@@ -1,0 +1,293 @@
+{
+  "homeSlides": [
+    {
+      "id": "slide-1",
+      "image": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1400&q=80",
+      "heading": "Transforming Healthcare One Installation at a Time",
+      "tagline": "GLOBAL STANDARDS OF MEDICAL SUPPLIES",
+      "description": "Vel Bio Med delivers high-caliber diagnostics and life-support machinery from world-renowned healthcare manufacturers to premium hospitals."
+    },
+    {
+      "id": "slide-2",
+      "image": "https://images.unsplash.com/photo-1584515901367-f1c21b29f30a?auto=format&fit=crop&w=1400&q=80",
+      "heading": "Your Trusted Partner in Medical Excellence",
+      "tagline": "END-TO-END CRITICAL CARE SOLUTIONS",
+      "description": "We specialize in turn-key hospital installations, robust critical-care set ups, and intensive care ventilations with certified quality compliance."
+    },
+    {
+      "id": "slide-3",
+      "image": "https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&w=1400&q=80",
+      "heading": "Innovative Medical Equipment Solutions",
+      "tagline": "24/7 AMC AND SERVICE SUPPORT",
+      "description": "Equipped with senior biomedical engineers, our division assures maximum operating-time and seamless maintenance across major clinical facilities."
+    }
+  ],
+  "services": [
+    {
+      "id": "srv-1",
+      "title": "Medical Equipment Installation",
+      "description": "Precision setup, calibration, and safety validation of intensive-care machines, diagnostics consoles, and surgical fixtures.",
+      "iconName": "Wrench"
+    },
+    {
+      "id": "srv-2",
+      "title": "Comprehensive Maintenance & AMC",
+      "description": "Flexible Annual Maintenance Contracts (AMC) and comprehensive service cycles backed by original vendor spare inventories.",
+      "iconName": "Shield"
+    },
+    {
+      "id": "srv-3",
+      "title": "Clinical Consultancy",
+      "description": "Biomedical room layouts, load-bearing architecture consulting, and equipment selection matrices matching patient volumes.",
+      "iconName": "Briefcase"
+    },
+    {
+      "id": "srv-4",
+      "title": "On-Site Calibration",
+      "description": "Certified calibration matching global health accreditations (NABH, JCI) using calibrated reference testing analyzers.",
+      "iconName": "Activity"
+    },
+    {
+      "id": "srv-5",
+      "title": "Emergency Biomedical Repair",
+      "description": "Fast 24/7 dispatch with immediate diagnostics and temporary alternative unit deployment to secure patient safety.",
+      "iconName": "PhoneCall"
+    }
+  ],
+  "products": [
+    {
+      "id": "prod-1",
+      "name": "GE Voluson E10 Ultrasound Scanner",
+      "category": "Diagnostics & Imaging",
+      "image": "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "High-end women's health radiology and maternity scans with HDlive silhouette rendering.",
+      "description": "The GE Voluson E10 is the leading high-frequency diagnostic ultrasound system designed for obstetrics, gynecology, and cutting-edge fetal cardiology. Sporting an advanced Radiance System Architecture, it unlocks peerless image resolutions and ultra-fast frame rates for dynamic 4D rendering.",
+      "rating": 5,
+      "features": [
+        "Advanced 4D Matrix scanning arrays",
+        "HDlive visual silhouette rendering for extreme clinical clarity",
+        "OLED diagnostic displays with high-contrast color gamut",
+        "Raw data review capabilities with immediate archive transfer"
+      ],
+      "specifications": {
+        "Frequency Range": "1.5 MHz - 18 MHz",
+        "Screen Type": "23-inch High Definition OLED Monitor",
+        "Scanning Depth": "Up to 40 cm",
+        "Operating Systems": "Windows Embedded Medical Edition",
+        "Warranty": "2 Years Certified Warranty"
+      },
+      "trending": true,
+      "newest": false
+    },
+    {
+      "id": "prod-2",
+      "name": "Dräger Primus Anesthesia Station",
+      "category": "Operating Theatre (OT)",
+      "image": "https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "Advanced ventilation and gas delivery workstation supporting neonates to adults.",
+      "description": "Dräger Primus is synonymous with operating room versatility and safety. Providing excellent ventilation and anesthesiology monitoring solutions, it features fully electronic gas mixing systems with rapid reaction times that simplify general surgical workflows under high strain.",
+      "rating": 5,
+      "features": [
+        "E-Vent plus electronically driven piston ventilator",
+        "Heated patient respiratory system avoids condensation issues",
+        "Advanced gas delivery with synchronized vaporizers",
+        "Fully dynamic color display showing compliance curves"
+      ],
+      "specifications": {
+        "Ventilation Modes": "IPPV, VPPT, SIMV, PCV, Manual",
+        "Tidal Volume": "10 mL - 1500 mL",
+        "Flow Range": "0.1 - 12 L/min",
+        "Vaporizer Slots": "2 Interlock Slots",
+        "Certified Approvals": "FDA, CE, ISO 13485"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-3",
+      "name": "Philips IntelliVue MX450 Bedside Monitor",
+      "category": "Critical Care & ICU",
+      "image": "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "Multi-parameter high acuity monitor featuring comprehensive cardiac analysis.",
+      "description": "IntelliVue MX450 delivers highly accurate real-time bedside monitoring for intensive care environments. Supporting multiple physiological modules (ECG, SpO2, Temp, IBP, CO2), this system guarantees high data fidelity and integrates securely with medical health record systems.",
+      "rating": 4,
+      "features": [
+        "Stunning touch UI panel with adjustable illumination sensors",
+        "IntelliVue proprietary waveform analysis filters noise",
+        "Advanced cardiac arrhythmia tracking parameters",
+        "Wireless LAN linkages to central nursing stations"
+      ],
+      "specifications": {
+        "Screen Size": "12-inch Capacitive Multi-touch Screen",
+        "Parameters": "ECG, Respiration, SpO2, NIBP, Dual Temp, Dual IBP",
+        "Battery Runtime": "Up to 4 Hours Continuous Operation",
+        "Data Interface": "HL7 Export Protocol via LAN/Wi-Fi",
+        "Mounting": "Bedside Safety Clamp / Roll Stand Mountable"
+      },
+      "trending": false,
+      "newest": true
+    },
+    {
+      "id": "prod-4",
+      "name": "AeroMed Ventilator Pro-7",
+      "category": "Critical Care & ICU",
+      "image": "https://images.unsplash.com/photo-1584036561566-baf245fdb76f?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "State-of-the-art invasive & non-invasive lung ventilator with automated weaning filters.",
+      "description": "AeroMed Pro-7 is a critical care ventilator that adapts intuitively to the patient's respiratory needs. With sophisticated trigger thresholds and integrated high-flow oxygen therapy capabilities, this ventilator maintains clinical control and reduces the risks of patient distress.",
+      "rating": 5,
+      "features": [
+        "Invasive and Non-Invasive (NIV) ventilation profiles",
+        "Dynamic lung visualizer depicting anatomical compliance",
+        "Integrated high flow oxygen therapy (HFNC) module",
+        "Ultra-silent internal turbine compressor avoids external gas dependency"
+      ],
+      "specifications": {
+        "Oxygen Supply": "21% - 100% adjustable",
+        "Inspiratory Pressure": "2 - 100 cmH2O",
+        "Display Panels": "15.6-inch LED Rotate Touch Screen",
+        "Triggering": "Flow and Pressure Smart triggers",
+        "Gas Input Pressure": "2.8 - 6.0 bar"
+      },
+      "trending": true,
+      "newest": false
+    },
+    {
+      "id": "prod-5",
+      "name": "Belimed MST-V Steam Autoclave",
+      "category": "CSSD & Sterilization",
+      "image": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "High-volume steam sterilizer with digital sterilization validation trackers.",
+      "description": "Belimed MST-V delivers optimal sterilization parameters for clinical tools and surgical kits. Combining efficient water conservation tech with double door safety layouts, this sterilizer streamlines CSSD room workflows while exceeding international safety protocols.",
+      "rating": 4,
+      "features": [
+        "Energy savings with internal water-recycling vacuum pumps",
+        "Automated pneumatic sliding doors with obstruction optical sensors",
+        "Built-in batch printer and USB logging parameters",
+        "Chamber lining crafted from pure premium grade 316Ti stainless steel"
+      ],
+      "specifications": {
+        "Chamber Volume": "450 Liters capacity",
+        "Sterilizing Temp Limit": "105°C - 138°C",
+        "Water Connection": "Standard Demineralized Water Infeeds",
+        "Outer Dimensions": "1900 x 1000 x 1500 mm",
+        "Power Hookup": "380-415V, Three-Phase Electrical Phase"
+      },
+      "trending": false,
+      "newest": false
+    },
+    {
+      "id": "prod-6",
+      "name": "Olympus EVIS EXERA III Video Scope",
+      "category": "Operating Theatre (OT)",
+      "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "Premium HDTV Gastrointestinal endoscopic system with Narrow Band Imaging.",
+      "description": "The EVIS EXERA III gastrointestinal scope introduces medical facilities to ultra-high-definition imaging scopes. Harnessing high intensity optical filters, it assists physicians in locating minimal tissue anomalies on early stage diagnosis workflows.",
+      "rating": 5,
+      "features": [
+        "Dual-Focus mechanics allowing deep-field zoom controls",
+        "Narrow Band Imaging (NBI) triples capillaries visualization contrast",
+        "Responsive insertion tubes reduce patient tissue friction and pain",
+        "Full waterproofing housing enables comprehensive chemical reprocessing"
+      ],
+      "specifications": {
+        "Focal Depth": "2 mm - 100 mm",
+        "Field of View": "140 Degrees Standard",
+        "Deflection controls": "Up 210° / Down 90° / Right-Left 100°",
+        "Length of Shaft": "1030 mm workable length",
+        "Video Outputs": "HDMI, HD-SDI digital configurations"
+      },
+      "trending": true,
+      "newest": true
+    }
+  ],
+  "categories": [
+    "Diagnostics & Imaging",
+    "Critical Care & ICU",
+    "Operating Theatre (OT)",
+    "CSSD & Sterilization"
+  ],
+  "gallery": [
+    {
+      "id": "gal-1",
+      "image": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=600&q=80",
+      "title": "Surgical Suite Live Installation",
+      "category": "Operation Theatre Setup"
+    },
+    {
+      "id": "gal-2",
+      "image": "https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&w=600&q=80",
+      "title": "Dräger Primus Installation in ICU",
+      "category": "Critical Care"
+    },
+    {
+      "id": "gal-3",
+      "image": "https://images.unsplash.com/photo-1584515901367-f1c21b29f30a?auto=format&fit=crop&w=600&q=80",
+      "title": "Diagnostic Radiology Console Calibration",
+      "category": "Diagnostics"
+    },
+    {
+      "id": "gal-4",
+      "image": "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=600&q=80",
+      "title": "Belimed CSSD Autoclave Training Session",
+      "category": "Sterilization CSSD"
+    },
+    {
+      "id": "gal-5",
+      "image": "https://images.unsplash.com/photo-1584036561566-baf245fdb76f?auto=format&fit=crop&w=600&q=80",
+      "title": "Multidisciplinary Trauma Center Integration",
+      "category": "Operation Theatre Setup"
+    },
+    {
+      "id": "gal-6",
+      "image": "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=600&q=80",
+      "title": "Voluson E10 Obstetric Setup Delivery",
+      "category": "Diagnostics"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "tst-1",
+      "name": "Dr. Arisara Nair",
+      "designation": "Director of Maternal-Fetal Services, Metro Heart hospital",
+      "image": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=300&q=80",
+      "reviewText": "The GE Voluson systems supplied by Vel Bio Med changed our outpatient scanning department. Their engineers finished calibration a day ahead of schedule, ensuring seamless clinical operations.",
+      "rating": 5
+    },
+    {
+      "id": "tst-2",
+      "name": "Dr. Vivek Chawla",
+      "designation": "Head of Critical Care Services, Apollo Multispecialty",
+      "image": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=300&q=80",
+      "reviewText": "Our institution depends on Vel Bio Med for emergency critical care ICU equipment maintenance. Their technical response support operates beautifully even during high emergency cycles.",
+      "rating": 5
+    },
+    {
+      "id": "tst-3",
+      "name": "Prof. Alan Fletcher",
+      "designation": "Chief Operating Officer, Horizon Trust Clinics",
+      "image": "https://images.unsplash.com/photo-1594824813573-246434de83fb?auto=format&fit=crop&w=300&q=80",
+      "reviewText": "We purchased eight Dräger Primus stations for our complex upgrade phase. Vel Bio Med demonstrated absolute healthcare expertise-managing safety approvals, mechanical fittings, and technician briefings.",
+      "rating": 4
+    }
+  ],
+  "contactInfo": {
+    "address": "704-B, Phoenix Corporate Park, Outer Ring Road, Bengaluru - 560103, Karnataka, India",
+    "phone": "+91 80 4930 2930",
+    "email": "sales@velbiomed.co.in",
+    "workingHours": "Monday - Saturday: 9:00 AM - 6:30 PM (IST)",
+    "mapUrl": "https://maps.google.com/maps?q=Vel%20Bio%20Med%20Bengaluru&t=&z=13&ie=UTF8&iwloc=&output=embed",
+    "whatsappNumber": "918049302930"
+  },
+  "inquiries": [
+    {
+      "id": "inq-1",
+      "name": "Dr. R. K. Shrivastava",
+      "email": "shrivastava.rk@cityhospital.org",
+      "mobile": "+91 98765 43210",
+      "product": "GE Voluson E10 Ultrasound Scanner",
+      "feedback": "Interested in a demonstration for our upcoming diagnostic wing. Please share pricing and rental catalogs.",
+      "date": "2026-05-25T14:32:00.000Z",
+      "attended": true
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Vel Bio Med",
+  "description": "Premium medical machinery and hospital equipment presentation & sales website with an integrated admin control system.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
