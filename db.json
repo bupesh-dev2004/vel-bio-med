@@ -268,6 +268,22 @@
       "image": "https://images.unsplash.com/photo-1594824813573-246434de83fb?auto=format&fit=crop&w=300&q=80",
       "reviewText": "We purchased eight Dräger Primus stations for our complex upgrade phase. Vel Bio Med demonstrated absolute healthcare expertise-managing safety approvals, mechanical fittings, and technician briefings.",
       "rating": 4
+    },
+    {
+      "id": "tst-4",
+      "name": "Dr. Sarah Jenkins",
+      "designation": "Chief of Anesthesiology, Mayo Clinical Centre",
+      "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80",
+      "reviewText": "The clinical training modules and quick technical setup support provided by Vel Bio Med for our ventilator channels exceeded all safety and compliance indices.",
+      "rating": 5
+    },
+    {
+      "id": "tst-5",
+      "name": "Dr. Rajesh Kumar",
+      "designation": "Senior Consultant Interventional Cardiologist, Fortis Healthcare",
+      "image": "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=300&q=80",
+      "reviewText": "For advanced high-acuity diagnostics and ICU monitors, Vel Bio Med is our gold standard. Zero calibration defects and prompt 24/7 AMC servicing guarantees absolute safety.",
+      "rating": 5
     }
   ],
   "contactInfo": {
@@ -288,6 +304,16 @@
       "feedback": "Interested in a demonstration for our upcoming diagnostic wing. Please share pricing and rental catalogs.",
       "date": "2026-05-25T14:32:00.000Z",
       "attended": true
+    },
+    {
+      "id": "inq-1779793345596",
+      "name": "Dr. Jane Doe",
+      "email": "jane.doe@hospital.org",
+      "mobile": "+91 99999 88888",
+      "product": "GE Voluson E10 Ultrasound Scanner",
+      "feedback": "Looking for delivery in Bengaluru by next month.",
+      "date": "2026-05-26T11:02:25.596Z",
+      "attended": false
     }
   ]
 }

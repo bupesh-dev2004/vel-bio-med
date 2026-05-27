@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu, X, Search, Phone, Mail, Clock, Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { useAppState } from "../AppContext.js";
 
 export default function Header() {
@@ -33,64 +33,18 @@ export default function Header() {
 
   return (
     <header className="w-full relative z-50 bg-white">
-      {/* Top Banner with info and floating social icons */}
-      <div className="bg-slate-950 text-slate-300 py-2 px-4 text-xs font-medium border-b border-slate-800">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
-          {/* Contact elements */}
-          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-6 text-slate-300">
-            <a href={`tel:${contact.phone}`} className="flex items-center gap-1.5 hover:text-blue-400 transition-colors">
-              <Phone className="w-3.5 h-3.5 text-blue-500" />
-              <span>{contact.phone}</span>
-            </a>
-            <a href={`mailto:${contact.email}`} className="flex items-center gap-1.5 hover:text-blue-400 transition-colors">
-              <Mail className="w-3.5 h-3.5 text-blue-500" />
-              <span>{contact.email}</span>
-            </a>
-            <span className="hidden sm:flex items-center gap-1.5 text-slate-400">
-              <Clock className="w-3.5 h-3.5 text-blue-500" />
-              <span>Mon - Sat: 9:00 AM - 6:30 PM BD</span>
-            </span>
-          </div>
-
-          {/* Social Icons of Vel Bio Med */}
-          <div className="flex items-center gap-4">
-            <a href="https://facebook.com/velbiomed" target="_blank" rel="noreferrer" className="hover:text-blue-400 transition-colors" title="Facebook">
-              <Facebook className="w-3.5 h-3.5" />
-            </a>
-            <a href="https://instagram.com/velbiomed" target="_blank" rel="noreferrer" className="hover:text-pink-400 transition-colors" title="Instagram">
-              <Instagram className="w-3.5 h-3.5" />
-            </a>
-            <a href="https://linkedin.com/company/velbiomed" target="_blank" rel="noreferrer" className="hover:text-blue-500 transition-colors" title="LinkedIn">
-              <Linkedin className="w-3.5 h-3.5" />
-            </a>
-            <a href="https://twitter.com/velbiomed" target="_blank" rel="noreferrer" className="hover:text-blue-400 transition-colors" title="Twitter">
-              <Twitter className="w-3.5 h-3.5" />
-            </a>
-            <a href="https://youtube.com/velbiomed" target="_blank" rel="noreferrer" className="hover:text-red-500 transition-colors" title="YouTube">
-              <Youtube className="w-3.5 h-3.5" />
-            </a>
-            <button
-              onClick={() => setCurrentTab("admin")}
-              className="bg-blue-600 hover:bg-blue-700 text-white hover:text-white px-2 py-0.5 rounded text-[10px] font-semibold transition-colors uppercase ml-2 tracking-wide"
-            >
-              Control Panel
-            </button>
-          </div>
-        </div>
-      </div>
-
       {/* Primary Sticky Header */}
       <nav className="sticky top-0 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 py-4 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex-shrink-0 cursor-pointer flex items-center gap-3 group" onClick={() => setCurrentTab("home")}>
-              <div className="h-11 w-11 rounded-xl bg-gradient-to-tr from-blue-600 to-blue-400 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform duration-300">
+              <div className="h-11 w-11 rounded-xl bg-gradient-to-tr from-blue-600 via-sky-400 to-amber-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform duration-300">
                 V
               </div>
               <div>
                 <span className="text-xl font-bold text-slate-900 tracking-tight block">
-                  Vel Bio <span className="text-blue-600">Med</span>
+                  Vel Bio <span className="text-amber-500 font-extrabold">Med</span>
                 </span>
                 <span className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block -mt-1">
                   Healthcare Equipment

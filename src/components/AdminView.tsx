@@ -4,7 +4,8 @@ import { PlusCircle, Trash2, CheckCircle2, FileText, ShoppingBag, Image, PhoneCa
 import { Product, Testimonial, GalleryItem, Service, HomeSlide, ContactInfo } from "../types.js";
 
 export default function AdminView() {
-  const { state, refreshState, categories } = useAppState();
+  const { state, refreshState } = useAppState();
+  const categories = state?.categories || [];
 
   const [activeAdminSubTab, setActiveAdminSubTab] = useState<"inquiries" | "products" | "categories" | "slides" | "contact" | "gallery" | "services">("inquiries");
 

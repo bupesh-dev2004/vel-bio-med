@@ -2,9 +2,73 @@ import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, Award, ShieldCheck, Zap, Activity, Star, Eye, MessageSquare, Check, ArrowRight, StarHalf, Building, ThumbsUp, CheckSquare, Heart } from "lucide-react";
 import { useAppState } from "../AppContext.js";
 import { Product } from "../types.js";
+import { FrostedGlassCard } from "@/components/ui/interactive-frosted-glass-card";
+import { BorderRotate } from "@/components/ui/animated-gradient-border";
+import { TestimonialSlider } from "@/components/ui/testimonial-slider";
+import { Logos3 } from "@/components/ui/logos3";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 interface HomeViewProps {
   onOpenProductModal: (p: Product) => void;
+}
+
+function AnimatedCounter({ target, duration = 1500, suffix = "" }: { target: number; duration?: number; suffix?: string }) {
+  const [count, setCount] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
+  const elementRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+
+    let start = 0;
+    const end = target;
+    const isDecimal = !Number.isInteger(target);
+    const startTime = performance.now();
+
+    const updateCount = (now: number) => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const easeProgress = progress * (2 - progress); // easeOutQuad
+      const currentVal = easeProgress * (end - start) + start;
+      
+      if (isDecimal) {
+        setCount(parseFloat(currentVal.toFixed(1)));
+      } else {
+        setCount(Math.floor(currentVal));
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCount);
+      }
+    };
+
+    requestAnimationFrame(updateCount);
+  }, [hasStarted, target, duration]);
+
+  return <span ref={elementRef}>{count}{suffix}</span>;
 }
 
 export default function HomeView({ onOpenProductModal }: HomeViewProps) {
@@ -64,7 +128,6 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
 
   // Testimonials Carousel
   const testimonials = state?.testimonials || [];
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
 
   const startInquiry = (productName: string) => {
     setInquiryMachineName(productName);
@@ -172,64 +235,142 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
       </section>
 
       {/* 2. ELEVATING HEALTHCARE EXCELLENCE SECTION */}
-      <section className="py-20 bg-slate-50 relative overflow-hidden">
+      <section className="py-24 bg-slate-50 relative overflow-hidden border-b border-slate-100">
+        {/* Ambient Decorative Light Orbs */}
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-600/5 blur-3xl rounded-full pointer-events-none" />
+        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-amber-500/5 blur-3xl rounded-full pointer-events-none" />
+        
+        {/* Subtle grid pattern background overlay */}
+        <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-blue-600 font-bold tracking-widest text-xs uppercase block mb-2">Our Performance</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Elevating Healthcare Excellence
-            </h2>
-            <div className="w-12 h-1 bg-blue-600 mx-auto mt-4 rounded-full" />
-            <p className="text-slate-500 text-sm mt-4 font-medium">
-              Supporting health clinics and emergency services globally with cutting-edge bioscience machinery and specialized training setup.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Card 1 */}
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-blue-300 transition-all duration-300 hover:-translate-y-1.5 flex flex-col items-start relative overflow-hidden group">
-              <div className="absolute top-0 left-0 w-2 h-full bg-blue-600 group-hover:h-full transition-all" />
-              <div className="p-4 bg-blue-50 text-blue-600 rounded-xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-all">
-                <Award className="w-6 h-6" />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            
+            {/* Left Column: Sticky Summary & Stats Counters */}
+            <div className="lg:col-span-5 space-y-8 lg:sticky lg:top-24">
+              <div>
+                <span className="inline-flex items-center gap-1.5 bg-blue-50 text-blue-600 font-bold px-3.5 py-1.5 rounded-full text-xs uppercase tracking-widest mb-4 border border-blue-100/80">
+                  <Activity className="w-3.5 h-3.5" /> Our Performance
+                </span>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+                  Elevating <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">Healthcare Excellence</span>
+                </h2>
+                <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-amber-500 mt-4 rounded-full" />
               </div>
-              <h3 className="text-xl font-bold text-slate-950 mb-3 group-hover:text-blue-600 transition-colors">Extensive Experience</h3>
-              <p className="text-slate-500 text-xs sm:text-sm leading-relaxed mb-4">
-                Over 12+ years of providing turnkey equipment configurations, technical safety clearance, and customized installations for multi-specialty hospitals.
+              
+              <p className="text-slate-500 text-sm md:text-base leading-relaxed font-medium">
+                Supporting health clinics and emergency services globally with cutting-edge bioscience machinery and specialized training setup. We bridge technical operations with flawless medical readiness.
               </p>
-              <button onClick={() => setCurrentTab("about")} className="text-xs font-bold text-blue-600 hover:text-blue-700 mt-auto flex items-center gap-1 group/btn">
-                Read Vision <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
-              </button>
+
+              {/* High-Impact Stat Grid */}
+              <div className="grid grid-cols-2 gap-6 pt-6 border-t border-slate-200">
+                <div className="p-4 rounded-2xl bg-white border border-slate-100 shadow-xs hover:shadow-sm transition-all duration-300">
+                  <span className="text-3xl md:text-4xl font-extrabold text-blue-600 tracking-tight block">
+                    <AnimatedCounter target={12} suffix="+" />
+                  </span>
+                  <span className="text-slate-400 font-bold text-[10px] uppercase tracking-wider block mt-1">Years Experience</span>
+                </div>
+                <div className="p-4 rounded-2xl bg-white border border-slate-100 shadow-xs hover:shadow-sm transition-all duration-300">
+                  <span className="text-3xl md:text-4xl font-extrabold text-amber-500 tracking-tight block">
+                    <AnimatedCounter target={450} suffix="+" />
+                  </span>
+                  <span className="text-slate-400 font-bold text-[10px] uppercase tracking-wider block mt-1">Doctors Trusted</span>
+                </div>
+                <div className="p-4 rounded-2xl bg-white border border-slate-100 shadow-xs hover:shadow-sm transition-all duration-300">
+                  <span className="text-3xl md:text-4xl font-extrabold text-blue-600 tracking-tight block">
+                    <AnimatedCounter target={1500} suffix="+" />
+                  </span>
+                  <span className="text-slate-400 font-bold text-[10px] uppercase tracking-wider block mt-1">ICU Installations</span>
+                </div>
+                <div className="p-4 rounded-2xl bg-white border border-slate-100 shadow-xs hover:shadow-sm transition-all duration-300">
+                  <span className="text-3xl md:text-4xl font-extrabold text-amber-500 tracking-tight block">
+                    <AnimatedCounter target={99.8} suffix="%" />
+                  </span>
+                  <span className="text-slate-400 font-bold text-[10px] uppercase tracking-wider block mt-1">Calibration SLA</span>
+                </div>
+              </div>
             </div>
 
-            {/* Card 2 */}
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-blue-300 transition-all duration-300 hover:-translate-y-1.5 flex flex-col items-start relative overflow-hidden group">
-              <div className="absolute top-0 left-0 w-2 h-full bg-blue-600 group-hover:h-full transition-all" />
-              <div className="p-4 bg-blue-50 text-blue-600 rounded-xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-all">
-                <ThumbsUp className="w-6 h-6" />
+            {/* Right Column: Beautiful Interactive Detail Cards */}
+            <div className="lg:col-span-7 space-y-6">
+              
+              {/* Pillar Card 1 */}
+              <div className="bg-white p-6 md:p-8 rounded-2xl shadow-xs border border-slate-100 hover:border-blue-300 hover:shadow-md transition-all duration-300 flex flex-col md:flex-row gap-6 relative group overflow-hidden">
+                <div className="absolute top-0 left-0 w-1 h-full bg-blue-600 group-hover:h-full transition-all" />
+                <div className="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-xs">
+                  <Award className="w-7 h-7" />
+                </div>
+                <div className="space-y-3 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">Extensive Experience</h3>
+                    <span className="bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-blue-100">Pillar 01</span>
+                  </div>
+                  <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
+                    Over 12+ years of providing turnkey equipment configurations, technical safety clearance, and customized installations for multi-specialty hospitals. We handle layout logistics, heavy compliance checks, and secure continuous operation contracts.
+                  </p>
+                  <div className="pt-2">
+                    <button 
+                      onClick={() => setCurrentTab("about")} 
+                      className="inline-flex items-center gap-1.5 text-xs font-black text-blue-600 hover:text-blue-800 transition-colors group/btn cursor-pointer"
+                    >
+                      Read Our Vision <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-slate-950 mb-3 group-hover:text-blue-600 transition-colors">Client Satisfaction</h3>
-              <p className="text-slate-500 text-xs sm:text-sm leading-relaxed mb-4">
-                Trusted by 450+ doctors and critical care specialists for zero-tolerance product quality, high accuracy metrics, and quick repair responses.
-              </p>
-              <button onClick={() => setCurrentTab("contact")} className="text-xs font-bold text-blue-600 hover:text-blue-700 mt-auto flex items-center gap-1 group/btn">
-                Work With Us <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
-              </button>
+
+              {/* Pillar Card 2 */}
+              <div className="bg-white p-6 md:p-8 rounded-2xl shadow-xs border border-slate-100 hover:border-amber-300 hover:shadow-md transition-all duration-300 flex flex-col md:flex-row gap-6 relative group overflow-hidden">
+                <div className="absolute top-0 left-0 w-1 h-full bg-amber-500 group-hover:h-full transition-all" />
+                <div className="w-14 h-14 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:bg-amber-500 group-hover:text-white transition-all shadow-xs">
+                  <ThumbsUp className="w-7 h-7" />
+                </div>
+                <div className="space-y-3 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-amber-600 transition-colors">Client Satisfaction</h3>
+                    <span className="bg-amber-50 text-amber-600 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-amber-100">Pillar 02</span>
+                  </div>
+                  <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
+                    Trusted by 450+ doctors and critical care specialists for zero-tolerance product quality, high accuracy metrics, and quick repair responses. Our emergency servicing support remains available 24/7.
+                  </p>
+                  <div className="pt-2">
+                    <button 
+                      onClick={() => setCurrentTab("contact")} 
+                      className="inline-flex items-center gap-1.5 text-xs font-black text-amber-600 hover:text-amber-800 transition-colors group/btn cursor-pointer"
+                    >
+                      Work With Us <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Pillar Card 3 */}
+              <div className="bg-white p-6 md:p-8 rounded-2xl shadow-xs border border-slate-100 hover:border-blue-300 hover:shadow-md transition-all duration-300 flex flex-col md:flex-row gap-6 relative group overflow-hidden">
+                <div className="absolute top-0 left-0 w-1 h-full bg-blue-600 group-hover:h-full transition-all" />
+                <div className="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-xs">
+                  <CheckSquare className="w-7 h-7" />
+                </div>
+                <div className="space-y-3 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">Proven Installations</h3>
+                    <span className="bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-blue-100">Pillar 03</span>
+                  </div>
+                  <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
+                    Successful setup of 1500+ ICU respiratory beds, diagnostics ultrasound machinery chambers, and double-door steam sanitization centers. We maintain direct logistics linkages with global medical providers.
+                  </p>
+                  <div className="pt-2">
+                    <button 
+                      onClick={() => setCurrentTab("gallery")} 
+                      className="inline-flex items-center gap-1.5 text-xs font-black text-blue-600 hover:text-blue-800 transition-colors group/btn cursor-pointer"
+                    >
+                      Browse Portfolios <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+
             </div>
 
-            {/* Card 3 */}
-            <div className="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-blue-300 transition-all duration-300 hover:-translate-y-1.5 flex flex-col items-start relative overflow-hidden group">
-              <div className="absolute top-0 left-0 w-2 h-full bg-blue-600 group-hover:h-full transition-all" />
-              <div className="p-4 bg-blue-50 text-blue-600 rounded-xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-all">
-                <CheckSquare className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-bold text-slate-950 mb-3 group-hover:text-blue-600 transition-colors">Proven Installations</h3>
-              <p className="text-slate-500 text-xs sm:text-sm leading-relaxed mb-4">
-                Successful setup of 1500+ ICU respiratory beds, diagnostics ultrasound machinery chambers, and double-door steam sanitization centers.
-              </p>
-              <button onClick={() => setCurrentTab("gallery")} className="text-xs font-bold text-blue-600 hover:text-blue-700 mt-auto flex items-center gap-1 group/btn">
-                Browse Portfolios <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
-              </button>
-            </div>
           </div>
         </div>
       </section>
@@ -253,65 +394,71 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
             </button>
           </div>
 
-          {/* Horizontal Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {dynamicProducts.slice(0, 3).map((item) => (
-              <div
-                key={item.id}
-                className="bg-slate-50 border border-slate-100 rounded-2xl overflow-hidden group hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-300 flex flex-col h-full"
-              >
-                <div className="relative pt-[65%] overflow-hidden bg-slate-200">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                  <div className="absolute top-4 left-4 bg-blue-600 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded">
-                    LATEST
-                  </div>
-                </div>
-
-                <div className="p-6 flex flex-col flex-grow">
-                  <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest block mb-1">
-                    {item.category}
-                  </span>
-                  <h3 className="text-lg font-bold text-slate-950 line-clamp-1 group-hover:text-blue-600 transition-colors mb-2">
-                    {item.name}
-                  </h3>
-                  <p className="text-slate-500 text-xs sm:text-sm line-clamp-2 leading-relaxed mb-4 flex-grow">
-                    {item.shortDesc}
-                  </p>
-                  <div className="flex items-center gap-1.5 mb-5">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`w-3.5 h-3.5 ${
-                          i < Math.floor(item.rating) ? "text-amber-400 fill-amber-400" : "text-slate-300"
-                        }`}
+          {/* Responsive Cards Carousel Slider */}
+          <Carousel className="w-full relative" opts={{ align: "start", loop: true }}>
+            <CarouselContent className="-ml-6">
+              {dynamicProducts.slice(0, 8).map((item) => (
+                <CarouselItem key={item.id} className="pl-6 basis-full sm:basis-1/2 lg:basis-1/3">
+                  <div className="bg-slate-50 border border-slate-100 rounded-2xl overflow-hidden group hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-300 flex flex-col h-full">
+                    <div className="relative pt-[65%] overflow-hidden bg-slate-200">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
                       />
-                    ))}
-                    <span className="text-xs text-slate-500 font-bold ml-1">({item.rating}.0)</span>
-                  </div>
+                      <div className="absolute top-4 left-4 bg-blue-600 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded">
+                        LATEST
+                      </div>
+                    </div>
 
-                  <div className="grid grid-cols-2 gap-3 pt-4 border-t border-slate-200/50">
-                    <button
-                      onClick={() => onOpenProductModal(item)}
-                      className="bg-white border border-slate-200 hover:border-blue-600 text-slate-700 hover:text-blue-600 font-bold text-xs py-2.5 rounded-lg transition-colors flex items-center justify-center gap-1 uppercase tracking-wide cursor-pointer"
-                    >
-                      <Eye className="w-3.5 h-3.5" /> Details
-                    </button>
-                    <button
-                      onClick={() => startInquiry(item.name)}
-                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-2.5 rounded-lg transition-colors flex items-center justify-center gap-1 uppercase tracking-wide cursor-pointer"
-                    >
-                      <MessageSquare className="w-3.5 h-3.5" /> Inquiry
-                    </button>
+                    <div className="p-6 flex flex-col flex-grow">
+                      <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest block mb-1">
+                        {item.category}
+                      </span>
+                      <h3 className="text-lg font-bold text-slate-950 line-clamp-1 group-hover:text-blue-600 transition-colors mb-2">
+                        {item.name}
+                      </h3>
+                      <p className="text-slate-500 text-xs sm:text-sm line-clamp-2 leading-relaxed mb-4 flex-grow">
+                        {item.shortDesc}
+                      </p>
+                      <div className="flex items-center gap-1.5 mb-5">
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <Star
+                            key={i}
+                            className={`w-3.5 h-3.5 ${
+                              i < Math.floor(item.rating) ? "text-amber-400 fill-amber-400" : "text-slate-300"
+                            }`}
+                          />
+                        ))}
+                        <span className="text-xs text-slate-500 font-bold ml-1">({item.rating}.0)</span>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3 pt-4 border-t border-slate-200/50">
+                        <button
+                          onClick={() => onOpenProductModal(item)}
+                          className="bg-white border border-slate-200 hover:border-blue-600 text-slate-700 hover:text-blue-600 font-bold text-xs py-2.5 rounded-lg transition-colors flex items-center justify-center gap-1 uppercase tracking-wide cursor-pointer"
+                        >
+                          <Eye className="w-3.5 h-3.5" /> Details
+                        </button>
+                        <button
+                          onClick={() => startInquiry(item.name)}
+                          className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-2.5 rounded-lg transition-colors flex items-center justify-center gap-1 uppercase tracking-wide cursor-pointer"
+                        >
+                          <MessageSquare className="w-3.5 h-3.5" /> Inquiry
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))}
-          </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            {/* Center-aligned arrows below the cards for premium accessibility */}
+            <div className="flex justify-center gap-4 mt-10">
+              <CarouselPrevious className="static translate-y-0 h-10 w-10 border-slate-200 text-slate-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-colors shadow-sm cursor-pointer" />
+              <CarouselNext className="static translate-y-0 h-10 w-10 border-slate-200 text-slate-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-colors shadow-sm cursor-pointer" />
+            </div>
+          </Carousel>
         </div>
       </section>
 
@@ -327,58 +474,63 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto justify-items-center">
             {trendingProducts.length > 0 ? (
               trendingProducts.map((item) => (
                 <div
                   key={item.id}
-                  className="bg-white border border-slate-200 rounded-2xl overflow-hidden group hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
+                  className="flex flex-col items-center bg-neutral-primary-soft p-6 border border-default rounded-base shadow-xs md:flex-row md:max-w-xl w-full hover:shadow-lg hover:border-slate-350 transition-all duration-300 group relative overflow-hidden"
                 >
-                  <div className="relative pt-[65%] bg-slate-200 overflow-hidden">
+                  {/* Left Side: Image container */}
+                  <div className="relative w-full h-56 md:h-44 md:w-48 mb-4 md:mb-0 flex-shrink-0 bg-slate-200 rounded-base overflow-hidden">
                     <img
+                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 text-transparent"
                       src={item.image}
                       alt={item.name}
-                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute top-4 left-4 bg-orange-500 text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded">
+                    <div className="absolute top-3 left-3 bg-orange-500 text-white text-[9px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded shadow-sm z-10">
                       HOT SELLING
                     </div>
                   </div>
 
-                  <div className="p-6 flex flex-col flex-grow">
-                    <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest block mb-1">
-                      {item.category}
-                    </span>
-                    <h3 className="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-2 line-clamp-1">
-                      {item.name}
-                    </h3>
-                    <p className="text-slate-500 text-xs sm:text-sm line-clamp-2 leading-relaxed mb-4 flex-grow">
-                      {item.shortDesc}
-                    </p>
-
-                    <div className="flex items-center gap-1.5 mb-5 pt-3 border-t border-slate-100">
-                      <div className="flex text-amber-400">
-                        <Star className="w-3.5 h-3.5 fill-amber-400" />
-                        <Star className="w-3.5 h-3.5 fill-amber-400" />
-                        <Star className="w-3.5 h-3.5 fill-amber-400" />
-                        <Star className="w-3.5 h-3.5 fill-amber-400" />
-                        <Star className="w-3.5 h-3.5 fill-amber-400" />
+                  {/* Right Side: Product Details */}
+                  <div className="flex flex-col justify-between flex-grow md:pl-6 leading-normal w-full min-w-0">
+                    <div>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest truncate mr-2">
+                          {item.category}
+                        </span>
+                        {/* Star Rating */}
+                        <div className="flex items-center gap-1 flex-shrink-0">
+                          <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
+                          <span className="text-[11px] text-slate-500 font-bold">({item.rating}.0)</span>
+                        </div>
                       </div>
-                      <span className="text-xs text-slate-500 font-bold">(5.0 Rating)</span>
+
+                      <h5 className="mb-2 text-xl font-bold tracking-tight text-heading group-hover:text-blue-600 transition-colors line-clamp-1">
+                        {item.name}
+                      </h5>
+                      <p className="mb-5 text-xs text-body leading-relaxed font-medium line-clamp-2">
+                        {item.shortDesc}
+                      </p>
                     </div>
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-wrap gap-2 pt-2 border-t border-slate-200/50">
                       <button
+                        type="button"
                         onClick={() => onOpenProductModal(item)}
-                        className="flex-1 bg-white border border-slate-200 hover:border-blue-600 text-slate-700 hover:text-blue-600 font-bold text-xs py-3 rounded-lg transition-colors flex items-center justify-center gap-1 uppercase tracking-wide cursor-pointer"
+                        className="inline-flex items-center w-auto text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-bold leading-5 rounded-base text-[11px] px-3.5 py-2.5 focus:outline-none cursor-pointer transition-all gap-1"
                       >
                         Quick View
+                        <Eye className="w-3.5 h-3.5" />
                       </button>
                       <button
+                        type="button"
                         onClick={() => startInquiry(item.name)}
-                        className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 rounded-lg transition-colors flex items-center justify-center gap-1 uppercase tracking-wide cursor-pointer"
+                        className="inline-flex items-center w-auto text-white bg-blue-600 box-border border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:ring-blue-100 shadow-xs font-bold leading-5 rounded-base text-[11px] px-3.5 py-2.5 focus:outline-none cursor-pointer transition-all gap-1"
                       >
                         Inquire Now
+                        <MessageSquare className="w-3.5 h-3.5" />
                       </button>
                     </div>
                   </div>
@@ -394,54 +546,100 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
       </section>
 
       {/* 5. WHY CHOOSE US SECTION */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-24 bg-slate-950 relative overflow-hidden">
+        {/* Glow ambient design elements */}
+        <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left side Image with design elements */}
+            {/* Left side Image wrapped in rotating gradient border */}
             <div className="lg:col-span-6 relative">
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-blue-300 rounded-3xl transform rotate-2 scale-103 opacity-10" />
-              <img
-                src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80"
-                alt="Vel Bio Med critical care service support"
-                className="w-full h-auto rounded-3xl object-cover relative z-10 shadow-2xl"
-              />
-              <div className="absolute -bottom-6 -right-6 bg-slate-900 text-white p-6 rounded-2xl shadow-xl z-20 max-w-xs hidden sm:block">
-                <p className="text-3xl font-black text-blue-500">100%</p>
-                <p className="text-xs font-bold uppercase tracking-wider text-slate-300 mt-1">Uptime SLA Support</p>
-                <p className="text-slate-400 text-[11px] mt-2 font-medium">Our engineers are dispatched immediately for high emergency troubleshooting alerts.</p>
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-3xl transform rotate-2 scale-103 opacity-15 blur-sm" />
+              
+              <BorderRotate
+                animationMode="auto-rotate"
+                animationSpeed={6}
+                borderWidth={3.5}
+                borderRadius={28}
+                gradientColors={{
+                  primary: '#3b82f6',
+                  secondary: '#6366f1',
+                  accent: '#06b6d4'
+                }}
+                backgroundColor="#020617"
+                className="p-1"
+              >
+                <div className="relative overflow-hidden rounded-[24px]">
+                  <img
+                    src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80"
+                    alt="Vel Bio Med critical care service support"
+                    className="w-full h-auto object-cover relative z-10 shadow-2xl"
+                  />
+                </div>
+              </BorderRotate>
+
+              <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-6 rounded-2xl shadow-xl z-20 max-w-xs hidden sm:block border border-blue-500/30">
+                <p className="text-3xl font-black text-white">100%</p>
+                <p className="text-xs font-bold uppercase tracking-wider text-blue-100 mt-1">Uptime SLA Support</p>
+                <p className="text-blue-100 text-[11px] mt-2 font-medium leading-relaxed">Our engineers are dispatched immediately for high emergency troubleshooting alerts.</p>
               </div>
             </div>
 
             {/* Right side content */}
             <div className="lg:col-span-6 space-y-6">
               <div>
-                <span className="text-blue-600 font-bold tracking-widest text-xs uppercase block mb-1">Corporate Strengths</span>
-                <h2 className="text-3xl font-extrabold text-slate-950 tracking-tight leading-tight">
+                <span className="text-blue-400 font-bold tracking-widest text-xs uppercase block mb-1">Corporate Strengths</span>
+                <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
                   Our Uncompromising Standard of Reliability
                 </h2>
-                <div className="w-12 h-1 bg-blue-600 mt-4 rounded-full" />
+                <div className="w-12 h-1 bg-blue-50 mt-4 rounded-full" />
               </div>
 
-              <p className="text-slate-500 text-sm leading-relaxed font-medium">
+              <p className="text-slate-300 text-sm leading-relaxed font-medium">
                 Vel Bio Med bridges the technical void in biological science distribution by delivering world-class hospital equipment, fast emergency servicing response, and long term comprehensive warranties.
               </p>
 
-              <div className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
                 {[
-                  { title: "Continuous Quality Assurance", desc: "Every medical monitor and digital scanner system is calibrated rigorously against original parameters before dispatch." },
-                  { title: "Trusted Turnkey Configurations", desc: "Our biomedical crew supervises gas setups, electrical compliance testing, and critical OT layouts end-to-end." },
-                  { title: "Certified Clinical Engineers", desc: "Access the training expertise of specialists registered under critical medical equipment regulatory protocols." },
-                  { title: "Budget-Friendly Hospital Contracts", desc: "Leverage affordable AMC frameworks designed for individual clinics to corporate multi-wing hospital systems." }
+                  { 
+                    title: "Continuous Quality", 
+                    subtitle: "Tier-1 Calibration",
+                    desc: "Every medical monitor and digital scanner system is calibrated rigorously against original parameters before dispatch.",
+                    icon: <ShieldCheck className="w-7 h-7 text-white" />,
+                    bgColor: "bg-blue-600/90"
+                  },
+                  { 
+                    title: "Turnkey Setups", 
+                    subtitle: "End-to-End Compliance",
+                    desc: "Our biomedical crew supervises gas setups, electrical compliance testing, and critical OT layouts end-to-end.",
+                    icon: <Zap className="w-7 h-7 text-white" />,
+                    bgColor: "bg-indigo-600/90"
+                  },
+                  { 
+                    title: "Clinical Engineers", 
+                    subtitle: "Specialist Supervision",
+                    desc: "Access the training expertise of specialists registered under critical medical equipment regulatory protocols.",
+                    icon: <Activity className="w-7 h-7 text-white" />,
+                    bgColor: "bg-teal-600/90"
+                  },
+                  { 
+                    title: "Friendly Contracts", 
+                    subtitle: "Flexible AMC Frameworks",
+                    desc: "Leverage affordable AMC frameworks designed for individual clinics to corporate multi-wing hospital systems.",
+                    icon: <ThumbsUp className="w-7 h-7 text-white" />,
+                    bgColor: "bg-amber-600/90"
+                  }
                 ].map((item, idx) => (
-                  <div key={idx} className="flex gap-4 items-start bg-slate-50 p-4 rounded-xl border border-slate-100 hover:border-blue-100 transition-colors">
-                    <div className="p-1 px-1.5 bg-blue-500 text-white rounded-lg mt-0.5">
-                      <Check className="w-4 h-4 text-white" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-bold text-slate-900">{item.title}</h4>
-                      <p className="text-slate-500 text-xs mt-1 font-medium">{item.desc}</p>
-                    </div>
-                  </div>
+                  <FrostedGlassCard 
+                    key={idx}
+                    title={item.title}
+                    subtitle={item.subtitle}
+                    description={item.desc}
+                    icon={item.icon}
+                    iconBgColor={item.bgColor}
+                  />
                 ))}
               </div>
             </div>
@@ -450,19 +648,14 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
       </section>
 
       {/* 6. VALUABLE CLIENTS LOGO SLIDER */}
-      <section className="py-14 bg-slate-900 overflow-hidden relative border-y border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 text-center text-slate-400">
-          <p className="text-xs uppercase font-extrabold tracking-widest text-blue-500">Trusted By Premium Medical Institutions</p>
-        </div>
-        <div className="flex gap-16 animate-marquee whitespace-nowrap min-w-full">
-          {clientLogos.concat(clientLogos).map((client, idx) => (
-            <div key={idx} className="inline-flex items-center gap-3.5 select-none bg-slate-950/40 py-2.5 px-6 rounded-full border border-slate-800/80">
-              <span className="text-2xl">{client.icon}</span>
-              <span className="text-xs font-black text-slate-300 tracking-wider uppercase">{client.name}</span>
-            </div>
-          ))}
-        </div>
-      </section>
+      <Logos3 
+        heading="Trusted By Premium Medical Institutions"
+        logos={clientLogos.map((client, idx) => ({
+          id: `medical-client-${idx}`,
+          description: client.name,
+          icon: client.icon
+        }))}
+      />
 
       {/* 7. TESTIMONIALS REVIEW SECTION */}
       <section className="py-20 bg-white">
@@ -473,55 +666,15 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
             <div className="w-12 h-1 bg-blue-600 mx-auto mt-4 rounded-full" />
           </div>
 
-          {testimonials.length > 0 ? (
-            <div className="max-w-3xl mx-auto bg-slate-50 border border-slate-100 rounded-3xl p-8 md:p-12 shadow-sm relative">
-              <div className="absolute top-10 right-10 text-slate-200 text-8xl font-serif pointer-events-none select-none">“</div>
-              <div className="relative z-10 flex flex-col md:flex-row gap-8 items-center">
-                <img
-                  src={testimonials[activeTestimonial].image}
-                  alt={testimonials[activeTestimonial].name}
-                  className="w-24 h-24 rounded-2xl object-cover shadow-md border-2 border-blue-500 flex-shrink-0"
-                  loading="lazy"
-                />
-                <div className="space-y-4">
-                  <div className="flex gap-1">
-                    {Array.from({ length: testimonials[activeTestimonial].rating }).map((_, i) => (
-                      <Star key={i} className="w-4 h-4 text-amber-500 fill-amber-500" />
-                    ))}
-                  </div>
-                  <p className="text-slate-600 text-sm md:text-base italic leading-relaxed font-medium">
-                    "{testimonials[activeTestimonial].reviewText}"
-                  </p>
-                  <div>
-                    <h4 className="text-base font-black text-slate-900">
-                      {testimonials[activeTestimonial].name}
-                    </h4>
-                    <p className="text-slate-400 text-xs font-bold uppercase tracking-wider mt-0.5">
-                      {testimonials[activeTestimonial].designation}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Slider Dots/Controls */}
-              <div className="flex justify-end gap-2 mt-8 md:mt-3 border-t border-slate-200/50 pt-5">
-                {testimonials.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setActiveTestimonial(idx)}
-                    className={`w-3.5 h-1.5 rounded-full transition-all ${
-                      idx === activeTestimonial ? "bg-blue-600 w-8" : "bg-slate-350"
-                    }`}
-                    aria-label={`Go to testimonial ${idx + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
-          ) : (
-            <div className="text-center py-6 bg-slate-50 rounded-2xl">
-              <p className="text-slate-400 text-sm">No client reviews listed at the moment.</p>
-            </div>
-          )}
+          <TestimonialSlider 
+            testimonials={testimonials.map((t: any) => ({
+              image: t.image,
+              quote: t.reviewText,
+              name: t.name,
+              role: t.designation,
+              rating: t.rating
+            }))}
+          />
         </div>
       </section>
     </div>

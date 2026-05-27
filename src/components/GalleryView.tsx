@@ -67,7 +67,7 @@ export default function GalleryView() {
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-250 cursor-pointer ${
                   selectedCategory === cat
-                    ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20"
+                    ? "bg-gradient-to-r from-blue-600 to-amber-500 text-white shadow-lg shadow-blue-500/10"
                     : "bg-slate-50 text-slate-600 hover:bg-slate-100 hover:text-slate-950"
                 }`}
               >
@@ -79,37 +79,44 @@ export default function GalleryView() {
           {/* Masonry image grid */}
           {filteredItems.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredItems.map((item, idx) => (
-                <div
-                  key={item.id}
-                  onClick={() => openLightbox(idx)}
-                  className="bg-white border border-slate-200/60 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-slate-200/85 transition-all duration-300 cursor-pointer group flex flex-col"
-                >
-                  <div className="relative pt-[70%] bg-slate-100 overflow-hidden">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/65 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                      <div className="flex items-center gap-2 text-white">
-                        <Maximize2 className="w-5 h-5 text-blue-400" />
-                        <span className="text-xs font-bold uppercase tracking-wider">Expand Photo</span>
+              {filteredItems.map((item, idx) => {
+                const isAmber = idx % 2 === 1;
+                return (
+                  <div
+                    key={item.id}
+                    onClick={() => openLightbox(idx)}
+                    className="bg-white border border-slate-200/60 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-slate-200/85 transition-all duration-300 cursor-pointer group flex flex-col"
+                  >
+                    <div className="relative pt-[70%] bg-slate-100 overflow-hidden">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/65 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div className="flex items-center gap-2 text-white">
+                          <Maximize2 className={`w-5 h-5 ${isAmber ? "text-amber-400" : "text-blue-400"}`} />
+                          <span className="text-xs font-bold uppercase tracking-wider">Expand Photo</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="p-5 flex-grow">
-                    <span className="text-[10px] font-black tracking-widest text-blue-600 uppercase block mb-1">
-                      {item.category}
-                    </span>
-                    <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-                      {item.title}
-                    </h3>
+                    <div className="p-5 flex-grow">
+                      <span className={`text-[10px] font-black tracking-widest uppercase block mb-1
+                        ${isAmber ? "text-amber-500" : "text-blue-600"}
+                      `}>
+                        {item.category}
+                      </span>
+                      <h3 className={`text-sm font-bold text-slate-900 transition-colors
+                        ${isAmber ? "group-hover:text-amber-500" : "group-hover:text-blue-600"}
+                      `}>
+                        {item.title}
+                      </h3>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           ) : (
             <div className="py-24 text-center border border-dashed border-slate-200 rounded-2xl bg-slate-50">
@@ -128,7 +135,7 @@ export default function GalleryView() {
           {/* Close trigger button */}
           <button
             onClick={closeLightbox}
-            className="absolute top-6 right-6 text-white/70 hover:text-white bg-slate-900/50 hover:bg-blue-600 p-2.5 rounded-full transition-all cursor-pointer"
+            className="absolute top-6 right-6 text-white/70 hover:text-white bg-slate-900/50 hover:bg-amber-500 p-2.5 rounded-full transition-all cursor-pointer"
             aria-label="Close Lightbox"
           >
             <X className="w-6 h-6" />
@@ -138,7 +145,7 @@ export default function GalleryView() {
           {filteredItems.length > 1 && (
             <button
               onClick={handlePrevImage}
-              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-slate-900/50 hover:bg-blue-600 p-3 rounded-full transition-all cursor-pointer"
+              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-slate-900/50 hover:bg-amber-500 p-3 rounded-full transition-all cursor-pointer"
               aria-label="Previous Image"
             >
               <ChevronLeft className="w-6 h-6" />
@@ -156,7 +163,7 @@ export default function GalleryView() {
               className="max-w-full max-h-[70vh] object-contain rounded-xl shadow-2xl border border-white/10"
             />
             <div className="text-center mt-5 space-y-2">
-              <span className="inline-block bg-blue-600/95 text-white text-[10px] sm:text-xs font-black tracking-widest px-3 py-1.5 rounded-full uppercase">
+              <span className="inline-block bg-gradient-to-r from-blue-600 to-amber-500 text-white text-[10px] sm:text-xs font-black tracking-widest px-3 py-1.5 rounded-full uppercase">
                 {filteredItems[lightboxIndex].category}
               </span>
               <h2 className="text-lg md:text-xl font-bold text-white tracking-tight">
@@ -169,7 +176,7 @@ export default function GalleryView() {
           {filteredItems.length > 1 && (
             <button
               onClick={handleNextImage}
-              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-slate-900/50 hover:bg-blue-600 p-3 rounded-full transition-all cursor-pointer"
+              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-slate-900/50 hover:bg-amber-500 p-3 rounded-full transition-all cursor-pointer"
               aria-label="Next Image"
             >
               <ChevronRight className="w-6 h-6" />

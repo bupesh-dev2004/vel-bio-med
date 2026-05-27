@@ -10,8 +10,8 @@ import ProductsView from "./components/ProductsView.js";
 import ContactView from "./components/ContactView.js";
 import AdminView from "./components/AdminView.js";
 import Breadcrumbs from "./components/Breadcrumbs.js";
-import WhatsAppButton from "./components/WhatsAppButton.js";
 import ScrollToTop from "./components/ScrollToTop.js";
+import FloatingSocialMenu from "./components/FloatingSocialMenu.js";
 import { Product } from "./types.js";
 import { Activity, ShieldAlert, RotateCcw } from "lucide-react";
 
@@ -106,8 +106,8 @@ function AppContent() {
       {/* Shared Deep blue footer block */}
       <Footer />
 
-      {/* Shared WhatsApp floating widget */}
-      <WhatsAppButton />
+      {/* Shared dynamic floating social and chat hub */}
+      <FloatingSocialMenu />
 
       {/* Shared Scroll to safe top anchor widget */}
       <ScrollToTop />

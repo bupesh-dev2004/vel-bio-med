@@ -71,7 +71,7 @@ export default function ProductsView({
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             {/* Header info */}
             <div>
-              <span className="text-blue-600 font-bold tracking-widest text-[10px] sm:text-xs uppercase block mb-1">Vel Bio Med Inventory</span>
+              <span className="text-amber-500 font-bold tracking-widest text-[10px] sm:text-xs uppercase block mb-1">Vel Bio Med Inventory</span>
               <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">Machinery & Devices Catalog</h1>
             </div>
 
@@ -82,7 +82,7 @@ export default function ProductsView({
                 placeholder="Search by name, category..."
                 value={searchText}
                 onChange={(e) => setSearchText(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:bg-white rounded-xl py-3 pl-11 pr-4 text-xs focus:outline-none transition-all text-slate-800 font-medium"
+                className="w-full bg-slate-50 border border-slate-200 focus:border-amber-500 focus:bg-white rounded-xl py-3 pl-11 pr-4 text-xs focus:outline-none transition-all text-slate-800 font-medium"
               />
               <Search className="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
             </div>
@@ -96,9 +96,9 @@ export default function ProductsView({
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setSelectedCategory("All")}
-                className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer ${
+                className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                   selectedCategory === "All"
-                    ? "bg-blue-600 text-white shadow-md shadow-blue-500/10"
+                    ? "bg-gradient-to-r from-blue-600 to-amber-500 text-white shadow-md shadow-blue-500/10"
                     : "bg-slate-50 hover:bg-slate-100 text-slate-600 hover:text-slate-950"
                 }`}
               >
@@ -108,9 +108,9 @@ export default function ProductsView({
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer ${
+                  className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
                     selectedCategory === cat
-                      ? "bg-blue-600 text-white shadow-md shadow-blue-500/10"
+                      ? "bg-gradient-to-r from-blue-600 to-amber-500 text-white shadow-md shadow-blue-500/10"
                       : "bg-slate-50 hover:bg-slate-100 text-slate-600 hover:text-slate-950"
                   }`}
                 >
@@ -147,7 +147,7 @@ export default function ProductsView({
               Showing <strong className="text-slate-800">{sortedProducts.length}</strong> machines matching requirements
             </span>
             {selectedCategory !== "All" && (
-              <span className="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded font-bold uppercase">
+              <span className="text-xs bg-amber-50 text-amber-600 px-2 py-1 rounded font-bold uppercase">
                 {selectedCategory}
               </span>
             )}
@@ -155,76 +155,93 @@ export default function ProductsView({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {sortedProducts.length > 0 ? (
-              sortedProducts.map((p) => (
-                <div
-                  key={p.id}
-                  className="bg-white border border-slate-200 overflow-hidden rounded-2xl shadow-sm hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-300 flex flex-col h-full group"
-                >
-                  {/* Photo area with tag indicators */}
-                  <div className="relative pt-[65%] overflow-hidden bg-slate-200">
-                    <img
-                      src={p.image}
-                      alt={p.name}
-                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                    <div className="absolute top-4 right-4 flex flex-col gap-1.5">
-                      {p.trending && (
-                        <span className="bg-orange-500 text-white text-[9px] font-black uppercase px-2.5 py-0.5 rounded shadow">
-                          TRENDING
-                        </span>
-                      )}
-                      {p.newest && (
-                        <span className="bg-blue-600 text-white text-[9px] font-black uppercase px-2.5 py-0.5 rounded shadow">
-                          NEW ARRIVAL
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Body textual information */}
-                  <div className="p-6 flex flex-col flex-grow">
-                    <span className="text-[10px] font-bold tracking-widest text-blue-600 uppercase block mb-1">
-                      {p.category}
-                    </span>
-                    <h3 className="text-base sm:text-lg font-bold text-slate-950 group-hover:text-blue-600 transition-colors mb-2 line-clamp-1">
-                      {p.name}
-                    </h3>
-                    <p className="text-slate-500 text-xs sm:text-sm line-clamp-2 leading-relaxed mb-4 flex-grow font-medium">
-                      {p.shortDesc}
-                    </p>
-
-                    <div className="flex items-center gap-1.5 mb-5 pt-3 border-t border-slate-100">
-                      <div className="flex text-amber-400">
-                        {Array.from({ length: 5 }).map((_, i) => (
-                          <Star
-                            key={i}
-                            className={`w-3.5 h-3.5 ${
-                              i < Math.floor(p.rating) ? "text-amber-400 fill-amber-400" : "text-slate-300"
-                            }`}
-                          />
-                        ))}
+              sortedProducts.map((p, idx) => {
+                const isAmber = idx % 2 === 1;
+                return (
+                  <div
+                    key={p.id}
+                    className="bg-white border border-slate-200 overflow-hidden rounded-2xl shadow-sm hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-300 flex flex-col h-full group"
+                  >
+                    {/* Photo area with tag indicators */}
+                    <div className="relative pt-[65%] overflow-hidden bg-slate-200">
+                      <img
+                        src={p.image}
+                        alt={p.name}
+                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                      <div className="absolute top-4 right-4 flex flex-col gap-1.5">
+                        {p.trending && (
+                          <span className="bg-orange-500 text-white text-[9px] font-black uppercase px-2.5 py-0.5 rounded shadow">
+                            TRENDING
+                          </span>
+                        )}
+                        {p.newest && (
+                          <span className="bg-blue-600 text-white text-[9px] font-black uppercase px-2.5 py-0.5 rounded shadow">
+                            NEW ARRIVAL
+                          </span>
+                        )}
                       </div>
-                      <span className="text-xs text-slate-500 font-bold ml-1">({p.rating}.0)</span>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-3 mt-auto">
-                      <button
-                        onClick={() => onOpenProductModal(p)}
-                        className="bg-white border border-slate-200 hover:border-blue-600 text-slate-700 hover:text-blue-600 font-bold text-xs py-3 rounded-lg transition-colors flex items-center justify-center gap-1 uppercase tracking-wide cursor-pointer"
-                      >
-                        <Eye className="w-3.5 h-3.5" /> Details
-                      </button>
-                      <button
-                        onClick={() => triggerInquiryFlow(p.name)}
-                        className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 rounded-lg transition-colors flex items-center justify-center gap-1 uppercase tracking-wide cursor-pointer"
-                      >
-                        <MessageSquare className="w-3.5 h-3.5" /> Select Machine
-                      </button>
+                    {/* Body textual information */}
+                    <div className="p-6 flex flex-col flex-grow">
+                      <span className={`text-[10px] font-bold tracking-widest uppercase block mb-1
+                        ${isAmber ? "text-amber-500" : "text-blue-600"}
+                      `}>
+                        {p.category}
+                      </span>
+                      <h3 className={`text-base sm:text-lg font-bold text-slate-950 transition-colors mb-2 line-clamp-1
+                        ${isAmber ? "group-hover:text-amber-500" : "group-hover:text-blue-600"}
+                      `}>
+                        {p.name}
+                      </h3>
+                      <p className="text-slate-500 text-xs sm:text-sm line-clamp-2 leading-relaxed mb-4 flex-grow font-medium">
+                        {p.shortDesc}
+                      </p>
+
+                      <div className="flex items-center gap-1.5 mb-5 pt-3 border-t border-slate-100">
+                        <div className="flex text-amber-400">
+                          {Array.from({ length: 5 }).map((_, i) => (
+                            <Star
+                              key={i}
+                              className={`w-3.5 h-3.5 ${
+                                i < Math.floor(p.rating) ? "text-amber-400 fill-amber-400" : "text-slate-300"
+                              }`}
+                            />
+                          ))}
+                        </div>
+                        <span className="text-xs text-slate-500 font-bold ml-1">({p.rating}.0)</span>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-3 mt-auto">
+                        <button
+                          onClick={() => onOpenProductModal(p)}
+                          className={`bg-white border text-slate-700 font-bold text-xs py-3 rounded-lg transition-colors flex items-center justify-center gap-1 uppercase tracking-wide cursor-pointer
+                            ${isAmber 
+                              ? "border-slate-200 hover:border-amber-500 hover:text-amber-600" 
+                              : "border-slate-200 hover:border-blue-600 hover:text-blue-600"
+                            }
+                          `}
+                        >
+                          <Eye className="w-3.5 h-3.5" /> Details
+                        </button>
+                        <button
+                          onClick={() => triggerInquiryFlow(p.name)}
+                          className={`font-bold text-xs py-3 rounded-lg transition-colors flex items-center justify-center gap-1 uppercase tracking-wide cursor-pointer text-white
+                            ${isAmber 
+                              ? "bg-amber-500 hover:bg-amber-600" 
+                              : "bg-blue-600 hover:bg-blue-700"
+                            }
+                          `}
+                        >
+                          <MessageSquare className="w-3.5 h-3.5" /> Select Machine
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))
+                );
+              })
             ) : (
               <div className="col-span-full py-16 text-center border-2 border-dashed border-slate-200 rounded-2xl bg-white max-w-lg mx-auto w-full px-6 flex flex-col items-center">
                 <ShieldAlert className="w-12 h-12 text-slate-300 mb-4" />
@@ -237,7 +254,7 @@ export default function ProductsView({
                     setSearchText("");
                     setSelectedCategory("All");
                   }}
-                  className="bg-blue-550 bg-blue-100 text-blue-600 hover:bg-blue-200 font-bold text-xs py-2.5 px-6 rounded-lg uppercase tracking-wide transition-all mt-4"
+                  className="bg-amber-50 text-amber-600 hover:bg-amber-100 font-bold text-xs py-2.5 px-6 rounded-lg uppercase tracking-wide transition-all mt-4"
                 >
                   Clear All Filters
                 </button>
@@ -278,7 +295,7 @@ export default function ProductsView({
             {/* Right Information Sheet */}
             <div className="w-full md:w-1/2 p-6 sm:p-8 flex flex-col overflow-y-auto justify-between">
               <div>
-                <span className="text-[10px] font-black tracking-widest text-blue-600 uppercase block mb-1">
+                <span className="text-[10px] font-black tracking-widest text-amber-500 uppercase block mb-1">
                   {selectedProductModal.category}
                 </span>
                 <h2 className="text-xl sm:text-2xl font-extrabold text-slate-950 tracking-tight pr-8">
@@ -304,7 +321,7 @@ export default function ProductsView({
                   <button
                     onClick={() => setActiveModalTab("desc")}
                     className={`pb-2.5 pr-4 border-b-2 font-bold uppercase transition-all tracking-wider ${
-                      activeModalTab === "desc" ? "border-blue-600 text-blue-600" : "border-transparent text-slate-500 hover:text-slate-800"
+                      activeModalTab === "desc" ? "border-amber-500 text-amber-500" : "border-transparent text-slate-500 hover:text-slate-800"
                     }`}
                   >
                     About Unit
@@ -312,7 +329,7 @@ export default function ProductsView({
                   <button
                     onClick={() => setActiveModalTab("features")}
                     className={`pb-2.5 px-4 border-b-2 font-bold uppercase transition-all tracking-wider ${
-                      activeModalTab === "features" ? "border-blue-600 text-blue-600" : "border-transparent text-slate-500 hover:text-slate-800"
+                      activeModalTab === "features" ? "border-amber-500 text-amber-500" : "border-transparent text-slate-500 hover:text-slate-800"
                     }`}
                   >
                     Key Features
@@ -320,7 +337,7 @@ export default function ProductsView({
                   <button
                     onClick={() => setActiveModalTab("specs")}
                     className={`pb-2.5 pl-4 border-b-2 font-bold uppercase transition-all tracking-wider ${
-                      activeModalTab === "specs" ? "border-blue-600 text-blue-600" : "border-transparent text-slate-500 hover:text-slate-800"
+                      activeModalTab === "specs" ? "border-amber-500 text-amber-500" : "border-transparent text-slate-500 hover:text-slate-800"
                     }`}
                   >
                     Specs Sheet
@@ -340,7 +357,7 @@ export default function ProductsView({
                       {Boolean(selectedProductModal.features?.length) ? (
                         selectedProductModal.features.map((fea, index) => (
                           <li key={index} className="flex gap-2.5 items-start">
-                            <div className="p-1 px-[5px] bg-blue-500 text-white rounded text-[8px] mt-0.5">
+                            <div className="p-1 px-[5px] bg-amber-500 text-white rounded text-[8px] mt-0.5">
                               <Check className="w-3 h-3 text-white" />
                             </div>
                             <span className="text-xs sm:text-sm font-semibold">{fea}</span>
@@ -381,7 +398,7 @@ export default function ProductsView({
               <div className="pt-6 border-t border-slate-200 mt-6 flex justify-end">
                 <button
                   onClick={() => triggerInquiryFlow(selectedProductModal.name)}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm py-3.5 px-8 rounded-xl shadow-lg transition-transform flex items-center gap-1.5 uppercase tracking-wide cursor-pointer"
+                  className="bg-gradient-to-r from-blue-600 to-amber-500 hover:from-blue-700 hover:to-amber-600 text-white font-bold text-xs sm:text-sm py-3.5 px-8 rounded-xl shadow-lg transition-transform flex items-center gap-1.5 uppercase tracking-wide cursor-pointer"
                 >
                   Confirm & Inquire Machine <ArrowUpRight className="w-4 h-4" />
                 </button>

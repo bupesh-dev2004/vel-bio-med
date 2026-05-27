@@ -117,9 +117,9 @@ export default function ContactView() {
               <div className="space-y-4">
                 <span className="text-blue-600 font-bold tracking-widest text-xs uppercase block mb-1">Corporate Details</span>
                 <h2 className="text-3xl font-extrabold text-slate-950 tracking-tight leading-tight">
-                  Vel Bio Med Head Administration
+                  Vel Bio <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">Med Administration</span>
                 </h2>
-                <div className="w-12 h-1 bg-blue-600 rounded-full" />
+                <div className="w-12 h-1 bg-gradient-to-r from-blue-600 to-amber-500 rounded-full" />
               </div>
 
               <p className="text-slate-500 text-sm leading-relaxed font-semibold">
@@ -128,7 +128,7 @@ export default function ContactView() {
 
               {/* Contact Icons block */}
               <div className="space-y-6">
-                <div className="flex gap-4 items-start bg-slate-50 p-5 rounded-2xl border border-slate-100 hover:border-blue-150 transition-colors">
+                <div className="flex gap-4 items-start bg-slate-50 p-5 rounded-2xl border border-slate-100 hover:border-blue-200 transition-colors">
                   <div className="p-3 bg-blue-50 text-blue-600 rounded-xl">
                     <MapPin className="w-5 h-5" />
                   </div>
@@ -138,8 +138,8 @@ export default function ContactView() {
                   </div>
                 </div>
 
-                <div className="flex gap-4 items-start bg-slate-50 p-5 rounded-2xl border border-slate-100 hover:border-blue-150 transition-colors">
-                  <div className="p-3 bg-blue-50 text-blue-600 rounded-xl">
+                <div className="flex gap-4 items-start bg-slate-50 p-5 rounded-2xl border border-slate-100 hover:border-amber-200 transition-colors">
+                  <div className="p-3 bg-amber-50 text-amber-600 rounded-xl">
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
@@ -148,7 +148,7 @@ export default function ContactView() {
                   </div>
                 </div>
 
-                <div className="flex gap-4 items-start bg-slate-50 p-5 rounded-2xl border border-slate-100 hover:border-blue-150 transition-colors">
+                <div className="flex gap-4 items-start bg-slate-50 p-5 rounded-2xl border border-slate-100 hover:border-blue-200 transition-colors">
                   <div className="p-3 bg-blue-50 text-blue-600 rounded-xl">
                     <Mail className="w-5 h-5" />
                   </div>
@@ -160,8 +160,8 @@ export default function ContactView() {
                   </div>
                 </div>
 
-                <div className="flex gap-4 items-start bg-slate-50 p-5 rounded-2xl border border-slate-100 hover:border-blue-150 transition-colors">
-                  <div className="p-3 bg-blue-50 text-blue-600 rounded-xl">
+                <div className="flex gap-4 items-start bg-slate-50 p-5 rounded-2xl border border-slate-100 hover:border-amber-200 transition-colors">
+                  <div className="p-3 bg-amber-50 text-amber-600 rounded-xl">
                     <Clock className="w-5 h-5" />
                   </div>
                   <div>
@@ -174,11 +174,11 @@ export default function ContactView() {
 
             {/* Right Column Interactive Form */}
             <div className="lg:col-span-7 bg-slate-50 p-8 sm:p-10 rounded-3xl border border-slate-200/60 shadow-sm relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 rounded-full pointer-events-none" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-550/5 rounded-full pointer-events-none" />
 
               {formSuccess ? (
                 <div className="py-12 px-4 text-center max-w-md mx-auto space-y-6">
-                  <div className="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mx-auto shadow-xl">
+                  <div className="w-16 h-16 bg-blue-105 bg-amber-50 text-amber-500 rounded-full flex items-center justify-center mx-auto shadow-xl">
                     <ShieldCheck className="w-10 h-10" />
                   </div>
                   <h3 className="text-2.5xl font-extrabold text-slate-950 tracking-tight">Inquiry Sheet Submitted!</h3>
@@ -190,7 +190,7 @@ export default function ContactView() {
                       setFormSuccess(false);
                       setInquiryMachineName(null);
                     }}
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 px-6 rounded-lg uppercase tracking-wider transition-colors cursor-pointer"
+                    className="bg-gradient-to-r from-blue-600 to-amber-500 text-white font-bold text-xs py-3 px-6 rounded-lg uppercase tracking-wider transition-colors cursor-pointer"
                   >
                     Submit Another Request
                   </button>
@@ -221,7 +221,7 @@ export default function ContactView() {
                         placeholder="Dr. Shrivastava"
                         value={formData.name}
                         onChange={handleChange}
-                        className="w-full bg-white border border-slate-200/80 rounded-xl py-3 px-4 text-xs font-medium focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/10 text-slate-800 transition-colors"
+                        className="w-full bg-white border border-slate-200/80 rounded-xl py-3 px-4 text-xs font-medium focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500/10 text-slate-800 transition-colors"
                         required
                       />
                     </div>
@@ -237,7 +237,7 @@ export default function ContactView() {
                         placeholder="shrivastava@hospital.org"
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full bg-white border border-slate-200/80 rounded-xl py-3 px-4 text-xs font-medium focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/10 text-slate-800 transition-colors"
+                        className="w-full bg-white border border-slate-200/80 rounded-xl py-3 px-4 text-xs font-medium focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500/10 text-slate-800 transition-colors"
                         required
                       />
                     </div>
@@ -255,7 +255,7 @@ export default function ContactView() {
                         placeholder="+91 98765 XXXXX"
                         value={formData.mobile}
                         onChange={handleChange}
-                        className="w-full bg-white border border-slate-200/80 rounded-xl py-3 px-4 text-xs font-medium focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/10 text-slate-800 transition-colors"
+                        className="w-full bg-white border border-slate-200/80 rounded-xl py-3 px-4 text-xs font-medium focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500/10 text-slate-800 transition-colors"
                       />
                     </div>
 
@@ -270,7 +270,7 @@ export default function ContactView() {
                         placeholder="e.g. GE Voluson E10, Dräger Primus Setup"
                         value={formData.product}
                         onChange={handleChange}
-                        className="w-full bg-white border border-slate-200/80 rounded-xl py-3 px-4 text-xs font-medium focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/10 text-slate-800 transition-colors"
+                        className="w-full bg-white border border-slate-200/80 rounded-xl py-3 px-4 text-xs font-medium focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500/10 text-slate-800 transition-colors"
                       />
                     </div>
                   </div>
@@ -286,14 +286,14 @@ export default function ContactView() {
                       placeholder="Please clarify if you require an Annual Maintenance Contract (AMC), specific transducer arrays, or emergency training handovers."
                       value={formData.feedback}
                       onChange={handleChange}
-                      className="w-full bg-white border border-slate-200/80 rounded-xl py-3 px-4 text-xs font-medium focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/10 text-slate-800 transition-colors resize-none leading-relaxed"
+                      className="w-full bg-white border border-slate-200/80 rounded-xl py-3 px-4 text-xs font-medium focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500/10 text-slate-800 transition-colors resize-none leading-relaxed"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm py-4 rounded-xl shadow-lg shadow-blue-500/10 transition-transform uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full bg-gradient-to-r from-blue-600 to-amber-500 hover:from-blue-700 hover:to-amber-600 text-white font-bold text-xs sm:text-sm py-4 rounded-xl shadow-lg shadow-blue-500/10 transition-transform uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer"
                   >
                     {isSubmitting ? (
                       "Saving Inquiry Sourcing Metrics..."
@@ -321,7 +321,7 @@ export default function ContactView() {
           referrerPolicy="no-referrer-when-downgrade"
         />
         <div className="absolute top-4 left-4 bg-slate-900/90 text-white p-4 rounded-xl shadow-2xl z-10 hidden sm:block max-w-xs border border-white/10 pointer-events-none">
-          <p className="text-xs font-black uppercase tracking-wider text-blue-400">Headquarters</p>
+          <p className="text-xs font-black uppercase tracking-wider text-amber-500">Headquarters</p>
           <p className="text-xs font-medium leading-relaxed mt-1 text-slate-150">Vel Bio Med Corporate Office is fully accessible during business operating hours.</p>
         </div>
       </section>
