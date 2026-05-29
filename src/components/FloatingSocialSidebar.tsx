@@ -1,36 +1,36 @@
 import React from "react";
-import { Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
+import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon, YoutubeIcon } from "./ui/BrandSocialIcons.js";
 
 export default function FloatingSocialSidebar() {
   const socials = [
     {
       name: "Facebook",
       url: "https://facebook.com/velbiomed",
-      icon: <Facebook className="w-4 h-4" />,
+      icon: <FacebookIcon className="w-4 h-4" />,
       hoverColor: "hover:bg-blue-600 hover:text-white hover:border-blue-500 hover:shadow-blue-500/20",
     },
     {
       name: "Instagram",
       url: "https://instagram.com/velbiomed",
-      icon: <Instagram className="w-4 h-4" />,
+      icon: <InstagramIcon className="w-4 h-4" />,
       hoverColor: "hover:bg-pink-600 hover:text-white hover:border-pink-500 hover:shadow-pink-500/20",
     },
     {
       name: "LinkedIn",
       url: "https://linkedin.com/company/velbiomed",
-      icon: <Linkedin className="w-4 h-4" />,
+      icon: <LinkedinIcon className="w-4 h-4" />,
       hoverColor: "hover:bg-blue-700 hover:text-white hover:border-blue-600 hover:shadow-blue-600/20",
     },
     {
       name: "Twitter",
       url: "https://twitter.com/velbiomed",
-      icon: <Twitter className="w-4 h-4" />,
-      hoverColor: "hover:bg-sky-500 hover:text-white hover:border-sky-400 hover:shadow-sky-400/20",
+      icon: <XIcon className="w-4 h-4" />,
+      hoverColor: "hover:bg-black hover:text-white hover:border-slate-800 hover:shadow-black/20",
     },
     {
       name: "YouTube",
       url: "https://youtube.com/velbiomed",
-      icon: <Youtube className="w-4 h-4" />,
+      icon: <YoutubeIcon className="w-4 h-4" />,
       hoverColor: "hover:bg-red-650 hover:text-white hover:border-red-600 hover:shadow-red-500/20",
     },
   ];

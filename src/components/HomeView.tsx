@@ -6,6 +6,7 @@ import { FrostedGlassCard } from "@/components/ui/interactive-frosted-glass-card
 import { BorderRotate } from "@/components/ui/animated-gradient-border";
 import { TestimonialSlider } from "@/components/ui/testimonial-slider";
 import { Logos3 } from "@/components/ui/logos3";
+import ImageGallery from "@/components/ui/image-gallery";
 import {
   Carousel,
   CarouselContent,
@@ -375,92 +376,8 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
         </div>
       </section>
 
-      {/* 3. LATEST PRODUCTS CAROUSEL */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
-            <div className="max-w-xl">
-              <span className="text-blue-600 font-bold tracking-widest text-xs uppercase block mb-1">State of the Art Solutions</span>
-              <h2 className="text-3xl font-extrabold text-slate-950 tracking-tight">Our Latest Acquisitions</h2>
-              <p className="text-slate-500 text-sm mt-2 font-medium">
-                High acuity bedside systems and multi-frequency digital ultrasound machinery from certified global healthcare leaders.
-              </p>
-            </div>
-            <button
-              onClick={() => setCurrentTab("products")}
-              className="mt-4 md:mt-0 bg-blue-50 hover:bg-blue-100 text-blue-600 text-xs font-bold py-3 px-6 rounded-lg transition-all flex items-center gap-1.5 uppercase tracking-wide cursor-pointer self-start md:self-auto"
-            >
-              See All Catalogues <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-
-          {/* Responsive Cards Carousel Slider */}
-          <Carousel className="w-full relative" opts={{ align: "start", loop: true }}>
-            <CarouselContent className="-ml-6">
-              {dynamicProducts.slice(0, 8).map((item) => (
-                <CarouselItem key={item.id} className="pl-6 basis-full sm:basis-1/2 lg:basis-1/3">
-                  <div className="bg-slate-50 border border-slate-100 rounded-2xl overflow-hidden group hover:shadow-2xl hover:shadow-blue-500/5 transition-all duration-300 flex flex-col h-full">
-                    <div className="relative pt-[65%] overflow-hidden bg-slate-200">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                        loading="lazy"
-                      />
-                      <div className="absolute top-4 left-4 bg-blue-600 text-white text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded">
-                        LATEST
-                      </div>
-                    </div>
-
-                    <div className="p-6 flex flex-col flex-grow">
-                      <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest block mb-1">
-                        {item.category}
-                      </span>
-                      <h3 className="text-lg font-bold text-slate-950 line-clamp-1 group-hover:text-blue-600 transition-colors mb-2">
-                        {item.name}
-                      </h3>
-                      <p className="text-slate-500 text-xs sm:text-sm line-clamp-2 leading-relaxed mb-4 flex-grow">
-                        {item.shortDesc}
-                      </p>
-                      <div className="flex items-center gap-1.5 mb-5">
-                        {Array.from({ length: 5 }).map((_, i) => (
-                          <Star
-                            key={i}
-                            className={`w-3.5 h-3.5 ${
-                              i < Math.floor(item.rating) ? "text-amber-400 fill-amber-400" : "text-slate-300"
-                            }`}
-                          />
-                        ))}
-                        <span className="text-xs text-slate-500 font-bold ml-1">({item.rating}.0)</span>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-3 pt-4 border-t border-slate-200/50">
-                        <button
-                          onClick={() => onOpenProductModal(item)}
-                          className="bg-white border border-slate-200 hover:border-blue-600 text-slate-700 hover:text-blue-600 font-bold text-xs py-2.5 rounded-lg transition-colors flex items-center justify-center gap-1 uppercase tracking-wide cursor-pointer"
-                        >
-                          <Eye className="w-3.5 h-3.5" /> Details
-                        </button>
-                        <button
-                          onClick={() => startInquiry(item.name)}
-                          className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-2.5 rounded-lg transition-colors flex items-center justify-center gap-1 uppercase tracking-wide cursor-pointer"
-                        >
-                          <MessageSquare className="w-3.5 h-3.5" /> Inquiry
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            {/* Center-aligned arrows below the cards for premium accessibility */}
-            <div className="flex justify-center gap-4 mt-10">
-              <CarouselPrevious className="static translate-y-0 h-10 w-10 border-slate-200 text-slate-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-colors shadow-sm cursor-pointer" />
-              <CarouselNext className="static translate-y-0 h-10 w-10 border-slate-200 text-slate-600 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 transition-colors shadow-sm cursor-pointer" />
-            </div>
-          </Carousel>
-        </div>
-      </section>
+      {/* 3. LATEST PRODUCTS GALLERY */}
+      <ImageGallery />
 
       {/* 4. TRENDING PRODUCTS GRID */}
       <section className="py-20 bg-slate-50">

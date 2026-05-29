@@ -31,10 +31,10 @@ interface CardProps {
   gradientTo: string;
   glowColor: string;
   badge: string;
-  Icon: React.ElementType;
+  Icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
   heading: string;
   body: string;
-  points: { icon: React.ElementType; text: string }[];
+  points: { icon: React.ComponentType<{ className?: string; style?: React.CSSProperties; strokeWidth?: number }>; text: string }[];
   shapeColor: string;
 }
 

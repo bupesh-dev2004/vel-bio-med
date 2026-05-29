@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useAppState } from "../AppContext.js";
-import { Maximize2, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Maximize2, X, ChevronLeft, ChevronRight, ArrowRight, Zap } from "lucide-react";
+import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 export default function GalleryView() {
-  const { state } = useAppState();
+  const { state, setCurrentTab } = useAppState();
   const galleryItems = state?.gallery || [];
   const [selectedCategory, setSelectedCategory] = useState("All");
 
@@ -19,7 +21,6 @@ export default function GalleryView() {
     : galleryItems.filter((item) => item.category === selectedCategory);
 
   const openLightbox = (idx: number) => {
-    // Find absolute index inside filtered items
     setLightboxIndex(idx);
   };
 
@@ -41,34 +42,169 @@ export default function GalleryView() {
     }
   };
 
+  const handleScrollToGrid = () => {
+    const element = document.getElementById("portfolio-showcase");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen">
-      {/* Upper header banner */}
-      <section className="relative py-20 bg-slate-900 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1584515901367-f1c21b29f30a?auto=format&fit=crop&w=1200&q=80')] bg-cover bg-center opacity-10" />
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/40 to-slate-950" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white space-y-4">
-          <span className="text-blue-500 font-black tracking-widest text-xs uppercase block font-sans">Media Portfolio</span>
-          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight">On-Site Installations Gallery</h1>
-          <p className="max-w-2xl mx-auto text-slate-300 text-sm md:text-base leading-relaxed">
-            A visual overview of real diagnostic setup deliveries, trauma clinics, and intensive care installations completed by our expert engineering crew.
-          </p>
+      {/* Immersive Hero/Landing Section with Premium Background Image */}
+      <div className="relative w-full min-h-[85vh] bg-slate-950 overflow-hidden flex flex-col items-center justify-center py-20">
+        {/* Background Image with elegant overlay */}
+        <div 
+          className="absolute inset-0 bg-[url('https://static.vecteezy.com/system/resources/thumbnails/053/732/763/small/comfortable-patient-room-featuring-advanced-equipment-and-relaxing-bed-design-free-photo.jpg')] bg-cover bg-center opacity-30" 
+          aria-hidden="true"
+        />
+        {/* Top Gradient Overlay to blend with sticky navigation */}
+        <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#081d38]/70 to-transparent pointer-events-none z-10" />
+        
+        {/* Bottom overlay blending into the next section */}
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950 to-transparent pointer-events-none z-10" />
+
+        {/* Glow effects */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-slate-950/50 pointer-events-none" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl animate-pulse pointer-events-none" />
+
+        <div className="relative z-10 text-center space-y-12 max-w-5xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-8"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-blue-500/10 via-sky-500/10 to-amber-500/10 border border-blue-500/20 backdrop-blur-xl shadow-2xl"
+            >
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500/5 via-transparent to-amber-500/5 animate-pulse" />
+              <div className="w-2 h-2 bg-blue-500 rounded-full animate-ping" />
+              <span className="relative z-10 text-xs font-black tracking-widest text-blue-400 uppercase">MEDIA PORTFOLIO</span>
+              <div className="w-2 h-2 bg-amber-500 rounded-full animate-ping animation-delay-500" />
+            </motion.div>
+
+            <div className="space-y-6">
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.3 }}
+                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight leading-[0.9] select-none text-white"
+                style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+              >
+                <span className="block font-light text-slate-300/85 mb-2 text-2xl md:text-3xl lg:text-4xl">
+                  Visualizing
+                </span>
+                <span className="block relative">
+                  <span className="bg-gradient-to-r from-blue-500 via-sky-400 to-amber-500 bg-clip-text text-transparent font-black relative z-10">
+                    Our Work
+                  </span>
+                  <div
+                    className="absolute inset-0 bg-gradient-to-r from-blue-500 via-sky-400 to-amber-500 bg-clip-text text-transparent font-black blur-2xl opacity-50 scale-105"
+                    style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+                  >
+                    Our Work
+                  </div>
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: 1.5, delay: 1.2, ease: "easeOut" }}
+                    className="absolute -bottom-4 left-0 h-2 bg-gradient-to-r from-blue-500 via-sky-400 to-amber-500 rounded-full shadow-lg shadow-blue-500/50"
+                  />
+                </span>
+              </motion.h1>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="max-w-3xl mx-auto space-y-4"
+            >
+              <p
+                className="text-base md:text-lg lg:text-xl text-slate-300 leading-relaxed font-semibold"
+                style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+              >
+                A visual overview of real diagnostic setup deliveries, trauma clinics, and{" "}
+                <span className="text-amber-500 font-extrabold">
+                  intensive care installations
+                </span>{" "}
+                completed by our expert engineering crew.
+              </p>
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1 }}
+            className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-4"
+          >
+            <motion.button
+              onClick={handleScrollToGrid}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 20px 40px rgba(0,0,0,0.3), 0 0 25px rgba(56, 189, 248, 0.4)",
+                y: -2
+              }}
+              whileTap={{ scale: 0.98 }}
+              className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 via-sky-400 to-amber-500 text-white rounded-xl font-bold text-lg shadow-xl hover:shadow-blue-500/30 transition-all duration-500 overflow-hidden border border-blue-400/20 cursor-pointer"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                initial={{ x: "-100%" }}
+                whileHover={{ x: "100%" }}
+                transition={{ duration: 0.8 }}
+              />
+              <span className="relative z-10 tracking-wide">Browse Gallery</span>
+              <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
+            </motion.button>
+
+            <motion.button
+              onClick={() => setCurrentTab("contact")}
+              whileHover={{
+                scale: 1.05,
+                backgroundColor: "rgba(255,255,255,0.08)",
+                borderColor: "#f59e0b",
+                boxShadow: "0 15px 30px rgba(0,0,0,0.2), 0 0 15px rgba(245, 158, 11, 0.2)",
+                y: -2
+              }}
+              whileTap={{ scale: 0.98 }}
+              className="group relative inline-flex items-center gap-3 px-8 py-4 border-2 border-slate-700 rounded-xl font-bold text-lg text-white hover:border-amber-500 transition-all duration-500 backdrop-blur-xl bg-slate-900/60 hover:bg-slate-900/90 shadow-lg overflow-hidden cursor-pointer"
+            >
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 via-transparent to-amber-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <Zap className="relative z-10 w-5 h-5 text-amber-500 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300" />
+              <span className="relative z-10 tracking-wide">Contact Sourcing</span>
+            </motion.button>
+          </motion.div>
         </div>
-      </section>
+      </div>
+
+
 
       {/* Filter tabs and masonry grid */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="portfolio-showcase" className="py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden border-t border-slate-100">
+        {/* Ambient Decorative Elements */}
+        <div className="absolute top-1/3 left-0 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-1/3 right-0 w-80 h-80 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Category Filter buttons */}
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
+          <div className="flex flex-wrap justify-center gap-3.5 mb-16">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-250 cursor-pointer ${
+                className={`px-6 py-3 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-350 cursor-pointer shadow-sm hover:shadow-md border border-transparent ${
                   selectedCategory === cat
-                    ? "bg-gradient-to-r from-blue-600 to-amber-500 text-white shadow-lg shadow-blue-500/10"
-                    : "bg-slate-50 text-slate-600 hover:bg-slate-100 hover:text-slate-950"
+                    ? "bg-gradient-to-r from-blue-600 via-sky-400 to-amber-500 text-white shadow-xl shadow-blue-500/25 scale-105"
+                    : "bg-white text-slate-600 hover:text-blue-600 hover:bg-slate-50 border-slate-200/80 shadow-xs hover:scale-102"
                 }`}
               >
                 {cat}
@@ -85,42 +221,66 @@ export default function GalleryView() {
                   <div
                     key={item.id}
                     onClick={() => openLightbox(idx)}
-                    className="bg-white border border-slate-200/60 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-slate-200/85 transition-all duration-300 cursor-pointer group flex flex-col"
+                    className="relative group cursor-pointer rounded-[24px] z-10"
                   >
-                    <div className="relative pt-[70%] bg-slate-100 overflow-hidden">
+                    {/* Glowing shadow effect behind card on hover */}
+                    <div 
+                      className={cn(
+                        "absolute -inset-1 rounded-[24px] blur-xl opacity-0 group-hover:opacity-15 transition-all duration-500 -z-10",
+                        isAmber ? "bg-amber-500" : "bg-blue-500"
+                      )} 
+                    />
+
+                    {/* Glowing outer border line inside card on hover */}
+                    <div 
+                      className={cn(
+                        "absolute inset-0 border-2 rounded-[24px] pointer-events-none z-20 opacity-0 group-hover:opacity-100 transition-all duration-500",
+                        isAmber ? "border-amber-400/50" : "border-blue-400/50"
+                      )} 
+                    />
+
+                    {/* Main image container */}
+                    <div className="relative aspect-[4/3] rounded-[24px] overflow-hidden border border-slate-200/60 shadow-md group-hover:shadow-2xl transition-all duration-500 bg-slate-900">
+                      {/* Image zoom effect */}
                       <img
                         src={item.image}
                         alt={item.title}
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
                         loading="lazy"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/65 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                        <div className="flex items-center gap-2 text-white">
-                          <Maximize2 className={`w-5 h-5 ${isAmber ? "text-amber-400" : "text-blue-400"}`} />
-                          <span className="text-xs font-bold uppercase tracking-wider">Expand Photo</span>
+
+                      {/* Glassmorphic dark gradient overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent opacity-85 group-hover:opacity-90 transition-opacity duration-500 z-10" />
+
+                      {/* Content aligned inside card */}
+                      <div className="absolute inset-x-0 bottom-0 p-6 z-20 flex flex-col justify-end text-white space-y-2">
+                        <span 
+                          className={cn(
+                            "text-[10px] font-black uppercase tracking-widest block",
+                            isAmber ? "text-amber-400" : "text-sky-300"
+                          )}
+                        >
+                          {item.category}
+                        </span>
+
+                        <h3 className="text-base sm:text-lg font-bold tracking-tight text-white leading-snug drop-shadow-md group-hover:translate-x-1 transition-transform duration-300">
+                          {item.title}
+                        </h3>
+
+                        {/* Slide up Expand Action */}
+                        <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pt-1">
+                          <Maximize2 className={cn("w-4 h-4", isAmber ? "text-amber-400" : "text-sky-300")} />
+                          <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">Expand Photo</span>
                         </div>
                       </div>
-                    </div>
-
-                    <div className="p-5 flex-grow">
-                      <span className={`text-[10px] font-black tracking-widest uppercase block mb-1
-                        ${isAmber ? "text-amber-500" : "text-blue-600"}
-                      `}>
-                        {item.category}
-                      </span>
-                      <h3 className={`text-sm font-bold text-slate-900 transition-colors
-                        ${isAmber ? "group-hover:text-amber-500" : "group-hover:text-blue-600"}
-                      `}>
-                        {item.title}
-                      </h3>
                     </div>
                   </div>
                 );
               })}
             </div>
           ) : (
-            <div className="py-24 text-center border border-dashed border-slate-200 rounded-2xl bg-slate-50">
-              <p className="text-slate-400 text-sm">No portfolio assets found under this filtering selection.</p>
+            <div className="py-24 text-center border border-dashed border-slate-200 rounded-[24px] bg-slate-50">
+              <p className="text-slate-400 text-sm font-medium">No portfolio assets found under this filtering selection.</p>
             </div>
           )}
         </div>
@@ -145,7 +305,7 @@ export default function GalleryView() {
           {filteredItems.length > 1 && (
             <button
               onClick={handlePrevImage}
-              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-slate-900/50 hover:bg-amber-500 p-3 rounded-full transition-all cursor-pointer"
+              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-slate-900/50 hover:bg-blue-600 p-3 rounded-full transition-all cursor-pointer"
               aria-label="Previous Image"
             >
               <ChevronLeft className="w-6 h-6" />
@@ -160,10 +320,10 @@ export default function GalleryView() {
             <img
               src={filteredItems[lightboxIndex].image}
               alt={filteredItems[lightboxIndex].title}
-              className="max-w-full max-h-[70vh] object-contain rounded-xl shadow-2xl border border-white/10"
+              className="max-w-full max-h-[70vh] object-contain rounded-2xl shadow-2xl border border-white/10"
             />
             <div className="text-center mt-5 space-y-2">
-              <span className="inline-block bg-gradient-to-r from-blue-600 to-amber-500 text-white text-[10px] sm:text-xs font-black tracking-widest px-3 py-1.5 rounded-full uppercase">
+              <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-400 to-amber-500 text-white text-[10px] sm:text-xs font-black tracking-widest px-3.5 py-1.5 rounded-full uppercase">
                 {filteredItems[lightboxIndex].category}
               </span>
               <h2 className="text-lg md:text-xl font-bold text-white tracking-tight">
@@ -176,7 +336,7 @@ export default function GalleryView() {
           {filteredItems.length > 1 && (
             <button
               onClick={handleNextImage}
-              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-slate-900/50 hover:bg-amber-500 p-3 rounded-full transition-all cursor-pointer"
+              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-slate-900/50 hover:bg-blue-600 p-3 rounded-full transition-all cursor-pointer"
               aria-label="Next Image"
             >
               <ChevronRight className="w-6 h-6" />

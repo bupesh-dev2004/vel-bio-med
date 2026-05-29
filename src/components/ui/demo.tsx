@@ -1,5 +1,5 @@
-import { FrostedGlassCard } from "@/components/ui/interactive-frosted-glass-card";
+import Example from "@/components/ui/image-gallery";
 
 export default function DemoOne() {
-  return <FrostedGlassCard />;
+  return <Example />;
 }

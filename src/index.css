@@ -109,7 +109,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #0b1329;
+  background-color: #081d38;
 }
 
 .heroEffects .bg {
@@ -120,14 +120,14 @@
   background-position: center;
   background-repeat: no-repeat;
   z-index: 1;
-  opacity: 0.75;
+  opacity: 0.45;
   will-change: transform;
 }
 
 .heroEffects .shade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(11, 19, 41, 0.4) 0%, rgba(15, 23, 42, 0.92) 100%);
+  background: linear-gradient(to bottom, rgba(10, 37, 64, 0.45) 0%, rgba(8, 29, 56, 0.95) 100%);
   z-index: 2;
   pointer-events: none;
   will-change: opacity;

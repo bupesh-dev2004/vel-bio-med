@@ -4,17 +4,13 @@ import React from 'react';
 import type { ComponentProps, ReactNode } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { 
-  Facebook, 
-  Instagram, 
-  Linkedin, 
-  Twitter, 
-  Youtube, 
   MapPin, 
   Phone, 
   Mail, 
   Award, 
   ArrowRight 
 } from "lucide-react";
+import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon, YoutubeIcon } from "./ui/BrandSocialIcons.js";
 import { useAppState } from "../AppContext.js";
 
 type ViewAnimationProps = {
@@ -109,18 +105,38 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-2.5 pt-2">
             {[
-              { icon: <Facebook className="w-4 h-4" />, url: "https://facebook.com/velbiomed" },
-              { icon: <Instagram className="w-4 h-4" />, url: "https://instagram.com/velbiomed" },
-              { icon: <Linkedin className="w-4 h-4" />, url: "https://linkedin.com/company/velbiomed" },
-              { icon: <Twitter className="w-4 h-4" />, url: "https://twitter.com/velbiomed" },
-              { icon: <Youtube className="w-4 h-4" />, url: "https://youtube.com/velbiomed" }
+              { 
+                icon: <FacebookIcon className="w-4 h-4" />, 
+                url: "https://facebook.com/velbiomed",
+                hoverClass: "hover:bg-[#1877F2] hover:border-[#1877F2] hover:shadow-[#1877F2]/20" 
+              },
+              { 
+                icon: <InstagramIcon className="w-4 h-4" />, 
+                url: "https://instagram.com/velbiomed",
+                hoverClass: "hover:bg-[#E1306C] hover:border-[#E1306C] hover:shadow-[#E1306C]/20" 
+              },
+              { 
+                icon: <LinkedinIcon className="w-4 h-4" />, 
+                url: "https://linkedin.com/company/velbiomed",
+                hoverClass: "hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:shadow-[#0A66C2]/20" 
+              },
+              { 
+                icon: <XIcon className="w-4 h-4" />, 
+                url: "https://twitter.com/velbiomed",
+                hoverClass: "hover:bg-black hover:border-slate-800 hover:shadow-black/20" 
+              },
+              { 
+                icon: <YoutubeIcon className="w-4 h-4" />, 
+                url: "https://youtube.com/velbiomed",
+                hoverClass: "hover:bg-[#FF0000] hover:border-[#FF0000] hover:shadow-[#FF0000]/20" 
+              }
             ].map((social, idx) => (
               <a 
                 key={idx}
                 href={social.url} 
                 target="_blank"
                 rel="noreferrer"
-                className="p-2.5 bg-slate-900/80 hover:bg-blue-600 rounded-xl text-slate-400 hover:text-white border border-slate-800 hover:border-blue-500 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-blue-500/10"
+                className={`p-2.5 bg-slate-900/80 rounded-xl text-slate-400 hover:text-white border border-slate-800 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg ${social.hoverClass}`}
               >
                 {social.icon}
               </a>

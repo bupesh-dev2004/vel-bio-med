@@ -1,5 +1,6 @@
 import React from "react";
-import { MessageSquare, X, Facebook, Instagram, Linkedin, Twitter, Youtube } from "lucide-react";
+import { MessageSquare, X } from "lucide-react";
+import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon, YoutubeIcon, WhatsappIcon } from "./ui/BrandSocialIcons.js";
 import { MenuItem, MenuContainer } from "./ui/fluid-menu.js";
 import { useAppState } from "../AppContext.js";
 
@@ -27,38 +28,38 @@ export default function FloatingSocialMenu() {
     {
       name: "WhatsApp",
       url: whatsappUrl,
-      icon: <MessageSquare className="w-5 h-5 text-white" />,
+      icon: <WhatsappIcon className="w-5 h-5 text-white" />,
       className: "bg-emerald-500 border border-emerald-400 hover:bg-emerald-600 text-white shadow-lg shadow-emerald-500/20",
     },
     {
       name: "LinkedIn",
       url: "https://linkedin.com/company/velbiomed",
-      icon: <Linkedin className="w-5 h-5 text-white" />,
+      icon: <LinkedinIcon className="w-5 h-5 text-white" />,
       className: "bg-blue-700 border border-blue-600 hover:bg-blue-800 text-white shadow-lg shadow-blue-700/20",
     },
     {
       name: "Facebook",
       url: "https://facebook.com/velbiomed",
-      icon: <Facebook className="w-5 h-5 text-white" />,
+      icon: <FacebookIcon className="w-5 h-5 text-white" />,
       className: "bg-blue-600 border border-blue-500 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/20",
     },
     {
       name: "Instagram",
       url: "https://instagram.com/velbiomed",
-      icon: <Instagram className="w-5 h-5 text-white" />,
+      icon: <InstagramIcon className="w-5 h-5 text-white" />,
       className: "bg-pink-600 border border-pink-500 hover:bg-pink-700 text-white shadow-lg shadow-pink-600/20",
     },
     {
       name: "Twitter",
       url: "https://twitter.com/velbiomed",
-      icon: <Twitter className="w-5 h-5 text-white" />,
-      className: "bg-sky-500 border border-sky-400 hover:bg-sky-600 text-white shadow-lg shadow-sky-500/20",
+      icon: <XIcon className="w-5 h-5 text-white" />,
+      className: "bg-black border border-slate-800 hover:bg-slate-900 text-white shadow-lg shadow-black/20",
     },
     {
       name: "YouTube",
       url: "https://youtube.com/velbiomed",
-      icon: <Youtube className="w-5 h-5 text-white" />,
-      className: "bg-red-600 border border-red-500 hover:bg-red-700 text-white shadow-lg shadow-red-600/20",
+      icon: <YoutubeIcon className="w-5 h-5 text-white" />,
+      className: "bg-red-650 border border-red-500 hover:bg-red-700 text-white shadow-lg shadow-red-600/20",
     },
   ];
 
