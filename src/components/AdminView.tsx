@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAppState } from "../AppContext.js";
-import { PlusCircle, Trash2, CheckCircle2, FileText, ShoppingBag, Image, PhoneCall, Award, Star, ListCollapse, List, Save, UserCheck, X } from "lucide-react";
+import { PlusCircle, Trash2, CheckCircle2, FileText, ShoppingBag, Image, PhoneCall, Award, Star, ListCollapse, List, Save, UserCheck, X, Lock, Unlock, User, Key, Eye, EyeOff, HelpCircle, ShieldAlert } from "lucide-react";
 import { Product, Testimonial, GalleryItem, Service, HomeSlide, ContactInfo } from "../types.js";
 
 export default function AdminView() {
@@ -8,6 +8,14 @@ export default function AdminView() {
   const categories = state?.categories || [];
 
   const [activeAdminSubTab, setActiveAdminSubTab] = useState<"inquiries" | "products" | "categories" | "slides" | "contact" | "gallery" | "services">("inquiries");
+
+  // Authentication State
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [inputUser, setInputUser] = useState("");
+  const [inputPass, setInputPass] = useState("");
+  const [loginError, setLoginError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showForgotModal, setShowForgotModal] = useState(false);
 
   // Local feedback or messages
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
@@ -285,12 +293,165 @@ export default function AdminView() {
   const defaultContactEmail = "sales@velbiomed.co.in";
   const defaultContactWhatsapp = "918049302930";
 
+  const handleLoginSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (inputUser.trim().toLowerCase() === "admin" && inputPass === "Admin123") {
+      setIsAuthenticated(true);
+      setLoginError("");
+      displayMessage("Authenticated successfully. Welcome back, Admin.");
+    } else {
+      setLoginError("Invalid username or password credentials.");
+    }
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="bg-slate-50 min-h-[80vh] font-sans flex items-center justify-center py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        {/* Glow ambient design elements matching brand logo gradient */}
+        <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-md w-full space-y-8 relative z-10">
+          <div className="text-center">
+            {/* Pulsing Lock Header Icon with Brand Logo Gradient */}
+            <div className="mx-auto h-16 w-16 rounded-2xl bg-gradient-to-tr from-blue-600 via-sky-400 to-amber-500 flex items-center justify-center text-white font-bold text-2xl shadow-xl shadow-blue-500/20 hover:scale-105 transition-transform duration-300 animate-pulse">
+              <Lock className="w-8 h-8" />
+            </div>
+            <h2 className="mt-6 text-center text-3xl font-black text-slate-900 tracking-tight">
+              Admin Gateway
+            </h2>
+            <p className="mt-2 text-center text-xs text-slate-500 uppercase tracking-widest font-black">
+              Vel Bio Med Sourcing Registry
+            </p>
+          </div>
+
+          <div className="bg-white py-8 px-6 sm:px-10 rounded-3xl border border-slate-200/80 shadow-xl">
+            <form className="space-y-6" onSubmit={handleLoginSubmit}>
+              {loginError && (
+                <div className="p-3.5 bg-rose-50 border border-rose-250 text-rose-705 text-rose-700 text-xs font-bold rounded-xl flex items-center gap-2">
+                  <ShieldAlert className="w-4.5 h-4.5 text-rose-500 flex-shrink-0" />
+                  <span>{loginError}</span>
+                </div>
+              )}
+
+              <div className="space-y-4">
+                <div>
+                  <label htmlFor="username-input" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
+                    Username
+                  </label>
+                  <div className="relative">
+                    <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                      <User className="w-4 h-4" />
+                    </span>
+                    <input
+                      id="username-input"
+                      type="text"
+                      required
+                      value={inputUser}
+                      onChange={(e) => setInputUser(e.target.value)}
+                      className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:border-blue-500 focus:bg-white rounded-xl py-3 pl-10 pr-4 text-xs font-semibold focus:outline-none transition-all text-slate-800"
+                      placeholder="Enter administrator username"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="password-input" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">
+                    Password
+                  </label>
+                  <div className="relative">
+                    <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                      <Key className="w-4 h-4" />
+                    </span>
+                    <input
+                      id="password-input"
+                      type={showPassword ? "text" : "password"}
+                      required
+                      value={inputPass}
+                      onChange={(e) => setInputPass(e.target.value)}
+                      className="w-full bg-slate-50 border border-slate-200 hover:border-slate-300 focus:border-blue-500 focus:bg-white rounded-xl py-3 pl-10 pr-10 text-xs font-semibold focus:outline-none transition-all text-slate-800"
+                      placeholder="Enter verification password"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-650"
+                    >
+                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className="text-xs">
+                  <button
+                    type="button"
+                    onClick={() => setShowForgotModal(true)}
+                    className="font-bold text-blue-600 hover:text-blue-800 transition-colors cursor-pointer"
+                  >
+                    Forgot your password?
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <button
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-blue-600 to-amber-500 hover:opacity-95 text-white font-bold text-xs py-3.5 rounded-xl shadow-md shadow-blue-500/10 transition-all uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer active:scale-98"
+                >
+                  <Unlock className="w-4 h-4" /> Verify Credentials
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        {/* Forgot Password Modal */}
+        {showForgotModal && (
+          <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
+            <div className="bg-white rounded-3xl border border-slate-200 max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+              <button
+                onClick={() => setShowForgotModal(false)}
+                className="absolute top-4 right-4 text-slate-400 hover:text-slate-650 p-1 bg-slate-50 rounded-full"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              <div className="text-center space-y-4">
+                <div className="mx-auto h-12 w-12 rounded-xl bg-amber-50 text-amber-500 border border-amber-100 flex items-center justify-center">
+                  <HelpCircle className="w-6 h-6 animate-bounce" />
+                </div>
+                <h3 className="text-lg font-black text-slate-900 uppercase tracking-tight">ISO Security Protocol</h3>
+                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed font-medium">
+                  For healthcare infrastructure security compliance (ISO 13485 regulations), automated password resets are disabled.
+                </p>
+                <div className="bg-slate-50/80 border border-slate-150 p-4 rounded-2xl text-left space-y-2 text-xs font-semibold text-slate-650">
+                  <p className="text-slate-950 font-bold uppercase tracking-wider text-[10px]">Manual Verification Required:</p>
+                  <p>1. Contact Corporate IT Support at <span className="text-blue-600 select-all font-bold">admin@velbiomed.co.in</span></p>
+                  <p>2. Provide your institutional authorization code.</p>
+                  <p>3. Reset window requires active security clearance.</p>
+                </div>
+                <button
+                  onClick={() => setShowForgotModal(false)}
+                  className="w-full bg-slate-900 hover:bg-slate-950 text-white font-bold text-xs py-3 rounded-xl transition-all uppercase tracking-wider cursor-pointer"
+                >
+                  Understood
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="bg-slate-50 min-h-screen font-sans border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
         {/* Dashboard Title banner */}
-        <div className="bg-gradient-to-r from-slate-900 to-blue-950 text-white rounded-3xl p-8 mb-8 shadow-xl border border-slate-800">
+        <div className="bg-gradient-to-r from-slate-900 via-blue-950 to-amber-950/20 text-white rounded-3xl p-8 mb-8 shadow-xl border border-slate-800/80 relative overflow-hidden">
+          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-blue-600 via-sky-400 to-amber-500" />
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
               <span className="bg-blue-600/20 text-blue-400 text-[10px] font-black tracking-widest px-3 py-1.5 rounded-full uppercase">
@@ -306,16 +467,94 @@ export default function AdminView() {
           </div>
         </div>
 
-        {/* Local responses notifications */}
+        {/* Quick Analytics Dashboard Row */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+          {[
+            {
+              label: "Active Products",
+              value: state?.products?.length || 0,
+              desc: "Catalog registers",
+              color: "from-blue-600 to-sky-400",
+              bg: "bg-blue-500/10",
+              icon: (
+                <svg className="w-5 h-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                </svg>
+              )
+            },
+            {
+              label: "Pending Inquiries",
+              value: state?.inquiries?.filter((i) => !i.attended)?.length || 0,
+              desc: "Requires response",
+              color: "from-rose-600 to-amber-500",
+              bg: "bg-rose-500/10",
+              icon: (
+                <span className="relative flex h-4 w-4">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-450 bg-rose-450 bg-rose-450 bg-rose-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-4 w-4 bg-rose-550 bg-rose-500 flex items-center justify-center text-white text-[9px] font-black">
+                    !
+                  </span>
+                </span>
+              )
+            },
+            {
+              label: "Gallery Assets",
+              value: state?.gallery?.length || 0,
+              desc: "Portfolio visuals",
+              color: "from-sky-500 to-indigo-500",
+              bg: "bg-sky-500/10",
+              icon: (
+                <svg className="w-5 h-5 text-sky-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              )
+            },
+            {
+              label: "SLA Service Plans",
+              value: state?.serviceSlas?.length || 0,
+              desc: "Active AMC layouts",
+              color: "from-amber-500 to-orange-600",
+              bg: "bg-amber-500/10",
+              icon: (
+                <svg className="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+              )
+            }
+          ].map((stat, idx) => (
+            <div
+              key={idx}
+              className="bg-white border border-slate-200/80 rounded-3xl p-5 shadow-xs flex items-center justify-between hover:shadow-lg transition-all duration-300 relative overflow-hidden group"
+            >
+              {/* Subtle line indicator matching the gradient */}
+              <div className={`absolute top-0 inset-x-0 h-1 bg-gradient-to-r ${stat.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+              
+              <div className="space-y-1">
+                <span className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">{stat.label}</span>
+                <span className="block text-2xl sm:text-3xl font-black text-slate-900 leading-none">{stat.value}</span>
+                <span className="block text-[10px] font-semibold text-slate-500">{stat.desc}</span>
+              </div>
+              <div className={`h-11 w-11 rounded-2xl ${stat.bg} flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-300`}>
+                {stat.icon}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Local responses notifications with animations */}
         {successMsg && (
-          <div className="p-4 bg-emerald-50 border border-emerald-250 text-emerald-700 text-xs sm:text-sm font-bold rounded-2xl mb-8 flex items-center gap-2">
-            <CheckCircle2 className="w-5 h-5 text-emerald-500" />
+          <div className="p-4 bg-emerald-50/90 backdrop-blur-xs border border-emerald-200 text-emerald-800 text-xs sm:text-sm font-bold rounded-2xl mb-8 flex items-center gap-3 shadow-md shadow-emerald-500/5 animate-fadeIn">
+            <div className="p-1 bg-emerald-500 text-white rounded-lg">
+              <CheckCircle2 className="w-4 h-4" />
+            </div>
             <span>Success: {successMsg}</span>
           </div>
         )}
         {errorMsg && (
-          <div className="p-4 bg-rose-50 border border-rose-250 text-rose-700 text-xs sm:text-sm font-bold rounded-2xl mb-8 flex items-center gap-2">
-            <CheckCircle2 className="w-5 h-5 text-rose-500" />
+          <div className="p-4 bg-rose-50/90 backdrop-blur-xs border border-rose-200 text-rose-800 text-xs sm:text-sm font-bold rounded-2xl mb-8 flex items-center gap-3 shadow-md shadow-rose-500/5 animate-fadeIn">
+            <div className="p-1 bg-rose-500 text-white rounded-lg">
+              <CheckCircle2 className="w-4 h-4" />
+            </div>
             <span>Error: {errorMsg}</span>
           </div>
         )}
@@ -346,7 +585,7 @@ export default function AdminView() {
                 }}
                 className={`w-full text-left py-3 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-3 transition-colors uppercase tracking-wider ${
                   activeAdminSubTab === sub.id
-                    ? "bg-blue-600 text-white shadow-lg shadow-blue-500/10"
+                    ? "bg-gradient-to-r from-blue-600 via-sky-400 to-amber-500 text-white shadow-lg shadow-blue-500/10 scale-[1.02]"
                     : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
                 }`}
               >
@@ -374,28 +613,48 @@ export default function AdminView() {
                     state.inquiries.map((inq) => (
                       <div
                         key={inq.id}
-                        className={`p-5 rounded-2xl border transition-all ${
+                        className={`p-5 rounded-2xl border transition-all duration-300 relative overflow-hidden group ${
                           inq.attended
-                            ? "bg-slate-50/60 border-slate-100 opacity-65"
-                            : "bg-blue-50/15 border-blue-200/80 shadow-sm"
+                            ? "bg-slate-50/40 border-slate-200/60 opacity-60 hover:opacity-100"
+                            : "bg-gradient-to-br from-blue-50/10 to-slate-50 border-blue-200/80 shadow-xs hover:shadow-md"
                         }`}
                       >
-                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-150 pb-4 mb-4">
+                        {/* Status border left */}
+                        <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${inq.attended ? "bg-slate-300" : "bg-gradient-to-b from-blue-600 via-sky-400 to-amber-500"}`} />
+
+                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-100 pb-4 mb-4">
                           <div>
-                            <span className="text-xs bg-blue-105 bg-blue-100 text-blue-700 font-bold tracking-wide uppercase px-2.5 py-1 rounded">
-                              {inq.product || "General Enquiry"}
-                            </span>
-                            <h4 className="text-sm font-black text-slate-900 mt-2">{inq.name}</h4>
-                            <p className="text-[11px] text-slate-500 font-bold mt-1">
-                              Email: <span className="text-slate-800">{inq.email}</span> | Phone: <span className="text-slate-800">{inq.mobile || "Not Provided"}</span>
+                            <div className="flex flex-wrap items-center gap-2">
+                              <span className="text-[10px] bg-blue-50 text-blue-700 font-extrabold tracking-widest uppercase px-2.5 py-1 rounded-lg border border-blue-100">
+                                {inq.product || "General Enquiry"}
+                              </span>
+                              {!inq.attended ? (
+                                <div className="flex items-center gap-1.5">
+                                  <span className="relative flex h-2 w-2">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-450 bg-rose-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                                  </span>
+                                  <span className="text-[9px] font-black text-rose-500 uppercase tracking-widest bg-rose-50 px-2 py-0.5 rounded border border-rose-100">NEW INQUIRY</span>
+                                </div>
+                              ) : (
+                                <span className="text-[9px] font-black text-emerald-600 uppercase tracking-widest bg-emerald-50 px-2 py-0.5 rounded border border-emerald-100 flex items-center gap-0.5">
+                                  ✓ Attended
+                                </span>
+                              )}
+                            </div>
+                            <h4 className="text-sm font-black text-slate-900 mt-2.5">{inq.name}</h4>
+                            <p className="text-[11px] text-slate-500 font-bold mt-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
+                              <span>Email: <span className="text-slate-800 select-all font-semibold">{inq.email}</span></span>
+                              <span className="text-slate-300">•</span>
+                              <span>Phone: <span className="text-slate-800 select-all font-semibold">{inq.mobile || "Not Provided"}</span></span>
                             </p>
                           </div>
-                          <span className="text-[10px] text-slate-400 font-bold">
+                          <span className="text-[10px] text-slate-400 font-extrabold bg-slate-100 px-2.5 py-1 rounded-lg">
                             {new Date(inq.date).toLocaleString()}
                           </span>
                         </div>
 
-                        <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 whitespace-pre-line font-medium italic">
+                        <p className="text-slate-650 text-xs sm:text-sm leading-relaxed mb-5 whitespace-pre-line font-medium italic pl-2 border-l-2 border-slate-200">
                           "{inq.feedback || "Sender did not provide further feedback statements."}"
                         </p>
 
@@ -409,11 +668,11 @@ export default function AdminView() {
                             }`}
                           >
                             <UserCheck className="w-3.5 h-3.5" />
-                            {inq.attended ? "Attended Logged" : "Process Complete"}
+                            {inq.attended ? "Re-open Ticket" : "Mark as Attended"}
                           </button>
                           <button
                             onClick={() => handleInquiryDelete(inq.id)}
-                            className="bg-red-50 hover:bg-red-100 text-red-650 text-red-600 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider border border-red-200 hover:border-red-300 transition-all cursor-pointer flex items-center gap-1"
+                            className="bg-red-50 hover:bg-red-100 text-red-600 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider border border-red-200 hover:border-red-300 transition-all cursor-pointer flex items-center gap-1"
                           >
                             <Trash2 className="w-3.5 h-3.5" /> Delete
                           </button>
@@ -498,6 +757,75 @@ export default function AdminView() {
                     </div>
                   </div>
 
+                  {/* Predefined Image Quick Selection Column/Grid */}
+                  <div className="space-y-2.5">
+                    <span className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                      Or Choose Predefined Biomedical Photo Asset:
+                    </span>
+                    <div className="grid grid-cols-2 sm:grid-cols-6 gap-3">
+                      {[
+                        {
+                          name: "ICU Ventilator",
+                          url: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=600&auto=format&fit=crop"
+                        },
+                        {
+                          name: "ECG Monitor",
+                          url: "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=600&auto=format&fit=crop"
+                        },
+                        {
+                          name: "Anesthesia Unit",
+                          url: "https://images.unsplash.com/photo-1579684389782-64d84b5e901d?q=80&w=600&auto=format&fit=crop"
+                        },
+                        {
+                          name: "Ultrasound scan",
+                          url: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=600&auto=format&fit=crop"
+                        },
+                        {
+                          name: "Autoclave Sterilizer",
+                          url: "https://images.unsplash.com/photo-1607619056574-7b8f304b3c86?q=80&w=600&auto=format&fit=crop"
+                        },
+                        {
+                          name: "Operation Theater",
+                          url: "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=600&auto=format&fit=crop"
+                        }
+                      ].map((preset) => {
+                        const isSelected = newProdImage === preset.url;
+                        return (
+                          <div
+                            key={preset.name}
+                            type="button"
+                            onClick={() => setNewProdImage(preset.url)}
+                            className={`relative aspect-video rounded-xl overflow-hidden cursor-pointer border-2 transition-all duration-200 group ${
+                              isSelected
+                                ? "border-amber-500 ring-2 ring-amber-500/20 scale-[1.03] shadow-md shadow-amber-500/10"
+                                : "border-slate-200 hover:border-slate-350 hover:scale-[1.02]"
+                            }`}
+                          >
+                            <img
+                              src={preset.url}
+                              alt={preset.name}
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            />
+                            <div className={`absolute inset-0 bg-slate-950/60 p-1.5 flex flex-col justify-end transition-opacity duration-200 ${
+                              isSelected ? "opacity-100" : "opacity-75 group-hover:opacity-90"
+                            }`}>
+                              <p className="text-[8px] text-white font-black uppercase tracking-wider truncate">
+                                {preset.name}
+                              </p>
+                            </div>
+                            {isSelected && (
+                              <div className="absolute top-1 right-1 bg-amber-500 text-white rounded-full p-0.5 shadow-sm">
+                                <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3.5">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                </svg>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
                   <div className="grid grid-cols-1 gap-5">
                     <div>
                       <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Short Description (Cards Block)</label>
@@ -546,7 +874,7 @@ export default function AdminView() {
 
                   <button
                     type="submit"
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm py-4 rounded-xl shadow-lg transition-transform uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full bg-gradient-to-r from-blue-600 via-sky-400 to-amber-500 hover:opacity-95 text-white font-bold text-xs sm:text-sm py-4 rounded-xl shadow-lg transition-transform uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer shadow-blue-500/10"
                   >
                     <PlusCircle className="w-4 h-4" /> Save Machine to Registers
                   </button>
@@ -554,22 +882,32 @@ export default function AdminView() {
 
                 <hr className="border-slate-100" />
 
-                {/* Database Catalog Listings for fast removal */}
-                <div className="space-y-4">
-                  <h4 className="text-base font-black text-slate-900 border-b border-slate-150 pb-2">Active Catalog Listings ({state?.products?.length || 0})</h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-96 overflow-y-auto pr-2">
+                 {/* Database Catalog Listings with thumbnails & premium hover removal */}
+                <div className="space-y-4 pt-6 border-t border-slate-100">
+                  <h4 className="text-base font-black text-slate-900 flex items-center gap-2">
+                    <ShoppingBag className="w-4 h-4 text-blue-600" />
+                    Active Catalog Listings ({state?.products?.length || 0})
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-h-[480px] overflow-y-auto pr-2 custom-scrollbar">
                     {state?.products?.map((p) => (
-                      <div key={p.id} className="p-3 bg-slate-50 border border-slate-150 rounded-xl flex items-center justify-between gap-3 text-xs font-medium">
-                        <div className="truncate">
-                          <p className="font-bold text-slate-900 truncate">{p.name}</p>
-                          <p className="text-[10px] text-blue-600 font-semibold uppercase">{p.category}</p>
+                      <div key={p.id} className="p-3.5 bg-slate-50 hover:bg-white border border-slate-200/80 rounded-2xl flex flex-col justify-between gap-3 text-xs font-medium transition-all duration-300 hover:shadow-md relative group overflow-hidden">
+                        <div className="absolute top-0 inset-x-0 h-[3px] bg-gradient-to-r from-blue-600 to-amber-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <div className="flex gap-3">
+                          <div className="w-12 h-12 rounded-xl bg-slate-200 overflow-hidden flex-shrink-0">
+                            <img src={p.image} alt={p.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                          </div>
+                          <div className="truncate min-w-0">
+                            <p className="font-extrabold text-slate-900 truncate">{p.name}</p>
+                            <p className="text-[9px] text-blue-600 font-bold uppercase tracking-wider">{p.category}</p>
+                            <p className="text-[10px] text-slate-400 font-semibold">{p.rating}★ Rating</p>
+                          </div>
                         </div>
                         <button
                           onClick={() => handleDeleteProduct(p.id)}
-                          className="p-2 text-rose-600 hover:bg-rose-50 border border-slate-200 hover:border-rose-250 rounded-lg transition-colors cursor-pointer flex-shrink-0"
+                          className="w-full mt-2 py-2 text-rose-600 hover:text-white bg-white hover:bg-rose-600 border border-slate-200 hover:border-transparent rounded-xl transition-all duration-200 font-bold uppercase tracking-wider text-[9px] flex items-center justify-center gap-1 cursor-pointer active:scale-98"
                           title="Delete Machine option"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Trash2 className="w-3.5 h-3.5" /> Delete Machine
                         </button>
                       </div>
                     ))}
@@ -597,7 +935,7 @@ export default function AdminView() {
                     />
                     <button
                       type="submit"
-                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-6 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 flex-shrink-0 uppercase tracking-wider"
+                      className="bg-gradient-to-r from-blue-600 to-amber-500 text-white font-bold text-xs px-6 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 flex-shrink-0 uppercase tracking-wider"
                     >
                       <PlusCircle className="w-4 h-4" /> Add Slot
                     </button>
@@ -678,7 +1016,7 @@ export default function AdminView() {
 
                 <button
                   type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm py-4 rounded-xl shadow-lg transition-transform uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="w-full bg-gradient-to-r from-blue-600 via-sky-400 to-amber-500 hover:opacity-95 text-white font-bold text-xs sm:text-sm py-4 rounded-xl shadow-lg transition-transform uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer shadow-blue-500/10"
                 >
                   <Save className="w-4 h-4" /> Save Sourcing Settings
                 </button>
@@ -732,7 +1070,7 @@ export default function AdminView() {
 
                   <button
                     type="submit"
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm py-4 rounded-xl shadow-lg transition-transform uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="w-full bg-gradient-to-r from-blue-600 via-sky-400 to-amber-500 hover:opacity-95 text-white font-bold text-xs sm:text-sm py-4 rounded-xl shadow-lg transition-transform uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer shadow-blue-500/10"
                   >
                     <PlusCircle className="w-4 h-4" /> Save Media Asset to Gallery
                   </button>
@@ -740,20 +1078,28 @@ export default function AdminView() {
 
                 <hr className="border-slate-100" />
 
-                <div className="space-y-3">
-                  <h4 className="text-xs font-black text-slate-400 uppercase tracking-wide">Active Media Visual Files ({state?.gallery?.length || 0})</h4>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-h-80 overflow-y-auto">
+                <div className="space-y-3 pt-6 border-t border-slate-100">
+                  <h4 className="text-sm font-black text-slate-900 flex items-center gap-2">
+                    <Image className="w-4 h-4 text-blue-600" />
+                    Active Media Gallery Photos ({state?.gallery?.length || 0})
+                  </h4>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-h-[360px] overflow-y-auto pr-2 custom-scrollbar">
                     {state?.gallery?.map((g) => (
-                      <div key={g.id} className="relative group bg-slate-100 rounded-xl overflow-hidden shadow-sm aspect-video border border-slate-200">
-                        <img src={g.image} alt={g.title} className="w-full h-full object-cover" />
-                        <div className="absolute inset-0 bg-slate-950/70 p-3 flex flex-col justify-between opacity-0 group-hover:opacity-100 transition-opacity">
-                          <p className="text-[10px] text-white font-black truncate">{g.title}</p>
-                          <button
-                            onClick={() => handleDeleteGalleryItem(g.id)}
-                            className="bg-red-600 hover:bg-red-700 text-white rounded p-1 max-w-fit self-end text-[10px] font-black uppercase tracking-wider px-2 cursor-pointer"
-                          >
-                            Delete
-                          </button>
+                      <div key={g.id} className="relative group bg-slate-50 border border-slate-200/80 rounded-2xl overflow-hidden shadow-xs aspect-video transition-all duration-300 hover:shadow-md">
+                        <img src={g.image} alt={g.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/40 to-transparent p-3 flex flex-col justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <span className="bg-blue-600/90 text-white text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-md self-start truncate max-w-full">
+                            {g.category || "Setup"}
+                          </span>
+                          <div className="space-y-1.5">
+                            <p className="text-[10px] text-white font-extrabold truncate">{g.title}</p>
+                            <button
+                              onClick={() => handleDeleteGalleryItem(g.id)}
+                              className="w-full bg-rose-600 hover:bg-rose-700 text-white text-[9px] font-black uppercase tracking-wider py-1.5 rounded-lg transition-colors cursor-pointer flex items-center justify-center gap-1 active:scale-95"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" /> Delete
+                            </button>
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -814,7 +1160,7 @@ export default function AdminView() {
 
                   <button
                     type="submit"
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm py-4 rounded-xl shadow-lg transition-transform uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer"
+                    className="w-full bg-gradient-to-r from-blue-600 via-sky-400 to-amber-500 hover:opacity-95 text-white font-bold text-xs sm:text-sm py-4 rounded-xl shadow-lg transition-transform uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer shadow-blue-500/10"
                   >
                     <PlusCircle className="w-4 h-4" /> Save Support Sla Deliverable
                   </button>

@@ -115,6 +115,7 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
   // Products filters
   const trendingProducts = state?.products?.filter((p) => p.trending) || [];
   const dynamicProducts = state?.products || [];
+  const latestAcquisitions = state?.products ? [...state.products].slice(-4).reverse() : [];
 
   // Clients Mock
   const clientLogos = [
@@ -375,6 +376,8 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
           </div>
         </div>
       </section>
+
+
 
       {/* 3. LATEST PRODUCTS GALLERY */}
       <ImageGallery />

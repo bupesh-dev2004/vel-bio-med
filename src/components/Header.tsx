@@ -75,20 +75,37 @@ export default function Header() {
               ))}
             </div>
 
-            {/* Right side search bar */}
-            <div className="hidden lg:block w-64">
-              <form onSubmit={handleSearchSubmit} className="relative">
-                <input
-                  type="text"
-                  placeholder="Scan machines, ventilators..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-full py-1.5 pl-4 pr-10 text-xs focus:outline-none focus:border-blue-500 focus:bg-white transition-all text-slate-800 font-medium"
-                />
-                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-600 transition-colors">
-                  <Search className="w-4 h-4" />
-                </button>
-              </form>
+            {/* Right side search bar & Admin button in the top right corner */}
+            <div className="hidden md:flex items-center gap-3">
+              <div className="hidden lg:block w-52">
+                <form onSubmit={handleSearchSubmit} className="relative">
+                  <input
+                    type="text"
+                    placeholder="Scan machines, ventilators..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-full py-1.5 pl-4 pr-10 text-xs focus:outline-none focus:border-blue-500 focus:bg-white transition-all text-slate-800 font-medium"
+                  />
+                  <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-blue-600 transition-colors">
+                    <Search className="w-4 h-4" />
+                  </button>
+                </form>
+              </div>
+
+              {/* Top Right corner Admin Portal Button styled with brand logo gradient */}
+              <button
+                onClick={() => setCurrentTab("admin")}
+                className={`py-2 px-4 rounded-xl text-xs font-black uppercase tracking-widest transition-all duration-300 flex items-center gap-1.5 cursor-pointer shadow-md active:scale-95 ${
+                  currentTab === "admin"
+                    ? "bg-gradient-to-r from-blue-600 via-sky-400 to-amber-500 text-white shadow-blue-500/10 scale-102"
+                    : "bg-slate-900 hover:bg-slate-950 text-white"
+                }`}
+              >
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+                Admin
+              </button>
             </div>
 
             {/* Mobile menu trigger button */}
@@ -140,7 +157,7 @@ export default function Header() {
                   setCurrentTab("admin");
                   setMobileMenuOpen(false);
                 }}
-                className="w-full text-center py-2.5 px-3 rounded-lg bg-blue-600 text-white text-sm font-bold shadow-md hover:bg-blue-700 transition-colors uppercase tracking-wider"
+                className="w-full text-center py-2.5 px-3 rounded-xl bg-gradient-to-r from-blue-600 to-amber-500 text-white text-sm font-black shadow-md transition-all uppercase tracking-wider cursor-pointer"
               >
                 Admin Panel
               </button>
