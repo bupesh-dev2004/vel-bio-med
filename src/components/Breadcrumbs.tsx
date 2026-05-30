@@ -21,8 +21,7 @@ export default function Breadcrumbs({ currentTab, onNavigate, extraItem }: Bread
         return "Products Catalog";
       case "contact":
         return "Contact & Inquiries";
-      case "admin":
-        return "Admin Controller";
+
       default:
         return tab.charAt(0).toUpperCase() + tab.slice(1);
     }

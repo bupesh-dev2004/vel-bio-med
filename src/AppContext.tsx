@@ -9,6 +9,8 @@ interface AppContextType {
   setCurrentTab: (tab: string) => void;
   inquiryMachineName: string | null;
   setInquiryMachineName: (name: string | null) => void;
+  selectedCategory: string;
+  setSelectedCategory: (category: string) => void;
   refreshState: () => Promise<void>;
   submitInquiry: (inquiry: Omit<Inquiry, "id" | "date" | "attended">) => Promise<boolean>;
 }
@@ -21,6 +23,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [error, setError] = useState<string | null>(null);
   const [currentTab, setCurrentTab] = useState("home");
   const [inquiryMachineName, setInquiryMachineName] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   const refreshState = async () => {
     try {
@@ -73,6 +76,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         },
         inquiryMachineName,
         setInquiryMachineName,
+        selectedCategory,
+        setSelectedCategory: (cat) => {
+          setSelectedCategory(cat);
+        },
         refreshState,
         submitInquiry
       }}

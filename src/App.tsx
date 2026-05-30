@@ -8,7 +8,6 @@ import ServicesView from "./components/ServicesView.js";
 import GalleryView from "./components/GalleryView.js";
 import ProductsView from "./components/ProductsView.js";
 import ContactView from "./components/ContactView.js";
-import AdminView from "./components/AdminView.js";
 import Breadcrumbs from "./components/Breadcrumbs.js";
 import ScrollToTop from "./components/ScrollToTop.js";
 import FloatingSocialMenu from "./components/FloatingSocialMenu.js";
@@ -23,6 +22,7 @@ function AppContent() {
 
   const handleOpenProductModal = (product: Product) => {
     setSelectedProductModal(product);
+    setCurrentTab("products");
   };
 
   const handleCloseProductModal = () => {
@@ -100,7 +100,6 @@ function AppContent() {
           />
         )}
         {currentTab === "contact" && <ContactView />}
-        {currentTab === "admin" && <AdminView />}
       </main>
 
       {/* Shared Deep blue footer block */}

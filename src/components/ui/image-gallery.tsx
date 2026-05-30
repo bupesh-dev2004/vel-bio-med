@@ -6,38 +6,52 @@ interface GalleryItem {
   src: string;
   title: string;
   category: string;
+  description?: string;
+  objectFit?: "cover" | "contain";
 }
 
 const medicalImages: GalleryItem[] = [
   {
-    src: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1000&q=80",
-    title: "GE Voluson E10 Ultrasound",
-    category: "Diagnostics & Imaging"
+    src: "https://storage.googleapis.com/avante/images/13448-1-drager-fabius-os.jpg",
+    title: "ANAESTHESIA MACHINE",
+    category: "Operating Theatre (OT)",
+    description: "Advanced anaesthesia delivery system engineered for precise gas administration, patient safety, and reliable performance during surgical procedures",
+    objectFit: "contain"
   },
   {
-    src: "https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&w=1000&q=80",
-    title: "Dräger Primus Anesthesia Station",
-    category: "Operating Theatre (OT)"
+    src: "https://5.imimg.com/data5/HD/TV/MY-9082765/diathermy-machine-500x500.png",
+    title: "SURGICAL DIATHERMY",
+    category: "Operating Theatre (OT)",
+    description: "Surgical Diathermy: Advanced electrosurgical system designed for precise cutting, coagulation, and tissue management during surgical procedures, ensuring enhanced surgical efficiency and patient safety.",
+    objectFit: "contain"
   },
   {
-    src: "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1000&q=80",
-    title: "Philips IntelliVue MX450",
-    category: "Critical Care & ICU"
+    src: "https://static.wixstatic.com/media/83a223_539cedb9b63e44689f4d77bb420fa4c0~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/83a223_539cedb9b63e44689f4d77bb420fa4c0~mv2.jpg",
+    title: "ECG MACHINE 3 CHANNEL",
+    category: "Critical Care & ICU",
+    description: "Compact and efficient electrocardiography system designed for accurate cardiac monitoring, rapid diagnostics, and dependable clinical performance.",
+    objectFit: "contain"
   },
   {
-    src: "https://images.unsplash.com/photo-1584036561566-baf245fdb76f?auto=format&fit=crop&w=1000&q=80",
-    title: "AeroMed Ventilator Pro-7",
-    category: "Critical Care & ICU"
+    src: "https://5.imimg.com/data5/SELLER/Default/2024/6/428020518/CO/WP/OU/45018337/horizontal-semi-automatic-single-door-cylindrical-steam-sterilizer-1000x1000.png",
+    title: "STEAM STERILIZER AUTO/SEMI",
+    category: "CSSD & Sterilization",
+    description: "Advanced steam sterilization system designed for reliable and efficient infection control in hospitals, laboratories, and healthcare facilities.",
+    objectFit: "contain"
   },
   {
-    src: "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1000&q=80",
-    title: "Belimed MST-V Autoclave",
-    category: "CSSD & Sterilization"
+    src: "https://meubon.com/cdn/shop/files/H490d3b68175b40a79e001740ba0454deq_1200x1200.webp?v=1731630708",
+    title: "FETAL MONITOR PORTABLE",
+    category: "Diagnostics & Imaging",
+    description: "Fetal Monitor – Portable: Advanced portable fetal monitoring system designed for accurate assessment of fetal heart rate, uterine activity, and maternal well-being during pregnancy and labor.",
+    objectFit: "contain"
   },
   {
-    src: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80",
-    title: "Olympus EVIS EXERA Video Scope",
-    category: "Operating Theatre (OT)"
+    src: "https://ventekindia.com/wp-content/uploads/2024/09/electra-4001.png",
+    title: "OT TABLE ELECTRIC",
+    category: "Operating Theatre (OT)",
+    description: "OT Table – Electric: Advanced electrically operated surgical table designed to provide precise positioning, stability, and flexibility for a wide range of surgical procedures, ensuring optimal patient care and surgical efficiency.",
+    objectFit: "contain"
   }
 ];
 
@@ -78,7 +92,12 @@ export default function ImageGallery() {
             >
               {/* Image with zoom on hover */}
               <img
-                className="h-full w-full object-cover object-center transition-transform duration-1000 ease-out group-hover:scale-105"
+                className={cn(
+                  "h-full w-full transition-transform duration-1000 ease-out group-hover:scale-105",
+                  item.objectFit === "contain" 
+                    ? "object-contain p-6 bg-white" 
+                    : "object-cover object-center"
+                )}
                 src={item.src}
                 alt={item.title}
                 loading="lazy"
@@ -119,7 +138,7 @@ export default function ImageGallery() {
                   )}
                 >
                   <p className="text-xs text-slate-300 font-medium leading-relaxed overflow-hidden">
-                    Delivered, calibrated, and maintained to the highest clinical parameters by Vel Bio Med.
+                    {item.description || "Delivered, calibrated, and maintained to the highest clinical parameters by Vel Bio Med."}
                   </p>
                 </div>
               </div>

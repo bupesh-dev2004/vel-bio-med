@@ -511,7 +511,7 @@ export default function AdminView() {
             },
             {
               label: "SLA Service Plans",
-              value: state?.serviceSlas?.length || 0,
+              value: state?.services?.length || 0,
               desc: "Active AMC layouts",
               color: "from-amber-500 to-orange-600",
               bg: "bg-amber-500/10",
@@ -793,7 +793,6 @@ export default function AdminView() {
                         return (
                           <div
                             key={preset.name}
-                            type="button"
                             onClick={() => setNewProdImage(preset.url)}
                             className={`relative aspect-video rounded-xl overflow-hidden cursor-pointer border-2 transition-all duration-200 group ${
                               isSelected

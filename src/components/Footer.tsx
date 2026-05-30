@@ -218,7 +218,6 @@ export default function Footer() {
         <div className="flex gap-6">
           <button onClick={() => setCurrentTab("about")} className="hover:text-blue-400 cursor-pointer transition-colors">Privacy Policy</button>
           <button onClick={() => setCurrentTab("contact")} className="hover:text-blue-400 cursor-pointer transition-colors">Terms & Conditions</button>
-          <button onClick={() => setCurrentTab("admin")} className="hover:text-blue-450 cursor-pointer font-semibold text-slate-450 transition-colors">Admin Control Log</button>
         </div>
       </div>
     </footer>

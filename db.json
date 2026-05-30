@@ -9,14 +9,14 @@
     },
     {
       "id": "slide-2",
-      "image": "https://images.unsplash.com/photo-1584515901367-f1c21b29f30a?auto=format&fit=crop&w=1400&q=80",
+      "image": "https://img.freepik.com/free-psd/interior-modern-emergency-room-with-empty-nurses-station-generative-ai_587448-2137.jpg",
       "heading": "Your Trusted Partner in Medical Excellence",
       "tagline": "END-TO-END CRITICAL CARE SOLUTIONS",
       "description": "We specialize in turn-key hospital installations, robust critical-care set ups, and intensive care ventilations with certified quality compliance."
     },
     {
       "id": "slide-3",
-      "image": "https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&w=1400&q=80",
+      "image": "https://img.magnific.com/premium-photo/recovery-icu-intensive-care-unit-room-ward-with-life-support-hospital-medical-care-emergency_641503-363641.jpg?semt=ais_hybrid&w=740&q=80",
       "heading": "Innovative Medical Equipment Solutions",
       "tagline": "24/7 AMC AND SERVICE SUPPORT",
       "description": "Equipped with senior biomedical engineers, our division assures maximum operating-time and seamless maintenance across major clinical facilities."
@@ -57,147 +57,507 @@
   "products": [
     {
       "id": "prod-1",
-      "name": "GE Voluson E10 Ultrasound Scanner",
-      "category": "Diagnostics & Imaging",
-      "image": "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=600&q=80",
-      "shortDesc": "High-end women's health radiology and maternity scans with HDlive silhouette rendering.",
-      "description": "The GE Voluson E10 is the leading high-frequency diagnostic ultrasound system designed for obstetrics, gynecology, and cutting-edge fetal cardiology. Sporting an advanced Radiance System Architecture, it unlocks peerless image resolutions and ultra-fast frame rates for dynamic 4D rendering.",
+      "name": "ANAESTHESIA MACHINE",
+      "category": "Operating Theatre (OT)",
+      "image": "https://storage.googleapis.com/avante/images/13448-1-drager-fabius-os.jpg",
+      "shortDesc": "Advanced anaesthesia delivery system engineered for precise gas administration and patient safety.",
+      "description": "Advanced anaesthesia delivery system engineered for precise gas administration, patient safety, and reliable performance during surgical procedures. Features advanced ventilation modes and digital flow meters for optimized surgical control.",
       "rating": 5,
       "features": [
-        "Advanced 4D Matrix scanning arrays",
-        "HDlive visual silhouette rendering for extreme clinical clarity",
-        "OLED diagnostic displays with high-contrast color gamut",
-        "Raw data review capabilities with immediate archive transfer"
+        "High-precision digital flow control systems",
+        "Multiple ventilation support modes",
+        "Compact space-saving design with robust storage solutions",
+        "High visibility diagnostic monitoring screens"
       ],
       "specifications": {
-        "Frequency Range": "1.5 MHz - 18 MHz",
-        "Screen Type": "23-inch High Definition OLED Monitor",
-        "Scanning Depth": "Up to 40 cm",
-        "Operating Systems": "Windows Embedded Medical Edition",
-        "Warranty": "2 Years Certified Warranty"
+        "Ventilation Modes": "Volume Control, Pressure Control, SIMV",
+        "Gas Delivery": "Digital flow meters for O2, N2O, Air",
+        "Chamber safety": "Integrated airway pressure protection valves",
+        "Battery backup": "Up to 120 minutes integrated safety charge",
+        "Warranty": "2 Years Comprehensive AMC"
       },
       "trending": true,
       "newest": false
     },
     {
       "id": "prod-2",
-      "name": "Dräger Primus Anesthesia Station",
+      "name": "SURGICAL DIATHERMY",
       "category": "Operating Theatre (OT)",
-      "image": "https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&w=600&q=80",
-      "shortDesc": "Advanced ventilation and gas delivery workstation supporting neonates to adults.",
-      "description": "Dräger Primus is synonymous with operating room versatility and safety. Providing excellent ventilation and anesthesiology monitoring solutions, it features fully electronic gas mixing systems with rapid reaction times that simplify general surgical workflows under high strain.",
+      "image": "https://5.imimg.com/data5/HD/TV/MY-9082765/diathermy-machine-500x500.png",
+      "shortDesc": "Advanced electrosurgical system designed for precise cutting and coagulation during surgical procedures.",
+      "description": "Surgical Diathermy: Advanced electrosurgical system designed for precise cutting, coagulation, and tissue management during surgical procedures, ensuring enhanced surgical efficiency and patient safety.",
       "rating": 5,
       "features": [
-        "E-Vent plus electronically driven piston ventilator",
-        "Heated patient respiratory system avoids condensation issues",
-        "Advanced gas delivery with synchronized vaporizers",
-        "Fully dynamic color display showing compliance curves"
+        "High-frequency electrosurgical cutting and coagulation modes",
+        "Precise tissue impedance monitoring for absolute power delivery control",
+        "Dual-pedal foot switch operation and premium standard hand control accessories",
+        "Integrated patient safety return electrode monitor systems"
       ],
       "specifications": {
-        "Ventilation Modes": "IPPV, VPPT, SIMV, PCV, Manual",
-        "Tidal Volume": "10 mL - 1500 mL",
-        "Flow Range": "0.1 - 12 L/min",
-        "Vaporizer Slots": "2 Interlock Slots",
-        "Certified Approvals": "FDA, CE, ISO 13485"
+        "Operating Frequency": "300 kHz - 500 kHz high-frequency electrosurgical parameters",
+        "Maximum Output Power": "300W - 400W adjustable output",
+        "Modes of Operation": "Pure Cut, Blend Cut, Monopolar Coag, Bipolar Coag",
+        "Power source": "AC standard mains operation with internal safety breakers",
+        "Warranty": "2 Years Certified AMC Support"
       },
       "trending": true,
       "newest": true
     },
     {
       "id": "prod-3",
-      "name": "Philips IntelliVue MX450 Bedside Monitor",
-      "category": "Critical Care & ICU",
-      "image": "https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=600&q=80",
-      "shortDesc": "Multi-parameter high acuity monitor featuring comprehensive cardiac analysis.",
-      "description": "IntelliVue MX450 delivers highly accurate real-time bedside monitoring for intensive care environments. Supporting multiple physiological modules (ECG, SpO2, Temp, IBP, CO2), this system guarantees high data fidelity and integrates securely with medical health record systems.",
-      "rating": 4,
+      "name": "ECG MACHINE 3 CHANNEL",
+      "category": "Diagnostics & Imaging",
+      "image": "https://static.wixstatic.com/media/83a223_539cedb9b63e44689f4d77bb420fa4c0~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/83a223_539cedb9b63e44689f4d77bb420fa4c0~mv2.jpg",
+      "shortDesc": "Compact and efficient electrocardiography system designed for accurate cardiac monitoring.",
+      "description": "ECG Machine – 3 Channel: Compact and efficient electrocardiography system designed for accurate cardiac monitoring, rapid diagnostics, and dependable clinical performance. Built with lightweight portability and robust accessories.",
+      "rating": 5,
       "features": [
-        "Stunning touch UI panel with adjustable illumination sensors",
-        "IntelliVue proprietary waveform analysis filters noise",
-        "Advanced cardiac arrhythmia tracking parameters",
-        "Wireless LAN linkages to central nursing stations"
+        "3-channel high-fidelity waveform trace recording",
+        "High resolution LCD screen displaying clear traces",
+        "Built-in thermal printing for fast diagnostic records",
+        "Robust patient cables and premium standard accessories included"
       ],
       "specifications": {
-        "Screen Size": "12-inch Capacitive Multi-touch Screen",
-        "Parameters": "ECG, Respiration, SpO2, NIBP, Dual Temp, Dual IBP",
-        "Battery Runtime": "Up to 4 Hours Continuous Operation",
-        "Data Interface": "HL7 Export Protocol via LAN/Wi-Fi",
-        "Mounting": "Bedside Safety Clamp / Roll Stand Mountable"
+        "Leads Mode": "Standard 12 leads acquisition",
+        "Display": "Color LCD screen for waveform previews",
+        "Recording format": "3-channel thermal trace",
+        "Power source": "AC power and rechargeable lithium battery",
+        "Warranty": "2 Years Certified AMC Support"
       },
       "trending": false,
       "newest": true
     },
     {
       "id": "prod-4",
-      "name": "AeroMed Ventilator Pro-7",
-      "category": "Critical Care & ICU",
-      "image": "https://images.unsplash.com/photo-1584036561566-baf245fdb76f?auto=format&fit=crop&w=600&q=80",
-      "shortDesc": "State-of-the-art invasive & non-invasive lung ventilator with automated weaning filters.",
-      "description": "AeroMed Pro-7 is a critical care ventilator that adapts intuitively to the patient's respiratory needs. With sophisticated trigger thresholds and integrated high-flow oxygen therapy capabilities, this ventilator maintains clinical control and reduces the risks of patient distress.",
+      "name": "STEAM STERILIZER AUTO/SEMI",
+      "category": "CSSD & Sterilization",
+      "image": "https://5.imimg.com/data5/SELLER/Default/2024/6/428020518/CO/WP/OU/45018337/horizontal-semi-automatic-single-door-cylindrical-steam-sterilizer-1000x1000.png",
+      "shortDesc": "Advanced steam sterilization system designed for reliable and efficient infection control in hospitals, laboratories, and healthcare facilities.",
+      "description": "Advanced steam sterilization system designed for reliable and efficient infection control in hospitals, laboratories, and healthcare facilities. Built with durable components and user-friendly controls, it supports both automatic and semi-automatic sterilization cycles for peak hospital workflow performance.",
       "rating": 5,
       "features": [
-        "Invasive and Non-Invasive (NIV) ventilation profiles",
-        "Dynamic lung visualizer depicting anatomical compliance",
-        "Integrated high flow oxygen therapy (HFNC) module",
-        "Ultra-silent internal turbine compressor avoids external gas dependency"
+        "Automatic and semi-automatic cycle operations",
+        "High durability stainless steel cylindrical chamber",
+        "Multi-stage pressure and temperature safety controls",
+        "Double-safety door locks with steam release venting"
       ],
       "specifications": {
-        "Oxygen Supply": "21% - 100% adjustable",
-        "Inspiratory Pressure": "2 - 100 cmH2O",
-        "Display Panels": "15.6-inch LED Rotate Touch Screen",
-        "Triggering": "Flow and Pressure Smart triggers",
-        "Gas Input Pressure": "2.8 - 6.0 bar"
+        "Chamber Material": "High-grade Stainless Steel 304/316",
+        "Operation Mode": "Automatic / Semi-Automatic selectable",
+        "Sterilization Temp": "121°C - 134°C",
+        "Chamber Capacity": "Available in 100L, 150L, and 200L models",
+        "Warranty": "2 Years Comprehensive AMC"
       },
       "trending": true,
       "newest": false
     },
     {
       "id": "prod-5",
-      "name": "Belimed MST-V Steam Autoclave",
-      "category": "CSSD & Sterilization",
-      "image": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=600&q=80",
-      "shortDesc": "High-volume steam sterilizer with digital sterilization validation trackers.",
-      "description": "Belimed MST-V delivers optimal sterilization parameters for clinical tools and surgical kits. Combining efficient water conservation tech with double door safety layouts, this sterilizer streamlines CSSD room workflows while exceeding international safety protocols.",
-      "rating": 4,
+      "name": "FETAL MONITOR PORTABLE",
+      "category": "Diagnostics & Imaging",
+      "image": "https://meubon.com/cdn/shop/files/H490d3b68175b40a79e001740ba0454deq_1200x1200.webp?v=1731630708",
+      "shortDesc": "Advanced portable fetal monitoring system designed for assessment of fetal heart rate and uterine activity.",
+      "description": "Fetal Monitor – Portable: Advanced portable fetal monitoring system designed for accurate assessment of fetal heart rate, uterine activity, and maternal well-being during pregnancy and labor. Ideal for clinical bedside monitoring and portable diagnostics.",
+      "rating": 5,
       "features": [
-        "Energy savings with internal water-recycling vacuum pumps",
-        "Automated pneumatic sliding doors with obstruction optical sensors",
-        "Built-in batch printer and USB logging parameters",
-        "Chamber lining crafted from pure premium grade 316Ti stainless steel"
+        "Accurate assessment of fetal heart rate (FHR) and uterine activity (TOCO)",
+        "High-definition portable color display screen with waveform display",
+        "Lightweight and compact build for easy transport and bedside setup",
+        "Includes premium transducers and safety accessories for immediate startup"
       ],
       "specifications": {
-        "Chamber Volume": "450 Liters capacity",
-        "Sterilizing Temp Limit": "105°C - 138°C",
-        "Water Connection": "Standard Demineralized Water Infeeds",
-        "Outer Dimensions": "1900 x 1000 x 1500 mm",
-        "Power Hookup": "380-415V, Three-Phase Electrical Phase"
+        "FHR Range": "50 BPM - 240 BPM measurement range",
+        "Display Size": "Adjustable high-resolution digital display monitor",
+        "Transducers": "Multi-crystal high-sensitivity ultrasound probe",
+        "Power Source": "AC mains power with internal rechargeable battery backup",
+        "Warranty": "2 Years Certified AMC Support"
       },
       "trending": false,
       "newest": false
     },
     {
       "id": "prod-6",
-      "name": "Olympus EVIS EXERA III Video Scope",
+      "name": "OT TABLE ELECTRIC",
       "category": "Operating Theatre (OT)",
-      "image": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80",
-      "shortDesc": "Premium HDTV Gastrointestinal endoscopic system with Narrow Band Imaging.",
-      "description": "The EVIS EXERA III gastrointestinal scope introduces medical facilities to ultra-high-definition imaging scopes. Harnessing high intensity optical filters, it assists physicians in locating minimal tissue anomalies on early stage diagnosis workflows.",
+      "image": "https://ventekindia.com/wp-content/uploads/2024/09/electra-4001.png",
+      "shortDesc": "Advanced electrically operated surgical table designed to provide precise positioning, stability, and flexibility.",
+      "description": "OT Table – Electric: Advanced electrically operated surgical table designed to provide precise positioning, stability, and flexibility for a wide range of surgical procedures, ensuring optimal patient care and surgical efficiency.",
       "rating": 5,
       "features": [
-        "Dual-Focus mechanics allowing deep-field zoom controls",
-        "Narrow Band Imaging (NBI) triples capillaries visualization contrast",
-        "Responsive insertion tubes reduce patient tissue friction and pain",
-        "Full waterproofing housing enables comprehensive chemical reprocessing"
+        "Fully electric height and angle tilting adjustments via remote control",
+        "Robust construction with high weight-bearing clinical capacity",
+        "Radiolucent table-top surface matching standard C-arm imaging layouts",
+        "Premium grade memory foam mattresses for maximal patient comfort"
       ],
       "specifications": {
-        "Focal Depth": "2 mm - 100 mm",
-        "Field of View": "140 Degrees Standard",
-        "Deflection controls": "Up 210° / Down 90° / Right-Left 100°",
-        "Length of Shaft": "1030 mm workable length",
-        "Video Outputs": "HDMI, HD-SDI digital configurations"
+        "Height Range": "730 mm - 1030 mm electrically adjustable",
+        "Tilting Capabilities": "Trendelenburg, Reverse Trendelenburg, Lateral Tilts",
+        "Table length/width": "2000 mm length by 520 mm width standard",
+        "Battery backup": "Integrated high-power battery package for 80 continuous cycles",
+        "Warranty": "2 Years Certified AMC Support"
       },
       "trending": true,
       "newest": true
+    },
+    {
+      "id": "prod-7",
+      "name": "Infusion Pump Infumax",
+      "category": "Critical Care & ICU",
+      "image": "https://images.unsplash.com/photo-1579684389782-64d84b5e901d?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "High-precision volumetric infusion pump with dual volumetric and drop count monitoring.",
+      "description": "Infusion Pump Infumax: Advanced volumetric infusion pump designed to deliver fluids, medications, and nutrients with absolute precision. Features linear peristaltic pumping, multi-safety alarms, and intuitive clinical user interfaces.",
+      "rating": 5,
+      "features": [
+        "Volumetric and drop count dual monitoring modes",
+        "High accuracy linear peristaltic pump engine",
+        "Comprehensive occlusion and air-in-line warning sensors",
+        "Extended battery life supporting active patient transit transport"
+      ],
+      "specifications": {
+        "Flow Rate Range": "0.1 - 1200 mL/h adjustable",
+        "Infusion Modes": "Volumetric Mode, Drop Rate Mode, Time Mode",
+        "Battery backup": "Up to 5 Hours continuous operation standard charge",
+        "Volume Limit (VTBI)": "0.1 - 9999.9 mL",
+        "Warranty": "2 Years Certified AMC Support"
+      },
+      "trending": false,
+      "newest": true
+    },
+    {
+      "id": "prod-8",
+      "name": "Syringe Pump SP-4004",
+      "category": "Critical Care & ICU",
+      "image": "https://images.unsplash.com/photo-1631553127989-53d7fba3c67c?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "Ultra-precise micro-infusion syringe pump designed for pediatric and critical care unit settings.",
+      "description": "Syringe Pump SP-4004: Micro-infusion syringe pump engineered for neonatal, pediatric, and adult critical care where precise micro-dosage delivery is critical. Supports various syringe sizes from major global brands.",
+      "rating": 5,
+      "features": [
+        "Automatic detection and calibration for syringe sizes: 10, 20, 30, 50/60 mL",
+        "Micro-flow delivery limits down to 0.1 mL/h parameters",
+        "Built-in drug library with custom dosage calculation engines",
+        "Highly visible diagnostic display for continuous flow tracking"
+      ],
+      "specifications": {
+        "Compatible Syringes": "10mL, 20mL, 30mL, 50/60mL standard size brands",
+        "Flow Range": "0.1 - 1500 mL/h depending on syringe size",
+        "Accuracy": "± 2% mechanical accuracy limit",
+        "Bolus Rate": "Adjustable bolus from 100 to 1200 mL/h",
+        "Warranty": "2 Years Certified AMC Support"
+      },
+      "trending": false,
+      "newest": true
+    },
+    {
+      "id": "prod-9",
+      "name": "ICU Monitor 5 Para",
+      "category": "Critical Care & ICU",
+      "image": "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "High acuity 5-parameter patient monitor featuring comprehensive real-time physiology traces.",
+      "description": "ICU Monitor 5 Para: Premium multi-parameter clinical bedside monitor tracking ECG, SpO2, NIBP, Respiration, and Temperature. Ideal for high acuity intensive care units and post-operative recovery spaces.",
+      "rating": 5,
+      "features": [
+        "5 essential parameters: ECG, SpO2, NIBP, TEMP, RESP",
+        "Bright high-contrast TFT color display for waveform previews",
+        "Advanced visual and audible clinical alert configurations",
+        "Comprehensive tabular and graphic trend archival systems"
+      ],
+      "specifications": {
+        "Display Panels": "12.1-inch High Definition color TFT display",
+        "ECG Modes": "3-lead / 5-lead selectable monitoring",
+        "SpO2 Range": "0% - 100% measurement range",
+        "Data Interface": "Central Nursing Station (CNS) connectivity support",
+        "Warranty": "2 Years Certified AMC Support"
+      },
+      "trending": true,
+      "newest": false
+    },
+    {
+      "id": "prod-10",
+      "name": "Ward Monitor Basic",
+      "category": "Critical Care & ICU",
+      "image": "https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "Reliable and compact bedside monitor for routine ward checks and general patient tracking.",
+      "description": "Ward Monitor Basic: Designed for low-acuity monitoring and general hospital ward checks, providing immediate, clear metrics for vital patient stats. Simple, durable, and highly cost-effective.",
+      "rating": 4,
+      "features": [
+        "Vital parameters tracked: NIBP, SpO2, and Pulse Rate",
+        "Lightweight build with robust handle for quick ward transport",
+        "One-touch fast measurement options for immediate updates",
+        "Highly visible digital display easily read from across the room"
+      ],
+      "specifications": {
+        "Display Size": "8-inch high definition digital display screen",
+        "Operation Mode": "Spot-check and continuous tracking modes",
+        "NIBP Range": "Sys: 40 - 270 mmHg, Dia: 10 - 215 mmHg",
+        "Battery backup": "Up to 6 Hours continuous spot-check charge",
+        "Warranty": "2 Years Certified AMC Support"
+      },
+      "trending": false,
+      "newest": false
+    },
+    {
+      "id": "prod-11",
+      "name": "ECG Machine 12 Channel",
+      "category": "Diagnostics & Imaging",
+      "image": "https://images.unsplash.com/photo-1530026405186-ed1ea0ac7a63?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "Advanced 12-channel electrocardiography station with auto-diagnostic analysis and high-fidelity trace.",
+      "description": "ECG Machine 12 Channel: Medical grade 12-lead diagnostic electrocardiograph providing synchronous lead acquisition, high-fidelity waveform prints, and sophisticated auto-interpretation filters for rapid cardiac analysis.",
+      "rating": 5,
+      "features": [
+        "12-channel high-speed thermal grid printing array",
+        "Simultaneous acquisition and trace of 12 standard leads",
+        "Built-in diagnostic analysis interpreter software programs",
+        "Large touch screen display supporting visual wave previews"
+      ],
+      "specifications": {
+        "Display": "10.1-inch High Definition color touch screen",
+        "Paper Format": "A4 width thermal folding paper output",
+        "Frequency Response": "0.05 Hz - 150 Hz diagnostic spectrum",
+        "Storage Capacity": "Up to 1000 ECG trace record archives",
+        "Warranty": "2 Years Certified AMC Support"
+      },
+      "trending": false,
+      "newest": true
+    },
+    {
+      "id": "prod-12",
+      "name": "LED OT Light 6 Series",
+      "category": "Operating Theatre (OT)",
+      "image": "https://images.unsplash.com/photo-1513224502586-d1e602410265?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "High intensity shadowless surgical LED light dome providing superior cold light illumination.",
+      "description": "LED OT Light 6 Series: Professional ceiling-mounted shadowless operating light utilizing a premium multi-reflector light field design. Emits exceptional, homogeneous cold light for deep cavity procedures.",
+      "rating": 5,
+      "features": [
+        "Shadowless multi-reflector design for clean, clear optical focus",
+        "Cold light technology avoids high tissue temperature rises",
+        "Adjustable illumination intensity and precise light field focus",
+        "Extremely durable bulbs with 50,000+ hours active runtime limits"
+      ],
+      "specifications": {
+        "Illumination Intensity": "140,000 - 160,000 Lux high power range",
+        "Color Temp": "3500K - 5000K adjustable natural white levels",
+        "Light Field Diameter": "150 mm - 300 mm surgical spot focus",
+        "Mounting Style": "Ceiling-mounted robust double swivel arms",
+        "Warranty": "2 Years Certified AMC Support"
+      },
+      "trending": true,
+      "newest": false
+    },
+    {
+      "id": "prod-13",
+      "name": "LED OT Light Round Doom",
+      "category": "Operating Theatre (OT)",
+      "image": "https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "Classic round dome operating theatre light combining robust mechanics with premium LED illumination.",
+      "description": "LED OT Light Round Doom: Classic, aerodynamically designed round-dome surgical luminaire. Provides high-fidelity shadowless light field penetration and exceptional thermal management during long procedures.",
+      "rating": 4,
+      "features": [
+        "Streamlined round dome structure for laminar air flow compatibility",
+        "High intensity LED technology with outstanding color rendering indices",
+        "Easy-to-clean smooth housing surfaces matching infection control codes",
+        "Manual focus control grip sterilizable in standard autoclaves"
+      ],
+      "specifications": {
+        "Illumination Limit": "120,000 Lux highly bright focus spot",
+        "Dome Diameter": "600 mm standard round dome size",
+        "LED Count": "Premium LED clusters providing outstanding redundancy",
+        "Color Index (CRI)": "95 Ra standard for exact tissue color reproduction",
+        "Warranty": "2 Years Certified AMC Support"
+      },
+      "trending": false,
+      "newest": false
+    },
+    {
+      "id": "prod-14",
+      "name": "OT Table Advance",
+      "category": "Operating Theatre (OT)",
+      "image": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "Electro-hydraulic multi-purpose surgical table offering versatile positioning for complex specialties.",
+      "description": "OT Table Advance: Electro-hydraulic heavy duty surgical table built to deliver extraordinary clinical stability, extreme weight capacity, and smooth multi-axis positioning for neurosurgery, orthopedics, and cardiovascular workflows.",
+      "rating": 5,
+      "features": [
+        "Advanced electro-hydraulic multi-axis adjustments with remote control",
+        "Integrated kidney bridge and leg sections for specialized positioning",
+        "High load capacity supporting patients up to 250 kg in safety",
+        "X-ray translucent composite surface matching standard imaging C-arms"
+      ],
+      "specifications": {
+        "Position Controls": "Flex, Reflex, Trendelenburg, Lateral and Height adjustments",
+        "Chassis Material": "Premium grade 304 Stainless Steel base and column",
+        "Adjustable Height": "700 mm - 1100 mm adjustable stroke range",
+        "Power backup": "High efficiency integrated battery package standard",
+        "Warranty": "2 Years Certified AMC Support"
+      },
+      "trending": false,
+      "newest": true
+    },
+    {
+      "id": "prod-15",
+      "name": "ETO Sterilizer AUTO/SEMI",
+      "category": "CSSD & Sterilization",
+      "image": "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "Advanced Ethylene Oxide (ETO) sterilizer designed for heat-sensitive surgical instruments.",
+      "description": "ETO Sterilizer AUTO/SEMI: Specialized Ethylene Oxide low-temperature sterilization system. Perfect for delicate surgical tools, catheters, endoscopes, and plastics that cannot withstand high-temperature autoclaving. Features active gas disposal and aerators.",
+      "rating": 5,
+      "features": [
+        "High efficiency low temperature ETO sterilization process",
+        "Fully automated gas dosage and post-cycle aeration vacuum phases",
+        "Built-in micro-printers for permanent cycle validation logs",
+        "Double safety locks with active environment trace sensors"
+      ],
+      "specifications": {
+        "Sterilizing Temp": "37°C - 55°C low-temperature operation range",
+        "Chamber Capacity": "Available in 120L and 200L volumetric sizes",
+        "Sterilization Cycle": "Automatic multi-stage safety purging process",
+        "Outer Housing": "High durability stainless steel exterior panels",
+        "Warranty": "2 Years Certified AMC Support"
+      },
+      "trending": false,
+      "newest": true
+    },
+    {
+      "id": "prod-16",
+      "name": "Defibrillator Biphasic",
+      "category": "Critical Care & ICU",
+      "image": "https://images.unsplash.com/photo-1603398938378-e54eab446dde?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "High performance biphasic defibrillator with integrated patient monitoring and AED functionality.",
+      "description": "Defibrillator Biphasic: Multi-functional biphasic defibrillator, monitor, and manual/AED system. Designed for rapid emergency intervention and intensive patient shock therapy in ICU wards and ambulances.",
+      "rating": 5,
+      "features": [
+        "High-performance biphasic shock technology up to 360 Joules",
+        "Integrated vital monitoring for ECG, SpO2, and NIBP",
+        "Automatic External Defibrillator (AED) mode with visual voice instructions",
+        "Integrated thermal printout documenting cardiac events"
+      ],
+      "specifications": {
+        "Waveform Type": "Biphasic Truncated Exponential (BTE) waveform",
+        "Charging Speed": "Less than 5 seconds to full energy levels",
+        "Monitor Screen": "7-inch color TFT display for diagnostic traces",
+        "Battery backup": "Up to 100 maximum energy shocks on fully charged battery",
+        "Warranty": "2 Years Certified AMC Support"
+      },
+      "trending": true,
+      "newest": false
+    },
+    {
+      "id": "prod-17",
+      "name": "Ventilator Turbine",
+      "category": "Critical Care & ICU",
+      "image": "https://images.unsplash.com/photo-1584036561566-baf245fdb76f?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "Advanced critical care lung ventilator utilizing a quiet internal turbine compressor.",
+      "description": "Ventilator Turbine: Modern, turbine-driven lung ventilator supporting both invasive and non-invasive therapy. Bypasses the need for central medical wall gas inlets, making it exceptionally versatile and transport-ready.",
+      "rating": 5,
+      "features": [
+        "Invasive and non-invasive ventilation modes for pediatric to adults",
+        "Integrated high-speed turbine compressor avoids external air pipelines",
+        "Precise high flow oxygen therapy (HFNC) modules",
+        "Sophisticated lung mechanics measurements shown on touch panel"
+      ],
+      "specifications": {
+        "Inspiratory Flow": "Up to 200 L/min turbine flow capacity",
+        "Ventilation Modes": "VCV, PCV, PRVC, SIMV, CPAP, PSV, BiPAP",
+        "Display Size": "12.1-inch high-resolution medical color touchscreen",
+        "Backup Battery": "Up to 4 Hours standard battery operation",
+        "Warranty": "2 Years Certified AMC Support"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-18",
+      "name": "Warmer Neonatal",
+      "category": "Critical Care & ICU",
+      "image": "https://images.unsplash.com/photo-1502740479091-635887520276?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "Advanced infant radiant warmer providing highly stable micro-environment temperature controls.",
+      "description": "Warmer Neonatal: High-end infant warming station engineered for delivery rooms and neonatal intensive care units (NICU). Delivers immediate, uniform infrared heat with advanced micro-processor safety monitors.",
+      "rating": 5,
+      "features": [
+        "Micro-processor based skin and manual warming modes",
+        "Ceramic far-infrared heating element with safety focus dome",
+        "Advanced visual alarms for skin sensor deviation or power cuts",
+        "Integrated bassinet with easy double-tilt trendelenburg positioning"
+      ],
+      "specifications": {
+        "Control Modes": "Servo-skin control mode and manual timer mode",
+        "Skin Temp Sensor": "Highly sensitive thermistor bead skin probe (± 0.2°C)",
+        "Infrared Heater": "Ceramic element with automatic focus reflector grid",
+        "Illumination": "Built-in bright LED clinical examination light",
+        "Warranty": "2 Years Certified AMC Support"
+      },
+      "trending": false,
+      "newest": false
+    },
+    {
+      "id": "prod-19",
+      "name": "LED Photo Therapy Neonatal",
+      "category": "Critical Care & ICU",
+      "image": "https://images.unsplash.com/photo-1519689680058-324335c77ebe?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "High intensity neonatal phototherapy light utilizing premium narrow-band blue LEDs.",
+      "description": "LED Photo Therapy Neonatal: High-efficacy phototherapy unit designed for hyperbilirubinemia treatment in newborns. Utilizes high-intensity blue light bands for fast bilirubin degradation while keeping heat emissions zero.",
+      "rating": 4,
+      "features": [
+        "Premium narrow-band blue LEDs emitting clinical spectrum (450-475nm)",
+        "Double-sided phototherapy setups compatible with hospital bassinets",
+        "Integrated LCD hour counter tracking active light treatment runtime",
+        "Height-adjustable stand with smooth rolling wheels and parking brakes"
+      ],
+      "specifications": {
+        "Light Spectrum": "450 - 475 nm narrow-band blue wavelength",
+        "Irradiance Limit": "30 - 55 µW/cm²/nm adjustable high irradiance",
+        "LED Lifetime": "Up to 30,000 hours of peak treatment operation",
+        "Height Range": "1200 mm - 1650 mm adjustable support stand",
+        "Warranty": "2 Years Certified AMC Support"
+      },
+      "trending": false,
+      "newest": false
+    },
+    {
+      "id": "prod-20",
+      "name": "QVS",
+      "category": "Critical Care & ICU",
+      "image": "https://images.unsplash.com/photo-1619015616239-a3d8c5415aae?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "High-vacuum high-flow surgical suction system designed for continuous operating theatre use.",
+      "description": "QVS Suction System (Quick Vacuum Suction): Heavy-duty, high-performance surgical aspirator engineered for operating rooms and intensive care wards. Features high-flow vacuum action, oil-free piston pumps, and double overflow protection containers.",
+      "rating": 5,
+      "features": [
+        "Ultra-quiet, maintenance-free oil-free vacuum piston pump",
+        "Dual large-capacity unbreakable polycarbonate fluid collecting jars",
+        "Integrated double overflow check valves preventing fluid backups",
+        "Robust mobile stand with anti-static wheels and foot-switch activation"
+      ],
+      "specifications": {
+        "Maximum Vacuum": "≥ 0.09 MPa (680 mmHg) high-vacuum limit",
+        "Suction Flow Rate": "≥ 40 Liters per minute high-volume capacity",
+        "Collecting Jars": "Dual 2500 mL polycarbonate autoclavable jars",
+        "Power source": "Standard AC mains operation with internal fuses",
+        "Warranty": "2 Years Certified AMC Support"
+      },
+      "trending": false,
+      "newest": false
+    },
+    {
+      "id": "prod-21",
+      "name": "Modular OT ICU Setup",
+      "category": "Operating Theatre (OT)",
+      "image": "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=600&q=80",
+      "shortDesc": "Complete modular medical infrastructure solutions for state-of-the-art operating theatres and ICU wards.",
+      "description": "Modular OT ICU Setup: Bespoke turn-key engineering setups for modern surgical theatres and high-acuity wards. Includes wall cladding panels, HEPA filtration layouts, pendant arms, medical gas pipelines, and electronic controls.",
+      "rating": 5,
+      "features": [
+        "Antimicrobial medical-grade wall panels and seamless flooring layouts",
+        "Integrated HEPA air filtration laminations for absolute aseptic sterile control",
+        "Pre-installed pendant arms, surgical panels, and central gas lines",
+        "Built-in hermetic sliding doors and complete clinical control desks"
+      ],
+      "specifications": {
+        "Wall Panels": "High-durability stainless steel or powder-coated steel panels",
+        "Air Filtration": "Laminar flow system with premium Class-100 HEPA filters",
+        "Gas Outlets": "O2, N2O, Air, Vacuum, CO2 modular gas inlets",
+        "Engineering standards": "Complies fully with ISO 14644-1 cleanliness standards",
+        "Warranty": "5 Years Comprehensive Turnkey Warranty"
+      },
+      "trending": false,
+      "newest": false
     }
   ],
   "categories": [
@@ -215,7 +575,7 @@
     },
     {
       "id": "gal-2",
-      "image": "https://images.unsplash.com/photo-1579684389782-64d84b5e901a?auto=format&fit=crop&w=600&q=80",
+      "image": "https://p.turbosquid.com/ts-thumb/Yc/fsanLN/UzitSuIX/cs/jpg/1585493562/1920x1080/fit_q87/da68c41053a9e07718286c16002d83d3898cf665/cs.jpg",
       "title": "Dräger Primus Installation in ICU",
       "category": "Critical Care"
     },
@@ -239,9 +599,9 @@
     },
     {
       "id": "gal-6",
-      "image": "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=600&q=80",
-      "title": "Voluson E10 Obstetric Setup Delivery",
-      "category": "Diagnostics"
+      "image": "https://storage.googleapis.com/avante/images/13448-1-drager-fabius-os.jpg",
+      "title": "Dräger Fabius Anaesthesia Setup Delivery",
+      "category": "Operation Theatre Setup"
     }
   ],
   "testimonials": [

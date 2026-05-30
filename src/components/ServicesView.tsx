@@ -73,16 +73,17 @@ export default function ServicesView() {
     <div className="bg-slate-50 min-h-screen">
       {/* Upper header cover */}
       <section className="relative py-24 bg-slate-900 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551076805-e1869033e561?auto=format&fit=crop&w=1200&q=80')] bg-cover bg-center opacity-10" />
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/40 to-slate-950" />
+        <div className="absolute inset-0 bg-[url('https://altosengineers.com/wp-content/uploads/2023/01/5-Keys-to-Proper-Setup-of-Medical-Equipment-1.jpg')] bg-cover bg-center opacity-85" />
+        <div className="absolute inset-0 bg-slate-950/45" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/70 to-slate-950" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white space-y-6">
           <span className="text-blue-500 font-black tracking-widest text-xs uppercase block">Full Services & Support</span>
           <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
             <span>Biomedical Service</span>
             <span className="min-w-[280px] sm:min-w-[320px] text-center sm:text-left inline-block">
-              <FlipWords 
-                words={["Calibration", "Maintenance", "Installation", "Emergency SLA"]} 
-                duration={3000} 
+              <FlipWords
+                words={["Calibration", "Maintenance", "Installation", "Emergency SLA"]}
+                duration={3000}
                 className="text-amber-500 font-bold"
               />
             </span>
@@ -139,15 +140,15 @@ export default function ServicesView() {
                 <div
                   key={srv.id}
                   className={`bg-slate-50 p-8 rounded-2xl border border-slate-100 transition-all duration-300 flex flex-col h-full group
-                    ${isAmber 
-                      ? "hover:border-amber-400 hover:shadow-2xl hover:shadow-amber-500/5" 
+                    ${isAmber
+                      ? "hover:border-amber-400 hover:shadow-2xl hover:shadow-amber-500/5"
                       : "hover:border-blue-400 hover:shadow-2xl hover:shadow-blue-500/5"
                     }
                   `}
                 >
                   <div className={`p-4 rounded-xl w-14 h-14 flex items-center justify-center mb-6 transition-all duration-300
-                    ${isAmber 
-                      ? "bg-amber-50 text-amber-600 group-hover:bg-amber-500 group-hover:text-white" 
+                    ${isAmber
+                      ? "bg-amber-50 text-amber-600 group-hover:bg-amber-500 group-hover:text-white"
                       : "bg-blue-50 text-blue-600 group-hover:bg-blue-600 group-hover:text-white"
                     }
                   `}>
@@ -167,8 +168,8 @@ export default function ServicesView() {
                   <button
                     onClick={() => handleServiceSelect(srv.title)}
                     className={`mt-auto bg-white border font-bold text-xs py-3 rounded-lg transition-colors flex items-center justify-center gap-1.5 uppercase tracking-wide cursor-pointer
-                      ${isAmber 
-                        ? "border-slate-200 hover:border-amber-500 text-slate-700 hover:text-amber-600" 
+                      ${isAmber
+                        ? "border-slate-200 hover:border-amber-500 text-slate-700 hover:text-amber-600"
                         : "border-slate-200 hover:border-blue-600 text-slate-700 hover:text-blue-600"
                       }
                     `}

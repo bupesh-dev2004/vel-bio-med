@@ -3,6 +3,61 @@ import LeadershipMessage from "./ui/LeadershipMessage";
 import VisionMission from "./ui/VisionMission";
 import React, { useEffect, useRef, useState } from "react";
 
+function AnimatedCounter({ target, duration = 1500, suffix = "" }: { target: number; duration?: number; suffix?: string }) {
+  const [countStr, setCountStr] = useState("0");
+  const [hasStarted, setHasStarted] = useState(false);
+  const elementRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!hasStarted) return;
+
+    let start = 0;
+    const end = target;
+    const isDecimal = !Number.isInteger(target);
+    const startTime = performance.now();
+
+    const updateCount = (now: number) => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const easeProgress = progress * (2 - progress); // easeOutQuad
+      const currentVal = easeProgress * (end - start) + start;
+
+      let formattedVal = "";
+      if (isDecimal) {
+        formattedVal = currentVal.toFixed(1);
+      } else {
+        formattedVal = Math.floor(currentVal).toLocaleString();
+      }
+      setCountStr(formattedVal);
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCount);
+      }
+    };
+
+    requestAnimationFrame(updateCount);
+  }, [hasStarted, target, duration]);
+
+  return <span ref={elementRef}>{countStr}{suffix}</span>;
+}
+
 interface ValueItem {
   title: string;
   desc: string;
@@ -177,10 +232,10 @@ export default function AboutView() {
   }, []);
 
   const metrics = [
-    { value: "12+", label: "Years of Experience" },
-    { value: "450+", label: "Hospital Customers" },
-    { value: "1,500+", label: "Setup Installations" },
-    { value: "100%", label: "Uptime SLA Response" }
+    { target: 12, suffix: "+", label: "Years of Experience" },
+    { target: 450, suffix: "+", label: "Hospital Customers" },
+    { target: 1500, suffix: "+", label: "Setup Installations" },
+    { target: 100, suffix: "%", label: "Uptime SLA Response" }
   ];
 
   const cardColors = [
@@ -371,7 +426,7 @@ export default function AboutView() {
                 {metrics.map((m, idx) => (
                   <div key={idx} className="space-y-2 py-4 lg:py-0">
                     <p className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400 tracking-tight">
-                      {m.value}
+                      <AnimatedCounter target={m.target} suffix={m.suffix} />
                     </p>
                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
                       {m.label}

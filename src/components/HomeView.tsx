@@ -54,7 +54,7 @@ function AnimatedCounter({ target, duration = 1500, suffix = "" }: { target: num
       const progress = Math.min((now - startTime) / duration, 1);
       const easeProgress = progress * (2 - progress); // easeOutQuad
       const currentVal = easeProgress * (end - start) + start;
-      
+
       if (isDecimal) {
         setCount(parseFloat(currentVal.toFixed(1)));
       } else {
@@ -144,9 +144,8 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
           slides.map((slide, idx) => (
             <div
               key={slide.id}
-              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                idx === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
-              }`}
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
+                }`}
             >
               {/* Background with subtle Zoom effect */}
               <div
@@ -157,17 +156,30 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
                 }}
               />
               {/* Overlay with Medical blue tint gradient */}
-              <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/70 to-blue-900/35" />
+              <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/80 to-blue-950/40" />
+
+              {/* Background Glows */}
+              <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-radial from-blue-500/12 via-blue-900/0 to-transparent rounded-full pointer-events-none z-10" />
+              <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-radial from-amber-500/10 via-amber-650/0 to-transparent rounded-full pointer-events-none z-10" />
 
               {/* Slider content */}
-              <div className="absolute inset-0 flex items-center">
+              <div className="absolute inset-0 flex items-center z-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                   <div className="max-w-2xl text-left text-white space-y-4 md:space-y-6">
-                    <span className="inline-block bg-blue-600/95 text-white text-[10px] sm:text-xs font-black tracking-widest px-3 py-1.5 rounded-full uppercase shadow-lg shadow-blue-600/25">
+                    <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[10px] sm:text-xs font-black tracking-widest px-4 py-1.5 rounded-full uppercase shadow-lg shadow-blue-500/20">
                       {slide.tagline}
                     </span>
                     <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white">
-                      {slide.heading}
+                      {idx === 0 && (
+                        <span>Transforming <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-sky-400 bg-clip-text text-transparent">Healthcare</span> One Installation at a Time</span>
+                      )}
+                      {idx === 1 && (
+                        <span>Your Trusted Partner in <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 bg-clip-text text-transparent">Medical Excellence</span></span>
+                      )}
+                      {idx === 2 && (
+                        <span>Innovative Medical <span className="bg-gradient-to-r from-cyan-400 via-teal-400 to-sky-400 bg-clip-text text-transparent">Equipment</span> Solutions</span>
+                      )}
+                      {idx >= 3 && slide.heading}
                     </h1>
                     <p className="text-sm sm:text-base md:text-lg text-slate-200/90 leading-relaxed font-medium">
                       {slide.description}
@@ -175,13 +187,13 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
                     <div className="flex flex-wrap gap-3.5 pt-2">
                       <button
                         onClick={() => setCurrentTab("products")}
-                        className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs sm:text-sm py-3 px-6 sm:px-8 rounded-lg shadow-xl shadow-blue-500/25 hover:scale-103 transition-all flex items-center gap-2 uppercase tracking-wide cursor-pointer"
+                        className="bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 text-white font-black text-xs sm:text-sm py-3.5 px-6 sm:px-8 rounded-xl shadow-xl shadow-blue-500/25 hover:scale-103 transition-all flex items-center gap-2 uppercase tracking-wider cursor-pointer border-none"
                       >
                         Explore Products <ArrowRight className="w-4 h-4" />
                       </button>
                       <button
                         onClick={() => setCurrentTab("contact")}
-                        className="bg-slate-100/10 hover:bg-white hover:text-slate-950 text-white font-bold text-xs sm:text-sm py-3 px-6 sm:px-8 rounded-lg border border-white/20 transition-all flex items-center gap-2 uppercase tracking-wide cursor-pointer"
+                        className="bg-gradient-to-r from-amber-500 to-orange-400 hover:from-amber-600 hover:to-orange-500 text-white font-black text-xs sm:text-sm py-3.5 px-6 sm:px-8 rounded-xl shadow-lg shadow-amber-500/25 hover:scale-103 transition-all flex items-center gap-2 uppercase tracking-wider cursor-pointer border-none"
                       >
                         Contact Us
                       </button>
@@ -227,9 +239,8 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
                 setCurrentSlide(idx);
                 startAutoSlide();
               }}
-              className={`w-3.5 h-1.5 rounded-full transition-all duration-300 ${
-                idx === currentSlide ? "bg-blue-500 w-7" : "bg-white/40"
-              }`}
+              className={`w-3.5 h-1.5 rounded-full transition-all duration-300 ${idx === currentSlide ? "bg-blue-500 w-7" : "bg-white/40"
+                }`}
               aria-label={`Go to slide ${idx + 1}`}
             />
           ))}
@@ -241,13 +252,13 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
         {/* Ambient Decorative Light Orbs */}
         <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-600/5 blur-3xl rounded-full pointer-events-none" />
         <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-amber-500/5 blur-3xl rounded-full pointer-events-none" />
-        
+
         {/* Subtle grid pattern background overlay */}
         <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            
+
             {/* Left Column: Sticky Summary & Stats Counters */}
             <div className="lg:col-span-5 space-y-8 lg:sticky lg:top-24">
               <div>
@@ -259,7 +270,7 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
                 </h2>
                 <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-amber-500 mt-4 rounded-full" />
               </div>
-              
+
               <p className="text-slate-500 text-sm md:text-base leading-relaxed font-medium">
                 Supporting health clinics and emergency services globally with cutting-edge bioscience machinery and specialized training setup. We bridge technical operations with flawless medical readiness.
               </p>
@@ -295,7 +306,7 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
 
             {/* Right Column: Beautiful Interactive Detail Cards */}
             <div className="lg:col-span-7 space-y-6">
-              
+
               {/* Pillar Card 1 */}
               <div className="bg-white p-6 md:p-8 rounded-2xl shadow-xs border border-slate-100 hover:border-blue-300 hover:shadow-md transition-all duration-300 flex flex-col md:flex-row gap-6 relative group overflow-hidden">
                 <div className="absolute top-0 left-0 w-1 h-full bg-blue-600 group-hover:h-full transition-all" />
@@ -311,8 +322,8 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
                     Over 12+ years of providing turnkey equipment configurations, technical safety clearance, and customized installations for multi-specialty hospitals. We handle layout logistics, heavy compliance checks, and secure continuous operation contracts.
                   </p>
                   <div className="pt-2">
-                    <button 
-                      onClick={() => setCurrentTab("about")} 
+                    <button
+                      onClick={() => setCurrentTab("about")}
                       className="inline-flex items-center gap-1.5 text-xs font-black text-blue-600 hover:text-blue-800 transition-colors group/btn cursor-pointer"
                     >
                       Read Our Vision <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
@@ -336,8 +347,8 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
                     Trusted by 450+ doctors and critical care specialists for zero-tolerance product quality, high accuracy metrics, and quick repair responses. Our emergency servicing support remains available 24/7.
                   </p>
                   <div className="pt-2">
-                    <button 
-                      onClick={() => setCurrentTab("contact")} 
+                    <button
+                      onClick={() => setCurrentTab("contact")}
                       className="inline-flex items-center gap-1.5 text-xs font-black text-amber-600 hover:text-amber-800 transition-colors group/btn cursor-pointer"
                     >
                       Work With Us <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
@@ -361,8 +372,8 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
                     Successful setup of 1500+ ICU respiratory beds, diagnostics ultrasound machinery chambers, and double-door steam sanitization centers. We maintain direct logistics linkages with global medical providers.
                   </p>
                   <div className="pt-2">
-                    <button 
-                      onClick={() => setCurrentTab("gallery")} 
+                    <button
+                      onClick={() => setCurrentTab("gallery")}
                       className="inline-flex items-center gap-1.5 text-xs font-black text-blue-600 hover:text-blue-800 transition-colors group/btn cursor-pointer"
                     >
                       Browse Portfolios <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
@@ -477,7 +488,7 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
             {/* Left side Image wrapped in rotating gradient border */}
             <div className="lg:col-span-6 relative">
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-3xl transform rotate-2 scale-103 opacity-15 blur-sm" />
-              
+
               <BorderRotate
                 animationMode="auto-rotate"
                 animationSpeed={6}
@@ -523,36 +534,36 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
                 {[
-                  { 
-                    title: "Continuous Quality", 
+                  {
+                    title: "Continuous Quality",
                     subtitle: "Tier-1 Calibration",
                     desc: "Every medical monitor and digital scanner system is calibrated rigorously against original parameters before dispatch.",
                     icon: <ShieldCheck className="w-7 h-7 text-white" />,
                     bgColor: "bg-blue-600/90"
                   },
-                  { 
-                    title: "Turnkey Setups", 
+                  {
+                    title: "Turnkey Setups",
                     subtitle: "End-to-End Compliance",
                     desc: "Our biomedical crew supervises gas setups, electrical compliance testing, and critical OT layouts end-to-end.",
                     icon: <Zap className="w-7 h-7 text-white" />,
                     bgColor: "bg-indigo-600/90"
                   },
-                  { 
-                    title: "Clinical Engineers", 
+                  {
+                    title: "Clinical Engineers",
                     subtitle: "Specialist Supervision",
                     desc: "Access the training expertise of specialists registered under critical medical equipment regulatory protocols.",
                     icon: <Activity className="w-7 h-7 text-white" />,
                     bgColor: "bg-teal-600/90"
                   },
-                  { 
-                    title: "Friendly Contracts", 
+                  {
+                    title: "Friendly Contracts",
                     subtitle: "Flexible AMC Frameworks",
                     desc: "Leverage affordable AMC frameworks designed for individual clinics to corporate multi-wing hospital systems.",
                     icon: <ThumbsUp className="w-7 h-7 text-white" />,
                     bgColor: "bg-amber-600/90"
                   }
                 ].map((item, idx) => (
-                  <FrostedGlassCard 
+                  <FrostedGlassCard
                     key={idx}
                     title={item.title}
                     subtitle={item.subtitle}
@@ -568,7 +579,7 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
       </section>
 
       {/* 6. VALUABLE CLIENTS LOGO SLIDER */}
-      <Logos3 
+      <Logos3
         heading="Trusted By Premium Medical Institutions"
         logos={clientLogos.map((client, idx) => ({
           id: `medical-client-${idx}`,
@@ -586,7 +597,7 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
             <div className="w-12 h-1 bg-blue-600 mx-auto mt-4 rounded-full" />
           </div>
 
-          <TestimonialSlider 
+          <TestimonialSlider
             testimonials={testimonials.map((t: any) => ({
               image: t.image,
               quote: t.reviewText,
