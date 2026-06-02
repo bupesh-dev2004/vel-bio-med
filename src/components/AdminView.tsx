@@ -4,7 +4,20 @@ import { PlusCircle, Trash2, CheckCircle2, FileText, ShoppingBag, Image, PhoneCa
 import { Product, Testimonial, GalleryItem, Service, HomeSlide, ContactInfo } from "../types.js";
 
 export default function AdminView() {
-  const { state, refreshState } = useAppState();
+  const {
+    state,
+    toggleInquiryAttended,
+    deleteInquiry,
+    createProduct,
+    deleteProduct,
+    createCategory,
+    deleteCategory,
+    updateContactInfo,
+    addGalleryItem,
+    deleteGalleryItem,
+    createService,
+    deleteService
+  } = useAppState();
   const categories = state?.categories || [];
 
   const [activeAdminSubTab, setActiveAdminSubTab] = useState<"inquiries" | "products" | "categories" | "slides" | "contact" | "gallery" | "services">("inquiries");
@@ -34,15 +47,8 @@ export default function AdminView() {
   // 1. INQUIRIES CONTROL
   const handleInquiryAttendedToggle = async (id: string, currentStatus: boolean | undefined) => {
     try {
-      const res = await fetch(`/api/inquiries/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ attended: !currentStatus })
-      });
-      if (res.ok) {
-        displayMessage("Inquiry validation adjusted successfully.");
-        await refreshState();
-      }
+      await toggleInquiryAttended(id);
+      displayMessage("Inquiry validation adjusted successfully.");
     } catch (e) {
       displayMessage("Error updating inquiry state.", true);
     }
@@ -50,11 +56,8 @@ export default function AdminView() {
 
   const handleInquiryDelete = async (id: string) => {
     try {
-      const res = await fetch(`/api/inquiries/${id}`, { method: "DELETE" });
-      if (res.ok) {
-        displayMessage("Inquiry removed from database registers.");
-        await refreshState();
-      }
+      await deleteInquiry(id);
+      displayMessage("Inquiry removed from database registers.");
     } catch (e) {
       displayMessage("Error removing inquiry log.", true);
     }
@@ -93,33 +96,26 @@ export default function AdminView() {
     });
 
     try {
-      const res = await fetch("/api/products", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: newProdName,
-          category: newProdCategory,
-          image: newProdImage || "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=600&q=80",
-          shortDesc: newProdShort || "General premium hospital clinical machine unit.",
-          description: newProdDesc || "High reliability biological machinery setup with certified technical approvals.",
-          rating: Number(newProdRating) || 5,
-          features: processedFeatures,
-          specifications: processedSpecs,
-          trending: true,
-          newest: true
-        })
+      await createProduct({
+        name: newProdName,
+        category: newProdCategory,
+        image: newProdImage || "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=600&q=80",
+        shortDesc: newProdShort || "General premium hospital clinical machine unit.",
+        description: newProdDesc || "High reliability biological machinery setup with certified technical approvals.",
+        rating: Number(newProdRating) || 5,
+        features: processedFeatures,
+        specifications: processedSpecs,
+        trending: true,
+        newest: true
       });
 
-      if (res.ok) {
-        displayMessage(`Product '${newProdName}' added successfully to catalog.`);
-        // Reset inputs
-        setNewProdName("");
-        setNewProdImage("");
-        setNewProdShort("");
-        setNewProdDesc("");
-        setNewProdFeatures("");
-        await refreshState();
-      }
+      displayMessage(`Product '${newProdName}' added successfully to catalog.`);
+      // Reset inputs
+      setNewProdName("");
+      setNewProdImage("");
+      setNewProdShort("");
+      setNewProdDesc("");
+      setNewProdFeatures("");
     } catch (err) {
       displayMessage("Failed to insert product.", true);
     }
@@ -127,11 +123,8 @@ export default function AdminView() {
 
   const handleDeleteProduct = async (id: string) => {
     try {
-      const res = await fetch(`/api/products/${id}`, { method: "DELETE" });
-      if (res.ok) {
-        displayMessage("Product deleted from catalogs.");
-        await refreshState();
-      }
+      await deleteProduct(id);
+      displayMessage("Product deleted from catalogs.");
     } catch (e) {
       displayMessage("Failed to delete product.", true);
     }
@@ -144,16 +137,9 @@ export default function AdminView() {
     e.preventDefault();
     if (!newCategoryName.trim()) return;
     try {
-      const res = await fetch("/api/categories", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ category: newCategoryName.trim() })
-      });
-      if (res.ok) {
-        displayMessage(`Category '${newCategoryName}' added.`);
-        setNewCategoryName("");
-        await refreshState();
-      }
+      await createCategory(newCategoryName.trim());
+      displayMessage(`Category '${newCategoryName}' added.`);
+      setNewCategoryName("");
     } catch (e) {
       displayMessage("Error adding category.", true);
     }
@@ -161,15 +147,8 @@ export default function AdminView() {
 
   const handleDeleteCategory = async (cat: string) => {
     try {
-      const res = await fetch("/api/categories", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ category: cat })
-      });
-      if (res.ok) {
-        displayMessage(`Category '${cat}' removed.`);
-        await refreshState();
-      }
+      await deleteCategory(cat);
+      displayMessage(`Category '${cat}' removed.`);
     } catch (e) {
       displayMessage("Error deleting category.", true);
     }
@@ -184,20 +163,15 @@ export default function AdminView() {
   const handleUpdateContact = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch("/api/contact", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          address: contactAddress,
-          phone: contactPhone,
-          email: contactEmail,
-          whatsappNumber: contactWhatsapp
-        })
+      await updateContactInfo({
+        address: contactAddress,
+        phone: contactPhone,
+        email: contactEmail,
+        whatsappNumber: contactWhatsapp,
+        workingHours: state?.contactInfo?.workingHours || "Monday - Saturday: 9:00 AM - 6:30 PM (IST)",
+        mapUrl: state?.contactInfo?.mapUrl || "https://maps.google.com/maps?q=Vel%20Bio%20Med%20Bengaluru&t=&z=13&ie=UTF8&iwloc=&output=embed"
       });
-      if (res.ok) {
-        displayMessage("Corporate and WhatsApp details saved successfully.");
-        await refreshState();
-      }
+      displayMessage("Corporate and WhatsApp details saved successfully.");
     } catch (e) {
       displayMessage("Failed to save credentials.", true);
     }
@@ -215,21 +189,14 @@ export default function AdminView() {
       return;
     }
     try {
-      const res = await fetch("/api/gallery", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title: newGalTitle,
-          image: newGalImage,
-          category: newGalCategory || "General Setup"
-        })
+      await addGalleryItem({
+        title: newGalTitle,
+        image: newGalImage,
+        category: newGalCategory || "General Setup"
       });
-      if (res.ok) {
-        displayMessage("New visual portfolio element uploaded.");
-        setNewGalTitle("");
-        setNewGalImage("");
-        await refreshState();
-      }
+      displayMessage("New visual portfolio element uploaded.");
+      setNewGalTitle("");
+      setNewGalImage("");
     } catch (e) {
       displayMessage("Error delivering gallery asset.", true);
     }
@@ -237,11 +204,8 @@ export default function AdminView() {
 
   const handleDeleteGalleryItem = async (id: string) => {
     try {
-      const res = await fetch(`/api/gallery/${id}`, { method: "DELETE" });
-      if (res.ok) {
-        displayMessage("Gallery visual file removed.");
-        await refreshState();
-      }
+      await deleteGalleryItem(id);
+      displayMessage("Gallery visual file removed.");
     } catch (e) {
       displayMessage("Error removing gallery file.", true);
     }
@@ -256,21 +220,14 @@ export default function AdminView() {
     e.preventDefault();
     if (!newSvcTitle.trim()) return;
     try {
-      const res = await fetch("/api/services", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title: newSvcTitle,
-          description: newSvcDesc,
-          iconName: newSvcIcon
-        })
+      await createService({
+        title: newSvcTitle,
+        description: newSvcDesc,
+        iconName: newSvcIcon
       });
-      if (res.ok) {
-        displayMessage(`AMC service model '${newSvcTitle}' published.`);
-        setNewSvcTitle("");
-        setNewSvcDesc("");
-        await refreshState();
-      }
+      displayMessage(`AMC service model '${newSvcTitle}' published.`);
+      setNewSvcTitle("");
+      setNewSvcDesc("");
     } catch (e) {
       displayMessage("Error publishing support model.", true);
     }
@@ -278,11 +235,8 @@ export default function AdminView() {
 
   const handleDeleteService = async (id: string) => {
     try {
-      const res = await fetch(`/api/services/${id}`, { method: "DELETE" });
-      if (res.ok) {
-        displayMessage("AMC service option removed.");
-        await refreshState();
-      }
+      await deleteService(id);
+      displayMessage("AMC service option removed.");
     } catch (e) {
       displayMessage("Error deleting service option.", true);
     }
