@@ -116,17 +116,11 @@ export default function Footer() {
         {/* Column 1: Brand Info & Newsletter (lg:col-span-5) */}
         <AnimatedContainer className="space-y-6 lg:col-span-5">
           <div className="flex items-center gap-3 cursor-pointer group" onClick={() => setCurrentTab("home")}>
-            <div className="h-11 w-11 rounded-2xl bg-gradient-to-tr from-[#0A6EBD] via-[#00A8CC] to-[#F97316] flex items-center justify-center text-white font-black text-xl shadow-xl shadow-[#0A6EBD]/20 group-hover:scale-105 transition-transform duration-300 border border-white/10">
-              V
-            </div>
-            <div>
-              <span className="text-xl font-black text-white tracking-tight block">
-                Vel Bio <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-[#F97316] font-black">Med</span>
-              </span>
-              <span className="text-[9px] uppercase font-black text-[#0A6EBD] tracking-widest block -mt-0.5">
-                Clinical Excellence
-              </span>
-            </div>
+            <img
+              src="/logo.png"
+              alt="Vel Bio Med Logo"
+              className="h-20 w-auto object-contain rounded-2xl transition-transform duration-300 group-hover:scale-105"
+            />
           </div>
           <p className="text-xs text-slate-400 leading-relaxed max-w-md font-medium">
             Vel Bio Med is a premier medical infrastructure partner, sourcing elite high-acuity ventilators, premium diagnostics scanners, and state-of-the-art modular operation theatre systems for healthcare leaders globally.

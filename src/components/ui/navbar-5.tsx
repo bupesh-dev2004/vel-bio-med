@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { 
-  MenuIcon, 
-  Cpu, 
-  Shield, 
-  Wrench, 
-  Activity, 
-  Sparkles, 
+import {
+  MenuIcon,
+  Cpu,
+  Shield,
+  Wrench,
+  Activity,
+  Sparkles,
   ArrowRight,
   Search,
   Home,
@@ -97,27 +97,21 @@ export const Navbar5 = () => {
   return (
     <section className="py-2.5 bg-white border-b border-slate-150 relative z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav className="flex items-center justify-between h-16">
-          
+        <nav className="flex items-center justify-between h-24">
+
           {/* Brand Logo Identity */}
-          <div className="flex-shrink-0 cursor-pointer flex items-center gap-3 group" onClick={() => navigateTab("home")}>
-            <div className="h-11 w-11 rounded-xl bg-gradient-to-tr from-blue-600 via-sky-400 to-amber-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform duration-300">
-              V
-            </div>
-            <div>
-              <span className="text-xl font-bold text-slate-900 tracking-tight block">
-                Vel Bio <span className="text-amber-500 font-extrabold">Med</span>
-              </span>
-              <span className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block -mt-1">
-                Healthcare Equipment
-              </span>
-            </div>
+          <div className="flex-shrink-0 cursor-pointer flex items-center group" onClick={() => navigateTab("home")}>
+            <img
+              src="/logo.png"
+              alt="Vel Bio Med"
+              className="h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            />
           </div>
 
           {/* Desktop Radix Navigation Menu */}
           <NavigationMenu className="hidden lg:block">
             <NavigationMenuList className="flex gap-1">
-              
+
               <NavigationMenuItem>
                 <button
                   onClick={() => navigateTab("home")}
@@ -147,10 +141,9 @@ export const Navbar5 = () => {
 
               {/* PRODUCTS Hover dropdown with dynamic category list */}
               <NavigationMenuItem>
-                <NavigationMenuTrigger 
-                  className={`uppercase tracking-wider text-xs font-bold hover:text-blue-600 ${
-                    currentTab === "products" ? "bg-blue-50/70 text-blue-600 font-bold" : "text-slate-600"
-                  }`}
+                <NavigationMenuTrigger
+                  className={`uppercase tracking-wider text-xs font-bold hover:text-blue-600 ${currentTab === "products" ? "bg-blue-50/70 text-blue-600 font-bold" : "text-slate-600"
+                    }`}
                 >
                   Products
                 </NavigationMenuTrigger>
@@ -161,7 +154,7 @@ export const Navbar5 = () => {
                         <Cpu className="w-3.5 h-3.5 text-blue-500" />
                         Explore Certified Categories
                       </span>
-                      <button 
+                      <button
                         onClick={() => {
                           setSelectedCategory("All");
                           navigateTab("products");
@@ -234,7 +227,7 @@ export const Navbar5 = () => {
                 <Search className="w-3.5 h-3.5" />
               </button>
             </form>
-            <Button 
+            <Button
               onClick={() => navigateTab("contact")}
               className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-black uppercase tracking-wider rounded-xl cursor-pointer shadow-md shadow-blue-500/10"
             >
@@ -252,22 +245,19 @@ export const Navbar5 = () => {
             <SheetContent side="top" className="max-h-screen overflow-auto bg-white border-b border-slate-100">
               <SheetHeader className="pb-4 border-b border-slate-100">
                 <SheetTitle>
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-blue-600 via-sky-400 to-amber-500 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-blue-500/20">
-                      V
-                    </div>
-                    <div className="text-left">
-                      <span className="text-lg font-bold text-slate-900 tracking-tight block">
-                        Vel Bio <span className="text-amber-500 font-extrabold">Med</span>
-                      </span>
-                    </div>
+                  <div className="flex items-center cursor-pointer" onClick={() => navigateTab("home")}>
+                    <img
+                      src="/logo.png"
+                      alt="Vel Bio Med"
+                      className="h-18 w-auto object-contain"
+                    />
                   </div>
                 </SheetTitle>
               </SheetHeader>
               <div className="flex flex-col py-2 px-1">
-                
+
                 <Accordion type="single" collapsible className="w-full">
-                  
+
                   {/* Features / Categories inside Mobile Drawer */}
                   <AccordionItem value="products-accordion" className="border-b border-slate-100">
                     <AccordionTrigger className="text-sm font-bold uppercase tracking-wider text-slate-700 hover:no-underline hover:text-blue-600 py-3 border-none bg-transparent">
@@ -344,7 +334,7 @@ export const Navbar5 = () => {
                       <Search className="w-4 h-4" />
                     </button>
                   </form>
-                  <Button 
+                  <Button
                     onClick={() => navigateTab("contact")}
                     className="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-md shadow-blue-500/10"
                   >
