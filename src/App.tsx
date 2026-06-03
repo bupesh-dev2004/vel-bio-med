@@ -79,7 +79,7 @@ function AppContent() {
 
   // 3. Complete Loaded Website Template
   return (
-    <div className="min-h-screen bg-white flex flex-col justify-between font-sans overflow-x-hidden selection:bg-blue-500 selection:text-white">
+    <div className="min-h-screen bg-white flex flex-col justify-between font-sans overflow-x-hidden selection:bg-blue-500 selection:text-white pt-[116px]">
       {/* Dynamic Sticky Header Navigation */}
       <Header />
 
