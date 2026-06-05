@@ -129,7 +129,7 @@ export const Navbar5 = () => {
               <div className="relative">
                 <button
                   onClick={() => navigateTab("home")}
-                  className={`relative px-4 py-2.5 text-[11px] font-black uppercase tracking-wider transition-colors cursor-pointer border-none bg-transparent ${
+                  className={`relative px-4 py-2.5 text-[13px] font-black uppercase tracking-wider transition-colors cursor-pointer border-none bg-transparent ${
                     currentTab === "home" ? "text-blue-600" : "text-slate-600 hover:text-blue-600"
                   }`}
                 >
@@ -148,7 +148,7 @@ export const Navbar5 = () => {
               <div className="relative">
                 <button
                   onClick={() => navigateTab("about")}
-                  className={`relative px-4 py-2.5 text-[11px] font-black uppercase tracking-wider transition-colors cursor-pointer border-none bg-transparent ${
+                  className={`relative px-4 py-2.5 text-[13px] font-black uppercase tracking-wider transition-colors cursor-pointer border-none bg-transparent ${
                     currentTab === "about" ? "text-blue-600" : "text-slate-600 hover:text-blue-600"
                   }`}
                 >
@@ -167,7 +167,7 @@ export const Navbar5 = () => {
               <div className="relative">
                 <button
                   onClick={() => navigateTab("services")}
-                  className={`relative px-4 py-2.5 text-[11px] font-black uppercase tracking-wider transition-colors cursor-pointer border-none bg-transparent ${
+                  className={`relative px-4 py-2.5 text-[13px] font-black uppercase tracking-wider transition-colors cursor-pointer border-none bg-transparent ${
                     currentTab === "services" ? "text-blue-600" : "text-slate-600 hover:text-blue-600"
                   }`}
                 >
@@ -193,7 +193,7 @@ export const Navbar5 = () => {
                     setSelectedCategory("All");
                     navigateTab("products");
                   }}
-                  className={`relative px-4 py-2.5 text-[11px] font-black uppercase tracking-wider transition-colors cursor-pointer border-none bg-transparent flex items-center gap-1 ${
+                  className={`relative px-4 py-2.5 text-[13px] font-black uppercase tracking-wider transition-colors cursor-pointer border-none bg-transparent flex items-center gap-1 ${
                     currentTab === "products" ? "text-blue-600" : "text-slate-600 hover:text-blue-600"
                   }`}
                 >
@@ -271,7 +271,7 @@ export const Navbar5 = () => {
               <div className="relative">
                 <button
                   onClick={() => navigateTab("gallery")}
-                  className={`relative px-4 py-2.5 text-[11px] font-black uppercase tracking-wider transition-colors cursor-pointer border-none bg-transparent ${
+                  className={`relative px-4 py-2.5 text-[13px] font-black uppercase tracking-wider transition-colors cursor-pointer border-none bg-transparent ${
                     currentTab === "gallery" ? "text-blue-600" : "text-slate-600 hover:text-blue-600"
                   }`}
                 >
@@ -290,7 +290,7 @@ export const Navbar5 = () => {
               <div className="relative">
                 <button
                   onClick={() => navigateTab("contact")}
-                  className={`relative px-4 py-2.5 text-[11px] font-black uppercase tracking-wider transition-colors cursor-pointer border-none bg-transparent ${
+                  className={`relative px-4 py-2.5 text-[13px] font-black uppercase tracking-wider transition-colors cursor-pointer border-none bg-transparent ${
                     currentTab === "contact" ? "text-blue-600" : "text-slate-600 hover:text-blue-600"
                   }`}
                 >
