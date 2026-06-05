@@ -132,22 +132,56 @@ export default function ProductsView({
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             {/* Header info */}
-            <div className="max-w-2xl">
-              <div className="flex flex-wrap items-center gap-2 mb-3">
+            <motion.div 
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: {
+                    staggerChildren: 0.12,
+                    delayChildren: 0.1
+                  }
+                }
+              }}
+              className="max-w-2xl"
+            >
+              <motion.div 
+                variants={{
+                  hidden: { opacity: 0, y: 12 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                }}
+                className="flex flex-wrap items-center gap-2 mb-3"
+              >
                 <span className="bg-blue-500/10 text-blue-400 border border-blue-500/25 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
                   <Sparkles className="w-3 h-3 text-amber-500 animate-pulse" /> Global Standard Inventory
                 </span>
                 <span className="bg-amber-500/10 text-amber-400 border border-amber-500/25 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider flex items-center gap-1.5 shadow-sm">
                   <ShieldCheck className="w-3 h-3 text-amber-400" /> ISO 13485 Certified
                 </span>
-              </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-none mb-4">
+              </motion.div>
+
+              <motion.h1 
+                variants={{
+                  hidden: { opacity: 0, y: 15 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                }}
+                className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-none mb-4"
+              >
                 Biomedical Equipment <span className="bg-gradient-to-r from-blue-400 via-indigo-300 to-amber-400 bg-clip-text text-transparent">Catalog</span>
-              </h1>
-              <p className="text-slate-400 text-sm sm:text-base font-medium leading-relaxed max-w-xl">
+              </motion.h1>
+
+              <motion.p 
+                variants={{
+                  hidden: { opacity: 0, y: 15 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                }}
+                className="text-slate-400 text-sm sm:text-base font-medium leading-relaxed max-w-xl"
+              >
                 Explore our world-class inventory of high-acuity ventilators, precise ECG monitors, surgical operating theatre setups, and certified CSSD sterilization suites.
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
 
             {/* In-tab search bar & high-tech statistics */}
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center lg:flex-col lg:items-end w-full lg:w-auto">

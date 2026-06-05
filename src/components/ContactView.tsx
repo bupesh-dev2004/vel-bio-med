@@ -114,21 +114,42 @@ export default function ContactView() {
   return (
     <div className="bg-gradient-to-tr from-slate-50 via-slate-100 to-blue-50/50 min-h-screen text-slate-800 selection:bg-blue-500/10">
       {/* Top cover title with cinematic high-contrast backdrop */}
-      <section className="relative py-28 border-b border-slate-900 overflow-hidden bg-slate-950">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1200&q=80')] bg-cover bg-center opacity-[0.06] pointer-events-none" />
+      <section className="relative py-32 border-b border-slate-900 overflow-hidden bg-slate-950">
+        <div className="absolute inset-0 bg-[url('https://wallpaperbat.com/img/1872990-modern-hospital-modular-in-environments.jpg')] bg-cover bg-center opacity-[0.25] pointer-events-none" />
         
         {/* Floating gradient radial accent spots */}
-        <div className="absolute -top-40 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute -bottom-40 right-1/4 w-96 h-96 bg-amber-500/8 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute -top-40 right-0 w-[450px] h-[450px] bg-blue-500/15 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute -bottom-40 left-0 w-[350px] h-[350px] bg-amber-500/10 rounded-full blur-[140px] pointer-events-none" />
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-5 z-10">
-          <span className="text-blue-400 font-extrabold tracking-widest text-xs uppercase block font-sans">Contact Desk</span>
-          <h1 className="text-4xl md:text-6xl font-black bg-gradient-to-b from-white via-slate-100 to-slate-400 bg-clip-text text-transparent tracking-tight leading-none">
-            Request Quotations & Handovers
-          </h1>
-          <p className="max-w-2xl mx-auto text-slate-400 text-xs sm:text-sm md:text-base leading-relaxed font-medium">
-            Our corporate clinical agents supply quotes, arrange logistics timelines, and program live virtual system presentations on request.
-          </p>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-block bg-gradient-to-r from-blue-500/10 to-sky-500/10 border border-blue-500/30 px-4 py-1.5 rounded-full"
+          >
+            <span className="text-blue-300 font-extrabold tracking-widest text-[10px] uppercase block font-sans">
+              Contact Desk
+            </span>
+          </motion.div>
+
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="text-4xl md:text-6xl font-black text-white tracking-tight leading-tight max-w-4xl mx-auto"
+          >
+            Request <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-sky-400 bg-clip-text text-transparent">Quotations</span> & <span className="bg-gradient-to-r from-amber-400 via-orange-300 to-amber-500 bg-clip-text text-transparent">Handovers</span>
+          </motion.h1>
+
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="max-w-2xl mx-auto text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed font-semibold"
+          >
+            Our corporate clinical agents supply <span className="text-blue-300 font-bold">quote sheets</span>, arrange <span className="text-white">logistics timelines</span>, and program <span className="text-cyan-300 font-bold">live virtual system presentations</span> on request.
+          </motion.p>
         </div>
       </section>
 

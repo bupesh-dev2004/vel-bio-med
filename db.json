@@ -745,6 +745,34 @@
       "image": "https://storage.googleapis.com/avante/images/13448-1-drager-fabius-os.jpg",
       "title": "Dräger Fabius Anaesthesia Setup Delivery",
       "category": "Operation Theatre Setup"
+    },
+    {
+      "id": "gal-v1",
+      "image": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80",
+      "title": "Metro Heart Hospital - Dr. Nair Diagnostic Feedback",
+      "category": "Video Testimonials",
+      "video": "https://www.youtube.com/embed/HNs_P8v3m3U"
+    },
+    {
+      "id": "gal-v2",
+      "image": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80",
+      "title": "Apollo Multispecialty - Dr. Chawla Critical Care Review",
+      "category": "Video Testimonials",
+      "video": "https://www.youtube.com/embed/t7D1r8uJkQg"
+    },
+    {
+      "id": "gal-v3",
+      "image": "https://images.unsplash.com/photo-1594824813573-246434de83fb?auto=format&fit=crop&w=600&q=80",
+      "title": "Horizon Trust Clinics - Prof. Fletcher Installation Review",
+      "category": "Video Testimonials",
+      "video": "https://www.youtube.com/embed/9w_013V4w_w"
+    },
+    {
+      "id": "gal-v4",
+      "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
+      "title": "Mayo Clinical Centre - Dr. Jenkins Anesthesiology Feedback",
+      "category": "Video Testimonials",
+      "video": "https://www.youtube.com/embed/2p825aXQzY0"
     }
   ],
   "testimonials": [

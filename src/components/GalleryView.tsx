@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { useAppState } from "../AppContext.js";
-import { Maximize2, X, ChevronLeft, ChevronRight, ArrowRight, Zap } from "lucide-react";
-import { motion } from "framer-motion";
+import { 
+  Maximize2, X, ChevronLeft, ChevronRight, ArrowRight, Zap, Play, 
+  LayoutGrid, Activity, Heart, ShieldCheck, Video, Eye, Info, Camera
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export default function GalleryView() {
-  const { state, setCurrentTab } = useAppState();
+  const { state, setCurrentTab, setInquiryMachineName } = useAppState();
   const galleryItems = state?.gallery || [];
   const [selectedCategory, setSelectedCategory] = useState("All");
 
@@ -14,6 +17,56 @@ export default function GalleryView() {
 
   // Derive unique categories
   const categories = ["All", ...Array.from(new Set(galleryItems.map((item) => item.category)))];
+
+  // Helpers for category visual overhaul
+  const getCategoryCount = (category: string) => {
+    if (category === "All") return galleryItems.length;
+    return galleryItems.filter((item) => item.category === category).length;
+  };
+
+  const getCategoryIcon = (category: string) => {
+    const classVal = "w-3.5 h-3.5 flex-shrink-0 transition-transform duration-300 group-hover:scale-110";
+    switch (category) {
+      case "All":
+        return <LayoutGrid className={classVal} />;
+      case "Operation Theatre Setup":
+        return <Activity className={classVal} />;
+      case "Critical Care":
+        return <Heart className={classVal} />;
+      case "Diagnostics":
+        return <Eye className={classVal} />;
+      case "Sterilization CSSD":
+        return <ShieldCheck className={classVal} />;
+      case "Video Testimonials":
+        return <Video className={classVal} />;
+      default:
+        return <Info className={classVal} />;
+    }
+  };
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 40, scale: 0.96 },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: { 
+        type: "spring" as const,
+        stiffness: 80,
+        damping: 15
+      } 
+    }
+  };
 
   // Filter gallery list
   const filteredItems = selectedCategory === "All"
@@ -196,88 +249,152 @@ export default function GalleryView() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Category Filter buttons */}
-          <div className="flex flex-wrap justify-center gap-3.5 mb-16">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-6 py-3 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-350 cursor-pointer shadow-sm hover:shadow-md border border-transparent ${
-                  selectedCategory === cat
-                    ? "bg-gradient-to-r from-blue-600 via-sky-400 to-amber-500 text-white shadow-xl shadow-blue-500/25 scale-105"
-                    : "bg-white text-slate-600 hover:text-blue-600 hover:bg-slate-50 border-slate-200/80 shadow-xs hover:scale-102"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 mb-16">
+            {categories.map((cat) => {
+              const isActive = selectedCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={cn(
+                    "group px-5 py-3 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md border flex items-center gap-2.5 active:scale-95",
+                    isActive
+                      ? "bg-gradient-to-r from-blue-600 via-sky-400 to-amber-500 text-white border-transparent shadow-xl shadow-blue-500/25 scale-105"
+                      : "bg-white text-slate-600 hover:text-blue-600 hover:bg-slate-50/80 border-slate-200/80 hover:border-slate-300"
+                  )}
+                >
+                  {getCategoryIcon(cat)}
+                  <span>{cat}</span>
+                  <span className={cn(
+                    "text-[9px] px-2 py-0.5 rounded-full font-black transition-colors duration-300",
+                    isActive
+                      ? "bg-white/20 text-white"
+                      : "bg-slate-100 text-slate-400 group-hover:bg-blue-50 group-hover:text-blue-600"
+                  )}>
+                    {getCategoryCount(cat)}
+                  </span>
+                </button>
+              );
+            })}
           </div>
 
           {/* Masonry image grid */}
           {filteredItems.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredItems.map((item, idx) => {
-                const isAmber = idx % 2 === 1;
-                return (
-                  <div
-                    key={item.id}
-                    onClick={() => openLightbox(idx)}
-                    className="relative group cursor-pointer rounded-[24px] z-10"
-                  >
-                    {/* Glowing shadow effect behind card on hover */}
-                    <div 
-                      className={cn(
-                        "absolute -inset-1 rounded-[24px] blur-xl opacity-0 group-hover:opacity-15 transition-all duration-500 -z-10",
-                        isAmber ? "bg-amber-500" : "bg-blue-500"
-                      )} 
-                    />
-
-                    {/* Glowing outer border line inside card on hover */}
-                    <div 
-                      className={cn(
-                        "absolute inset-0 border-2 rounded-[24px] pointer-events-none z-20 opacity-0 group-hover:opacity-100 transition-all duration-500",
-                        isAmber ? "border-amber-400/50" : "border-blue-400/50"
-                      )} 
-                    />
-
-                    {/* Main image container */}
-                    <div className="relative aspect-[4/3] rounded-[24px] overflow-hidden border border-slate-200/60 shadow-md group-hover:shadow-2xl transition-all duration-500 bg-slate-900">
-                      {/* Image zoom effect */}
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
-                        loading="lazy"
+            <motion.div 
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.05 }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              <AnimatePresence mode="popLayout">
+                {filteredItems.map((item, idx) => {
+                  const isAmber = idx % 2 === 1;
+                  return (
+                    <motion.div
+                      layout
+                      variants={cardVariants}
+                      initial="hidden"
+                      animate="show"
+                      exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                      key={item.id}
+                      onClick={() => openLightbox(idx)}
+                      className="relative group cursor-pointer rounded-[24px] z-10"
+                    >
+                      {/* Glowing shadow effect behind card on hover */}
+                      <div 
+                        className={cn(
+                          "absolute -inset-1 rounded-[24px] blur-xl opacity-0 group-hover:opacity-15 transition-all duration-500 -z-10",
+                          isAmber ? "bg-amber-500" : "bg-blue-500"
+                        )} 
                       />
 
-                      {/* Glassmorphic dark gradient overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent opacity-85 group-hover:opacity-90 transition-opacity duration-500 z-10" />
+                      {/* Glowing outer border line inside card on hover */}
+                      <div 
+                        className={cn(
+                          "absolute inset-0 border-2 rounded-[24px] pointer-events-none z-20 opacity-0 group-hover:opacity-100 transition-all duration-500",
+                          isAmber ? "border-amber-400/50" : "border-blue-400/50"
+                        )} 
+                      />
 
-                      {/* Content aligned inside card */}
-                      <div className="absolute inset-x-0 bottom-0 p-6 z-20 flex flex-col justify-end text-white space-y-2">
-                        <span 
-                          className={cn(
-                            "text-[10px] font-black uppercase tracking-widest block",
-                            isAmber ? "text-amber-400" : "text-sky-300"
+                      {/* Main image container */}
+                      <div className="relative aspect-[4/3] rounded-[24px] overflow-hidden border border-slate-200/60 shadow-md group-hover:shadow-2xl transition-all duration-500 bg-slate-900">
+                        {/* Media Tag Badge at top-right */}
+                        <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-950/60 backdrop-blur-md border border-white/10 text-white shadow-md transition-all duration-300 group-hover:bg-slate-950/85">
+                          {item.video ? (
+                            <>
+                              <Video className="w-3.5 h-3.5 text-amber-400 fill-amber-400/20" />
+                              <span className="text-[9px] font-black uppercase tracking-widest text-amber-300">Video</span>
+                            </>
+                          ) : (
+                            <>
+                              <Camera className="w-3.5 h-3.5 text-sky-400 fill-sky-400/20" />
+                              <span className="text-[9px] font-black uppercase tracking-widest text-sky-300">Photo</span>
+                            </>
                           )}
-                        >
-                          {item.category}
-                        </span>
+                        </div>
 
-                        <h3 className="text-base sm:text-lg font-bold tracking-tight text-white leading-snug drop-shadow-md group-hover:translate-x-1 transition-transform duration-300">
-                          {item.title}
-                        </h3>
+                        {/* Image zoom effect */}
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
+                          loading="lazy"
+                        />
 
-                        {/* Slide up Expand Action */}
-                        <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pt-1">
-                          <Maximize2 className={cn("w-4 h-4", isAmber ? "text-amber-400" : "text-sky-300")} />
-                          <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">Expand Photo</span>
+                        {/* Glassmorphic dark gradient overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent opacity-85 group-hover:opacity-90 transition-opacity duration-500 z-10" />
+
+                        {/* Play Button Overlay for Videos */}
+                        {item.video && (
+                          <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+                            <div className={cn(
+                              "w-14 h-14 rounded-full flex items-center justify-center text-white backdrop-blur-md border shadow-lg transition-all duration-500 transform group-hover:scale-110 group-hover:rotate-12",
+                              isAmber 
+                                ? "bg-amber-500/20 border-amber-400/40 shadow-amber-500/20 group-hover:bg-amber-500/40 group-hover:border-amber-400/60" 
+                                : "bg-blue-600/20 border-blue-400/40 shadow-blue-600/20 group-hover:bg-blue-600/40 group-hover:border-blue-400/60"
+                            )}>
+                              <Play className="w-6 h-6 fill-white ml-0.5" />
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Content aligned inside card */}
+                        <div className="absolute inset-x-0 bottom-0 p-6 z-20 flex flex-col justify-end text-white space-y-2">
+                          <span 
+                            className={cn(
+                              "text-[10px] font-black uppercase tracking-widest block",
+                              isAmber ? "text-amber-400" : "text-sky-300"
+                            )}
+                          >
+                            {item.category}
+                          </span>
+
+                          <h3 className="text-base sm:text-lg font-bold tracking-tight text-white leading-snug drop-shadow-md group-hover:translate-x-1 transition-transform duration-300">
+                            {item.title}
+                          </h3>
+
+                          {/* Slide up Expand Action */}
+                          <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pt-1">
+                            {item.video ? (
+                              <>
+                                <Play className={cn("w-4 h-4 fill-current", isAmber ? "text-amber-400" : "text-sky-300")} />
+                                <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">Play Video</span>
+                              </>
+                            ) : (
+                              <>
+                                <Maximize2 className={cn("w-4 h-4", isAmber ? "text-amber-400" : "text-sky-300")} />
+                                <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">Expand Photo</span>
+                              </>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+                    </motion.div>
+                  );
+                })}
+              </AnimatePresence>
+            </motion.div>
           ) : (
             <div className="py-24 text-center border border-dashed border-slate-200 rounded-[24px] bg-slate-50">
               <p className="text-slate-400 text-sm font-medium">No portfolio assets found under this filtering selection.</p>
@@ -317,18 +434,42 @@ export default function GalleryView() {
             className="max-w-4xl max-h-[85vh] w-full flex flex-col items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
-            <img
-              src={filteredItems[lightboxIndex].image}
-              alt={filteredItems[lightboxIndex].title}
-              className="max-w-full max-h-[70vh] object-contain rounded-2xl shadow-2xl border border-white/10"
-            />
-            <div className="text-center mt-5 space-y-2">
+            {filteredItems[lightboxIndex].video ? (
+              <div className="w-full max-w-3xl aspect-video rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-black">
+                <iframe
+                  src={`${filteredItems[lightboxIndex].video}?autoplay=1`}
+                  className="w-full h-full border-0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  title={filteredItems[lightboxIndex].title}
+                />
+              </div>
+            ) : (
+              <img
+                src={filteredItems[lightboxIndex].image}
+                alt={filteredItems[lightboxIndex].title}
+                className="max-w-full max-h-[70vh] object-contain rounded-2xl shadow-2xl border border-white/10"
+              />
+            )}
+            <div className="text-center mt-5 space-y-3 flex flex-col items-center">
               <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-400 to-amber-500 text-white text-[10px] sm:text-xs font-black tracking-widest px-3.5 py-1.5 rounded-full uppercase">
                 {filteredItems[lightboxIndex].category}
               </span>
-              <h2 className="text-lg md:text-xl font-bold text-white tracking-tight">
+              <h2 className="text-lg md:text-xl font-bold text-white tracking-tight max-w-2xl">
                 {filteredItems[lightboxIndex].title}
               </h2>
+              
+              <button
+                onClick={() => {
+                  setInquiryMachineName(`Gallery Asset: ${filteredItems[lightboxIndex].title} (${filteredItems[lightboxIndex].category})`);
+                  setCurrentTab("contact");
+                  closeLightbox();
+                }}
+                className="mt-2 group relative inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all cursor-pointer shadow-lg hover:shadow-blue-500/20 active:scale-95 border border-white/10"
+              >
+                <Zap className="w-3.5 h-3.5 fill-current text-amber-300 group-hover:scale-110 transition-transform" />
+                <span>Inquire About Setup</span>
+              </button>
             </div>
           </div>
 

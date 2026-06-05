@@ -39,6 +39,7 @@ export interface GalleryItem {
   image: string;
   title: string;
   category: string;
+  video?: string;
 }
 
 export interface Testimonial {

@@ -392,8 +392,8 @@ export default function AboutView() {
                   ].map((item, idx) => (
                     <div key={idx} className={`flex items-center gap-3 bg-slate-50 border border-slate-100/70 p-3.5 rounded-xl transition-colors ${idx % 2 === 1 ? 'hover:border-orange-200' : 'hover:border-blue-200'}`}>
                       <div className={`w-6 h-6 rounded-full border flex items-center justify-center font-extrabold text-xs ${idx % 2 === 1
-                          ? 'bg-orange-50 border-orange-100 text-orange-600'
-                          : 'bg-blue-50 border-blue-100 text-blue-600'
+                        ? 'bg-orange-50 border-orange-100 text-orange-600'
+                        : 'bg-blue-50 border-blue-100 text-blue-600'
                         }`}>
                         ✓
                       </div>
