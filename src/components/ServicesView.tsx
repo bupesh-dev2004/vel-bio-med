@@ -178,6 +178,18 @@ export default function ServicesView() {
     }
   };
 
+  const fadeUpVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number]
+      }
+    }
+  };
+
   return (
     <div className="bg-slate-50 min-h-screen">
       {/* Upper header cover */}
@@ -185,9 +197,22 @@ export default function ServicesView() {
         <div className="absolute inset-0 bg-[url('https://altosengineers.com/wp-content/uploads/2023/01/5-Keys-to-Proper-Setup-of-Medical-Equipment-1.jpg')] bg-cover bg-center opacity-85" />
         <div className="absolute inset-0 bg-slate-950/45" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/70 to-slate-950" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white space-y-6">
-          <span className="text-blue-500 font-black tracking-widest text-xs uppercase block">Full Services & Support</span>
-          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white space-y-6"
+        >
+          <motion.span
+            variants={fadeUpVariants}
+            className="text-blue-500 font-black tracking-widest text-xs uppercase block"
+          >
+            Full Services & Support
+          </motion.span>
+          <motion.h1
+            variants={fadeUpVariants}
+            className="text-3xl md:text-5xl font-extrabold tracking-tight flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2"
+          >
             <span>Biomedical Service</span>
             <span className="min-w-[280px] sm:min-w-[320px] text-center sm:text-left inline-block">
               <FlipWords
@@ -196,35 +221,44 @@ export default function ServicesView() {
                 className="text-amber-500 font-bold"
               />
             </span>
-          </h1>
-          <p className="max-w-2xl mx-auto text-slate-300 text-sm md:text-base leading-relaxed font-medium">
+          </motion.h1>
+          <motion.p
+            variants={fadeUpVariants}
+            className="max-w-2xl mx-auto text-slate-300 text-sm md:text-base leading-relaxed font-medium"
+          >
             Our qualified biomedical engineers maintain peak machinery uptime, ensuring maximum patient safety under rigorous clinical load factors.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
       </section>
 
       {/* Dynamic Trust Benchmarks */}
       <section className="py-12 bg-slate-950 text-white relative overflow-hidden border-b border-slate-900">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-950/40 to-slate-950" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div className="p-6 bg-slate-900/60 rounded-2xl border border-white/5 shadow-sm">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-center"
+          >
+            <motion.div variants={cardVariants} className="p-6 bg-slate-900/60 rounded-2xl border border-white/5 shadow-sm">
               <span className="text-amber-550 text-amber-500 font-black text-3xl block">15+ mins</span>
               <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-2 block">Emergency Response Desk</span>
-            </div>
-            <div className="p-6 bg-slate-900/60 rounded-2xl border border-white/5 shadow-sm">
+            </motion.div>
+            <motion.div variants={cardVariants} className="p-6 bg-slate-900/60 rounded-2xl border border-white/5 shadow-sm">
               <span className="text-blue-400 font-black text-3xl block">100%</span>
               <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-2 block">NABL Calibrated Rigs</span>
-            </div>
-            <div className="p-6 bg-slate-900/60 rounded-2xl border border-white/5 shadow-sm">
+            </motion.div>
+            <motion.div variants={cardVariants} className="p-6 bg-slate-900/60 rounded-2xl border border-white/5 shadow-sm">
               <span className="text-amber-500 font-black text-3xl block">10,000+</span>
               <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-2 block">Hours Managed Annually</span>
-            </div>
-            <div className="p-6 bg-slate-900/60 rounded-2xl border border-white/5 shadow-sm">
+            </motion.div>
+            <motion.div variants={cardVariants} className="p-6 bg-slate-900/60 rounded-2xl border border-white/5 shadow-sm">
               <span className="text-blue-400 font-black text-3xl block">99.8%</span>
               <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-2 block">Uptime Level Guarantee</span>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -235,7 +269,13 @@ export default function ServicesView() {
         <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-amber-50/40 rounded-full blur-3xl pointer-events-none translate-x-1/2" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <motion.div
+            variants={fadeUpVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="text-center max-w-2xl mx-auto mb-16"
+          >
             <span className="text-blue-600 font-bold tracking-widest text-xs uppercase block mb-1">Our Offerings</span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight">
               Comprehensive <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">Support Deliverables</span>
@@ -244,7 +284,7 @@ export default function ServicesView() {
             <p className="text-slate-500 text-sm mt-4 font-medium leading-relaxed">
               We cover all phases of medical machinery management—from architectural layouts to certification, periodic AMC maintenance, and calibration checkups.
             </p>
-          </div>
+          </motion.div>
 
           <motion.div
             variants={containerVariants}
@@ -336,7 +376,13 @@ export default function ServicesView() {
       <section className="py-24 bg-slate-50 border-t border-slate-200/50 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-white/40 pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-2xl mx-auto mb-20">
+          <motion.div
+            variants={fadeUpVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="text-center max-w-2xl mx-auto mb-20"
+          >
             <span className="text-amber-600 font-bold tracking-widest text-xs uppercase block mb-1">Our Process</span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-950 tracking-tight">
               Biomedical Lifecycle <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">Workflow</span>
@@ -345,7 +391,7 @@ export default function ServicesView() {
             <p className="text-slate-500 text-sm mt-4 font-medium leading-relaxed">
               How our certified team manages hospital machinery setups from initial evaluation to lifetime SLA verification.
             </p>
-          </div>
+          </motion.div>
 
           <div className="relative">
             {/* Timeline connecting line (Desktop only) */}
@@ -413,7 +459,13 @@ export default function ServicesView() {
       {/* SLA Guarantees Block */}
       <section className="py-20 bg-slate-100 border-t border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-slate-950 text-white rounded-3xl p-8 md:p-14 relative overflow-hidden flex flex-col lg:flex-row justify-between items-center gap-10">
+          <motion.div
+            variants={fadeUpVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="bg-slate-950 text-white rounded-3xl p-8 md:p-14 relative overflow-hidden flex flex-col lg:flex-row justify-between items-center gap-10"
+          >
             <div className="absolute top-0 right-0 w-80 h-80 bg-blue-600/10 rounded-full blur-2xl pointer-events-none" />
             <div className="space-y-4 max-w-2xl relative z-10">
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-500/20 text-amber-400 rounded-full text-xs font-black uppercase tracking-wider">
@@ -430,7 +482,7 @@ export default function ServicesView() {
             >
               <PhoneCall className="w-4 h-4" /> Request Dispatch
             </button>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>
