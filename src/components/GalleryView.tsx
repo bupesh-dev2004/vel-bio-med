@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAppState } from "../AppContext.js";
-import { 
-  Maximize2, X, ChevronLeft, ChevronRight, ArrowRight, Zap, Play, 
+import {
+  Maximize2, X, ChevronLeft, ChevronRight, ArrowRight, Zap, Play,
   LayoutGrid, Activity, Heart, ShieldCheck, Video, Eye, Info, Camera
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -56,15 +56,15 @@ export default function GalleryView() {
 
   const cardVariants = {
     hidden: { opacity: 0, y: 40, scale: 0.96 },
-    show: { 
-      opacity: 1, 
-      y: 0, 
+    show: {
+      opacity: 1,
+      y: 0,
       scale: 1,
-      transition: { 
+      transition: {
         type: "spring" as const,
         stiffness: 80,
         damping: 15
-      } 
+      }
     }
   };
 
@@ -107,13 +107,13 @@ export default function GalleryView() {
       {/* Immersive Hero/Landing Section with Premium Background Image */}
       <div className="relative w-full min-h-[85vh] bg-slate-950 overflow-hidden flex flex-col items-center justify-center py-20">
         {/* Background Image with elegant overlay */}
-        <div 
-          className="absolute inset-0 bg-[url('https://static.vecteezy.com/system/resources/thumbnails/053/732/763/small/comfortable-patient-room-featuring-advanced-equipment-and-relaxing-bed-design-free-photo.jpg')] bg-cover bg-center opacity-30" 
+        <div
+          className="absolute inset-0 bg-[url('https://static.vecteezy.com/system/resources/thumbnails/053/732/763/small/comfortable-patient-room-featuring-advanced-equipment-and-relaxing-bed-design-free-photo.jpg')] bg-cover bg-center opacity-30"
           aria-hidden="true"
         />
         {/* Top Gradient Overlay to blend with sticky navigation */}
         <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#081d38]/70 to-transparent pointer-events-none z-10" />
-        
+
         {/* Bottom overlay blending into the next section */}
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950 to-transparent pointer-events-none z-10" />
 
@@ -280,41 +280,32 @@ export default function GalleryView() {
 
           {/* Masonry image grid */}
           {filteredItems.length > 0 ? (
-            <motion.div 
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.05 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               <AnimatePresence mode="popLayout">
                 {filteredItems.map((item, idx) => {
                   const isAmber = idx % 2 === 1;
                   return (
                     <motion.div
                       layout
-                      variants={cardVariants}
-                      initial="hidden"
-                      animate="show"
                       exit={{ opacity: 0, scale: 0.9, y: 20 }}
                       key={item.id}
                       onClick={() => openLightbox(idx)}
                       className="relative group cursor-pointer rounded-[24px] z-10"
                     >
                       {/* Glowing shadow effect behind card on hover */}
-                      <div 
+                      <div
                         className={cn(
                           "absolute -inset-1 rounded-[24px] blur-xl opacity-0 group-hover:opacity-15 transition-all duration-500 -z-10",
                           isAmber ? "bg-amber-500" : "bg-blue-500"
-                        )} 
+                        )}
                       />
 
                       {/* Glowing outer border line inside card on hover */}
-                      <div 
+                      <div
                         className={cn(
                           "absolute inset-0 border-2 rounded-[24px] pointer-events-none z-20 opacity-0 group-hover:opacity-100 transition-all duration-500",
                           isAmber ? "border-amber-400/50" : "border-blue-400/50"
-                        )} 
+                        )}
                       />
 
                       {/* Main image container */}
@@ -350,8 +341,8 @@ export default function GalleryView() {
                           <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
                             <div className={cn(
                               "w-14 h-14 rounded-full flex items-center justify-center text-white backdrop-blur-md border shadow-lg transition-all duration-500 transform group-hover:scale-110 group-hover:rotate-12",
-                              isAmber 
-                                ? "bg-amber-500/20 border-amber-400/40 shadow-amber-500/20 group-hover:bg-amber-500/40 group-hover:border-amber-400/60" 
+                              isAmber
+                                ? "bg-amber-500/20 border-amber-400/40 shadow-amber-500/20 group-hover:bg-amber-500/40 group-hover:border-amber-400/60"
                                 : "bg-blue-600/20 border-blue-400/40 shadow-blue-600/20 group-hover:bg-blue-600/40 group-hover:border-blue-400/60"
                             )}>
                               <Play className="w-6 h-6 fill-white ml-0.5" />
@@ -361,7 +352,7 @@ export default function GalleryView() {
 
                         {/* Content aligned inside card */}
                         <div className="absolute inset-x-0 bottom-0 p-6 z-20 flex flex-col justify-end text-white space-y-2">
-                          <span 
+                          <span
                             className={cn(
                               "text-[10px] font-black uppercase tracking-widest block",
                               isAmber ? "text-amber-400" : "text-sky-300"
@@ -394,7 +385,7 @@ export default function GalleryView() {
                   );
                 })}
               </AnimatePresence>
-            </motion.div>
+            </div>
           ) : (
             <div className="py-24 text-center border border-dashed border-slate-200 rounded-[24px] bg-slate-50">
               <p className="text-slate-400 text-sm font-medium">No portfolio assets found under this filtering selection.</p>
@@ -458,7 +449,7 @@ export default function GalleryView() {
               <h2 className="text-lg md:text-xl font-bold text-white tracking-tight max-w-2xl">
                 {filteredItems[lightboxIndex].title}
               </h2>
-              
+
               <button
                 onClick={() => {
                   setInquiryMachineName(`Gallery Asset: ${filteredItems[lightboxIndex].title} (${filteredItems[lightboxIndex].category})`);

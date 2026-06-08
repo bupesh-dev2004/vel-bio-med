@@ -466,10 +466,10 @@ export default function ContactView() {
       </section>
 
       {/* Embedded High accuracy Google map Iframe */}
-      <section className="h-96 md:h-[450px] w-full relative group">
+      <section className="h-96 md:h-[450px] w-full relative group overflow-hidden">
         <iframe
           src={contact.mapUrl}
-          className="w-full h-full border-0 absolute inset-0"
+          className="w-full h-full border-0 absolute inset-0 grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out"
           title="Google Maps Location of Vel Bio Med Outer Ring Road, Bangalore"
           allowFullScreen
           loading="lazy"

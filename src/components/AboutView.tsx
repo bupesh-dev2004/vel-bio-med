@@ -2,6 +2,30 @@ import { Award, ShieldCheck, Users, Activity, Sparkles, Building2 } from "lucide
 import LeadershipMessage from "./ui/LeadershipMessage";
 import VisionMission from "./ui/VisionMission";
 import React, { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+
+const fadeUpVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { 
+      duration: 0.6, 
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number]
+    } 
+  }
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1
+    }
+  }
+};
 
 function AnimatedCounter({ target, duration = 1500, suffix = "" }: { target: number; duration?: number; suffix?: string }) {
   const [countStr, setCountStr] = useState("0");
@@ -299,18 +323,35 @@ export default function AboutView() {
             ref={textRef}
             className="text"
           >
-            <div className="max-w-3xl mx-auto space-y-6">
-              <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 font-extrabold tracking-widest text-xs uppercase animate-pulse mb-2">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+              className="max-w-3xl mx-auto space-y-6"
+            >
+              <motion.span 
+                variants={fadeUpVariants}
+                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 font-extrabold tracking-widest text-xs uppercase animate-pulse mb-2"
+              >
                 <Sparkles className="w-3.5 h-3.5" /> Who We Are
-              </span>
-              <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight leading-none">
+              </motion.span>
+              <motion.h1 
+                variants={fadeUpVariants}
+                className="text-4xl md:text-6xl font-black text-white tracking-tight leading-none"
+              >
                 Your Partner in <span className="bg-gradient-to-r from-cyan-300 to-white bg-clip-text text-transparent">Clinical</span> <span className="bg-gradient-to-r from-amber-400 to-[#F97316] bg-clip-text text-transparent">Longevity</span>
-              </h1>
-              <div className="w-20 h-1 bg-gradient-to-r from-[#0A6EBD] to-[#F97316] mx-auto rounded-full" />
-              <p className="max-w-2xl mx-auto text-slate-200 text-sm md:text-lg leading-relaxed font-medium">
+              </motion.h1>
+              <motion.div 
+                variants={fadeUpVariants}
+                className="w-20 h-1 bg-gradient-to-r from-[#0A6EBD] to-[#F97316] mx-auto rounded-full" 
+              />
+              <motion.p 
+                variants={fadeUpVariants}
+                className="max-w-2xl mx-auto text-slate-200 text-sm md:text-lg leading-relaxed font-medium"
+              >
                 Vel Bio Med stands for premium grade healthcare sourcing, bridging elite overseas factories to regional clinics with extreme delivery precision.
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
           </div>
         </div>
 

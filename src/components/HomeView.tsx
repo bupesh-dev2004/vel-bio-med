@@ -14,6 +14,30 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { motion } from "framer-motion";
+
+const fadeUpVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number]
+    }
+  }
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1
+    }
+  }
+};
 
 interface HomeViewProps {
   onOpenProductModal: (p: Product) => void;
@@ -165,40 +189,60 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
               {/* Slider content */}
               <div className="absolute inset-0 flex items-center z-20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                  <div className="max-w-2xl text-left text-white space-y-4 md:space-y-6">
-                    <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[10px] sm:text-xs font-black tracking-widest px-4 py-1.5 rounded-full uppercase shadow-lg shadow-blue-500/20">
-                      {slide.tagline}
-                    </span>
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white">
-                      {idx === 0 && (
-                        <span>Transforming <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-sky-400 bg-clip-text text-transparent">Healthcare</span> One Installation at a Time</span>
-                      )}
-                      {idx === 1 && (
-                        <span>Your Trusted Partner in <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 bg-clip-text text-transparent">Medical Excellence</span></span>
-                      )}
-                      {idx === 2 && (
-                        <span>Innovative Medical <span className="bg-gradient-to-r from-cyan-400 via-teal-400 to-sky-400 bg-clip-text text-transparent">Equipment</span> Solutions</span>
-                      )}
-                      {idx >= 3 && slide.heading}
-                    </h1>
-                    <p className="text-sm sm:text-base md:text-lg text-slate-200/90 leading-relaxed font-medium">
-                      {slide.description}
-                    </p>
-                    <div className="flex flex-wrap gap-3.5 pt-2">
-                      <button
-                        onClick={() => setCurrentTab("products")}
-                        className="bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 text-white font-black text-xs sm:text-sm py-3.5 px-6 sm:px-8 rounded-xl shadow-xl shadow-blue-500/25 hover:scale-103 transition-all flex items-center gap-2 uppercase tracking-wider cursor-pointer border-none"
+                  {idx === currentSlide && (
+                    <motion.div
+                      key={currentSlide}
+                      variants={containerVariants}
+                      initial="hidden"
+                      animate="visible"
+                      className="max-w-2xl text-left text-white space-y-4 md:space-y-6"
+                    >
+                      <motion.span 
+                        variants={fadeUpVariants}
+                        className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[10px] sm:text-xs font-black tracking-widest px-4 py-1.5 rounded-full uppercase shadow-lg shadow-blue-500/20"
                       >
-                        Explore Products <ArrowRight className="w-4 h-4" />
-                      </button>
-                      <button
-                        onClick={() => setCurrentTab("contact")}
-                        className="bg-gradient-to-r from-amber-500 to-orange-400 hover:from-amber-600 hover:to-orange-500 text-white font-black text-xs sm:text-sm py-3.5 px-6 sm:px-8 rounded-xl shadow-lg shadow-amber-500/25 hover:scale-103 transition-all flex items-center gap-2 uppercase tracking-wider cursor-pointer border-none"
+                        {slide.tagline}
+                      </motion.span>
+                      <motion.h1 
+                        variants={fadeUpVariants}
+                        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white"
                       >
-                        Contact Us
-                      </button>
-                    </div>
-                  </div>
+                        {idx === 0 && (
+                          <span>Transforming <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-sky-400 bg-clip-text text-transparent">Healthcare</span> One Installation at a Time</span>
+                        )}
+                        {idx === 1 && (
+                          <span>Your Trusted Partner in <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 bg-clip-text text-transparent">Medical Excellence</span></span>
+                        )}
+                        {idx === 2 && (
+                          <span>Innovative Medical <span className="bg-gradient-to-r from-cyan-400 via-teal-400 to-sky-400 bg-clip-text text-transparent">Equipment</span> Solutions</span>
+                        )}
+                        {idx >= 3 && slide.heading}
+                      </motion.h1>
+                      <motion.p 
+                        variants={fadeUpVariants}
+                        className="text-sm sm:text-base md:text-lg text-slate-200/90 leading-relaxed font-medium"
+                      >
+                        {slide.description}
+                      </motion.p>
+                      <motion.div 
+                        variants={fadeUpVariants}
+                        className="flex flex-wrap gap-3.5 pt-2"
+                      >
+                        <button
+                          onClick={() => setCurrentTab("products")}
+                          className="bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 text-white font-black text-xs sm:text-sm py-3.5 px-6 sm:px-8 rounded-xl shadow-xl shadow-blue-500/25 hover:scale-103 transition-all flex items-center gap-2 uppercase tracking-wider cursor-pointer border-none"
+                        >
+                          Explore Products <ArrowRight className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => setCurrentTab("contact")}
+                          className="bg-gradient-to-r from-amber-500 to-orange-400 hover:from-amber-600 hover:to-orange-500 text-white font-black text-xs sm:text-sm py-3.5 px-6 sm:px-8 rounded-xl shadow-lg shadow-amber-500/25 hover:scale-103 transition-all flex items-center gap-2 uppercase tracking-wider cursor-pointer border-none"
+                        >
+                          Contact Us
+                        </button>
+                      </motion.div>
+                    </motion.div>
+                  )}
                 </div>
               </div>
             </div>
@@ -260,7 +304,13 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
 
             {/* Left Column: Sticky Summary & Stats Counters */}
-            <div className="lg:col-span-5 space-y-8 lg:sticky lg:top-24">
+            <motion.div 
+              variants={fadeUpVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="lg:col-span-5 space-y-8 lg:sticky lg:top-24"
+            >
               <div>
                 <span className="inline-flex items-center gap-1.5 bg-blue-50 text-blue-600 font-bold px-3.5 py-1.5 rounded-full text-xs uppercase tracking-widest mb-4 border border-blue-100/80">
                   <Activity className="w-3.5 h-3.5" /> Our Performance
@@ -302,13 +352,22 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
                   <span className="text-slate-400 font-bold text-[10px] uppercase tracking-wider block mt-1">Calibration SLA</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right Column: Beautiful Interactive Detail Cards */}
-            <div className="lg:col-span-7 space-y-6">
+            <motion.div 
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="lg:col-span-7 space-y-6"
+            >
 
               {/* Pillar Card 1 */}
-              <div className="bg-white p-6 md:p-8 rounded-2xl shadow-xs border border-slate-100 hover:border-blue-300 hover:shadow-md transition-all duration-300 flex flex-col md:flex-row gap-6 relative group overflow-hidden">
+              <motion.div 
+                variants={fadeUpVariants}
+                className="bg-white p-6 md:p-8 rounded-2xl shadow-xs border border-slate-100 hover:border-blue-300 hover:shadow-md transition-all duration-300 flex flex-col md:flex-row gap-6 relative group overflow-hidden"
+              >
                 <div className="absolute top-0 left-0 w-1 h-full bg-blue-600 group-hover:h-full transition-all" />
                 <div className="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-xs">
                   <Award className="w-7 h-7" />
@@ -330,10 +389,13 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
                     </button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Pillar Card 2 */}
-              <div className="bg-white p-6 md:p-8 rounded-2xl shadow-xs border border-slate-100 hover:border-amber-300 hover:shadow-md transition-all duration-300 flex flex-col md:flex-row gap-6 relative group overflow-hidden">
+              <motion.div 
+                variants={fadeUpVariants}
+                className="bg-white p-6 md:p-8 rounded-2xl shadow-xs border border-slate-100 hover:border-amber-300 hover:shadow-md transition-all duration-300 flex flex-col md:flex-row gap-6 relative group overflow-hidden"
+              >
                 <div className="absolute top-0 left-0 w-1 h-full bg-amber-500 group-hover:h-full transition-all" />
                 <div className="w-14 h-14 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:bg-amber-500 group-hover:text-white transition-all shadow-xs">
                   <ThumbsUp className="w-7 h-7" />
@@ -355,10 +417,13 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
                     </button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Pillar Card 3 */}
-              <div className="bg-white p-6 md:p-8 rounded-2xl shadow-xs border border-slate-100 hover:border-blue-300 hover:shadow-md transition-all duration-300 flex flex-col md:flex-row gap-6 relative group overflow-hidden">
+              <motion.div 
+                variants={fadeUpVariants}
+                className="bg-white p-6 md:p-8 rounded-2xl shadow-xs border border-slate-100 hover:border-blue-300 hover:shadow-md transition-all duration-300 flex flex-col md:flex-row gap-6 relative group overflow-hidden"
+              >
                 <div className="absolute top-0 left-0 w-1 h-full bg-blue-600 group-hover:h-full transition-all" />
                 <div className="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-xs">
                   <CheckSquare className="w-7 h-7" />
@@ -380,9 +445,9 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
                     </button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
-            </div>
+            </motion.div>
 
           </div>
         </div>
@@ -394,21 +459,34 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
       <ImageGallery />
 
       {/* 4. TRENDING PRODUCTS GRID */}
-      <section className="py-20 bg-slate-50">
+      <section className="py-20 bg-slate-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <motion.div 
+            variants={fadeUpVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="text-center max-w-2xl mx-auto mb-16"
+          >
             <span className="text-blue-600 font-bold tracking-widest text-xs uppercase block mb-2">Specialty Focus</span>
             <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Trending Critical Machinery</h2>
             <div className="w-12 h-1 bg-blue-600 mx-auto mt-4 rounded-full" />
             <p className="text-slate-500 text-sm mt-4 font-medium">
               Medical setups demanded in high acuity clinical rooms. Certified with absolute safety standards.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto justify-items-center">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto justify-items-center"
+          >
             {trendingProducts.length > 0 ? (
               trendingProducts.map((item) => (
-                <div
+                <motion.div
+                  variants={fadeUpVariants}
                   key={item.id}
                   className="flex flex-col items-center bg-neutral-primary-soft p-6 border border-default rounded-base shadow-xs md:flex-row md:max-w-xl w-full hover:shadow-lg hover:border-slate-350 transition-all duration-300 group relative overflow-hidden"
                 >
@@ -465,14 +543,14 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
                       </button>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))
             ) : (
               <div className="col-span-full bg-white p-12 text-center rounded-2xl border border-dashed border-slate-200">
                 <p className="text-slate-400">No trending items configured.</p>
               </div>
             )}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -486,7 +564,13 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left side Image wrapped in rotating gradient border */}
-            <div className="lg:col-span-6 relative">
+            <motion.div 
+              variants={fadeUpVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="lg:col-span-6 relative"
+            >
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-3xl transform rotate-2 scale-103 opacity-15 blur-sm" />
 
               <BorderRotate
@@ -516,23 +600,37 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
                 <p className="text-xs font-bold uppercase tracking-wider text-blue-100 mt-1">Uptime SLA Support</p>
                 <p className="text-blue-100 text-[11px] mt-2 font-medium leading-relaxed">Our engineers are dispatched immediately for high emergency troubleshooting alerts.</p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right side content */}
             <div className="lg:col-span-6 space-y-6">
-              <div>
-                <span className="text-blue-400 font-bold tracking-widest text-xs uppercase block mb-1">Corporate Strengths</span>
-                <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                  Our Uncompromising Standard of Reliability
-                </h2>
-                <div className="w-12 h-1 bg-blue-50 mt-4 rounded-full" />
-              </div>
+              <motion.div
+                variants={fadeUpVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                className="space-y-6"
+              >
+                <div>
+                  <span className="text-blue-400 font-bold tracking-widest text-xs uppercase block mb-1">Corporate Strengths</span>
+                  <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                    Our Uncompromising Standard of Reliability
+                  </h2>
+                  <div className="w-12 h-1 bg-blue-50 mt-4 rounded-full" />
+                </div>
 
-              <p className="text-slate-300 text-sm leading-relaxed font-medium">
-                Vel Bio Med bridges the technical void in biological science distribution by delivering world-class hospital equipment, fast emergency servicing response, and long term comprehensive warranties.
-              </p>
+                <p className="text-slate-300 text-sm leading-relaxed font-medium">
+                  Vel Bio Med bridges the technical void in biological science distribution by delivering world-class hospital equipment, fast emergency servicing response, and long term comprehensive warranties.
+                </p>
+              </motion.div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+              <motion.div 
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8"
+              >
                 {[
                   {
                     title: "Continuous Quality",
@@ -563,16 +661,17 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
                     bgColor: "bg-amber-600/90"
                   }
                 ].map((item, idx) => (
-                  <FrostedGlassCard
-                    key={idx}
-                    title={item.title}
-                    subtitle={item.subtitle}
-                    description={item.desc}
-                    icon={item.icon}
-                    iconBgColor={item.bgColor}
-                  />
+                  <motion.div key={idx} variants={fadeUpVariants}>
+                    <FrostedGlassCard
+                      title={item.title}
+                      subtitle={item.subtitle}
+                      description={item.desc}
+                      icon={item.icon}
+                      iconBgColor={item.bgColor}
+                    />
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -589,8 +688,14 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
       />
 
       {/* 7. TESTIMONIALS REVIEW SECTION */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-white overflow-hidden">
+        <motion.div 
+          variants={fadeUpVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        >
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-blue-600 font-bold tracking-widest text-xs uppercase block mb-2">Our Testimonials</span>
             <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Voices of Trust inside Hospital Wings</h2>
@@ -606,7 +711,7 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
               rating: t.rating
             }))}
           />
-        </div>
+        </motion.div>
       </section>
     </div>
   );

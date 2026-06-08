@@ -13,12 +13,24 @@ import ScrollToTop from "./components/ScrollToTop.js";
 import FloatingSocialMenu from "./components/FloatingSocialMenu.js";
 import { Product } from "./types.js";
 import { Activity, ShieldAlert, RotateCcw } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 function AppContent() {
   const { currentTab, setCurrentTab, isLoading, error, refreshState, state } = useAppState();
 
   // Selected product modal state - shared so hot-selling or latest items on Home can open detail modal immediately!
   const [selectedProductModal, setSelectedProductModal] = useState<Product | null>(null);
+
+  // Local state for the initial website preloader
+  const [showPreloader, setShowPreloader] = useState(true);
+
+  useEffect(() => {
+    // Hide preloader after 1800ms
+    const timer = setTimeout(() => {
+      setShowPreloader(false);
+    }, 1800);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleOpenProductModal = (product: Product) => {
     setSelectedProductModal(product);
@@ -37,16 +49,39 @@ function AppContent() {
   // 1. Loading Indicator screen with medical pulse icon
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-6 space-y-4 font-sans select-none">
-        <div className="relative flex items-center justify-center">
-          <div className="absolute w-24 h-24 rounded-full border-4 border-blue-500/20 border-t-blue-500 animate-spin" />
-          <div className="p-6 bg-slate-950 rounded-full text-blue-500 animate-pulse border border-slate-800">
-            <Activity className="w-8 h-8" />
+      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-6 select-none overflow-hidden relative font-sans">
+        {/* Glow ambient design elements */}
+        <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-blue-100/50 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-amber-100/40 blur-[100px] rounded-full pointer-events-none" />
+
+        <div className="flex flex-col items-center space-y-8 relative z-10">
+          <div className="relative flex items-center justify-center">
+            <div className="absolute w-44 h-44 rounded-full border-2 border-slate-100 border-t-blue-500 animate-spin" />
+            <div className="absolute w-48 h-48 rounded-full border border-dashed border-amber-400/30 animate-spin [animation-duration:12s]" />
+
+            <div className="w-32 h-32 p-4 bg-white rounded-3xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.1)] border border-slate-150/50 flex items-center justify-center relative z-10">
+              <img
+                src="/logo.png"
+                alt="Vel Bio Med Logo"
+                className="w-auto h-20 object-contain"
+              />
+            </div>
           </div>
-        </div>
-        <div className="text-center space-y-1 pt-4">
-          <h2 className="text-lg font-black tracking-widest text-white uppercase">Vel Bio Med Sourcing</h2>
-          <p className="text-xs text-slate-400 font-bold uppercase tracking-wider">Validating secure database assets...</p>
+
+          <div className="text-center space-y-2">
+            <h2 className="text-xl font-black tracking-widest text-slate-800 uppercase">
+              VEL BIO MED
+            </h2>
+            <div className="w-16 h-0.5 bg-gradient-to-r from-blue-500 to-amber-500 mx-auto rounded-full" />
+
+            <div className="w-48 h-1 bg-slate-100 rounded-full mx-auto overflow-hidden mt-3 relative">
+              <div className="absolute top-0 left-0 h-full bg-gradient-to-r from-blue-500 via-sky-400 to-amber-500 rounded-full w-full -translate-x-[40%] animate-pulse" style={{ animationDuration: '1.5s' }} />
+            </div>
+
+            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest pt-2">
+              Validating secure database assets...
+            </p>
+          </div>
         </div>
       </div>
     );
@@ -80,6 +115,63 @@ function AppContent() {
   // 3. Complete Loaded Website Template
   return (
     <div className="min-h-screen bg-white flex flex-col justify-between font-sans overflow-x-hidden selection:bg-blue-500 selection:text-white pt-[116px]">
+      <AnimatePresence>
+        {showPreloader && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{
+              opacity: 0,
+              translateY: -30,
+              transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+            }}
+            className="fixed inset-0 z-[9999] bg-slate-50 flex flex-col items-center justify-center p-6 select-none overflow-hidden"
+          >
+            {/* Glow ambient design elements */}
+            <div className="absolute top-1/3 left-1/4 w-[500px] h-[500px] bg-blue-100/50 blur-[120px] rounded-full pointer-events-none" />
+            <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-amber-100/40 blur-[100px] rounded-full pointer-events-none" />
+
+            <div className="flex flex-col items-center space-y-8 relative z-10">
+              <div className="relative flex items-center justify-center">
+                {/* Spinner ring around the logo card */}
+                <div className="absolute w-44 h-44 rounded-full border-2 border-slate-100 border-t-blue-500 animate-spin" />
+                <div className="absolute w-48 h-48 rounded-full border border-dashed border-amber-400/30 animate-spin [animation-duration:12s]" />
+
+                {/* The Logo container */}
+                <div className="w-32 h-32 p-4 bg-white rounded-3xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.1)] border border-slate-150/50 flex items-center justify-center relative z-10">
+                  <img
+                    src="/logo.png"
+                    alt="Vel Bio Med Logo"
+                    className="w-auto h-20 object-contain animate-pulse"
+                  />
+                </div>
+              </div>
+
+              {/* Text */}
+              <div className="text-center space-y-2">
+                <h2 className="text-xl font-black tracking-widest text-slate-800 uppercase">
+                  VEL BIO MED
+                </h2>
+                <div className="w-16 h-0.5 bg-gradient-to-r from-blue-500 to-amber-500 mx-auto rounded-full" />
+
+                {/* Progress bar simulation */}
+                <div className="w-48 h-1 bg-slate-200/60 rounded-full mx-auto overflow-hidden mt-3 relative">
+                  <motion.div
+                    initial={{ x: "-100%" }}
+                    animate={{ x: "0%" }}
+                    transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute inset-0 bg-gradient-to-r from-blue-500 via-sky-400 to-amber-500 rounded-full"
+                  />
+                </div>
+
+                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest pt-2">
+                  Clinical Sourcing & Sizing Schedulers
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Dynamic Sticky Header Navigation */}
       <Header />
 
