@@ -1,10 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Mail, Phone, MapPin, Clock, ArrowRight, ShieldCheck, HelpCircle, MessageSquare } from "lucide-react";
 import { useAppState } from "../AppContext.js";
 import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
 
 export default function ContactView() {
   const { state, submitInquiry, inquiryMachineName, setInquiryMachineName } = useAppState();
+
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   // For 3D card tilt effect
   const mouseX = useMotionValue(0);
@@ -56,10 +69,27 @@ export default function ContactView() {
     }
   }, [inquiryMachineName]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+
+    if (name === "mobile") {
+      // Allow only digits
+      const digitsOnly = value.replace(/\D/g, "");
+      // Limit to 10 digits
+      if (digitsOnly.length > 10) {
+        return;
+      }
+      setFormData((prev) => ({
+        ...prev,
+        mobile: digitsOnly
+      }));
+      setFormValidation(null);
+      return;
+    }
+
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [name]: value
     }));
     setFormValidation(null);
   };
@@ -78,6 +108,10 @@ export default function ContactView() {
     }
     if (formData.email && !formData.email.includes("@")) {
       setFormValidation("Please provide a valid email structure.");
+      return;
+    }
+    if (formData.mobile && formData.mobile.length !== 10) {
+      setFormValidation("Please provide a valid 10-digit mobile number.");
       return;
     }
 
@@ -351,47 +385,91 @@ export default function ContactView() {
                           </motion.div>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                          <motion.div
-                            whileHover={{ scale: 1.01 }}
-                            whileFocus={{ scale: 1.02 }}
-                            transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                            className="space-y-2"
-                          >
-                            <label htmlFor="mobile" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                              Mobile Number
-                            </label>
-                            <input
-                              type="tel"
-                              name="mobile"
-                              id="mobile"
-                              placeholder="+91 98765 XXXXX"
-                              value={formData.mobile}
-                              onChange={handleChange}
-                              className="w-full bg-white/5 border border-slate-800 rounded-xl py-3 px-4 text-xs font-bold focus:outline-none focus:border-blue-500 focus:bg-white/10 text-white placeholder:text-slate-600 transition-all"
-                            />
-                          </motion.div>
+                        <motion.div
+                          whileHover={{ scale: 1.01 }}
+                          whileFocus={{ scale: 1.02 }}
+                          transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                          className="space-y-2"
+                        >
+                          <label htmlFor="mobile" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                            Mobile Number
+                          </label>
+                          <input
+                            type="tel"
+                            name="mobile"
+                            id="mobile"
+                            placeholder="e.g. 9876543210 (10 digits)"
+                            maxLength={10}
+                            value={formData.mobile}
+                            onChange={handleChange}
+                            className="w-full bg-white/5 border border-slate-800 rounded-xl py-3 px-4 text-xs font-bold focus:outline-none focus:border-blue-500 focus:bg-white/10 text-white placeholder:text-slate-600 transition-all"
+                          />
+                        </motion.div>
 
-                          <motion.div
-                            whileHover={{ scale: 1.01 }}
-                            whileFocus={{ scale: 1.02 }}
-                            transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                            className="space-y-2"
-                          >
-                            <label htmlFor="product" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                              Required Device or Machine
-                            </label>
-                            <input
-                              type="text"
-                              name="product"
-                              id="product"
-                              placeholder="e.g. GE Voluson E10, Dräger Primus"
-                              value={formData.product}
-                              onChange={handleChange}
-                              className="w-full bg-white/5 border border-slate-800 rounded-xl py-3 px-4 text-xs font-bold focus:outline-none focus:border-blue-500 focus:bg-white/10 text-white placeholder:text-slate-600 transition-all"
-                            />
-                          </motion.div>
-                        </div>
+                        <motion.div
+                          whileHover={{ scale: 1.01 }}
+                          whileFocus={{ scale: 1.02 }}
+                          transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                          className="space-y-2 relative"
+                        >
+                          <label htmlFor="product" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                            Required Device or Machine
+                          </label>
+                          <div className="relative" ref={dropdownRef}>
+                            <button
+                              type="button"
+                              onClick={() => setIsOpen(!isOpen)}
+                              className="w-full bg-white/5 border border-slate-800 rounded-xl py-2.5 px-3.5 text-xs font-bold text-left text-white flex items-center justify-between transition-all focus:outline-none focus:border-blue-500 cursor-pointer"
+                            >
+                              <span className={formData.product ? "text-white" : "text-slate-500"}>
+                                {formData.product || "Select a Device / Machine"}
+                              </span>
+                              <svg className={`w-4 h-4 text-slate-500 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                              </svg>
+                            </button>
+
+                            <AnimatePresence>
+                              {isOpen && (
+                                <motion.div
+                                  initial={{ opacity: 0, y: -10 }}
+                                  animate={{ opacity: 1, y: 0 }}
+                                  exit={{ opacity: 0, y: -10 }}
+                                  transition={{ duration: 0.15 }}
+                                  className="absolute z-50 w-full top-full mt-1.5 bg-slate-950 border border-slate-800 rounded-xl shadow-2xl max-h-40 overflow-y-auto"
+                                  style={{
+                                    scrollbarWidth: 'thin',
+                                    scrollbarColor: '#334155 transparent'
+                                  }}
+                                >
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      setFormData(prev => ({ ...prev, product: "General Sourcing Inquiry" }));
+                                      setIsOpen(false);
+                                    }}
+                                    className="w-full px-3.5 py-2 text-left text-xs font-bold text-slate-300 hover:bg-blue-600 hover:text-white transition-colors border-none bg-transparent cursor-pointer"
+                                  >
+                                    General Sourcing Inquiry
+                                  </button>
+                                  {(state?.products || []).map((prod) => (
+                                    <button
+                                      key={prod.id}
+                                      type="button"
+                                      onClick={() => {
+                                        setFormData(prev => ({ ...prev, product: prod.name }));
+                                        setIsOpen(false);
+                                      }}
+                                      className="w-full px-3.5 py-2 text-left text-xs font-bold text-white hover:bg-blue-600 hover:text-white transition-colors border-none bg-transparent cursor-pointer"
+                                    >
+                                      {prod.name}
+                                    </button>
+                                  ))}
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                        </motion.div>
 
                         <motion.div
                           whileHover={{ scale: 1.01 }}

@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
-import { motion, useInView } from "motion/react";
-import { Compass, Target, CheckCircle2, Zap, Shield, Globe, Heart } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { Compass, Target, CheckCircle2, Zap, Shield, Globe, Heart, Sparkles } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 36 },
-  visible: (i = 0) => ({
+  visible: (i: number = 0) => ({
     opacity: 1, y: 0,
     transition: { duration: 0.65, delay: i * 0.13, ease: [0.22, 1, 0.36, 1] as const },
   }),
@@ -49,31 +49,31 @@ function PremiumCard({
       animate={inView ? "visible" : "hidden"}
       variants={fadeUp}
       whileHover={{ y: -8, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] as const } }}
-      className="relative rounded-[32px] p-8 md:p-10 flex flex-col gap-8 overflow-hidden"
+      className="relative rounded-[2.5rem] p-8 md:p-10 flex flex-col gap-8 overflow-hidden group transition-all duration-300"
       style={{
         background: `linear-gradient(145deg, ${gradientFrom} 0%, ${gradientTo} 100%)`,
-        border: `1px solid rgba(255,255,255,0.85)`,
-        boxShadow: `0 8px 40px ${glowColor}, 0 2px 8px rgba(10,37,64,0.06)`,
-        backdropFilter: "blur(20px)",
-        WebkitBackdropFilter: "blur(20px)",
+        border: `1px solid rgba(255, 255, 255, 0.85)`,
+        boxShadow: `0 15px 45px ${glowColor}, 0 4px 15px rgba(10,37,64,0.03)`,
+        backdropFilter: "blur(24px)",
+        WebkitBackdropFilter: "blur(24px)",
       }}
     >
-      {/* Abstract top-right decorative shape */}
+      {/* Abstract top-right decorative shapes */}
       <div
         aria-hidden
-        className="absolute -top-12 -right-12 w-48 h-48 rounded-full pointer-events-none"
+        className="absolute -top-12 -right-12 w-48 h-48 rounded-full pointer-events-none group-hover:scale-110 transition-transform duration-500"
         style={{ background: shapeColor, filter: "blur(40px)", opacity: 0.55 }}
       />
       <div
         aria-hidden
-        className="absolute top-6 right-6 w-20 h-20 rounded-full pointer-events-none"
+        className="absolute top-6 right-6 w-20 h-20 rounded-full pointer-events-none group-hover:scale-125 transition-transform duration-500"
         style={{ background: shapeColor, filter: "blur(18px)", opacity: 0.35 }}
       />
 
-      {/* Dot-grid texture */}
+      {/* Dot-grid texture overlay */}
       <div
         aria-hidden
-        className="absolute inset-0 pointer-events-none opacity-[0.04]"
+        className="absolute inset-0 pointer-events-none opacity-[0.03] group-hover:opacity-[0.045] transition-opacity duration-300"
         style={{
           backgroundImage: "radial-gradient(circle, #0A2540 1px, transparent 1px)",
           backgroundSize: "22px 22px",
@@ -82,25 +82,28 @@ function PremiumCard({
 
       {/* Icon block */}
       <div className="relative z-10 flex items-start gap-5">
-        <motion.div
-          animate={{ boxShadow: [`0 0 0px ${accent}40`, `0 0 22px ${accent}60`, `0 0 0px ${accent}40`] }}
-          transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
-          className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0"
-          style={{ background: `linear-gradient(135deg, ${accent}, ${accentSoft})` }}
-        >
-          <Icon className="w-8 h-8 text-white" strokeWidth={1.8} />
-        </motion.div>
+        <div className="relative flex-shrink-0">
+          <motion.div
+            animate={{ boxShadow: [`0 0 0px ${accent}40`, `0 0 22px ${accent}60`, `0 0 0px ${accent}40`] }}
+            transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
+            className="w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br shadow-lg group-hover:rotate-6 transition-transform duration-300"
+            style={{ background: `linear-gradient(135deg, ${accent}, ${accentSoft})` }}
+          >
+            <Icon className="w-8 h-8 text-white" strokeWidth={1.8} />
+          </motion.div>
+          <div className="absolute -inset-1.5 rounded-2xl blur-md opacity-25 group-hover:opacity-40 transition-opacity -z-10" style={{ backgroundColor: accent }} />
+        </div>
 
         <div className="pt-1">
           <span
-            className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest mb-2"
-            style={{ background: `${accent}18`, color: accent, border: `1px solid ${accent}30` }}
+            className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-2 border animate-pulse"
+            style={{ background: `${accent}12`, color: accent, borderColor: `${accent}25` }}
           >
-            {badge}
+            <Sparkles className="w-2.5 h-2.5" /> {badge}
           </span>
           <h3
-            className="text-[28px] md:text-[32px] font-extrabold leading-tight tracking-tight"
-            style={{ color: "#0A2540", fontFamily: "'Poppins', 'Satoshi', sans-serif", letterSpacing: "-0.02em" }}
+            className="text-[26px] md:text-[30px] font-black leading-tight tracking-tight text-slate-900"
+            style={{ fontFamily: "'Poppins', 'Satoshi', sans-serif", letterSpacing: "-0.02em" }}
           >
             {heading}
           </h3>
@@ -109,43 +112,38 @@ function PremiumCard({
 
       {/* Divider */}
       <div
-        className="h-px w-full rounded-full relative z-10"
-        style={{ background: `linear-gradient(90deg, transparent, ${accent}40, transparent)` }}
+        className="h-px w-full rounded-full relative z-10 bg-gradient-to-r from-transparent via-slate-200 to-transparent group-hover:via-slate-300 transition-all duration-300"
       />
 
       {/* Body text */}
       <p
-        className="relative z-10 leading-[1.9]"
-        style={{ fontFamily: "'Inter', sans-serif", fontSize: "18px", color: "#4B5563" }}
+        className="relative z-10 leading-[1.8] font-medium text-slate-600 group-hover:text-slate-700 transition-colors duration-300"
+        style={{ fontFamily: "'Inter', sans-serif", fontSize: "16px" }}
       >
         {body}
       </p>
 
       {/* Bullet points */}
-      <ul className="relative z-10 space-y-3.5">
+      <ul className="relative z-10 space-y-4">
         {points.map(({ icon: BulletIcon, text }, i) => (
           <motion.li
             key={i}
-            custom={index + i * 0.2}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            variants={fadeUp}
-            className="flex items-center gap-3.5"
+            className="flex items-start gap-4 group/item"
           >
             <div
-              className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0"
-              style={{ background: `${accent}15`, border: `1px solid ${accent}25` }}
+              className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 border transition-all duration-300 group-hover/item:scale-110 shadow-sm mt-0.5"
+              style={{ background: `${accent}08`, borderColor: `${accent}18` }}
             >
-              <BulletIcon className="w-4 h-4" style={{ color: accent }} strokeWidth={2} />
+              <BulletIcon className="w-4 h-4 transition-transform duration-300" style={{ color: accent }} strokeWidth={2.5} />
             </div>
-            <span className="text-sm font-semibold" style={{ color: "#374151" }}>{text}</span>
+            <span className="text-sm font-bold text-slate-700 group-hover/item:text-slate-900 transition-colors duration-300">{text}</span>
           </motion.li>
         ))}
       </ul>
 
       {/* Bottom accent bar */}
       <div
-        className="relative z-10 h-1 w-16 rounded-full mt-auto"
+        className="relative z-10 h-1.5 w-16 rounded-full mt-auto group-hover:w-24 transition-all duration-300"
         style={{ background: `linear-gradient(90deg, ${accent}, ${accentSoft})` }}
       />
     </motion.div>
@@ -160,13 +158,15 @@ export default function VisionMission() {
     <section
       ref={ref}
       className="relative py-28 md:py-36 overflow-hidden"
-      style={{ background: "linear-gradient(170deg, #ffffff 0%, #F0F7FF 50%, #EEF4FF 100%)" }}
+      style={{ background: "linear-gradient(170deg, #FFFFFF 0%, #F4F8FD 40%, #E9F1FC 100%)" }}
     >
       {/* Ambient background glows */}
-      <div aria-hidden className="pointer-events-none absolute -top-32 left-1/4 w-[500px] h-[500px] rounded-full opacity-25"
-        style={{ background: "radial-gradient(circle, #0A6EBD 0%, transparent 70%)", filter: "blur(90px)" }} />
-      <div aria-hidden className="pointer-events-none absolute -bottom-24 right-1/4 w-[400px] h-[400px] rounded-full opacity-20"
-        style={{ background: "radial-gradient(circle, #00B4D8 0%, transparent 70%)", filter: "blur(80px)" }} />
+      <div aria-hidden className="pointer-events-none absolute -top-32 left-1/4 w-[600px] h-[600px] rounded-full opacity-30 animate-pulse"
+        style={{ background: "radial-gradient(circle, #0A6EBD 0%, transparent 70%)", filter: "blur(110px)" }} />
+      <div aria-hidden className="pointer-events-none absolute -bottom-24 right-1/4 w-[500px] h-[500px] rounded-full opacity-20"
+        style={{ background: "radial-gradient(circle, #00B4D8 0%, transparent 70%)", filter: "blur(90px)" }} />
+      <div aria-hidden className="pointer-events-none absolute top-1/2 left-10 w-[300px] h-[300px] rounded-full opacity-15"
+        style={{ background: "radial-gradient(circle, #F97316 0%, transparent 70%)", filter: "blur(70px)" }} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
 
@@ -176,8 +176,7 @@ export default function VisionMission() {
           initial="hidden" animate={inView ? "visible" : "hidden"} variants={fadeUp}
         >
           <span
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-extrabold uppercase tracking-widest border"
-            style={{ background: "rgba(10,110,189,0.08)", borderColor: "rgba(10,110,189,0.2)", color: "#0A6EBD" }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[11px] font-extrabold uppercase tracking-widest border border-blue-200/50 bg-blue-50 text-blue-600"
           >
             Our Foundation
           </span>
@@ -187,14 +186,13 @@ export default function VisionMission() {
           >
             Where Purpose Meets{" "}
             <span
-              className="inline-block"
-              style={{ background: "linear-gradient(90deg, #0A6EBD, #F97316)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+              className="inline-block bg-gradient-to-r from-blue-600 to-orange-500 bg-clip-text text-transparent"
             >
               Precision
             </span>
           </h2>
-          <div className="mx-auto w-20 h-1 rounded-full" style={{ background: "linear-gradient(90deg, #0A6EBD, #F97316)" }} />
-          <p className="max-w-xl mx-auto text-base leading-relaxed font-medium" style={{ color: "#6B7280" }}>
+          <div className="mx-auto w-20 h-1 rounded-full bg-gradient-to-r from-blue-500 to-orange-500" />
+          <p className="max-w-xl mx-auto text-base leading-relaxed font-medium text-slate-500">
             Every decision at Vel Bio Med is anchored in a clear vision and an unwavering mission to elevate clinical outcomes.
           </p>
         </motion.div>

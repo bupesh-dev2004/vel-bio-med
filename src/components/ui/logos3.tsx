@@ -104,9 +104,11 @@ const Logos3 = ({
                       className={logo.className}
                     />
                   ) : (
-                    <div className="inline-flex items-center gap-3 px-6 py-3 select-none rounded-xl border border-slate-800/95 bg-slate-900/80 hover:border-blue-500/40 hover:bg-slate-900 transition-all duration-300 shadow-sm">
-                      <span className="text-xl flex-shrink-0">{logo.icon}</span>
-                      <span className="text-xs font-semibold text-slate-200 tracking-wide">
+                    <div className="inline-flex items-center gap-3 px-5 py-3 select-none rounded-2xl border border-slate-800/60 bg-slate-900/40 backdrop-blur-md hover:border-blue-500/40 hover:bg-slate-900/80 hover:shadow-[0_0_20px_rgba(59,130,246,0.12)] hover:scale-[1.03] transition-all duration-300 group cursor-pointer">
+                      <div className="w-8 h-8 rounded-xl bg-blue-500/10 border border-blue-500/25 flex items-center justify-center text-blue-400 group-hover:bg-blue-500 group-hover:text-white group-hover:border-blue-500 transition-all duration-300">
+                        {logo.icon}
+                      </div>
+                      <span className="text-xs font-bold text-slate-300 group-hover:text-white transition-colors tracking-wide">
                         {logo.description}
                       </span>
                     </div>
@@ -116,8 +118,8 @@ const Logos3 = ({
             ))}
           </CarouselContent>
         </Carousel>
-        <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-slate-950 to-transparent pointer-events-none z-10"></div>
-        <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-slate-950 to-transparent pointer-events-none z-10"></div>
+        <div className="absolute inset-y-0 left-0 w-36 bg-gradient-to-r from-slate-950 via-slate-950/75 to-transparent pointer-events-none z-10"></div>
+        <div className="absolute inset-y-0 right-0 w-36 bg-gradient-to-l from-slate-950 via-slate-950/75 to-transparent pointer-events-none z-10"></div>
       </div>
     </section>
   );

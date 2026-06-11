@@ -79,23 +79,23 @@ export default function ImageGallery() {
         </div>
 
         {/* Dynamic Accordion Gallery */}
-        <div className="flex flex-col md:flex-row items-center gap-3 h-auto md:h-[450px] w-full max-w-6xl mt-2 px-6">
+        <div className="flex flex-col lg:flex-row items-center gap-3 h-auto lg:h-[450px] w-full max-w-6xl mt-2 px-6">
           {medicalImages.map((item, idx) => (
             <div
               key={idx}
               onMouseEnter={() => setHoveredIdx(idx)}
               onMouseLeave={() => setHoveredIdx(null)}
               className={cn(
-                "relative group flex-grow transition-all duration-700 ease-out rounded-2xl overflow-hidden shadow-md hover:shadow-2xl border border-slate-200/60 cursor-pointer w-full md:w-28 h-[250px] md:h-full",
-                hoveredIdx === idx ? "md:flex-[3.5]" : "md:flex-[1]"
+                "relative group flex-grow transition-all duration-700 ease-out rounded-2xl overflow-hidden shadow-md hover:shadow-2xl border border-slate-200/60 cursor-pointer w-full lg:w-28 h-[250px] lg:h-full",
+                hoveredIdx === idx ? "lg:flex-[3.5]" : "lg:flex-[1]"
               )}
             >
               {/* Image with zoom on hover */}
               <img
                 className={cn(
                   "h-full w-full transition-transform duration-1000 ease-out group-hover:scale-105",
-                  item.objectFit === "contain" 
-                    ? "object-contain p-6 bg-white" 
+                  item.objectFit === "contain"
+                    ? "object-contain p-6 bg-white"
                     : "object-cover object-center"
                 )}
                 src={item.src}
@@ -107,16 +107,16 @@ export default function ImageGallery() {
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-85 group-hover:opacity-90 transition-opacity duration-500" />
 
               {/* Left-Border accent highlight matching logo brand colors */}
-              <div 
+              <div
                 className={cn(
                   "absolute top-0 left-0 w-1.5 h-full transition-all duration-500",
                   idx % 2 === 0 ? "bg-blue-500" : "bg-amber-500"
-                )} 
+                )}
               />
 
               {/* Text content card details */}
               <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col justify-end min-h-[120px] text-white">
-                <span 
+                <span
                   className={cn(
                     "text-[10px] font-black uppercase tracking-widest transition-all duration-500 mb-1.5 block",
                     idx % 2 === 0 ? "text-sky-300" : "text-amber-400"
@@ -131,7 +131,7 @@ export default function ImageGallery() {
                 </h3>
 
                 {/* Subtitle description revealed smoothly on accordion expand */}
-                <div 
+                <div
                   className={cn(
                     "grid transition-all duration-700 ease-out opacity-0",
                     hoveredIdx === idx ? "grid-rows-[1fr] opacity-100 mt-2.5" : "grid-rows-[0fr]"

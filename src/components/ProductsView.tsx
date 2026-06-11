@@ -321,19 +321,6 @@ export default function ProductsView({
                           <span className="text-white text-[10px] font-black uppercase tracking-wider">Inspect Specs</span>
                         </div>
 
-                        {/* Top indicators */}
-                        <div className="absolute top-4 right-4 flex flex-col gap-1.5 z-10">
-                          {p.trending && (
-                            <span className="bg-gradient-to-r from-amber-500 to-orange-500 text-white text-[9px] font-black uppercase px-3 py-1 rounded-full shadow-md tracking-widest border border-amber-400/20">
-                              TRENDING
-                            </span>
-                          )}
-                          {p.newest && (
-                            <span className="bg-gradient-to-r from-blue-600 to-indigo-650 text-white text-[9px] font-black uppercase px-3 py-1 rounded-full shadow-md tracking-widest border border-blue-500/20">
-                              NEW ARRIVAL
-                            </span>
-                          )}
-                        </div>
                       </motion.div>
 
                       {/* Body textual information */}
@@ -446,7 +433,7 @@ export default function ProductsView({
             <div className="fixed inset-0 flex items-center justify-center p-4 md:p-6 lg:p-12 z-55 overflow-y-auto">
               <motion.div
                 layoutId={`product-${selectedProductModal.id}`}
-                className="w-full max-w-4xl bg-white rounded-3xl overflow-hidden shadow-2xl relative max-h-[90vh] flex flex-col md:flex-row border border-slate-150 z-56"
+                className="w-full max-w-4xl bg-white rounded-3xl overflow-y-auto md:overflow-hidden shadow-2xl relative max-h-[90vh] flex flex-col md:flex-row border border-slate-150 z-56"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Close Cross button */}
@@ -461,12 +448,12 @@ export default function ProductsView({
                 {/* Left Image View */}
                 <motion.div
                   layoutId={`product-image-${selectedProductModal.id}`}
-                  className="w-full md:w-1/2 bg-slate-100 relative"
+                  className="w-full md:w-1/2 bg-white relative flex items-center justify-center p-6 min-h-[250px] md:min-h-full"
                 >
                   <img
                     src={selectedProductModal.image}
                     alt={selectedProductModal.name}
-                    className="w-full h-full object-cover min-h-[250px] md:min-h-full max-h-[350px] md:max-h-full"
+                    className="max-w-full max-h-[350px] md:max-h-[500px] object-contain"
                   />
                   {/* Visual clinical overlay tag inside modal */}
                   <div className="absolute bottom-4 left-4 bg-slate-900/90 text-white text-[9px] font-black uppercase px-3 py-1.5 rounded-full shadow-md backdrop-blur-sm border border-slate-800 tracking-wider flex items-center gap-1.5">
@@ -477,7 +464,7 @@ export default function ProductsView({
                 {/* Right Information Sheet */}
                 <motion.div
                   layoutId={`product-content-${selectedProductModal.id}`}
-                  className="w-full md:w-1/2 p-6 sm:p-8 flex flex-col overflow-y-auto justify-between max-h-[50vh] md:max-h-none"
+                  className="w-full md:w-1/2 p-6 sm:p-8 flex flex-col md:overflow-y-auto justify-between md:max-h-none"
                 >
                   <div>
                     <span className="text-[10px] font-black tracking-widest text-amber-500 uppercase block mb-1">

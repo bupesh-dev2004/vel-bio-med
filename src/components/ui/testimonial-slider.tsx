@@ -80,7 +80,7 @@ export const TestimonialSlider = ({ testimonials, className }: TestimonialSlider
 
   return (
     <div className={cn("relative w-full max-w-2xl mx-auto overflow-hidden", className)}>
-      <div className="relative min-h-[380px] md:min-h-[280px] flex items-center justify-center">
+      <div className="relative min-h-[480px] sm:min-h-[380px] md:min-h-[290px] lg:min-h-[270px] flex items-center justify-center">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={currentIndex}
