@@ -210,8 +210,8 @@ export default function VisionMission() {
             shapeColor="rgba(10,110,189,0.18)"
             badge="Our Vision"
             Icon={Compass}
-            heading="Our Noble Vision"
-            body="To transform regional clinical diagnostics by giving every clinic direct, affordable, and certified access to international quality machinery — establishing trust-driven patient care across all demographics."
+            heading="Our Vision"
+            body="At Vel Bio Med, we envision leading the charge in advancing healthcare solutions. Our goal is to make cutting-edge medical equipment easily accessible, empowering healthcare providers to deliver top-notch care. We’re driven by a vision that embraces innovation, adaptability, and a relentless pursuit of excellence."
             points={visionPoints}
           />
           <PremiumCard
@@ -225,8 +225,8 @@ export default function VisionMission() {
             shapeColor="rgba(249,115,22,0.20)"
             badge="Our Mission"
             Icon={Target}
-            heading="Our Mission Matrix"
-            body="Commitment to premium response times, strict multi-stage inspection of biomedical products, comprehensive technician handovers, and continuous maintenance structures that safeguard lives around the clock."
+            heading="Our Mission"
+            body="Our mission is simple yet powerful: to make quality healthcare a fundamental right. We achieve this by providing reliable, innovative, and cost-effective medical solutions. Through our services, we support healthcare institutions in their mission to enhance patient care, making a positive impact on the healthcare landscape."
             points={missionPoints}
           />
         </div>

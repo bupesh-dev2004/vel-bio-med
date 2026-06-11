@@ -1,4 +1,4 @@
-import { Award, ShieldCheck, Users, Activity, Sparkles, Building2, Globe, HeartHandshake, Scale, Cpu, Heart } from "lucide-react";
+import { Award, ShieldCheck, Users, Activity, Sparkles, Building2, Globe, HeartHandshake, Scale, Cpu, Heart, MapPin } from "lucide-react";
 import LeadershipMessage from "./ui/LeadershipMessage";
 import VisionMission from "./ui/VisionMission";
 import React, { useEffect, useRef, useState } from "react";
@@ -124,7 +124,8 @@ function CorporateValueCard({ handleShuffle, title, desc, icon: IconComponent, g
   return (
     <motion.div
       style={{
-        zIndex: posStyles.zIndex
+        zIndex: posStyles.zIndex,
+        willChange: "transform, opacity"
       }}
       animate={{
         rotate: posStyles.rotate,
@@ -132,13 +133,13 @@ function CorporateValueCard({ handleShuffle, title, desc, icon: IconComponent, g
         scale: posStyles.scale,
         opacity: posStyles.opacity
       }}
-      drag={true}
-      dragElastic={0.35}
+      drag={isFront ? "x" : false}
+      dragElastic={0.25}
       dragListener={isFront}
       dragConstraints={{
+        left: -200,
+        right: 200,
         top: 0,
-        left: 0,
-        right: 0,
         bottom: 0
       }}
       onDragStart={(e) => {
@@ -147,15 +148,13 @@ function CorporateValueCard({ handleShuffle, title, desc, icon: IconComponent, g
       }}
       onDragEnd={(e) => {
         const clientX = 'clientX' in e ? e.clientX : (e as any).changedTouches?.[0]?.clientX || 0;
-        if (dragRef.current - clientX > 150) {
+        if (dragRef.current - clientX > 100) {
           handleShuffle();
         }
         dragRef.current = 0;
       }}
-      transition={{ duration: 0.35 }}
-      className={`absolute left-0 top-0 flex flex-col justify-between h-[340px] w-[250px] sm:h-[430px] sm:w-[330px] select-none rounded-3xl border border-slate-800 bg-slate-900/95 p-6 sm:p-8 shadow-2xl text-white backdrop-blur-md ${
-        isFront ? "cursor-grab active:cursor-grabbing hover:border-slate-700" : ""
-      }`}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      className={`absolute left-0 top-0 flex flex-col justify-between h-[340px] w-[250px] sm:h-[430px] sm:w-[330px] select-none rounded-3xl border border-slate-800 bg-[#0f172a] p-6 sm:p-8 shadow-2xl text-white ${isFront ? "cursor-grab active:cursor-grabbing hover:border-slate-700" : ""}`}
     >
       {/* Decorative top line */}
       <div className={`absolute top-0 inset-x-0 h-1.5 rounded-t-3xl bg-gradient-to-r ${gradient}`} />
@@ -219,9 +218,9 @@ function CorporateValuesStack({ values }: { values: ValueItem[] }) {
     if (isHovered) return;
     const interval = setInterval(() => {
       handleShuffle();
-    }, 2000);
+    }, 2800);
     return () => clearInterval(interval);
-  }, [positions, isHovered]);
+  }, [isHovered]);
 
   return (
     <section className="py-16 sm:py-24 md:py-36 bg-slate-950 text-slate-100 border-t border-slate-900 relative overflow-hidden">
@@ -244,10 +243,10 @@ function CorporateValuesStack({ values }: { values: ValueItem[] }) {
         className="pointer-events-none absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full opacity-15"
         style={{ background: "radial-gradient(circle, #F97316 0%, transparent 70%)", filter: "blur(100px)" }}
       />
-      
+
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          
+
           {/* Left Side text */}
           <div className="lg:col-span-5 space-y-6 text-left">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-950/50 text-blue-400 border border-blue-900/50 font-extrabold tracking-widest text-[10px] uppercase">
@@ -263,7 +262,7 @@ function CorporateValuesStack({ values }: { values: ValueItem[] }) {
           </div>
 
           {/* Right Side card stack */}
-          <div 
+          <div
             className="lg:col-span-7 flex justify-center lg:justify-end items-center h-[390px] sm:h-[480px] relative"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -539,90 +538,86 @@ export default function AboutView() {
 
                 <div className="space-y-5">
                   <p className="text-slate-800 text-base sm:text-lg leading-relaxed font-semibold">
-                    Founded as an exclusive distributor for advanced ultrasonic solutions and neonatal systems, Vel Bio Med has emerged as a premier turn-key partner for clinical centers. Our product inventory spans from premium diagnostic scanners to advanced anesthetic delivery desks.
+                    At Vel Bio Med, we are dedicated to providing cutting-edge medical equipment, unparalleled service, and unwavering commitment to healthcare excellence. Established in 2013 by Mr. Muralikrishnan Gokulakrishnan, Vel Bio Med started as a proprietorship and has since grown to become a leading player in the medical equipment industry, offering sales and services across the vibrant healthcare landscape of Tamil Nadu.
                   </p>
-                  <div className="pl-4 border-l-4 border-orange-500 bg-slate-50/70 p-4 rounded-r-xl">
-                    <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium italic">
-                      We collaborate with recognized clinical panels, medical engineers, and institutional stakeholders to install configurations that pass stringent licensing reviews smoothly. Quality is verified across incoming, in-transit, and calibration parameters before deployment.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Highly structured, premium interactive grids */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-4">
-                  {[
-                    {
-                      title: "ISO 13485:2016 Compliant Systems",
-                      desc: "Strict international biological engineering standards for healthcare quality and safety.",
-                      icon: ShieldCheck,
-                      gradient: "from-blue-500 to-cyan-500",
-                      cardBg: "from-blue-50/70 via-white/95 to-blue-50/20",
-                      borderColor: "border-blue-100/80 hover:border-blue-300/80 hover:shadow-[0_12px_30px_rgba(59,130,246,0.1)]",
-                      hoverGlow: "from-blue-100/50 to-cyan-100/30"
-                    },
-                    {
-                      title: "FDA and CE Certified Portfolio",
-                      desc: "Elite diagnostic machinery passing stringent overseas regulatory board certifications.",
-                      icon: Award,
-                      gradient: "from-orange-500 to-amber-500",
-                      cardBg: "from-orange-50/70 via-white/95 to-orange-50/20",
-                      borderColor: "border-orange-100/80 hover:border-orange-300/80 hover:shadow-[0_12px_30px_rgba(249,115,22,0.1)]",
-                      hoverGlow: "from-orange-100/50 to-amber-100/30"
-                    },
-                    {
-                      title: "Rapid Logistics Supply Network",
-                      desc: "Smooth global-to-regional import logistics ensuring prompt and safe hardware delivery.",
-                      icon: Globe,
-                      gradient: "from-blue-600 to-indigo-600",
-                      cardBg: "from-indigo-50/70 via-white/95 to-indigo-50/20",
-                      borderColor: "border-indigo-100/80 hover:border-indigo-300/80 hover:shadow-[0_12px_30px_rgba(99,102,241,0.1)]",
-                      hoverGlow: "from-indigo-100/50 to-blue-100/30"
-                    },
-                    {
-                      title: "24/7 Dedicated Engineering Service",
-                      desc: "Expert biomedical assistance desk ensuring absolute clinical uptime and calibrations.",
-                      icon: HeartHandshake,
-                      gradient: "from-amber-500 to-orange-600",
-                      cardBg: "from-amber-50/70 via-white/95 to-amber-50/20",
-                      borderColor: "border-amber-100/80 hover:border-amber-300/80 hover:shadow-[0_12px_30px_rgba(245,158,11,0.1)]",
-                      hoverGlow: "from-amber-100/50 to-orange-100/30"
-                    },
-                  ].map((item, idx) => {
-                    const IconComponent = item.icon;
-                    return (
-                      <motion.div
-                        key={idx}
-                        whileHover={{ y: -5, scale: 1.01 }}
-                        transition={{ duration: 0.3 }}
-                        className={`group p-5 rounded-2xl border bg-gradient-to-br ${item.cardBg} ${item.borderColor} transition-all duration-300 relative overflow-hidden`}
-                      >
-                        {/* Hover glow background */}
-                        <div
-                          className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 bg-gradient-to-br ${item.hoverGlow}`}
-                        />
-
-                        <div className="flex gap-4 items-start">
-                          <div
-                            className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 text-white bg-gradient-to-br ${item.gradient} transition-transform duration-500 group-hover:rotate-6 shadow-md`}
-                          >
-                            <IconComponent className="w-5 h-5" strokeWidth={2.2} />
-                          </div>
-                          <div className="space-y-1">
-                            <h4 className="text-slate-900 font-extrabold text-sm tracking-tight leading-snug">
-                              {item.title}
-                            </h4>
-                            <p className="text-slate-500 font-medium text-xs leading-relaxed">
-                              {item.desc}
-                            </p>
-                          </div>
-                        </div>
-                      </motion.div>
-                    );
-                  })}
                 </div>
               </div>
 
             </div>
+
+            {/* Highly structured, premium interactive grids */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+              {[
+                {
+                  title: "Location",
+                  desc: "Headquartered in Trichy, Vel Bio Med strategically positions itself to cater to the diverse healthcare needs of the region. Our central location enables us to efficiently reach and serve medical establishments throughout Tamil Nadu.",
+                  icon: MapPin,
+                  gradient: "from-blue-500 to-cyan-500",
+                  cardBg: "from-blue-50/70 via-white/95 to-blue-50/20",
+                  borderColor: "border-blue-100/80 hover:border-blue-300/80 hover:shadow-[0_12px_30px_rgba(59,130,246,0.1)]",
+                  hoverGlow: "from-blue-100/50 to-cyan-100/30"
+                },
+                {
+                  title: "Comprehensive Sales & Service",
+                  desc: "At Vel Bio Med, we specialize in the sales and service of a wide array of medical equipment. Whether you are a hospital, clinic, or healthcare facility, we understand the importance of reliable and efficient equipment to provide optimum patient care. Our team of experts is committed to delivering prompt and effective service to keep your medical equipment in optimal condition.",
+                  icon: Activity,
+                  gradient: "from-orange-500 to-amber-500",
+                  cardBg: "from-orange-50/70 via-white/95 to-orange-50/20",
+                  borderColor: "border-orange-100/80 hover:border-orange-300/80 hover:shadow-[0_12px_30px_rgba(249,115,22,0.1)]",
+                  hoverGlow: "from-orange-100/50 to-amber-100/30"
+                },
+                {
+                  title: "Authorized Dealer for Leading Brands",
+                  desc: "We take pride in being authorized dealers for renowned brands in the medical equipment industry. Vel Bio Med is the trusted dealer for Maestros, Akas Infusions, Sharkclave Systems, and SIMED. These partnerships ensure that our clients receive state-of-the-art products backed by the latest technology and innovation.",
+                  icon: Award,
+                  gradient: "from-blue-600 to-indigo-600",
+                  cardBg: "from-indigo-50/70 via-white/95 to-indigo-50/20",
+                  borderColor: "border-indigo-100/80 hover:border-indigo-300/80 hover:shadow-[0_12px_30px_rgba(99,102,241,0.1)]",
+                  hoverGlow: "from-indigo-100/50 to-blue-100/30"
+                },
+                {
+                  title: "Strategic Collaborations",
+                  desc: "Vel Bio Med believes in the power of collaboration. We have established strong ties with numerous companies to ensure a seamless and continuous supply of high-quality medical equipment. Our collaborations enable us to offer a diverse range of products to meet the evolving needs of the healthcare sector.",
+                  icon: HeartHandshake,
+                  gradient: "from-amber-500 to-orange-600",
+                  cardBg: "from-amber-50/70 via-white/95 to-amber-50/20",
+                  borderColor: "border-amber-100/80 hover:border-amber-300/80 hover:shadow-[0_12px_30px_rgba(245,158,11,0.1)]",
+                  hoverGlow: "from-amber-100/50 to-orange-100/30"
+                },
+              ].map((item, idx) => {
+                const IconComponent = item.icon;
+                return (
+                  <motion.div
+                    key={idx}
+                    whileHover={{ y: -5, scale: 1.01 }}
+                    transition={{ duration: 0.3 }}
+                    className={`group p-6 rounded-2xl border bg-gradient-to-br ${item.cardBg} ${item.borderColor} transition-all duration-300 relative overflow-hidden flex flex-col justify-between`}
+                  >
+                    {/* Hover glow background */}
+                    <div
+                      className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 bg-gradient-to-br ${item.hoverGlow}`}
+                    />
+
+                    <div className="space-y-4">
+                      <div
+                        className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 text-white bg-gradient-to-br ${item.gradient} transition-transform duration-500 group-hover:rotate-6 shadow-md`}
+                      >
+                        <IconComponent className="w-5 h-5" strokeWidth={2.2} />
+                      </div>
+                      <div className="space-y-2">
+                        <h4 className="text-slate-900 font-extrabold text-sm tracking-tight leading-snug">
+                          {item.title}
+                        </h4>
+                        <p className="text-slate-500 font-medium text-xs leading-relaxed">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
           </div>
         </section>
 

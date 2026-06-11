@@ -19,16 +19,16 @@ const fadeUp = {
 };
 
 const stats = [
-    { icon: TrendingUp, value: "20+", label: "Years Leading" },
-    { icon: Users, value: "450+", label: "Hospitals Served" },
-    { icon: Award, value: "1,500+", label: "Installations" },
-    { icon: Stethoscope, value: "100%", label: "Uptime SLA" },
+    { icon: TrendingUp, value: "12+", label: "Years Leading", gradient: "from-blue-400 to-cyan-300", iconColor: "text-blue-400", bgGlow: "bg-slate-800/80" },
+    { icon: Users, value: "450+", label: "Hospitals Served", gradient: "from-emerald-400 to-teal-300", iconColor: "text-emerald-400", bgGlow: "bg-slate-800/80" },
+    { icon: Award, value: "1,500+", label: "Installations", gradient: "from-amber-400 to-orange-300", iconColor: "text-amber-400", bgGlow: "bg-slate-800/80" },
+    { icon: Stethoscope, value: "100%", label: "Uptime SLA", gradient: "from-indigo-400 to-purple-300", iconColor: "text-indigo-400", bgGlow: "bg-slate-800/80" },
 ];
 
 const highlights: [string, string][] = [
-    ["zero headroom for compromise", "text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-300 font-extrabold not-italic"],
-    ["Annual Maintenance Contracts (AMC)", "text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 font-extrabold not-italic"],
-    ["benchmark for biological engineering", "text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-purple-300 font-extrabold not-italic"],
+    ["visionary and inspiring founder", "text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-300 font-extrabold not-italic"],
+    ["excellence and innovation", "text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 font-extrabold not-italic"],
+    ["make a difference in healthcare", "text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-purple-300 font-extrabold not-italic"],
 ];
 
 function highlightText(text: string) {
@@ -52,9 +52,9 @@ export default function LeadershipMessage() {
     const inView = useInView(ref, { once: true, margin: "-80px" });
 
     const para1 =
-        `At Vel Bio Med, we define technology as a platform to secure lives. When a ventilator or anesthetic station undergoes calibration inside our labs, we remind our engineers of the human aspect involved. There is simply zero headroom for compromise in hospital critical setups.`;
+        `At Vel Bio Med, our journey is led by Mr. Muralikrishnan Gokulakrishnan, a visionary and inspiring founder. His leadership is the compass that guides our team towards success. With a focus on excellence and innovation, he instills a culture of dedication and professionalism, shaping Vel Bio Med into a dynamic player in the medical equipment field.`;
     const para2 =
-        `By establishing comprehensive Annual Maintenance Contracts (AMC) and ensuring direct availability of critical spare components, we help clinical facilities operate seamlessly without unexpected emergency breaks. Our goal is to set the benchmark for biological engineering service operations.`;
+        `Under his guidance, we move forward with confidence, driven by a commitment to make a difference in healthcare.`;
 
     return (
         <section
@@ -118,7 +118,7 @@ export default function LeadershipMessage() {
                         <motion.div
                             custom={1} initial="hidden" animate={inView ? "visible" : "hidden"} variants={fadeUp}
                             whileHover={{ y: -4, transition: { duration: 0.3 } }}
-                            className="relative rounded-[2rem] p-8 md:p-10 overflow-hidden bg-slate-900/60 border border-slate-800/80 shadow-2xl backdrop-blur-md"
+                            className="relative rounded-[2rem] p-8 md:p-10 overflow-hidden bg-slate-950/50 border border-slate-800/80 shadow-2xl backdrop-blur-md"
                         >
                             {/* Decorative Quote Icon */}
                             <div className="absolute top-6 right-8 text-slate-800 opacity-20 pointer-events-none">
@@ -141,14 +141,14 @@ export default function LeadershipMessage() {
                                 <div
                                     className="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-black text-xl flex-shrink-0 bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg"
                                 >
-                                    VV
+                                    MG
                                 </div>
                                 <div>
                                     <p
                                         className="font-extrabold text-xl tracking-tight text-white"
                                         style={{ fontFamily: "'Poppins', sans-serif" }}
                                     >
-                                        Dr. Vivek Vardhan Rao
+                                        Mr. Muralikrishnan Gokulakrishnan
                                     </p>
                                     <p
                                         className="text-[11px] font-extrabold uppercase tracking-widest mt-0.5 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent"
@@ -204,7 +204,7 @@ export default function LeadershipMessage() {
                             <div className="relative overflow-hidden aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3]">
                                 <motion.img
                                     src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80"
-                                    alt="Dr. Vivek Vardhan Rao – Founder & Managing Director"
+                                    alt="Mr. Muralikrishnan Gokulakrishnan – Founder & Managing Director"
                                     className="w-full h-full object-cover object-top"
                                     whileHover={{ scale: 1.04, transition: { duration: 0.5 } }}
                                 />
@@ -218,7 +218,7 @@ export default function LeadershipMessage() {
                                     <p
                                         className="text-2xl font-black leading-none bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent"
                                     >
-                                        20+
+                                        12+
                                     </p>
                                     <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-0.5">Years</p>
                                 </motion.div>
@@ -239,10 +239,10 @@ export default function LeadershipMessage() {
                             {/* Refined Bio plate inside card */}
                             <div className="p-6 sm:p-8 space-y-2 relative z-20">
                                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-500">
-                                    Biography & Background
+                                    Our Founder's Vision
                                 </span>
                                 <p className="text-sm leading-relaxed font-medium text-slate-300">
-                                    Leveraging over two decades directing critical trauma panels and sourcing bioscience products across global health systems.
+                                    Founded with a vision to elevate healthcare standards, Mr. Muralikrishnan Gokulakrishnan envisioned Vel Bio Med as a company that not only delivers top-notch medical equipment but also focuses on building enduring relationships with our valued clients.
                                 </p>
                             </div>
                         </motion.div>
@@ -252,20 +252,20 @@ export default function LeadershipMessage() {
                             custom={2.5} initial="hidden" animate={inView ? "visible" : "hidden"} variants={fadeUp}
                             className="grid grid-cols-2 gap-4"
                         >
-                            {stats.map(({ icon: Icon, value, label }, i) => (
+                            {stats.map(({ icon: Icon, value, label, gradient, iconColor, bgGlow }, i) => (
                                 <motion.div
                                     key={label}
                                     whileHover={{ y: -4, transition: { duration: 0.25 } }}
                                     className="rounded-2xl p-5 flex flex-col gap-3 bg-slate-900/40 border border-slate-800/60 shadow-md backdrop-blur-md hover:border-slate-700 transition-all duration-300 group"
                                 >
                                     <div
-                                        className="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-800 border border-slate-700/80 group-hover:rotate-6 transition-transform duration-300"
+                                        className={`w-10 h-10 rounded-xl flex items-center justify-center ${bgGlow} border border-slate-700/50 group-hover:rotate-6 transition-transform duration-300`}
                                     >
-                                        <Icon className="w-5 h-5 text-blue-400" />
+                                        <Icon className={`w-5 h-5 ${iconColor}`} />
                                     </div>
                                     <div>
                                         <p
-                                            className="text-2xl font-black leading-none bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent"
+                                            className={`text-2xl font-black leading-none bg-gradient-to-r ${gradient} bg-clip-text text-transparent`}
                                         >
                                             {value}
                                         </p>
