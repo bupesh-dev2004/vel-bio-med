@@ -96,24 +96,26 @@ interface CorporateValueCardProps {
   icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
   gradient: string;
   position: string;
+  isMobile: boolean;
 }
 
-function CorporateValueCard({ handleShuffle, title, desc, icon: IconComponent, gradient, position }: CorporateValueCardProps) {
+function CorporateValueCard({ handleShuffle, title, desc, icon: IconComponent, gradient, position, isMobile }: CorporateValueCardProps) {
   const dragRef = React.useRef(0);
   const isFront = position === "front";
 
   const getPositionStyles = () => {
+    const shift = isMobile ? 8 : 18;
     switch (position) {
       case "front":
         return { rotate: "-6deg", x: "0%", zIndex: 30, opacity: 1, scale: 1 };
       case "middle":
-        return { rotate: "0deg", x: "18%", zIndex: 20, opacity: 0.9, scale: 0.94 };
+        return { rotate: "0deg", x: `${shift}%`, zIndex: 20, opacity: 0.9, scale: 0.94 };
       case "back":
-        return { rotate: "6deg", x: "36%", zIndex: 10, opacity: 0.75, scale: 0.88 };
+        return { rotate: "4deg", x: `${shift * 2}%`, zIndex: 10, opacity: 0.75, scale: 0.88 };
       case "far-back":
-        return { rotate: "10deg", x: "54%", zIndex: 5, opacity: 0.5, scale: 0.82 };
+        return { rotate: "8deg", x: `${shift * 3}%`, zIndex: 5, opacity: 0.5, scale: 0.82 };
       default:
-        return { rotate: "12deg", x: "72%", zIndex: 0, opacity: 0, scale: 0.76 };
+        return { rotate: "12deg", x: `${shift * 4}%`, zIndex: 0, opacity: 0, scale: 0.76 };
     }
   };
 
@@ -151,8 +153,8 @@ function CorporateValueCard({ handleShuffle, title, desc, icon: IconComponent, g
         dragRef.current = 0;
       }}
       transition={{ duration: 0.35 }}
-      className={`absolute left-0 top-0 flex flex-col justify-between h-[380px] w-[290px] sm:h-[430px] sm:w-[330px] select-none rounded-3xl border border-slate-800 bg-slate-900/95 p-6 sm:p-8 shadow-2xl text-white backdrop-blur-md ${
-        isFront ? "cursor-grab active:cursor-grabbing hover:border-slate-755" : ""
+      className={`absolute left-0 top-0 flex flex-col justify-between h-[340px] w-[250px] sm:h-[430px] sm:w-[330px] select-none rounded-3xl border border-slate-800 bg-slate-900/95 p-6 sm:p-8 shadow-2xl text-white backdrop-blur-md ${
+        isFront ? "cursor-grab active:cursor-grabbing hover:border-slate-700" : ""
       }`}
     >
       {/* Decorative top line */}
@@ -192,6 +194,17 @@ function CorporateValueCard({ handleShuffle, title, desc, icon: IconComponent, g
 
 function CorporateValuesStack({ values }: { values: ValueItem[] }) {
   const [positions, setPositions] = useState(["front", "middle", "back", "far-back", "hidden"]);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const handleShuffle = () => {
     setPositions((prev) => {
@@ -202,8 +215,16 @@ function CorporateValuesStack({ values }: { values: ValueItem[] }) {
     });
   };
 
+  useEffect(() => {
+    if (isHovered) return;
+    const interval = setInterval(() => {
+      handleShuffle();
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [positions, isHovered]);
+
   return (
-    <section className="py-24 md:py-36 bg-slate-950 text-slate-100 border-t border-slate-900 relative overflow-hidden">
+    <section className="py-16 sm:py-24 md:py-36 bg-slate-950 text-slate-100 border-t border-slate-900 relative overflow-hidden">
       {/* Dark premium grids and glows */}
       <div
         aria-hidden
@@ -225,7 +246,7 @@ function CorporateValuesStack({ values }: { values: ValueItem[] }) {
       />
       
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Left Side text */}
           <div className="lg:col-span-5 space-y-6 text-left">
@@ -242,14 +263,19 @@ function CorporateValuesStack({ values }: { values: ValueItem[] }) {
           </div>
 
           {/* Right Side card stack */}
-          <div className="lg:col-span-7 flex justify-center lg:justify-end items-center h-[480px] relative">
-            <div className="relative h-[380px] w-[290px] sm:h-[430px] sm:w-[330px] -ml-[30px] sm:-ml-[60px] lg:mr-28">
+          <div 
+            className="lg:col-span-7 flex justify-center lg:justify-end items-center h-[390px] sm:h-[480px] relative"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <div className="relative h-[340px] w-[250px] sm:h-[430px] sm:w-[330px] -ml-[20px] sm:-ml-[60px] lg:mr-28">
               {values.map((v, index) => (
                 <CorporateValueCard
                   key={index}
                   {...v}
                   handleShuffle={handleShuffle}
                   position={positions[index]}
+                  isMobile={isMobile}
                 />
               ))}
             </div>
