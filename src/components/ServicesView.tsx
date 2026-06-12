@@ -15,45 +15,45 @@ export default function ServicesView() {
   const dbServices = state?.services || [
     {
       id: "srv-1",
-      title: "Medical Equipment Installation",
-      description: "Precision setup, calibration, and safety validation of intensive-care machines, diagnostics consoles, and surgical fixtures.",
-      iconName: "Wrench"
-    },
-    {
-      id: "srv-2",
-      title: "Comprehensive Maintenance & AMC",
-      description: "Flexible Annual Maintenance Contracts (AMC) and comprehensive service cycles backed by original vendor spare inventories.",
+      title: "AMC for Operation Theatre Equipment",
+      description: "An Annual Maintenance Contract (AMC) for operation theatre equipment ensures regular maintenance, emergency support to optimize equipment performance.",
       iconName: "Shield"
     },
     {
+      id: "srv-2",
+      title: "Troubleshooting of all medical equipment (Any brand)",
+      description: "We provide expert troubleshooting services for all medical equipment brands, resolution of issues to maintain uninterrupted equipment reliability.",
+      iconName: "Wrench"
+    },
+    {
       id: "srv-3",
-      title: "Biomedical Calibration SLA",
-      description: "High-precision testing under certified diagnostic tools to guarantee accuracy standards across high-acuity ventilators and anesthesia setups.",
-      iconName: "Activity"
-    },
-    {
-      id: "srv-4",
-      title: "Emergency Breakdown Sourcing",
-      description: "24/7 priority dispatch framework addressing hospital facility failures with immediate temporary hot-swap backups.",
-      iconName: "PhoneCall"
-    },
-    {
-      id: "srv-5",
-      title: "Biomedical Training & Handovers",
-      description: "On-site and virtual tutorial workshops empowering clinical personnel to operate advanced clinical instrumentation.",
+      title: "Installation & Commissioning of new medical equipment",
+      description: "We excel in the seamless installation and commissioning of new medical equipment, ensuring optimal functionality and readiness .",
       iconName: "Briefcase"
     },
     {
+      id: "srv-4",
+      title: "Restoration of medical equipment",
+      description: "We specialize in restoring medical equipment to peak performance, ensuring reliability and longevity to support uninterrupted patient care.",
+      iconName: "Activity"
+    },
+    {
+      id: "srv-5",
+      title: "Customised Product solutions for all medical equipment",
+      description: "We provide customized solutions for all medical equipment, meeting diverse needs with precision and innovation.",
+      iconName: "PhoneCall"
+    },
+    {
       id: "srv-6",
-      title: "Regulatory Compliance Certification",
-      description: "Rigorous electrical and biometric safety checkups confirming absolute compliance with international hospital certification norms.",
+      title: "Hygienic Cleaning services",
+      description: "Our hygienic cleaning services ensure meticulous sterilization and sanitation of medical equipment and facilities, maintaining impeccable standards for patient safety and healthcare hygiene.",
       iconName: "LifeBuoy"
     }
   ];
 
   // Helper to resolve icon from key names
   const renderIcon = (name: string, isAmber: boolean) => {
-    const iconColor = isAmber ? "text-amber-600 group-hover:text-white" : "text-blue-600 group-hover:text-white";
+    const iconColor = isAmber ? "text-orange-600 group-hover:text-white" : "text-blue-600 group-hover:text-white";
     switch (name) {
       case "Wrench":
         return <Wrench className={`w-6 h-6 ${iconColor}`} />;
@@ -72,46 +72,46 @@ export default function ServicesView() {
 
   const getDeliverables = (title: string) => {
     const lowerTitle = title.toLowerCase();
+    if (lowerTitle.includes("amc")) {
+      return [
+        "Regular preventative maintenance audits",
+        "24/7 priority operational room dispatch",
+        "Original vendor parts & seal checkups"
+      ];
+    }
+    if (lowerTitle.includes("troubleshooting")) {
+      return [
+        "Multi-brand diagnostic testing",
+        "Fast fault isolation & repairs",
+        "Component reliability restoration"
+      ];
+    }
     if (lowerTitle.includes("installation")) {
       return [
-        "Site readiness & space planning",
-        "OEM specification alignment",
-        "Final electrical safety certification"
+        "Pre-installation layout planning",
+        "OEM-standard equipment testing",
+        "Operational certification handovers"
       ];
     }
-    if (lowerTitle.includes("maintenance") || lowerTitle.includes("amc")) {
+    if (lowerTitle.includes("restoration")) {
       return [
-        "Scheduled quarterly preventative audits",
-        "24/7 priority emergency dispatch",
-        "Certified vendor parts integration"
+        "Full structural & cosmetic overhaul",
+        "Electronic component recalibration",
+        "Longevity validation testing"
       ];
     }
-    if (lowerTitle.includes("calibration") || lowerTitle.includes("sla")) {
+    if (lowerTitle.includes("customised") || lowerTitle.includes("customized")) {
       return [
-        "NABL traceable documentation",
-        "NIST standard precision tools",
-        "System accuracy drift validation"
+        "Tailored adapter & housing designs",
+        "Precision workflow integration",
+        "Innovative engineering adjustments"
       ];
     }
-    if (lowerTitle.includes("breakdown") || lowerTitle.includes("emergency")) {
+    if (lowerTitle.includes("cleaning") || lowerTitle.includes("hygienic")) {
       return [
-        "15-minute response triage desk",
-        "Hot-swap replacement systems",
-        "On-site patient safety overrides"
-      ];
-    }
-    if (lowerTitle.includes("training") || lowerTitle.includes("handover")) {
-      return [
-        "Operational SOP review workshops",
-        "Hands-on simulations & testing",
-        "Clinical certification handovers"
-      ];
-    }
-    if (lowerTitle.includes("regulatory") || lowerTitle.includes("compliance") || lowerTitle.includes("certification")) {
-      return [
-        "Joint Commission compliance audits",
-        "Electrical leakage profiling",
-        "Legal compliance record filing"
+        "Meticulous sanitization protocols",
+        "Certified biological sterilization check",
+        "Healthcare hygiene standard compliance"
       ];
     }
     return [
@@ -300,36 +300,36 @@ export default function ServicesView() {
                 <motion.div
                   key={srv.id}
                   variants={cardVariants}
-                  className={`bg-white/95 border border-slate-200/60 p-8 rounded-3xl transition-all duration-500 flex flex-col h-full group relative overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.02)]
+                  className={`border p-8 rounded-3xl transition-all duration-500 flex flex-col h-full group relative overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.02)]
                     ${isAmber
-                      ? "hover:border-amber-400/80 hover:shadow-[0_20px_40px_rgba(245,158,11,0.06)]"
-                      : "hover:border-blue-400/80 hover:shadow-[0_20px_40px_rgba(59,130,246,0.06)]"
+                      ? "bg-gradient-to-br from-orange-50/40 via-white to-white border-orange-200/80 hover:border-orange-400 hover:shadow-[0_20px_40px_rgba(249,115,22,0.08)]"
+                      : "bg-gradient-to-br from-blue-50/40 via-white to-white border-blue-200/80 hover:border-blue-400 hover:shadow-[0_20px_40px_rgba(59,130,246,0.08)]"
                     }
                   `}
                 >
                   {/* Decorative card gradient glow */}
                   <div className={`absolute -right-12 -top-12 w-40 h-40 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none
                     ${isAmber
-                      ? "bg-amber-500/10"
+                      ? "bg-orange-500/10"
                       : "bg-blue-500/10"
                     }
                   `} />
 
-                  <span className="absolute top-8 right-8 text-[10px] font-black tracking-widest text-slate-300 group-hover:text-slate-400 uppercase transition-colors">
+                  <span className="absolute top-8 right-8 text-[10px] font-black tracking-widest text-slate-350 group-hover:text-slate-400 uppercase transition-colors">
                     Service {String(idx + 1).padStart(2, '0')}
                   </span>
 
                   <div className={`p-4 rounded-2xl w-14 h-14 flex items-center justify-center mb-6 transition-all duration-500 shadow-sm border
                     ${isAmber
-                      ? "bg-amber-50/50 border-amber-100 text-amber-600 group-hover:bg-amber-500 group-hover:border-amber-500 group-hover:text-white group-hover:rotate-6 group-hover:scale-110"
-                      : "bg-blue-50/50 border-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:border-blue-600 group-hover:text-white group-hover:rotate-6 group-hover:scale-110"
+                      ? "bg-orange-50 border-orange-200 text-orange-650 group-hover:bg-orange-500 group-hover:border-orange-500 group-hover:text-white group-hover:rotate-6 group-hover:scale-110"
+                      : "bg-blue-50 border-blue-200 text-blue-650 group-hover:bg-blue-600 group-hover:border-blue-600 group-hover:text-white group-hover:rotate-6 group-hover:scale-110"
                     }
                   `}>
                     {renderIcon(srv.iconName, isAmber)}
                   </div>
 
                   <h3 className={`text-xl font-extrabold text-slate-900 transition-colors mb-3 pr-8
-                    ${isAmber ? "group-hover:text-amber-600" : "group-hover:text-blue-600"}
+                    ${isAmber ? "group-hover:text-orange-600" : "group-hover:text-blue-600"}
                   `}>
                     {srv.title}
                   </h3>
@@ -345,7 +345,7 @@ export default function ServicesView() {
                       {deliverables.map((item, dIdx) => (
                         <li key={dIdx} className="flex items-start gap-2.5 text-xs text-slate-650 font-medium">
                           <CheckCircle2 className={`w-4 h-4 mt-0.5 shrink-0
-                            ${isAmber ? "text-amber-500" : "text-blue-500"}
+                            ${isAmber ? "text-orange-500" : "text-blue-500"}
                           `} />
                           <span>{item}</span>
                         </li>
@@ -357,8 +357,8 @@ export default function ServicesView() {
                     onClick={() => handleServiceSelect(srv.title)}
                     className={`w-full bg-slate-50 border font-bold text-xs py-3.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 uppercase tracking-wider cursor-pointer hover:shadow-sm
                       ${isAmber
-                        ? "border-slate-150 text-slate-700 hover:border-amber-500 hover:bg-amber-500 hover:text-white"
-                        : "border-slate-150 text-slate-700 hover:border-blue-600 hover:bg-blue-600 hover:text-white"
+                        ? "border-orange-100 text-slate-700 hover:border-orange-500 hover:bg-orange-500 hover:text-white"
+                        : "border-blue-100 text-slate-700 hover:border-blue-600 hover:bg-blue-600 hover:text-white"
                       }
                     `}
                   >

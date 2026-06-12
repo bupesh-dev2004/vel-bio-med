@@ -153,7 +153,7 @@ function CorporateValueCard({ handleShuffle, title, desc, icon: IconComponent, g
         }
         dragRef.current = 0;
       }}
-      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
       className={`absolute left-0 top-0 flex flex-col justify-between h-[340px] w-[250px] sm:h-[430px] sm:w-[330px] select-none rounded-3xl border border-slate-800 bg-[#0f172a] p-6 sm:p-8 shadow-2xl text-white ${isFront ? "cursor-grab active:cursor-grabbing hover:border-slate-700" : ""}`}
     >
       {/* Decorative top line */}
@@ -339,34 +339,34 @@ export default function AboutView() {
 
   const values = [
     {
-      title: "Uncompromising Integrity",
-      desc: "Every contract and delivery aligns with premium regulatory safety criteria, building life-long medical trust.",
+      title: "Integrity",
+      desc: "Upholding honesty, transparency, and ethical conduct is non-negotiable. We build trust through our commitment to the highest standards of integrity",
       icon: Scale,
       gradient: "from-blue-500 to-indigo-600"
     },
     {
-      title: "Constant Technological Innovation",
-      desc: "We prioritize supply of advanced high acuity solutions that assist clinical personnel in fast diagnosis.",
-      icon: Cpu,
-      gradient: "from-indigo-500 to-purple-600"
-    },
-    {
-      title: "100% Patient Centricity",
-      desc: "Our machinery setups center on seamless ergonomics that minimize stress on long hospital recovery phases.",
+      title: "Customer-Centricity",
+      desc: "Our customers are our priority. We are dedicated to understanding and surpassing their expectations, delivering tailored solutions to meet their unique needs.",
       icon: Heart,
       gradient: "from-rose-500 to-orange-500"
     },
     {
-      title: "Unyielding Reliability",
-      desc: "Emergency bio-medical breakdown tickets are processed within hours of notification, maintaining absolute ward uptime.",
-      icon: ShieldCheck,
-      gradient: "from-emerald-500 to-teal-600"
-    },
-    {
-      title: "Comprehensive Team Collaboration",
-      desc: "We consult clinical architects directly to install optimal space-saving modular hospital theatre gas systems.",
+      title: "Team Collaboration",
+      desc: "We value collaboration and teamwork. By creating an inclusive work environment, we harness the collective skills of our team to achieve common goals.",
       icon: Users,
       gradient: "from-amber-500 to-orange-600"
+    },
+    {
+      title: "Innovation",
+      desc: "We foster a culture of continuous improvement and innovation. Staying updated on the latest advancements ensures our clients have access to cutting-edge solutions.",
+      icon: Cpu,
+      gradient: "from-indigo-500 to-purple-600"
+    },
+    {
+      title: "Reliability",
+      desc: "Vel Bio Med is synonymous with reliability. Our commitment is unwavering, ensuring the quality of our products and the efficiency of our services instill confidence in our clients",
+      icon: ShieldCheck,
+      gradient: "from-emerald-500 to-teal-600"
     }
   ];
 
@@ -451,19 +451,21 @@ export default function AboutView() {
 
       {/* Subsequent Content Wrapper - scrolls over fixed background */}
       <div className="relative z-10 bg-slate-50 border-t border-slate-200/40">
-
         {/* Corporate Overview Story */}
-        <section className="py-24 md:py-36 bg-gradient-to-br from-[#f8fafc] via-[#f0f6ff] to-[#f8fafc] relative overflow-hidden">
+        <section className="py-24 md:py-32 bg-gradient-to-br from-slate-50 via-[#f0f6ff] to-white relative overflow-hidden">
+          {/* Scientific grid dot background */}
+          <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1.5px,transparent_1.5px)] [background-size:24px_24px] opacity-60" />
+
           {/* Subtle background ambient glows */}
           <div
             aria-hidden
-            className="pointer-events-none absolute -top-20 -left-20 w-[450px] h-[450px] rounded-full opacity-30 animate-pulse"
-            style={{ background: "radial-gradient(circle, #0A6EBD 0%, transparent 70%)", filter: "blur(80px)" }}
+            className="pointer-events-none absolute -top-20 -left-20 w-[500px] h-[500px] rounded-full opacity-25 animate-pulse"
+            style={{ background: "radial-gradient(circle, #3b82f6 0%, transparent 70%)", filter: "blur(100px)" }}
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute -bottom-20 -right-20 w-[450px] h-[450px] rounded-full opacity-25"
-            style={{ background: "radial-gradient(circle, #F97316 0%, transparent 70%)", filter: "blur(80px)" }}
+            className="pointer-events-none absolute -bottom-20 -right-20 w-[500px] h-[500px] rounded-full opacity-20"
+            style={{ background: "radial-gradient(circle, #f97316 0%, transparent 70%)", filter: "blur(100px)" }}
           />
 
           <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
@@ -471,8 +473,11 @@ export default function AboutView() {
 
               {/* Left Column Asymmetrical Image Block */}
               <div className="lg:col-span-5 relative">
+                {/* Outlined border offset layer */}
+                <div className="absolute -inset-4 border border-blue-500/10 rounded-[2.75rem] -z-10 transform translate-x-3 translate-y-3" />
+
                 {/* Glow behind the card */}
-                <div className="absolute inset-0 bg-blue-600/10 rounded-[2.5rem] blur-2xl transform translate-x-4 translate-y-4" />
+                <div className="absolute inset-0 bg-blue-600/10 rounded-[2.5rem] blur-2xl transform translate-x-4 translate-y-4 -z-10" />
 
                 {/* Main Image Layer */}
                 <motion.div
@@ -530,82 +535,121 @@ export default function AboutView() {
                   <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-50 text-blue-700 border border-blue-100 font-extrabold tracking-widest text-[10px] uppercase">
                     <Building2 className="w-3.5 h-3.5 text-blue-600" /> Corporate Profile
                   </span>
-                  <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                    Sourcing Global Diagnostics of <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-800 bg-clip-text text-transparent">Unparalleled</span> <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-orange-600 bg-clip-text text-transparent">Metric Confidence</span>
+                  <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+                    Sourcing Global Diagnostics of <br className="hidden sm:inline" />
+                    <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-800 bg-clip-text text-transparent">Unparalleled</span> <span className="bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 bg-clip-text text-transparent">Metric Confidence</span>
                   </h2>
                   <div className="w-20 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-orange-500 rounded-full" />
                 </div>
 
-                <div className="space-y-5">
-                  <p className="text-slate-800 text-base sm:text-lg leading-relaxed font-semibold">
+                <div className="space-y-6">
+                  <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-semibold">
                     At Vel Bio Med, we are dedicated to providing cutting-edge medical equipment, unparalleled service, and unwavering commitment to healthcare excellence. Established in 2013 by Mr. Muralikrishnan Gokulakrishnan, Vel Bio Med started as a proprietorship and has since grown to become a leading player in the medical equipment industry, offering sales and services across the vibrant healthcare landscape of Tamil Nadu.
                   </p>
+
+                  {/* Highlights Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                    <div className="flex gap-3 items-start p-4 bg-white/60 rounded-xl border border-blue-50/80 shadow-[0_4px_12px_rgba(0,0,0,0.01)]">
+                      <div className="p-2 rounded-lg bg-blue-50 text-blue-600">
+                        <Award className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <span className="font-extrabold text-slate-900 text-sm block">Established 2013</span>
+                        <span className="text-slate-500 text-xs mt-0.5 block">Founded by Mr. Muralikrishnan Gokulakrishnan</span>
+                      </div>
+                    </div>
+                    <div className="flex gap-3 items-start p-4 bg-white/60 rounded-xl border border-orange-50/80 shadow-[0_4px_12px_rgba(0,0,0,0.01)]">
+                      <div className="p-2 rounded-lg bg-orange-50 text-orange-600">
+                        <Activity className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <span className="font-extrabold text-slate-900 text-sm block">State-Wide Reach</span>
+                        <span className="text-slate-500 text-xs mt-0.5 block">Sales and services across Tamil Nadu</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
             </div>
 
             {/* Highly structured, premium interactive grids */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, margin: "-100px" }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-20"
+            >
               {[
                 {
                   title: "Location",
                   desc: "Headquartered in Trichy, Vel Bio Med strategically positions itself to cater to the diverse healthcare needs of the region. Our central location enables us to efficiently reach and serve medical establishments throughout Tamil Nadu.",
                   icon: MapPin,
-                  gradient: "from-blue-500 to-cyan-500",
-                  cardBg: "from-blue-50/70 via-white/95 to-blue-50/20",
-                  borderColor: "border-blue-100/80 hover:border-blue-300/80 hover:shadow-[0_12px_30px_rgba(59,130,246,0.1)]",
-                  hoverGlow: "from-blue-100/50 to-cyan-100/30"
+                  gradient: "from-blue-500 to-blue-600",
+                  cardBg: "from-blue-50/20 via-white to-white",
+                  borderColor: "border-blue-100/80 hover:border-blue-400 hover:shadow-[0_15px_35px_rgba(59,130,246,0.08)]",
+                  hoverGlow: "from-blue-50/50 to-blue-100/20",
+                  badgeColor: "text-blue-500 bg-blue-50"
                 },
                 {
                   title: "Comprehensive Sales & Service",
                   desc: "At Vel Bio Med, we specialize in the sales and service of a wide array of medical equipment. Whether you are a hospital, clinic, or healthcare facility, we understand the importance of reliable and efficient equipment to provide optimum patient care. Our team of experts is committed to delivering prompt and effective service to keep your medical equipment in optimal condition.",
                   icon: Activity,
-                  gradient: "from-orange-500 to-amber-500",
-                  cardBg: "from-orange-50/70 via-white/95 to-orange-50/20",
-                  borderColor: "border-orange-100/80 hover:border-orange-300/80 hover:shadow-[0_12px_30px_rgba(249,115,22,0.1)]",
-                  hoverGlow: "from-orange-100/50 to-amber-100/30"
+                  gradient: "from-orange-500 to-orange-600",
+                  cardBg: "from-orange-50/20 via-white to-white",
+                  borderColor: "border-orange-100/80 hover:border-orange-400 hover:shadow-[0_15px_35px_rgba(249,115,22,0.08)]",
+                  hoverGlow: "from-orange-50/50 to-orange-100/20",
+                  badgeColor: "text-orange-500 bg-orange-50"
                 },
                 {
                   title: "Authorized Dealer for Leading Brands",
                   desc: "We take pride in being authorized dealers for renowned brands in the medical equipment industry. Vel Bio Med is the trusted dealer for Maestros, Akas Infusions, Sharkclave Systems, and SIMED. These partnerships ensure that our clients receive state-of-the-art products backed by the latest technology and innovation.",
                   icon: Award,
-                  gradient: "from-blue-600 to-indigo-600",
-                  cardBg: "from-indigo-50/70 via-white/95 to-indigo-50/20",
-                  borderColor: "border-indigo-100/80 hover:border-indigo-300/80 hover:shadow-[0_12px_30px_rgba(99,102,241,0.1)]",
-                  hoverGlow: "from-indigo-100/50 to-blue-100/30"
+                  gradient: "from-blue-500 to-blue-600",
+                  cardBg: "from-blue-50/20 via-white to-white",
+                  borderColor: "border-blue-100/80 hover:border-blue-400 hover:shadow-[0_15px_35px_rgba(59,130,246,0.08)]",
+                  hoverGlow: "from-blue-50/50 to-blue-100/20",
+                  badgeColor: "text-blue-500 bg-blue-50"
                 },
                 {
                   title: "Strategic Collaborations",
                   desc: "Vel Bio Med believes in the power of collaboration. We have established strong ties with numerous companies to ensure a seamless and continuous supply of high-quality medical equipment. Our collaborations enable us to offer a diverse range of products to meet the evolving needs of the healthcare sector.",
                   icon: HeartHandshake,
-                  gradient: "from-amber-500 to-orange-600",
-                  cardBg: "from-amber-50/70 via-white/95 to-amber-50/20",
-                  borderColor: "border-amber-100/80 hover:border-amber-300/80 hover:shadow-[0_12px_30px_rgba(245,158,11,0.1)]",
-                  hoverGlow: "from-amber-100/50 to-orange-100/30"
+                  gradient: "from-orange-500 to-orange-600",
+                  cardBg: "from-orange-50/20 via-white to-white",
+                  borderColor: "border-orange-100/80 hover:border-orange-400 hover:shadow-[0_15px_35px_rgba(249,115,22,0.08)]",
+                  hoverGlow: "from-orange-50/50 to-orange-100/20",
+                  badgeColor: "text-orange-500 bg-orange-50"
                 },
               ].map((item, idx) => {
                 const IconComponent = item.icon;
                 return (
                   <motion.div
                     key={idx}
-                    whileHover={{ y: -5, scale: 1.01 }}
-                    transition={{ duration: 0.3 }}
-                    className={`group p-6 rounded-2xl border bg-gradient-to-br ${item.cardBg} ${item.borderColor} transition-all duration-300 relative overflow-hidden flex flex-col justify-between`}
+                    variants={fadeUpVariants}
+                    whileHover={{ y: -6, scale: 1.01 }}
+                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                    className={`group p-6 sm:p-8 rounded-3xl border bg-gradient-to-br ${item.cardBg} ${item.borderColor} transition-all duration-500 relative overflow-hidden flex flex-col justify-between`}
                   >
                     {/* Hover glow background */}
                     <div
                       className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 bg-gradient-to-br ${item.hoverGlow}`}
                     />
 
-                    <div className="space-y-4">
-                      <div
-                        className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 text-white bg-gradient-to-br ${item.gradient} transition-transform duration-500 group-hover:rotate-6 shadow-md`}
-                      >
-                        <IconComponent className="w-5 h-5" strokeWidth={2.2} />
+                    <div className="space-y-5">
+                      <div className="flex justify-between items-center">
+                        <div
+                          className={`w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 text-white bg-gradient-to-br ${item.gradient} transition-all duration-500 group-hover:rotate-6 shadow-md`}
+                        >
+                          <IconComponent className="w-6 h-6" strokeWidth={2.2} />
+                        </div>
+                        <span className={`text-[11px] font-black px-2.5 py-1 rounded-full ${item.badgeColor}`}>
+                          0{idx + 1}
+                        </span>
                       </div>
-                      <div className="space-y-2">
-                        <h4 className="text-slate-900 font-extrabold text-sm tracking-tight leading-snug">
+                      <div className="space-y-2.5">
+                        <h4 className="text-slate-900 font-extrabold text-sm sm:text-base tracking-tight leading-snug">
                           {item.title}
                         </h4>
                         <p className="text-slate-500 font-medium text-xs leading-relaxed">
@@ -616,7 +660,7 @@ export default function AboutView() {
                   </motion.div>
                 );
               })}
-            </div>
+            </motion.div>
 
           </div>
         </section>
@@ -629,6 +673,79 @@ export default function AboutView() {
 
         {/* Core Values Section */}
         <CorporateValuesStack values={values} />
+
+        {/* Why Choose Vel Bio Med Section */}
+        <section className="py-24 bg-gradient-to-br from-[#f0f6ff] via-white to-[#fff7ed] border-t border-blue-100/60 relative overflow-hidden">
+          {/* Ambient background glows */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full opacity-20"
+            style={{ background: "radial-gradient(circle, #3b82f6 0%, transparent 70%)", filter: "blur(120px)" }}
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full opacity-15"
+            style={{ background: "radial-gradient(circle, #f97316 0%, transparent 70%)", filter: "blur(120px)" }}
+          />
+          
+          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+            <motion.div
+              variants={fadeUpVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, margin: "-100px" }}
+              className="bg-white/80 backdrop-blur-2xl rounded-[2.5rem] p-10 md:p-16 border border-blue-100/80 shadow-2xl relative overflow-hidden"
+            >
+              {/* Inner card subtle decorative items */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-500/5 to-orange-500/5 rounded-full blur-3xl -z-10" />
+              <div className="absolute -bottom-10 -left-10 w-72 h-72 bg-gradient-to-br from-blue-500/5 to-orange-500/5 rounded-full blur-3xl -z-10" />
+
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                {/* Left Side: Header & Graphic representation of core benefits */}
+                <div className="lg:col-span-5 space-y-6">
+                  <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-50 text-blue-700 border border-blue-100 font-extrabold tracking-widest text-[10px] uppercase">
+                    <Sparkles className="w-3.5 h-3.5 text-blue-600" /> Your Sourcing Advantage
+                  </span>
+                  <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+                    Why Choose <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-[#f97316] bg-clip-text text-transparent">Vel Bio Med</span>?
+                  </h2>
+                  <p className="text-slate-600 text-sm font-semibold leading-relaxed">
+                    Partnering with us means securing top-tier medical solutions backed by regional expertise and global manufacturer relationships.
+                  </p>
+                  
+                  {/* Floating Badges */}
+                  <div className="grid grid-cols-3 gap-4 pt-4">
+                    {[
+                      { label: "Excellence", color: "from-blue-500 to-blue-700" },
+                      { label: "Reliability", color: "from-amber-500 to-orange-600" },
+                      { label: "Satisfaction", color: "from-indigo-500 to-blue-600" }
+                    ].map((badge, idx) => (
+                      <div key={idx} className="flex flex-col items-center p-3 rounded-2xl bg-white border border-blue-50/80 shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-300">
+                        <div className={`w-3.5 h-3.5 rounded-full bg-gradient-to-br ${badge.color} mb-2 shadow-inner`} />
+                        <span className="text-[10px] sm:text-xs font-black text-slate-700">{badge.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Right Side: Professional text blocks with premium styling */}
+                <div className="lg:col-span-7 space-y-6 text-slate-700">
+                  <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-blue-50/50 to-white backdrop-blur-md border border-blue-100/80 shadow-inner hover:border-blue-300 transition-colors">
+                    <p className="text-base sm:text-lg font-medium leading-relaxed">
+                      When you choose <span className="font-extrabold bg-gradient-to-r from-blue-600 to-[#f97316] bg-clip-text text-transparent">Vel Bio Med</span>, you are choosing a partner committed to <span className="font-extrabold text-blue-700 underline decoration-blue-400/50 decoration-2">excellence</span>, <span className="font-extrabold text-[#e0690f] underline decoration-orange-400/50 decoration-2">reliability</span>, and <span className="font-extrabold text-indigo-700 underline decoration-indigo-400/50 decoration-2">customer satisfaction</span>. We are dedicated to making a positive impact on healthcare delivery by providing superior products and services.
+                    </p>
+                  </div>
+
+                  <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-slate-900 via-[#0f2445] to-[#251508] text-slate-200 shadow-xl border border-blue-900/30">
+                    <p className="text-sm sm:text-base font-medium leading-relaxed">
+                      Thank you for considering Vel Bio Med as your trusted partner in medical solutions. We look forward to serving you and contributing to the success of your healthcare endeavors.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
 
         {/* Success Stories Metric Blocks */}
         <section className="py-24 bg-white border-t border-slate-100">

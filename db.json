@@ -25,33 +25,39 @@
   "services": [
     {
       "id": "srv-1",
-      "title": "Medical Equipment Installation",
-      "description": "Precision setup, calibration, and safety validation of intensive-care machines, diagnostics consoles, and surgical fixtures.",
-      "iconName": "Wrench"
-    },
-    {
-      "id": "srv-2",
-      "title": "Comprehensive Maintenance & AMC",
-      "description": "Flexible Annual Maintenance Contracts (AMC) and comprehensive service cycles backed by original vendor spare inventories.",
+      "title": "AMC for Operation Theatre Equipment",
+      "description": "An Annual Maintenance Contract (AMC) for operation theatre equipment ensures regular maintenance, emergency support to optimize equipment performance.",
       "iconName": "Shield"
     },
     {
+      "id": "srv-2",
+      "title": "Troubleshooting of all medical equipment (Any brand)",
+      "description": "We provide expert troubleshooting services for all medical equipment brands, resolution of issues to maintain uninterrupted equipment reliability.",
+      "iconName": "Wrench"
+    },
+    {
       "id": "srv-3",
-      "title": "Clinical Consultancy",
-      "description": "Biomedical room layouts, load-bearing architecture consulting, and equipment selection matrices matching patient volumes.",
+      "title": "Installation & Commissioning of new medical equipment",
+      "description": "We excel in the seamless installation and commissioning of new medical equipment, ensuring optimal functionality and readiness .",
       "iconName": "Briefcase"
     },
     {
       "id": "srv-4",
-      "title": "On-Site Calibration",
-      "description": "Certified calibration matching global health accreditations (NABH, JCI) using calibrated reference testing analyzers.",
+      "title": "Restoration of medical equipment",
+      "description": "We specialize in restoring medical equipment to peak performance, ensuring reliability and longevity to support uninterrupted patient care.",
       "iconName": "Activity"
     },
     {
       "id": "srv-5",
-      "title": "Emergency Biomedical Repair",
-      "description": "Fast 24/7 dispatch with immediate diagnostics and temporary alternative unit deployment to secure patient safety.",
+      "title": "Customised Product solutions for all medical equipment",
+      "description": "We provide customized solutions for all medical equipment, meeting diverse needs with precision and innovation.",
       "iconName": "PhoneCall"
+    },
+    {
+      "id": "srv-6",
+      "title": "Hygienic Cleaning services",
+      "description": "Our hygienic cleaning services ensure meticulous sterilization and sanitation of medical equipment and facilities, maintaining impeccable standards for patient safety and healthcare hygiene.",
+      "iconName": "LifeBuoy"
     }
   ],
   "products": [
