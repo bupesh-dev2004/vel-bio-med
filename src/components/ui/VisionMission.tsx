@@ -49,7 +49,7 @@ function PremiumCard({
       animate={inView ? "visible" : "hidden"}
       variants={fadeUp}
       whileHover={{ y: -8, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] as const } }}
-      className="relative rounded-[2.5rem] p-8 md:p-10 flex flex-col gap-8 overflow-hidden group transition-all duration-300"
+      className="relative rounded-[2.5rem] p-6 sm:p-8 md:p-10 flex flex-col gap-6 sm:gap-8 overflow-hidden group transition-all duration-300"
       style={{
         background: `linear-gradient(145deg, ${gradientFrom} 0%, ${gradientTo} 100%)`,
         border: `1px solid rgba(255, 255, 255, 0.85)`,
@@ -81,7 +81,7 @@ function PremiumCard({
       />
 
       {/* Icon block */}
-      <div className="relative z-10 flex items-start gap-5">
+      <div className="relative z-10 flex flex-col lg:flex-row items-start gap-4 lg:gap-5">
         <div className="relative flex-shrink-0">
           <motion.div
             animate={{ boxShadow: [`0 0 0px ${accent}40`, `0 0 22px ${accent}60`, `0 0 0px ${accent}40`] }}

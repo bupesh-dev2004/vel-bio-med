@@ -153,7 +153,7 @@ function CorporateValueCard({ handleShuffle, title, desc, icon: IconComponent, g
         }
         dragRef.current = 0;
       }}
-      transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       className={`absolute left-0 top-0 flex flex-col justify-between h-[340px] w-[250px] sm:h-[430px] sm:w-[330px] select-none rounded-3xl border border-slate-800 bg-[#0f172a] p-6 sm:p-8 shadow-2xl text-white ${isFront ? "cursor-grab active:cursor-grabbing hover:border-slate-700" : ""}`}
     >
       {/* Decorative top line */}
@@ -218,7 +218,7 @@ function CorporateValuesStack({ values }: { values: ValueItem[] }) {
     if (isHovered) return;
     const interval = setInterval(() => {
       handleShuffle();
-    }, 2800);
+    }, 1800);
     return () => clearInterval(interval);
   }, [isHovered]);
 
@@ -488,7 +488,7 @@ export default function AboutView() {
                   className="relative overflow-hidden rounded-[2.5rem] border-2 border-slate-100 shadow-2xl bg-white group"
                 >
                   <motion.img
-                    src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80"
+                    src="/corporate-profile.png"
                     alt="Hospital Operating Theatre Installation"
                     className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
                   />
@@ -536,8 +536,9 @@ export default function AboutView() {
                     <Building2 className="w-3.5 h-3.5 text-blue-600" /> Corporate Profile
                   </span>
                   <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight">
-                    Sourcing Global Diagnostics of <br className="hidden sm:inline" />
-                    <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-800 bg-clip-text text-transparent">Unparalleled</span> <span className="bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 bg-clip-text text-transparent">Metric Confidence</span>
+                    Sourcing Global Diagnostics of{" "}
+                    <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-800 bg-clip-text text-transparent">Unparalleled</span>{" "}
+                    <span className="bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 bg-clip-text text-transparent">Metric Confidence</span>
                   </h2>
                   <div className="w-20 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-orange-500 rounded-full" />
                 </div>
@@ -694,7 +695,7 @@ export default function AboutView() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: false, margin: "-100px" }}
-              className="bg-white/80 backdrop-blur-2xl rounded-[2.5rem] p-10 md:p-16 border border-blue-100/80 shadow-2xl relative overflow-hidden"
+              className="bg-white/80 backdrop-blur-2xl rounded-[2.5rem] p-6 sm:p-10 md:p-16 border border-blue-100/80 shadow-2xl relative overflow-hidden"
             >
               {/* Inner card subtle decorative items */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-500/5 to-orange-500/5 rounded-full blur-3xl -z-10" />
@@ -714,17 +715,28 @@ export default function AboutView() {
                   </p>
                   
                   {/* Floating Badges */}
-                  <div className="grid grid-cols-3 gap-4 pt-4">
+                  <div className="grid grid-cols-1 gap-3.5 pt-4">
                     {[
-                      { label: "Excellence", color: "from-blue-500 to-blue-700" },
-                      { label: "Reliability", color: "from-amber-500 to-orange-600" },
-                      { label: "Satisfaction", color: "from-indigo-500 to-blue-600" }
-                    ].map((badge, idx) => (
-                      <div key={idx} className="flex flex-col items-center p-3 rounded-2xl bg-white border border-blue-50/80 shadow-sm hover:shadow-md hover:border-blue-200 transition-all duration-300">
-                        <div className={`w-3.5 h-3.5 rounded-full bg-gradient-to-br ${badge.color} mb-2 shadow-inner`} />
-                        <span className="text-[10px] sm:text-xs font-black text-slate-700">{badge.label}</span>
-                      </div>
-                    ))}
+                      { label: "Excellence", desc: "Top-tier quality controls", icon: Award, color: "from-blue-500 to-blue-700", hoverBg: "hover:bg-blue-50/30 hover:border-blue-300/80", hoverText: "group-hover:text-blue-650 text-blue-600" },
+                      { label: "Reliability", desc: "Unwavering client uptime", icon: ShieldCheck, color: "from-amber-500 to-orange-600", hoverBg: "hover:bg-orange-50/30 hover:border-orange-300/80", hoverText: "group-hover:text-orange-650 text-orange-600" },
+                      { label: "Satisfaction", desc: "Dedicated partnerships", icon: HeartHandshake, color: "from-indigo-500 to-blue-600", hoverBg: "hover:bg-indigo-50/30 hover:border-indigo-300/80", hoverText: "group-hover:text-indigo-650 text-indigo-600" }
+                    ].map((badge, idx) => {
+                      const IconComponent = badge.icon;
+                      return (
+                        <div
+                          key={idx}
+                          className={`group flex flex-row items-center gap-4 p-4 rounded-2xl bg-white border border-blue-50/80 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:translate-x-1.5 justify-start w-full text-left cursor-default ${badge.hoverBg}`}
+                        >
+                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-white bg-gradient-to-br ${badge.color} shadow-md flex-shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6`}>
+                            <IconComponent className="w-5 h-5" strokeWidth={2.2} />
+                          </div>
+                          <div className="min-w-0">
+                            <span className={`text-xs sm:text-sm font-black text-slate-800 block leading-tight transition-colors duration-300 ${badge.hoverText}`}>{badge.label}</span>
+                            <span className="text-[10px] sm:text-xs font-bold text-slate-400 mt-1 block leading-tight">{badge.desc}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
 

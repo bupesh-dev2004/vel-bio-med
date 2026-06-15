@@ -86,9 +86,9 @@ export default function Footer() {
             <Award className="w-7 h-7 animate-pulse text-amber-500" />
           </div>
           <div>
-            <p className="text-sm font-black text-white tracking-wide flex items-center gap-1.5">
+            <p className="text-sm font-black text-white tracking-wide flex flex-wrap items-center gap-1.5">
               ISO 13485 Certified Medical Supplier
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20 text-amber-500 text-[9px] font-black uppercase tracking-wider">
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20 text-amber-500 text-[9px] font-black uppercase tracking-wider whitespace-nowrap">
                 <Sparkles className="w-2.5 h-2.5" /> High Quality
               </span>
             </p>
