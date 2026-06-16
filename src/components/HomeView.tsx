@@ -15,6 +15,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { motion } from "framer-motion";
+import { AnimatedText } from "@/components/ui/animated-shiny-text";
 
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -39,8 +40,32 @@ const containerVariants = {
   }
 };
 
+const heroContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.05
+    }
+  }
+};
+
+const heroItemVariants = {
+  hidden: { opacity: 0, y: 35 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number]
+    }
+  }
+};
+
 interface HomeViewProps {
   onOpenProductModal: (p: Product) => void;
+  showPreloader?: boolean;
 }
 
 function AnimatedCounter({ target, duration = 1500, suffix = "" }: { target: number; duration?: number; suffix?: string }) {
@@ -96,45 +121,11 @@ function AnimatedCounter({ target, duration = 1500, suffix = "" }: { target: num
   return <span ref={elementRef}>{count}{suffix}</span>;
 }
 
-export default function HomeView({ onOpenProductModal }: HomeViewProps) {
+export default function HomeView({ onOpenProductModal, showPreloader = false }: HomeViewProps) {
   const { state, setCurrentTab, setInquiryMachineName } = useAppState();
 
-  // Slider State
-  const [currentSlide, setCurrentSlide] = useState(0);
+  // Slider State (just slides data for background image)
   const slides = state?.homeSlides || [];
-  const slideInterval = useRef<NodeJS.Timeout | null>(null);
-
-  useEffect(() => {
-    startAutoSlide();
-    return () => stopAutoSlide();
-  }, [slides.length]);
-
-  const startAutoSlide = () => {
-    stopAutoSlide();
-    if (slides.length > 0) {
-      slideInterval.current = setInterval(() => {
-        setCurrentSlide((prev) => (prev + 1) % slides.length);
-      }, 5000);
-    }
-  };
-
-  const stopAutoSlide = () => {
-    if (slideInterval.current) {
-      clearInterval(slideInterval.current);
-    }
-  };
-
-  const handlePrevSlide = () => {
-    stopAutoSlide();
-    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-    startAutoSlide();
-  };
-
-  const handleNextSlide = () => {
-    stopAutoSlide();
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-    startAutoSlide();
-  };
 
   // Products filters
   const trendingProducts = state?.products?.filter((p) => p.trending) || [];
@@ -162,132 +153,71 @@ export default function HomeView({ onOpenProductModal }: HomeViewProps) {
 
   return (
     <div className="bg-white min-h-screen font-sans">
-      {/* 1. HERO SLIDER */}
-      <section className="relative h-[480px] md:h-[600px] overflow-hidden bg-slate-900 group/slider">
-        {slides.length > 0 ? (
-          slides.map((slide, idx) => (
-            <div
-              key={slide.id}
-              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
-                }`}
+      {/* 1. HERO SECTION */}
+      <section className="relative h-[480px] md:h-[600px] overflow-hidden bg-slate-900">
+        {/* Background with zoom and fade in effect */}
+        <motion.div
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={showPreloader ? { opacity: 0, scale: 1.1 } : { opacity: 1, scale: 1.05 }}
+          transition={{ duration: 1.8, ease: "easeOut" }}
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${slides[0]?.image || "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1600&q=80"})`
+          }}
+        />
+        {/* Overlay with Medical blue tint gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/80 to-blue-950/40" />
+
+        {/* Background Glows */}
+        <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-radial from-blue-500/12 via-blue-900/0 to-transparent rounded-full pointer-events-none z-10" />
+        <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-radial from-amber-500/10 via-amber-650/0 to-transparent rounded-full pointer-events-none z-10" />
+
+        {/* Hero Content */}
+        <div className="absolute inset-0 flex items-center z-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <motion.div
+              initial="hidden"
+              animate={showPreloader ? "hidden" : "visible"}
+              variants={heroContainerVariants}
+              className="max-w-2xl text-left text-white space-y-4 md:space-y-6"
             >
-              {/* Background with subtle Zoom effect */}
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-[8000ms]"
-                style={{
-                  backgroundImage: `url(${slide.image})`,
-                  transform: idx === currentSlide ? "scale(1.05)" : "scale(1)"
-                }}
-              />
-              {/* Overlay with Medical blue tint gradient */}
-              <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/80 to-blue-950/40" />
-
-              {/* Background Glows */}
-              <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-radial from-blue-500/12 via-blue-900/0 to-transparent rounded-full pointer-events-none z-10" />
-              <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-radial from-amber-500/10 via-amber-650/0 to-transparent rounded-full pointer-events-none z-10" />
-
-              {/* Slider content */}
-              <div className="absolute inset-0 flex items-center z-20">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                  {idx === currentSlide && (
-                    <motion.div
-                      key={currentSlide}
-                      variants={containerVariants}
-                      initial="hidden"
-                      animate="visible"
-                      className="max-w-2xl text-left text-white space-y-4 md:space-y-6"
-                    >
-                      <motion.span
-                        variants={fadeUpVariants}
-                        className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[10px] sm:text-xs font-black tracking-widest px-4 py-1.5 rounded-full uppercase shadow-lg shadow-blue-500/20"
-                      >
-                        {slide.tagline}
-                      </motion.span>
-                      <motion.h1
-                        variants={fadeUpVariants}
-                        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white"
-                      >
-                        {idx === 0 && (
-                          <span>Transforming <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-sky-400 bg-clip-text text-transparent">Healthcare</span> One Installation at a Time</span>
-                        )}
-                        {idx === 1 && (
-                          <span>Your Trusted Partner in <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 bg-clip-text text-transparent">Medical Excellence</span></span>
-                        )}
-                        {idx === 2 && (
-                          <span>Innovative Medical <span className="bg-gradient-to-r from-cyan-400 via-teal-400 to-sky-400 bg-clip-text text-transparent">Equipment</span> Solutions</span>
-                        )}
-                        {idx >= 3 && slide.heading}
-                      </motion.h1>
-                      <motion.p
-                        variants={fadeUpVariants}
-                        className="text-sm sm:text-base md:text-lg text-slate-200/90 leading-relaxed font-medium"
-                      >
-                        {slide.description}
-                      </motion.p>
-                      <motion.div
-                        variants={fadeUpVariants}
-                        className="flex flex-wrap gap-3.5 pt-2"
-                      >
-                        <button
-                          onClick={() => setCurrentTab("products")}
-                          className="bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 text-white font-black text-xs sm:text-sm py-3.5 px-6 sm:px-8 rounded-xl shadow-xl shadow-blue-500/25 hover:scale-103 transition-all flex items-center gap-2 uppercase tracking-wider cursor-pointer border-none"
-                        >
-                          Explore Products <ArrowRight className="w-4 h-4" />
-                        </button>
-                        <button
-                          onClick={() => setCurrentTab("contact")}
-                          className="bg-gradient-to-r from-amber-500 to-orange-400 hover:from-amber-600 hover:to-orange-500 text-white font-black text-xs sm:text-sm py-3.5 px-6 sm:px-8 rounded-xl shadow-lg shadow-amber-500/25 hover:scale-103 transition-all flex items-center gap-2 uppercase tracking-wider cursor-pointer border-none"
-                        >
-                          Contact Us
-                        </button>
-                      </motion.div>
-                    </motion.div>
-                  )}
-                </div>
-              </div>
-            </div>
-          ))
-        ) : (
-          <div className="absolute inset-0 bg-blue-900 flex items-center justify-center text-white">
-            No Homepage Slides Available
+              <motion.span
+                variants={heroItemVariants}
+                className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[10px] sm:text-xs font-black tracking-widest px-4 py-1.5 rounded-full uppercase shadow-lg shadow-blue-500/20"
+              >
+                Clinical Sourcing Excellence
+              </motion.span>
+              <motion.h1
+                variants={heroItemVariants}
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white"
+              >
+                Transforming <AnimatedText asSpan text="Healthcare" gradientColors="linear-gradient(90deg, #0A6EBD 0%, #00e5ff 30%, #ffffff 50%, #00e5ff 70%, #0A6EBD 100%)" gradientAnimationDuration={1.6} textClassName="bg-clip-text text-transparent" /> One Installation at a Time
+              </motion.h1>
+              <motion.p
+                variants={heroItemVariants}
+                className="text-sm sm:text-base md:text-lg text-slate-200/90 leading-relaxed font-medium"
+              >
+                Vel Bio Med delivers high-caliber diagnostics and life-support machinery from world-renowned healthcare manufacturers to premium hospitals.
+              </motion.p>
+              <motion.div
+                variants={heroItemVariants}
+                className="flex flex-wrap gap-3.5 pt-2"
+              >
+                <button
+                  onClick={() => setCurrentTab("products")}
+                  className="bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 text-white font-black text-xs sm:text-sm py-3.5 px-6 sm:px-8 rounded-xl shadow-xl shadow-blue-500/25 hover:scale-103 transition-all flex items-center gap-2 uppercase tracking-wider cursor-pointer border-none"
+                >
+                  Explore Products <ArrowRight className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={() => setCurrentTab("contact")}
+                  className="bg-gradient-to-r from-amber-500 to-orange-400 hover:from-amber-600 hover:to-orange-500 text-white font-black text-xs sm:text-sm py-3.5 px-6 sm:px-8 rounded-xl shadow-lg shadow-amber-500/25 hover:scale-103 transition-all flex items-center gap-2 uppercase tracking-wider cursor-pointer border-none"
+                >
+                  Contact Us
+                </button>
+              </motion.div>
+            </motion.div>
           </div>
-        )}
-
-        {/* Navigation Arrows */}
-        {slides.length > 1 && (
-          <>
-            <button
-              onClick={handlePrevSlide}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-slate-950/45 hover:bg-blue-600 text-white p-2 md:p-3 rounded-full opacity-0 group-hover/slider:opacity-100 transition-all cursor-pointer"
-              aria-label="Previous Slide"
-            >
-              <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
-            </button>
-            <button
-              onClick={handleNextSlide}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-slate-950/45 hover:bg-blue-600 text-white p-2 md:p-3 rounded-full opacity-0 group-hover/slider:opacity-100 transition-all cursor-pointer"
-              aria-label="Next Slide"
-            >
-              <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
-            </button>
-          </>
-        )}
-
-        {/* Pagination Dots */}
-        <div className="absolute bottom-6 left-0 right-0 z-20 flex justify-center gap-2">
-          {slides.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => {
-                stopAutoSlide();
-                setCurrentSlide(idx);
-                startAutoSlide();
-              }}
-              className={`w-3.5 h-1.5 rounded-full transition-all duration-300 ${idx === currentSlide ? "bg-blue-500 w-7" : "bg-white/40"
-                }`}
-              aria-label={`Go to slide ${idx + 1}`}
-            />
-          ))}
         </div>
       </section>
 

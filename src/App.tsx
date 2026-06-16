@@ -180,7 +180,7 @@ function AppContent() {
 
       {/* Main active sub views switcher panel */}
       <main className="flex-grow">
-        {currentTab === "home" && <HomeView onOpenProductModal={handleOpenProductModal} />}
+        {currentTab === "home" && <HomeView onOpenProductModal={handleOpenProductModal} showPreloader={showPreloader} />}
         {currentTab === "about" && <AboutView />}
         {currentTab === "services" && <ServicesView />}
         {currentTab === "gallery" && <GalleryView />}
