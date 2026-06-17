@@ -59,7 +59,7 @@ export default function LeadershipMessage() {
     return (
         <section
             ref={ref}
-            className="relative py-28 md:py-36 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 text-slate-100 border-t border-b border-slate-800/60"
+            className="relative py-16 md:py-28 lg:py-36 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 text-slate-100 border-t border-b border-slate-800/60"
         >
             {/* Ambient background glows */}
             <div
@@ -83,7 +83,7 @@ export default function LeadershipMessage() {
                 }}
             />
 
-            <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
 
                 {/* Section header */}
                 <motion.div
@@ -118,7 +118,7 @@ export default function LeadershipMessage() {
                         <motion.div
                             custom={1} initial="hidden" animate={inView ? "visible" : "hidden"} variants={fadeUp}
                             whileHover={{ y: -4, transition: { duration: 0.3 } }}
-                            className="relative rounded-[2rem] p-8 md:p-10 overflow-hidden bg-slate-950/50 border border-slate-800/80 shadow-2xl backdrop-blur-md"
+                            className="relative rounded-[2rem] p-5 sm:p-8 md:p-10 overflow-hidden bg-slate-950/50 border border-slate-800/80 shadow-2xl backdrop-blur-md"
                         >
                             {/* Decorative Quote Icon */}
                             <div className="absolute top-6 right-8 text-slate-800 opacity-20 pointer-events-none">
@@ -237,7 +237,7 @@ export default function LeadershipMessage() {
                             </div>
 
                             {/* Refined Bio plate inside card */}
-                            <div className="p-6 sm:p-8 space-y-2 relative z-20">
+                            <div className="p-5 sm:p-8 space-y-2 relative z-20">
                                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-500">
                                     Our Founder's Vision
                                 </span>

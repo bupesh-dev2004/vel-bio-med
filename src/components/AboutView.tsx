@@ -1,8 +1,12 @@
-import { Award, ShieldCheck, Users, Activity, Sparkles, Building2, Globe, HeartHandshake, Scale, Cpu, Heart, MapPin } from "lucide-react";
+import { Award, ShieldCheck, Users, Activity, Sparkles, Building2, Globe, HeartHandshake, Scale, Cpu, Heart, MapPin, ThumbsUp, CheckSquare, Zap, ArrowRight } from "lucide-react";
 import LeadershipMessage from "./ui/LeadershipMessage";
 import VisionMission from "./ui/VisionMission";
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { useAppState } from "../AppContext.js";
+import { FrostedGlassCard } from "@/components/ui/interactive-frosted-glass-card";
+import { BorderRotate } from "@/components/ui/animated-gradient-border";
+
 
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -287,6 +291,7 @@ function CorporateValuesStack({ values }: { values: ValueItem[] }) {
 }
 
 export default function AboutView() {
+  const { setCurrentTab } = useAppState();
   const bgRef = useRef<HTMLDivElement>(null);
   const shadeRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -399,7 +404,7 @@ export default function AboutView() {
               variants={containerVariants}
               initial="hidden"
               animate="visible"
-              className="max-w-3xl mx-auto space-y-6"
+              className="max-w-3xl mx-auto space-y-6 px-6"
             >
               <motion.span
                 variants={fadeUpVariants}
@@ -430,7 +435,7 @@ export default function AboutView() {
         {/* Bouncy Scroll Indicator Arrow */}
         <div
           ref={arrowRef}
-          className="arrow"
+          className="arrow hidden sm:block"
           onClick={() => {
             window.scrollTo({
               top: window.innerHeight - 80,
@@ -452,7 +457,7 @@ export default function AboutView() {
       {/* Subsequent Content Wrapper - scrolls over fixed background */}
       <div className="relative z-10 bg-slate-50 border-t border-slate-200/40">
         {/* Corporate Overview Story */}
-        <section className="py-24 md:py-32 bg-gradient-to-br from-slate-50 via-[#f0f6ff] to-white relative overflow-hidden">
+        <section className="py-16 md:py-24 lg:py-32 bg-gradient-to-br from-slate-50 via-[#f0f6ff] to-white relative overflow-hidden">
           {/* Scientific grid dot background */}
           <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1.5px,transparent_1.5px)] [background-size:24px_24px] opacity-60" />
 
@@ -468,7 +473,7 @@ export default function AboutView() {
             style={{ background: "radial-gradient(circle, #f97316 0%, transparent 70%)", filter: "blur(100px)" }}
           />
 
-          <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
 
               {/* Left Column Asymmetrical Image Block */}
@@ -519,7 +524,7 @@ export default function AboutView() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: 0.4 }}
-                  className="absolute -top-4 -right-4 rounded-xl px-4 py-2 flex items-center gap-2 bg-white/90 backdrop-blur-md border border-blue-100 shadow-xl"
+                  className="absolute top-2 right-2 sm:-top-4 sm:-right-4 rounded-xl px-4 py-2 flex items-center gap-2 bg-white/90 backdrop-blur-md border border-blue-100 shadow-xl"
                 >
                   <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
                   <div className="absolute w-2.5 h-2.5 rounded-full bg-emerald-500" />
@@ -580,7 +585,7 @@ export default function AboutView() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: false, margin: "-100px" }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-20"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12 md:mt-20"
             >
               {[
                 {
@@ -631,7 +636,7 @@ export default function AboutView() {
                     variants={fadeUpVariants}
                     whileHover={{ y: -6, scale: 1.01 }}
                     transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                    className={`group p-6 sm:p-8 rounded-3xl border bg-gradient-to-br ${item.cardBg} ${item.borderColor} transition-all duration-500 relative overflow-hidden flex flex-col justify-between`}
+                    className={`group p-5 sm:p-8 rounded-3xl border bg-gradient-to-br ${item.cardBg} ${item.borderColor} transition-all duration-500 relative overflow-hidden flex flex-col justify-between`}
                   >
                     {/* Hover glow background */}
                     <div
@@ -666,6 +671,7 @@ export default function AboutView() {
           </div>
         </section>
 
+
         {/* Leadership Founder Message Section */}
         <LeadershipMessage />
 
@@ -676,7 +682,7 @@ export default function AboutView() {
         <CorporateValuesStack values={values} />
 
         {/* Why Choose Vel Bio Med Section */}
-        <section className="py-24 bg-gradient-to-br from-[#f0f6ff] via-white to-[#fff7ed] border-t border-blue-100/60 relative overflow-hidden">
+        <section className="py-16 md:py-24 bg-gradient-to-br from-[#f0f6ff] via-white to-[#fff7ed] border-t border-blue-100/60 relative overflow-hidden">
           {/* Ambient background glows */}
           <div
             aria-hidden
@@ -689,13 +695,13 @@ export default function AboutView() {
             style={{ background: "radial-gradient(circle, #f97316 0%, transparent 70%)", filter: "blur(120px)" }}
           />
           
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
             <motion.div
               variants={fadeUpVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: false, margin: "-100px" }}
-              className="bg-white/80 backdrop-blur-2xl rounded-[2.5rem] p-6 sm:p-10 md:p-16 border border-blue-100/80 shadow-2xl relative overflow-hidden"
+              className="bg-white/80 backdrop-blur-2xl rounded-[2.5rem] p-5 sm:p-10 md:p-16 border border-blue-100/80 shadow-2xl relative overflow-hidden"
             >
               {/* Inner card subtle decorative items */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-500/5 to-orange-500/5 rounded-full blur-3xl -z-10" />
@@ -759,12 +765,135 @@ export default function AboutView() {
           </div>
         </section>
 
+        {/* Corporate Strengths Section (relocated from Home) */}
+        <section className="py-16 md:py-24 bg-slate-950 relative overflow-hidden">
+          {/* Glow ambient design elements */}
+          <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+              {/* Left side Image wrapped in rotating gradient border */}
+              <motion.div
+                variants={fadeUpVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-100px" }}
+                className="lg:col-span-6 relative"
+              >
+                <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-3xl transform rotate-2 scale-103 opacity-15 blur-sm" />
+
+                <BorderRotate
+                  animationMode="auto-rotate"
+                  animationSpeed={6}
+                  borderWidth={3.5}
+                  borderRadius={28}
+                  gradientColors={{
+                    primary: '#3b82f6',
+                    secondary: '#6366f1',
+                    accent: '#06b6d4'
+                  }}
+                  backgroundColor="#020617"
+                  className="p-1"
+                >
+                  <div className="relative overflow-hidden rounded-[24px]">
+                    <img
+                      src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80"
+                      alt="Vel Bio Med critical care service support"
+                      className="w-full h-auto object-cover relative z-10 shadow-2xl"
+                    />
+                  </div>
+                </BorderRotate>
+
+                <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-6 rounded-2xl shadow-xl z-20 max-w-xs hidden sm:block border border-blue-50/30">
+                  <p className="text-3xl font-black text-white">100%</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-blue-100 mt-1">Uptime SLA Support</p>
+                  <p className="text-blue-100 text-[11px] mt-2 font-medium leading-relaxed">Our engineers are dispatched immediately for high emergency troubleshooting alerts.</p>
+                </div>
+              </motion.div>
+
+              {/* Right side content */}
+              <div className="lg:col-span-6 space-y-6">
+                <motion.div
+                  variants={fadeUpVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-100px" }}
+                  className="space-y-6"
+                >
+                  <div>
+                    <span className="text-blue-400 font-bold tracking-widest text-xs uppercase block mb-1">Corporate Strengths</span>
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                      Our Uncompromising Standard of Reliability
+                    </h2>
+                    <div className="w-12 h-1 bg-blue-50 mt-4 rounded-full" />
+                  </div>
+
+                  <p className="text-slate-300 text-sm leading-relaxed font-medium">
+                    Vel Bio Med bridges the technical void in biological science distribution by delivering world-class hospital equipment, fast emergency servicing response, and long term comprehensive warranties.
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-100px" }}
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8"
+                >
+                  {[
+                    {
+                      title: "Continuous Quality",
+                      subtitle: "Tier-1 Calibration",
+                      desc: "Every medical monitor and digital scanner system is calibrated rigorously against original parameters before dispatch.",
+                      icon: <ShieldCheck className="w-7 h-7 text-white" />,
+                      bgColor: "bg-blue-600/90"
+                    },
+                    {
+                      title: "Turnkey Setups",
+                      subtitle: "End-to-End Compliance",
+                      desc: "Our biomedical crew supervises gas setups, electrical compliance testing, and critical OT layouts end-to-end.",
+                      icon: <Zap className="w-7 h-7 text-white" />,
+                      bgColor: "bg-indigo-600/90"
+                    },
+                    {
+                      title: "Clinical Engineers",
+                      subtitle: "Specialist Supervision",
+                      desc: "Access the training expertise of specialists registered under critical medical equipment regulatory protocols.",
+                      icon: <Activity className="w-7 h-7 text-white" />,
+                      bgColor: "bg-teal-600/90"
+                    },
+                    {
+                      title: "Friendly Contracts",
+                      subtitle: "Flexible AMC Frameworks",
+                      desc: "Leverage affordable AMC frameworks designed for individual clinics to corporate multi-wing hospital systems.",
+                      icon: <ThumbsUp className="w-7 h-7 text-white" />,
+                      bgColor: "bg-amber-600/90"
+                    }
+                  ].map((item, idx) => (
+                    <motion.div key={idx} variants={fadeUpVariants}>
+                      <FrostedGlassCard
+                        title={item.title}
+                        subtitle={item.subtitle}
+                        description={item.desc}
+                        icon={item.icon}
+                        iconBgColor={item.bgColor}
+                      />
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Success Stories Metric Blocks */}
-        <section className="py-24 bg-white border-t border-slate-100">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-            <div className="bg-gradient-to-br from-slate-900 to-slate-950 rounded-[2.5rem] p-10 md:p-16 shadow-2xl text-white relative overflow-hidden">
+        <section className="py-16 md:py-24 bg-white border-t border-slate-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
+            <div className="bg-gradient-to-br from-slate-900 to-slate-950 rounded-[2.5rem] p-6 sm:p-10 md:p-16 shadow-2xl text-white relative overflow-hidden">
               <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1200&q=80')] bg-cover bg-center opacity-5 pointer-events-none" />
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/10 relative z-10">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:divide-x divide-white/10 relative z-10">
                 {metrics.map((m, idx) => (
                   <div key={idx} className="space-y-2 py-4 md:py-0">
                     <p className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400 tracking-tight">

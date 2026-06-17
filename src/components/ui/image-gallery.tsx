@@ -1,6 +1,8 @@
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import { useAppState } from "../../AppContext.js";
+import { ArrowRight } from "lucide-react";
 
 interface GalleryItem {
   src: string;
@@ -55,96 +57,161 @@ const medicalImages: GalleryItem[] = [
   }
 ];
 
+const fadeUpVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number]
+    }
+  }
+};
+
 export default function ImageGallery() {
+  const { state, setCurrentTab } = useAppState();
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+
+  const dbGallery = state?.gallery || [];
+  
+  // Normalize items from state.gallery, fallback to medicalImages if empty
+  const displayItems: GalleryItem[] = dbGallery.length > 0
+    ? dbGallery.slice(0, 6).map((item: any) => ({
+        src: item.image,
+        title: item.title,
+        category: item.category,
+        description: item.video
+          ? "Interactive video walkthrough and clinical customer feedback for this modular installation setup."
+          : `Professional real-world clinical sizing and installation of ${item.title} under category ${item.category} by Vel Bio Med.`,
+        objectFit: "cover" as const
+      }))
+    : medicalImages;
 
   return (
     <>
-      <section className="w-full flex flex-col items-center justify-start py-20 bg-slate-50 relative overflow-hidden border-y border-slate-100">
-        {/* Glow Effects */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
+      <section className="w-full flex flex-col items-center justify-start py-24 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 relative overflow-hidden border-y border-slate-950">
+        {/* Ambient Glow Effects */}
+        <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-radial from-blue-600/8 via-transparent to-transparent rounded-full pointer-events-none blur-2xl" />
+        <div className="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-radial from-amber-500/4 via-transparent to-transparent rounded-full pointer-events-none blur-2xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-radial from-indigo-500/5 via-transparent to-transparent rounded-full pointer-events-none blur-3xl" />
 
-        <div className="max-w-4xl text-center px-6 mb-12">
-          <span className="inline-flex items-center gap-1.5 bg-blue-50 text-blue-600 font-bold px-3.5 py-1.5 rounded-full text-xs uppercase tracking-widest mb-4 border border-blue-100/80">
-            State of the Art Solutions
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
-            Our Latest <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">Acquisitions</span>
-          </h2>
-          <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto mt-4 rounded-full" />
-          <p className="text-slate-500 text-sm md:text-base mt-4 font-medium max-w-2xl mx-auto leading-relaxed">
-            High acuity bedside systems, multi-frequency digital ultrasound machinery, and specialized operational setups from certified global healthcare leaders.
-          </p>
-        </div>
+        {/* Ambient Grid Background */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)] opacity-30 pointer-events-none" />
 
-        {/* Dynamic Accordion Gallery */}
-        <div className="flex flex-col lg:flex-row items-center gap-3 h-auto lg:h-[450px] w-full max-w-6xl mt-2 px-6">
-          {medicalImages.map((item, idx) => (
-            <div
-              key={idx}
-              onMouseEnter={() => setHoveredIdx(idx)}
-              onMouseLeave={() => setHoveredIdx(null)}
-              className={cn(
-                "relative group flex-grow transition-all duration-700 ease-out rounded-2xl overflow-hidden shadow-md hover:shadow-2xl border border-slate-200/60 cursor-pointer w-full lg:w-28 h-[250px] lg:h-full",
-                hoveredIdx === idx ? "lg:flex-[3.5]" : "lg:flex-[1]"
-              )}
-            >
-              {/* Image with zoom on hover */}
-              <img
-                className={cn(
-                  "h-full w-full transition-transform duration-1000 ease-out group-hover:scale-105",
-                  item.objectFit === "contain"
-                    ? "object-contain p-6 bg-white"
-                    : "object-cover object-center"
-                )}
-                src={item.src}
-                alt={item.title}
-                loading="lazy"
-              />
+        <motion.div
+          variants={fadeUpVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="w-full flex flex-col items-center justify-start relative z-10"
+        >
+          <div className="max-w-4xl text-center px-6 mb-12 relative z-10">
+            <span className="inline-flex items-center gap-1.5 bg-blue-500/10 border border-blue-500/30 text-blue-400 font-extrabold px-3.5 py-1.5 rounded-full text-xs uppercase tracking-widest mb-4 shadow-lg shadow-blue-500/10">
+              State of the Art Solutions
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
+              Our Professional <span className="bg-gradient-to-r from-sky-400 via-blue-400 to-amber-400 bg-clip-text text-transparent">Gallery</span>
+            </h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-amber-500 mx-auto mt-5 rounded-full" />
+            <p className="text-slate-400 text-sm md:text-base mt-4 font-medium max-w-2xl mx-auto leading-relaxed">
+              Take a visual tour of real ICU setups, certified operating theatres, and high-performance diagnostic imaging suites installed and configured by our engineers.
+            </p>
+          </div>
 
-              {/* Gradient Overlay for text contrast */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-85 group-hover:opacity-90 transition-opacity duration-500" />
-
-              {/* Left-Border accent highlight matching logo brand colors */}
+          {/* Dynamic Accordion Gallery */}
+          <div className="flex flex-col lg:flex-row items-center gap-3 h-auto lg:h-[450px] w-full max-w-6xl mt-2 px-6">
+            {displayItems.map((item, idx) => (
               <div
+                key={idx}
+                onMouseEnter={() => setHoveredIdx(idx)}
+                onMouseLeave={() => setHoveredIdx(null)}
                 className={cn(
-                  "absolute top-0 left-0 w-1.5 h-full transition-all duration-500",
-                  idx % 2 === 0 ? "bg-blue-500" : "bg-amber-500"
+                  "relative group flex-grow transition-[flex-grow,border-color,box-shadow] duration-700 ease-out rounded-[24px] overflow-hidden shadow-xl border cursor-pointer w-full lg:w-28 h-[250px] lg:h-full [backface-visibility:hidden] transform-gpu",
+                  hoveredIdx === idx 
+                    ? "lg:flex-[3.5] shadow-blue-500/5" 
+                    : "lg:flex-[1] shadow-black/40",
+                  hoveredIdx === idx
+                    ? (idx % 2 === 0 ? "border-blue-500/40" : "border-amber-500/40")
+                    : "border-slate-800/80 hover:border-slate-700/80"
                 )}
-              />
-
-              {/* Text content card details */}
-              <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col justify-end min-h-[120px] text-white">
-                <span
+              >
+                {/* Image with zoom on hover */}
+                <img
                   className={cn(
-                    "text-[10px] font-black uppercase tracking-widest transition-all duration-500 mb-1.5 block",
-                    idx % 2 === 0 ? "text-sky-300" : "text-amber-400"
+                    "h-full w-full transition-transform duration-1000 ease-out group-hover:scale-105",
+                    item.objectFit === "contain"
+                      ? "object-contain p-6 bg-white"
+                      : "object-cover object-center bg-slate-900"
                   )}
-                >
-                  {item.category}
-                </span>
+                  src={item.src}
+                  alt={item.title}
+                  loading="lazy"
+                />
 
-                {/* Title changes structure when active/hovered */}
-                <h3 className="text-base md:text-lg font-bold tracking-tight text-white line-clamp-1 leading-snug">
-                  {item.title}
-                </h3>
+                {/* Gradient Overlay for text contrast */}
+                <div 
+                  className={cn(
+                    "absolute inset-0 bg-gradient-to-t to-transparent transition-all duration-500 z-10",
+                    hoveredIdx === idx 
+                      ? "from-slate-950 via-slate-950/40 opacity-95" 
+                      : "from-slate-950 via-slate-950/20 opacity-80"
+                  )}
+                />
 
-                {/* Subtitle description revealed smoothly on accordion expand */}
+                {/* Top Accent Gradient Border */}
                 <div
                   className={cn(
-                    "grid transition-all duration-700 ease-out opacity-0",
-                    hoveredIdx === idx ? "grid-rows-[1fr] opacity-100 mt-2.5" : "grid-rows-[0fr]"
+                    "absolute top-0 left-0 right-0 h-1 transition-all duration-500 z-20",
+                    idx % 2 === 0 
+                      ? "bg-gradient-to-r from-blue-500 via-sky-400 to-transparent" 
+                      : "bg-gradient-to-r from-amber-500 via-orange-400 to-transparent"
                   )}
-                >
-                  <p className="text-xs text-slate-300 font-medium leading-relaxed overflow-hidden">
-                    {item.description || "Delivered, calibrated, and maintained to the highest clinical parameters by Vel Bio Med."}
-                  </p>
+                />
+
+                {/* Text content card details */}
+                <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col justify-end min-h-[120px] text-white z-20">
+                  <span
+                    className={cn(
+                      "text-[10px] font-black uppercase tracking-widest transition-all duration-500 mb-1.5 block",
+                      idx % 2 === 0 ? "text-sky-300" : "text-amber-400"
+                    )}
+                  >
+                    {item.category}
+                  </span>
+
+                  {/* Title changes structure when active/hovered */}
+                  <h3 className="text-base md:text-lg font-bold tracking-tight text-white line-clamp-1 leading-snug">
+                    {item.title}
+                  </h3>
+
+                  {/* Subtitle description revealed smoothly on accordion expand */}
+                  <div
+                    className={cn(
+                      "grid transition-all duration-700 ease-out opacity-0",
+                      hoveredIdx === idx ? "grid-rows-[1fr] opacity-100 mt-2.5" : "grid-rows-[0fr]"
+                    )}
+                  >
+                    <p className="text-xs text-slate-300 font-medium leading-relaxed overflow-hidden">
+                      {item.description || "Delivered, calibrated, and maintained to the highest clinical parameters by Vel Bio Med."}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+
+          {/* View Full Gallery Button */}
+          <div className="mt-12 flex justify-center relative z-10">
+            <button
+              onClick={() => setCurrentTab("gallery")}
+              className="group relative inline-flex items-center gap-2.5 px-8 py-3.5 bg-slate-900/80 hover:bg-slate-955 text-slate-100 hover:text-white border border-slate-800 hover:border-blue-500/40 rounded-xl shadow-lg hover:shadow-blue-500/5 hover:scale-102 transition-all duration-300 uppercase tracking-wider font-extrabold text-[11px] cursor-pointer"
+            >
+              <span>View Full Gallery Section</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300 text-sky-400" />
+            </button>
+          </div>
+        </motion.div>
       </section>
     </>
   );

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight, Award, ShieldCheck, Zap, Activity, Star, Eye, MessageSquare, Check, ArrowRight, StarHalf, Building, ThumbsUp, CheckSquare, Heart, Stethoscope, HeartPulse, Dna } from "lucide-react";
+import { ChevronLeft, ChevronRight, Award, ShieldCheck, Zap, Activity, Star, Eye, MessageSquare, Check, ArrowRight, StarHalf, Building, ThumbsUp, CheckSquare, Heart, Stethoscope, HeartPulse, Dna, Wrench, Shield, Briefcase, PhoneCall, LifeBuoy, CheckCircle2 } from "lucide-react";
 import { useAppState } from "../AppContext.js";
 import { Product } from "../types.js";
 import { FrostedGlassCard } from "@/components/ui/interactive-frosted-glass-card";
@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/carousel";
 import { motion } from "framer-motion";
 import { AnimatedText } from "@/components/ui/animated-shiny-text";
+import { FlipWords } from "@/components/ui/flip-words";
 
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -123,14 +124,208 @@ function AnimatedCounter({ target, duration = 1500, suffix = "" }: { target: num
 
 export default function HomeView({ onOpenProductModal, showPreloader = false }: HomeViewProps) {
   const { state, setCurrentTab, setInquiryMachineName } = useAppState();
+  const [trendingApi, setTrendingApi] = useState<any>(null);
+  const [productsApi, setProductsApi] = useState<any>(null);
+  const [currentProductIndex, setCurrentProductIndex] = useState(0);
+  const [productSnaps, setProductSnaps] = useState<number[]>([]);
+
+  useEffect(() => {
+    if (!trendingApi) return;
+    let intervalId: any = null;
+
+    const startAutoplay = () => {
+      stopAutoplay();
+      intervalId = setInterval(() => {
+        if (!trendingApi) return;
+        if (trendingApi.canScrollNext()) {
+          trendingApi.scrollNext();
+        } else {
+          trendingApi.scrollTo(0);
+        }
+      }, 3500);
+    };
+
+    const stopAutoplay = () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+    };
+
+    startAutoplay();
+    trendingApi.on("pointerDown", stopAutoplay);
+    trendingApi.on("settle", startAutoplay);
+
+    return () => {
+      trendingApi.off("pointerDown", stopAutoplay);
+      trendingApi.off("settle", startAutoplay);
+      stopAutoplay();
+    };
+  }, [trendingApi]);
+
+  useEffect(() => {
+    if (!productsApi) return;
+
+    const updateSnaps = () => {
+      setProductSnaps(productsApi.scrollSnapList());
+      setCurrentProductIndex(productsApi.selectedScrollSnap());
+    };
+
+    updateSnaps();
+    productsApi.on("select", updateSnaps);
+    productsApi.on("reInit", updateSnaps);
+
+    let intervalId: any = null;
+
+    const startAutoplay = () => {
+      stopAutoplay();
+      intervalId = setInterval(() => {
+        if (!productsApi) return;
+        if (productsApi.canScrollNext()) {
+          productsApi.scrollNext();
+        } else {
+          productsApi.scrollTo(0);
+        }
+      }, 3000);
+    };
+
+    const stopAutoplay = () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+    };
+
+    startAutoplay();
+    productsApi.on("pointerDown", stopAutoplay);
+    productsApi.on("settle", startAutoplay);
+
+    return () => {
+      productsApi.off("select", updateSnaps);
+      productsApi.off("reInit", updateSnaps);
+      productsApi.off("pointerDown", stopAutoplay);
+      productsApi.off("settle", startAutoplay);
+      stopAutoplay();
+    };
+  }, [productsApi]);
 
   // Slider State (just slides data for background image)
   const slides = state?.homeSlides || [];
 
   // Products filters
   const trendingProducts = state?.products?.filter((p) => p.trending) || [];
+  const trendingThree = trendingProducts.slice(0, 3);
   const dynamicProducts = state?.products || [];
   const latestAcquisitions = state?.products ? [...state.products].slice(-4).reverse() : [];
+
+  // Service Icon resolver helper
+  const renderServiceIcon = (name: string, isAmber: boolean) => {
+    const iconColor = isAmber ? "text-orange-650 group-hover:text-white" : "text-blue-650 group-hover:text-white";
+    switch (name) {
+      case "Wrench":
+        return <Wrench className={`w-6 h-6 ${iconColor}`} />;
+      case "Shield":
+        return <Shield className={`w-6 h-6 ${iconColor}`} />;
+      case "Briefcase":
+        return <Briefcase className={`w-6 h-6 ${iconColor}`} />;
+      case "Activity":
+        return <Activity className={`w-6 h-6 ${iconColor}`} />;
+      case "PhoneCall":
+        return <PhoneCall className={`w-6 h-6 ${iconColor}`} />;
+      default:
+        return <LifeBuoy className={`w-6 h-6 ${iconColor}`} />;
+    }
+  };
+
+  const getDeliverables = (title: string) => {
+    const lowerTitle = title.toLowerCase();
+    if (lowerTitle.includes("amc")) {
+      return [
+        "Regular preventative maintenance audits",
+        "24/7 priority operational room dispatch",
+        "Original vendor parts & seal checkups"
+      ];
+    }
+    if (lowerTitle.includes("troubleshooting")) {
+      return [
+        "Multi-brand diagnostic testing",
+        "Fast fault isolation & repairs",
+        "Component reliability restoration"
+      ];
+    }
+    if (lowerTitle.includes("installation")) {
+      return [
+        "Pre-installation layout planning",
+        "OEM-standard equipment testing",
+        "Operational certification handovers"
+      ];
+    }
+    if (lowerTitle.includes("restoration")) {
+      return [
+        "Full structural & cosmetic overhaul",
+        "Electronic component recalibration",
+        "Longevity validation testing"
+      ];
+    }
+    if (lowerTitle.includes("customised") || lowerTitle.includes("customized")) {
+      return [
+        "Tailored adapter & housing designs",
+        "Precision workflow integration",
+        "Innovative engineering adjustments"
+      ];
+    }
+    if (lowerTitle.includes("cleaning") || lowerTitle.includes("hygienic")) {
+      return [
+        "Meticulous sanitization protocols",
+        "Certified biological sterilization check",
+        "Healthcare hygiene standard compliance"
+      ];
+    }
+    return [
+      "OEM-standard diagnostic audits",
+      "Certified engineering oversight",
+      "Full compliance & safety documentation"
+    ];
+  };
+
+  const dbServices = state?.services || [
+    {
+      id: "srv-1",
+      title: "AMC for Operation Theatre Equipment",
+      description: "An Annual Maintenance Contract (AMC) for operation theatre equipment ensures regular maintenance, emergency support to optimize equipment performance.",
+      iconName: "Shield"
+    },
+    {
+      id: "srv-2",
+      title: "Troubleshooting of all medical equipment (Any brand)",
+      description: "We provide expert troubleshooting services for all medical equipment brands, resolution of issues to maintain uninterrupted equipment reliability.",
+      iconName: "Wrench"
+    },
+    {
+      id: "srv-3",
+      title: "Installation & Commissioning of new medical equipment",
+      description: "We excel in the seamless installation and commissioning of new medical equipment, ensuring optimal functionality and readiness .",
+      iconName: "Briefcase"
+    },
+    {
+      id: "srv-4",
+      title: "Restoration of medical equipment",
+      description: "We specialize in restoring medical equipment to peak performance, ensuring reliability and longevity to support uninterrupted patient care.",
+      iconName: "Activity"
+    },
+    {
+      id: "srv-5",
+      title: "Customised Product solutions for all medical equipment",
+      description: "We provide customized solutions for all medical equipment, meeting diverse needs with precision and innovation.",
+      iconName: "PhoneCall"
+    },
+    {
+      id: "srv-6",
+      title: "Hygienic Cleaning services",
+      description: "Our hygienic cleaning services ensure meticulous sterilization and sanitation of medical equipment and facilities, maintaining impeccable standards for patient safety and healthcare hygiene.",
+      iconName: "LifeBuoy"
+    }
+  ];
 
   // Clients Mock
   const clientLogos = [
@@ -221,397 +416,363 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
         </div>
       </section>
 
-      {/* 2. ELEVATING HEALTHCARE EXCELLENCE SECTION */}
-      <section className="py-24 bg-slate-50 relative overflow-hidden border-b border-slate-100">
-        {/* Ambient Decorative Light Orbs */}
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-500/8 blur-3xl rounded-full pointer-events-none" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-amber-500/8 blur-3xl rounded-full pointer-events-none" />
+      {/* 2. OUR PRODUCTS SECTION */}
+      <section className="py-24 bg-linear-to-br from-blue-50/50 via-white to-orange-50/50 relative overflow-hidden border-b border-slate-100">
+        {/* Ambient Grid Background */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)] opacity-40 pointer-events-none" />
 
-        {/* Subtle grid pattern background overlay */}
-        <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
+        {/* Ambient Decorative Light Orbs - Blue and Orange Gradient Glows */}
+        <div className="absolute top-10 -left-10 w-[500px] h-[500px] bg-radial from-blue-500/15 via-blue-900/0 to-transparent rounded-full pointer-events-none" />
+        <div className="absolute bottom-10 -right-10 w-[500px] h-[500px] bg-radial from-orange-500/12 via-orange-950/0 to-transparent rounded-full pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-
-            {/* Left Column: Sticky Summary & Stats Counters */}
-            <motion.div
-              variants={fadeUpVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="lg:col-span-5 space-y-8 lg:sticky lg:top-24"
-            >
-              <div>
-                <span className="inline-flex items-center gap-1.5 bg-gradient-to-r from-blue-50 to-amber-50/60 text-blue-600 font-bold px-3.5 py-1.5 rounded-full text-xs uppercase tracking-widest mb-4 border border-blue-100/60 shadow-xs">
-                  <Activity className="w-3.5 h-3.5 text-blue-600 animate-pulse" /> Our Performance
-                </span>
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
-                  Elevating{" "}
-                  <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 bg-clip-text text-transparent">
-                    Healthcare
-                  </span>{" "}
-                  <span className="bg-gradient-to-r from-amber-500 via-orange-500 to-yellow-500 bg-clip-text text-transparent">
-                    Excellence
-                  </span>
-                </h2>
-                <div className="w-24 h-1.5 bg-gradient-to-r from-blue-600 via-indigo-500 to-amber-500 mt-5 rounded-full shadow-xs" />
-              </div>
-
-              <p className="text-slate-500 text-sm md:text-base leading-relaxed font-medium">
-                Supporting health clinics and emergency services globally with cutting-edge bioscience machinery and specialized training setup. We bridge technical operations with flawless medical readiness.
+        <motion.div
+          variants={fadeUpVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+        >
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+            <div className="space-y-3">
+              <span className="inline-flex items-center gap-1.5 bg-blue-50/80 border border-blue-200/50 text-blue-600 font-extrabold px-4 py-1.5 rounded-full text-[10px] uppercase tracking-widest shadow-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-ping" /> Sourcing Catalogue
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-none">
+                Our <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">Products</span>
+              </h2>
+              <p className="text-slate-500 text-xs sm:text-sm font-medium max-w-xl">
+                High-performance medical equipment, diagnostic machinery, and clinical instrumentation sourced from leading global manufacturers.
               </p>
-
-              {/* High-Impact Stat Grid */}
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-2 gap-6 pt-6 border-t border-slate-200">
-                <div className="p-4 rounded-2xl bg-gradient-to-br from-blue-50/90 via-blue-50/45 to-white/95 border border-blue-100/80 shadow-xs hover:shadow-md hover:border-blue-200 hover:-translate-y-0.5 transition-all duration-300">
-                  <span className="text-3xl md:text-4xl font-extrabold text-blue-600 tracking-tight block">
-                    <AnimatedCounter target={12} suffix="+" />
-                  </span>
-                  <span className="text-slate-500 font-bold text-[10px] uppercase tracking-wider block mt-1">Years Experience</span>
-                </div>
-                <div className="p-4 rounded-2xl bg-gradient-to-br from-amber-50/90 via-amber-50/45 to-white/95 border border-amber-100/80 shadow-xs hover:shadow-md hover:border-amber-200 hover:-translate-y-0.5 transition-all duration-300">
-                  <span className="text-3xl md:text-4xl font-extrabold text-amber-500 tracking-tight block">
-                    <AnimatedCounter target={450} suffix="+" />
-                  </span>
-                  <span className="text-slate-500 font-bold text-[10px] uppercase tracking-wider block mt-1">Doctors Trusted</span>
-                </div>
-                <div className="p-4 rounded-2xl bg-gradient-to-br from-blue-50/90 via-blue-50/45 to-white/95 border border-blue-100/80 shadow-xs hover:shadow-md hover:border-blue-200 hover:-translate-y-0.5 transition-all duration-300">
-                  <span className="text-3xl md:text-4xl font-extrabold text-blue-600 tracking-tight block">
-                    <AnimatedCounter target={1500} suffix="+" />
-                  </span>
-                  <span className="text-slate-500 font-bold text-[10px] uppercase tracking-wider block mt-1">ICU Installations</span>
-                </div>
-                <div className="p-4 rounded-2xl bg-gradient-to-br from-amber-50/90 via-amber-50/45 to-white/95 border border-amber-100/80 shadow-xs hover:shadow-md hover:border-amber-200 hover:-translate-y-0.5 transition-all duration-300">
-                  <span className="text-3xl md:text-4xl font-extrabold text-amber-500 tracking-tight block">
-                    <AnimatedCounter target={99.8} suffix="%" />
-                  </span>
-                  <span className="text-slate-500 font-bold text-[10px] uppercase tracking-wider block mt-1">Calibration SLA</span>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Right Column: Beautiful Interactive Detail Cards */}
-            <motion.div 
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="lg:col-span-7 space-y-6"
+            </div>
+            <button
+              onClick={() => setCurrentTab("products")}
+              className="group relative inline-flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 hover:border-blue-600 text-slate-800 hover:text-blue-600 font-extrabold text-[11px] rounded-xl shadow-xs hover:shadow-[0_10px_25px_rgba(37,99,235,0.06)] hover:scale-102 transition-all duration-300 uppercase tracking-wider cursor-pointer self-start md:self-end"
             >
-
-              {/* Pillar Card 1 */}
-              <motion.div 
-                variants={fadeUpVariants}
-                className="bg-gradient-to-br from-blue-50/90 via-blue-50/45 to-white/95 p-6 md:p-8 rounded-2xl shadow-xs border border-blue-100/80 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/5 transition-all duration-300 flex flex-col md:flex-row gap-6 relative group overflow-hidden"
-              >
-                <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-blue-600 to-indigo-500 transition-all" />
-                <div className="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-xs border border-blue-200/50">
-                  <Award className="w-7 h-7" />
-                </div>
-                <div className="space-y-3 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">Extensive Experience</h3>
-                    <span className="bg-blue-100 text-blue-600 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-blue-200">Pillar 01</span>
-                  </div>
-                  <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
-                    Over 12+ years of providing turnkey equipment configurations, technical safety clearance, and customized installations for multi-specialty hospitals. We handle layout logistics, heavy compliance checks, and secure continuous operation contracts.
-                  </p>
-                  <div className="pt-2">
-                    <button
-                      onClick={() => setCurrentTab("about")}
-                      className="inline-flex items-center gap-1.5 text-xs font-black text-blue-600 hover:text-blue-800 transition-colors group/btn cursor-pointer"
-                    >
-                      Read Our Vision <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Pillar Card 2 */}
-              <motion.div 
-                variants={fadeUpVariants}
-                className="bg-gradient-to-br from-amber-50/90 via-amber-50/45 to-white/95 p-6 md:p-8 rounded-2xl shadow-xs border border-amber-100/80 hover:border-amber-300 hover:shadow-lg hover:shadow-amber-500/5 transition-all duration-300 flex flex-col md:flex-row gap-6 relative group overflow-hidden"
-              >
-                <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-amber-500 to-orange-400 transition-all" />
-                <div className="w-14 h-14 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:bg-amber-500 group-hover:text-white transition-all shadow-xs border border-amber-200/50">
-                  <ThumbsUp className="w-7 h-7" />
-                </div>
-                <div className="space-y-3 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-amber-600 transition-colors">Client Satisfaction</h3>
-                    <span className="bg-amber-100 text-amber-600 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-amber-200">Pillar 02</span>
-                  </div>
-                  <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
-                    Trusted by 450+ doctors and critical care specialists for zero-tolerance product quality, high accuracy metrics, and quick repair responses. Our emergency servicing support remains available 24/7.
-                  </p>
-                  <div className="pt-2">
-                    <button
-                      onClick={() => setCurrentTab("contact")}
-                      className="inline-flex items-center gap-1.5 text-xs font-black text-amber-600 hover:text-amber-800 transition-colors group/btn cursor-pointer"
-                    >
-                      Work With Us <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Pillar Card 3 */}
-              <motion.div 
-                variants={fadeUpVariants}
-                className="bg-gradient-to-br from-blue-50/90 via-blue-50/45 to-white/95 p-6 md:p-8 rounded-2xl shadow-xs border border-blue-100/80 hover:border-blue-300 hover:shadow-lg hover:shadow-blue-500/5 transition-all duration-300 flex flex-col md:flex-row gap-6 relative group overflow-hidden"
-              >
-                <div className="absolute top-0 left-0 w-1.5 h-full bg-gradient-to-b from-blue-600 to-cyan-400 transition-all" />
-                <div className="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-xs border border-blue-200/50">
-                  <CheckSquare className="w-7 h-7" />
-                </div>
-                <div className="space-y-3 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">Proven Installations</h3>
-                    <span className="bg-blue-100 text-blue-600 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-blue-200">Pillar 03</span>
-                  </div>
-                  <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
-                    Successful setup of 1500+ ICU respiratory beds, diagnostics ultrasound machinery chambers, and double-door steam sanitization centers. We maintain direct logistics linkages with global medical providers.
-                  </p>
-                  <div className="pt-2">
-                    <button
-                      onClick={() => setCurrentTab("gallery")}
-                      className="inline-flex items-center gap-1.5 text-xs font-black text-blue-600 hover:text-blue-800 transition-colors group/btn cursor-pointer"
-                    >
-                      Browse Portfolios <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-
-            </motion.div>
-
+              <span>See Full Products</span>
+              <ArrowRight className="w-4 h-4 text-blue-600 group-hover:translate-x-1.5 transition-transform duration-300" />
+            </button>
           </div>
-        </div>
-      </section>
 
+          {/* Embla Carousel Slider */}
+          <Carousel setApi={setProductsApi} opts={{ align: "start", loop: true }} className="w-full max-w-6xl mx-auto relative px-0 sm:px-4">
+            <CarouselContent className="-ml-4">
+              {dynamicProducts.map((p, idx) => {
+                const isAmber = idx % 2 === 1;
+                return (
+                  <CarouselItem key={p.id} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
+                    <div
+                      onClick={() => onOpenProductModal(p)}
+                      className={`group relative bg-gradient-to-b from-white to-slate-50/40 border border-slate-200/60 rounded-[32px] p-4 sm:p-6 hover:-translate-y-2.5 transition-[transform,border-color,box-shadow] duration-500 flex flex-col h-[400px] sm:h-[500px] overflow-hidden cursor-pointer
+                        ${isAmber 
+                          ? "hover:border-amber-300 hover:shadow-[0_20px_45px_rgba(245,158,11,0.08)]" 
+                          : "hover:border-blue-300 hover:shadow-[0_20px_45px_rgba(37,99,235,0.08)]"
+                        }
+                      `}
+                    >
+                      {/* Top Accent Gradient Border Glow on Hover */}
+                      <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${isAmber ? "from-amber-400 to-orange-500" : "from-blue-600 to-sky-400"} origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500`} />
 
+                      {/* Photo area with technical notched framing */}
+                      <div className="relative h-40 sm:h-52 w-full rounded-2xl overflow-hidden bg-white flex items-center justify-center p-4 sm:p-6 border border-slate-100/80 flex-shrink-0 group-hover:border-slate-200/80 transition-all duration-300 mb-4 sm:mb-6">
+                        {/* Technical corner notches */}
+                        <div className="absolute top-2 left-2 w-2.5 h-2.5 border-t border-l border-slate-350/50" />
+                        <div className="absolute top-2 right-2 w-2.5 h-2.5 border-t border-r border-slate-355/50" />
+                        <div className="absolute bottom-2 left-2 w-2.5 h-2.5 border-b border-l border-slate-355/50" />
+                        <div className="absolute bottom-2 right-2 w-2.5 h-2.5 border-b border-r border-slate-355/50" />
 
-      {/* 3. LATEST PRODUCTS GALLERY */}
-      <ImageGallery />
-
-      {/* 4. TRENDING PRODUCTS GRID */}
-      <section className="py-20 bg-slate-50 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            variants={fadeUpVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="text-center max-w-2xl mx-auto mb-16"
-          >
-            <span className="text-blue-600 font-bold tracking-widest text-xs uppercase block mb-2">Specialty Focus</span>
-            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Trending Critical Machinery</h2>
-            <div className="w-12 h-1 bg-blue-600 mx-auto mt-4 rounded-full" />
-            <p className="text-slate-500 text-sm mt-4 font-medium">
-              Medical setups demanded in high acuity clinical rooms. Certified with absolute safety standards.
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto justify-items-center"
-          >
-            {trendingProducts.length > 0 ? (
-              trendingProducts.map((item) => (
-                <motion.div
-                  variants={fadeUpVariants}
-                  key={item.id}
-                  className="flex flex-col sm:flex-row md:flex-col lg:flex-row items-center bg-neutral-primary-soft p-6 border border-default rounded-base shadow-xs max-w-xl w-full hover:shadow-lg hover:border-slate-350 transition-all duration-300 group relative overflow-hidden"
-                >
-                  {/* Left Side: Image container */}
-                  <div className="relative w-full h-56 sm:h-44 sm:w-48 md:w-full md:h-52 lg:h-44 lg:w-48 mb-4 sm:mb-0 md:mb-4 lg:mb-0 flex-shrink-0 bg-slate-200 rounded-base overflow-hidden">
-                    <img
-                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 text-transparent"
-                      src={item.image}
-                      alt={item.name}
-                    />
-                    <div className="absolute top-3 left-3 bg-orange-500 text-white text-[9px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded shadow-sm z-10">
-                      HOT SELLING
-                    </div>
-                  </div>
-
-                  {/* Right Side: Product Details */}
-                  <div className="flex flex-col justify-between flex-grow sm:pl-6 md:pl-0 lg:pl-6 leading-normal w-full min-w-0">
-                    <div>
-                      <div className="flex items-center justify-between mb-1.5">
-                        <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest truncate mr-2">
-                          {item.category}
-                        </span>
-                        {/* Star Rating */}
-                        <div className="flex items-center gap-1 flex-shrink-0">
-                          <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
-                          <span className="text-[11px] text-slate-500 font-bold">({item.rating}.0)</span>
+                        <img
+                          src={p.image}
+                          alt={p.name}
+                          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out [backface-visibility:hidden] transform-gpu"
+                          loading="lazy"
+                        />
+                        {/* Specs badge that appears on hover */}
+                        <div className="absolute top-3 right-3 bg-slate-900/80 backdrop-blur-xs text-white text-[9px] font-bold px-2.5 py-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1 pointer-events-none shadow-sm">
+                          <Eye className="w-3.5 h-3.5" /> Specs
                         </div>
                       </div>
 
-                      <h5 className="mb-2 text-xl font-bold tracking-tight text-heading group-hover:text-blue-600 transition-colors line-clamp-1">
-                        {item.name}
-                      </h5>
-                      <p className="mb-5 text-xs text-body leading-relaxed font-medium line-clamp-2">
-                        {item.shortDesc}
-                      </p>
+                      {/* Details */}
+                      <div className="flex flex-col justify-between flex-grow">
+                        <div className="space-y-2.5">
+                          <span className={`inline-flex items-center gap-1.5 text-[10px] font-extrabold tracking-widest uppercase ${isAmber ? "text-amber-600" : "text-blue-600"}`}>
+                            <span className={`w-1.5 h-1.5 rounded-full ${isAmber ? "bg-amber-500 animate-pulse" : "bg-blue-500 animate-pulse"}`} />
+                            {p.category}
+                          </span>
+                          <h3 className="text-base sm:text-lg font-black text-slate-900 group-hover:text-blue-600 transition-colors duration-300 line-clamp-1 leading-tight">
+                            {p.name}
+                          </h3>
+                          <p className="text-slate-500 text-xs line-clamp-2 sm:line-clamp-3 leading-relaxed font-medium">
+                            {p.shortDesc}
+                          </p>
+                        </div>
+
+                        {/* Footer with Star rating & Specs Button reveal on hover */}
+                        <div className="relative pt-3 sm:pt-5 border-t border-slate-100 mt-3 sm:mt-5 h-10 flex items-center justify-between">
+                          <div className="flex items-center gap-4 group-hover:opacity-0 transition-opacity duration-300 w-full justify-between">
+                            <div className="flex items-center gap-1 bg-amber-50/70 border border-amber-100/50 px-2.5 py-1 rounded-full text-amber-700 font-extrabold text-[10px]">
+                              <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                              <span>{p.rating}.0</span>
+                            </div>
+                            <span className="text-[10px] text-slate-400 font-black uppercase tracking-wider flex items-center gap-1">
+                              <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" /> Certified
+                            </span>
+                          </div>
+
+                          {/* Hover State: reveal "View Specifications" button */}
+                          <div className="absolute inset-x-0 bottom-0 top-3 sm:top-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between pointer-events-none">
+                            <span className="text-[10px] text-slate-400 font-black uppercase tracking-wider flex items-center gap-1">
+                              <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" /> Certified Unit
+                            </span>
+                            <span className={`text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5 ${isAmber ? "text-amber-600" : "text-blue-600"}`}>
+                              View Specs <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-300" />
+                            </span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                  </CarouselItem>
+                );
+              })}
+            </CarouselContent>
+            <CarouselPrevious className="flex left-2 md:-left-4 lg:-left-16 bg-white border border-slate-200 text-slate-800 shadow-md hover:bg-blue-600 hover:text-white hover:border-blue-600 w-9 h-9 sm:w-11 sm:h-11 top-24 sm:top-1/2 transition-all duration-300 z-30" />
+            <CarouselNext className="flex right-2 md:-right-4 lg:-right-16 bg-white border border-slate-200 text-slate-800 shadow-md hover:bg-blue-600 hover:text-white hover:border-blue-600 w-9 h-9 sm:w-11 sm:h-11 top-24 sm:top-1/2 transition-all duration-300 z-30" />
+          </Carousel>
 
-                    <div className="flex flex-wrap gap-2 pt-2 border-t border-slate-200/50">
-                      <button
-                        type="button"
-                        onClick={() => onOpenProductModal(item)}
-                        className="inline-flex items-center w-auto text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-bold leading-5 rounded-base text-[11px] px-3.5 py-2.5 focus:outline-none cursor-pointer transition-all gap-1"
-                      >
-                        Quick View
-                        <Eye className="w-3.5 h-3.5" />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => startInquiry(item.name)}
-                        className="inline-flex items-center w-auto text-white bg-blue-600 box-border border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:ring-blue-100 shadow-xs font-bold leading-5 rounded-base text-[11px] px-3.5 py-2.5 focus:outline-none cursor-pointer transition-all gap-1"
-                      >
-                        Inquire Now
-                        <MessageSquare className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-              ))
-            ) : (
-              <div className="col-span-full bg-white p-12 text-center rounded-2xl border border-dashed border-slate-200">
-                <p className="text-slate-400">No trending items configured.</p>
-              </div>
-            )}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 5. WHY CHOOSE US SECTION */}
-      <section className="py-24 bg-slate-950 relative overflow-hidden">
-        {/* Glow ambient design elements */}
-        <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left side Image wrapped in rotating gradient border */}
-            <motion.div
-              variants={fadeUpVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="lg:col-span-6 relative"
-            >
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-3xl transform rotate-2 scale-103 opacity-15 blur-sm" />
-
-              <BorderRotate
-                animationMode="auto-rotate"
-                animationSpeed={6}
-                borderWidth={3.5}
-                borderRadius={28}
-                gradientColors={{
-                  primary: '#3b82f6',
-                  secondary: '#6366f1',
-                  accent: '#06b6d4'
-                }}
-                backgroundColor="#020617"
-                className="p-1"
-              >
-                <div className="relative overflow-hidden rounded-[24px]">
-                  <img
-                    src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80"
-                    alt="Vel Bio Med critical care service support"
-                    className="w-full h-auto object-cover relative z-10 shadow-2xl"
-                  />
-                </div>
-              </BorderRotate>
-
-              <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-6 rounded-2xl shadow-xl z-20 max-w-xs hidden sm:block border border-blue-500/30">
-                <p className="text-3xl font-black text-white">100%</p>
-                <p className="text-xs font-bold uppercase tracking-wider text-blue-100 mt-1">Uptime SLA Support</p>
-                <p className="text-blue-100 text-[11px] mt-2 font-medium leading-relaxed">Our engineers are dispatched immediately for high emergency troubleshooting alerts.</p>
-              </div>
-            </motion.div>
-
-            {/* Right side content */}
-            <div className="lg:col-span-6 space-y-6">
-              <motion.div
-                variants={fadeUpVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-                className="space-y-6"
-              >
-                <div>
-                  <span className="text-blue-400 font-bold tracking-widest text-xs uppercase block mb-1">Corporate Strengths</span>
-                  <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
-                    Our Uncompromising Standard of Reliability
-                  </h2>
-                  <div className="w-12 h-1 bg-blue-50 mt-4 rounded-full" />
-                </div>
-
-                <p className="text-slate-300 text-sm leading-relaxed font-medium">
-                  Vel Bio Med bridges the technical void in biological science distribution by delivering world-class hospital equipment, fast emergency servicing response, and long term comprehensive warranties.
-                </p>
-              </motion.div>
-
-              <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-                className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8"
-              >
-                {[
-                  {
-                    title: "Continuous Quality",
-                    subtitle: "Tier-1 Calibration",
-                    desc: "Every medical monitor and digital scanner system is calibrated rigorously against original parameters before dispatch.",
-                    icon: <ShieldCheck className="w-7 h-7 text-white" />,
-                    bgColor: "bg-blue-600/90"
-                  },
-                  {
-                    title: "Turnkey Setups",
-                    subtitle: "End-to-End Compliance",
-                    desc: "Our biomedical crew supervises gas setups, electrical compliance testing, and critical OT layouts end-to-end.",
-                    icon: <Zap className="w-7 h-7 text-white" />,
-                    bgColor: "bg-indigo-600/90"
-                  },
-                  {
-                    title: "Clinical Engineers",
-                    subtitle: "Specialist Supervision",
-                    desc: "Access the training expertise of specialists registered under critical medical equipment regulatory protocols.",
-                    icon: <Activity className="w-7 h-7 text-white" />,
-                    bgColor: "bg-teal-600/90"
-                  },
-                  {
-                    title: "Friendly Contracts",
-                    subtitle: "Flexible AMC Frameworks",
-                    desc: "Leverage affordable AMC frameworks designed for individual clinics to corporate multi-wing hospital systems.",
-                    icon: <ThumbsUp className="w-7 h-7 text-white" />,
-                    bgColor: "bg-amber-600/90"
-                  }
-                ].map((item, idx) => (
-                  <motion.div key={idx} variants={fadeUpVariants}>
-                    <FrostedGlassCard
-                      title={item.title}
-                      subtitle={item.subtitle}
-                      description={item.desc}
-                      icon={item.icon}
-                      iconBgColor={item.bgColor}
-                    />
-                  </motion.div>
-                ))}
-              </motion.div>
+          {/* Slide indicator dots */}
+          {productSnaps.length > 1 && (
+            <div className="flex justify-center items-center gap-2.5 mt-10">
+              {productSnaps.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => productsApi?.scrollTo(index)}
+                  className={`h-2 rounded-full transition-all duration-350 ${
+                    currentProductIndex === index 
+                      ? "w-8 bg-gradient-to-r from-blue-600 to-indigo-500 shadow-sm" 
+                      : "w-2 bg-slate-300 hover:bg-slate-400 cursor-pointer"
+                  }`}
+                  aria-label={`Go to page ${index + 1}`}
+                />
+              ))}
             </div>
-          </div>
-        </div>
+          )}
+        </motion.div>
       </section>
+
+      {/* 3. TRENDING PRODUCTS GRID */}
+      <section className="py-24 bg-gradient-to-b from-slate-900 via-slate-950 to-blue-950 relative overflow-hidden border-b border-slate-900">
+        {/* Ambient Grid Background */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)] opacity-35 pointer-events-none" />
+
+        {/* Glowing Ambient Light Orbs */}
+        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-radial from-blue-600/18 via-blue-950/0 to-transparent rounded-full pointer-events-none" />
+        <div className="absolute -bottom-40 -right-40 w-[600px] h-[600px] bg-radial from-amber-500/10 via-amber-950/0 to-transparent rounded-full pointer-events-none" />
+
+        <motion.div
+          variants={fadeUpVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+        >
+          <div className="text-center max-w-2xl mx-auto mb-16 relative z-10">
+            <span className="inline-flex items-center gap-1.5 bg-blue-500/10 border border-blue-500/30 text-blue-400 font-extrabold px-4 py-1.5 rounded-full text-[10px] uppercase tracking-widest shadow-lg shadow-blue-500/10 mb-4">
+              Specialty Focus
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-none">
+              Trending <span className="bg-gradient-to-r from-blue-400 via-sky-300 to-amber-400 bg-clip-text text-transparent">Critical Machinery</span>
+            </h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-amber-500 mx-auto mt-5 rounded-full" />
+            <p className="text-slate-400 text-xs sm:text-sm mt-4 font-medium leading-relaxed">
+              Medical setups demanded in high acuity clinical rooms. Certified with absolute safety standards.
+            </p>
+          </div>
+
+          {/* Auto Slider showing exactly 3 cards */}
+          <div className="w-full max-w-4xl mx-auto px-0 sm:px-4">
+            <Carousel setApi={setTrendingApi} opts={{ align: "start", loop: true }} className="w-full relative px-6 md:px-16">
+              <CarouselContent className="-ml-4">
+                {trendingThree.map((item) => (
+                  <CarouselItem key={item.id} className="pl-4 basis-full md:basis-1/2">
+                    <div
+                      onClick={() => onOpenProductModal(item)}
+                      className="flex flex-col bg-slate-900/80 backdrop-blur-md p-4 sm:p-6 border border-slate-800/80 rounded-3xl shadow-lg hover:shadow-blue-500/10 hover:border-blue-500/50 transition-[transform,border-color,box-shadow] duration-300 group relative overflow-hidden h-[400px] sm:h-[440px] justify-between cursor-pointer"
+                    >
+                      <div>
+                        {/* Image - beautifully aligned in white container */}
+                        <div className="relative w-full h-36 sm:h-44 bg-white rounded-2xl overflow-hidden mb-3 sm:mb-4 p-3 sm:p-4 flex items-center justify-center border border-slate-100/10 shadow-inner shrink-0">
+                          <img
+                            className="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500"
+                            src={item.image}
+                            alt={item.name}
+                          />
+                          <div className="absolute top-3 left-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-[9px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded shadow-md z-10">
+                            HOT SELLING
+                          </div>
+                        </div>
+
+                        {/* Details */}
+                        <div className="flex items-center justify-between mb-1.5">
+                          <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest truncate mr-2">
+                            {item.category}
+                          </span>
+                          <div className="flex items-center gap-1 flex-shrink-0">
+                            <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
+                            <span className="text-[11px] text-slate-400 font-bold">({item.rating}.0)</span>
+                          </div>
+                        </div>
+
+                        <h5 className="mb-1.5 text-lg sm:text-xl font-bold tracking-tight text-white group-hover:text-blue-400 transition-colors line-clamp-1">
+                          {item.name}
+                        </h5>
+                        <p className="text-xs text-slate-400 leading-relaxed font-medium line-clamp-2 sm:line-clamp-3">
+                          {item.shortDesc}
+                        </p>
+                      </div>
+
+                      {/* CTAs */}
+                      <div className="flex gap-2 pt-3 sm:pt-4 border-t border-slate-800/60 mt-3 sm:mt-4">
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onOpenProductModal(item);
+                          }}
+                          className="inline-flex items-center justify-center flex-grow text-slate-300 bg-slate-900 border border-slate-800/80 hover:bg-slate-800 hover:text-white shadow-sm font-bold rounded-xl text-[10px] py-2.5 cursor-pointer transition-all gap-1"
+                        >
+                          Quick View
+                          <Eye className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            startInquiry(item.name);
+                          }}
+                          className="inline-flex items-center justify-center flex-grow text-white bg-gradient-to-r from-blue-600 to-indigo-650 hover:from-blue-500 hover:to-indigo-600 shadow-md hover:shadow-blue-500/20 font-bold rounded-xl text-[10px] py-2.5 cursor-pointer transition-all gap-1 border-none"
+                        >
+                          Inquire Now
+                          <MessageSquare className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="absolute left-1 md:left-4 bg-white border border-slate-200 text-slate-800 shadow-md hover:bg-blue-600 hover:text-white hover:border-blue-600 w-9 h-9 sm:w-10 sm:h-10 transition-all z-30 animate-pulse" style={{ animationDuration: '3s' }} />
+              <CarouselNext className="absolute right-1 md:right-4 bg-white border border-slate-200 text-slate-800 shadow-md hover:bg-blue-600 hover:text-white hover:border-blue-600 w-9 h-9 sm:w-10 sm:h-10 transition-all z-30 animate-pulse" style={{ animationDuration: '3s' }} />
+            </Carousel>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* 4. SERVICES SECTION - COMPREHENSIVE SUPPORT DELIVERABLES */}
+      <section className="py-24 bg-slate-50/40 relative overflow-hidden border-b border-slate-100">
+        <div className="absolute top-1/3 left-0 w-[500px] h-[500px] bg-blue-100/30 rounded-full blur-3xl pointer-events-none -translate-x-1/2" />
+        <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-orange-100/30 rounded-full blur-3xl pointer-events-none translate-x-1/2" />
+
+        <motion.div
+          variants={fadeUpVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
+        >
+          <div className="text-center max-w-2xl mx-auto mb-16 relative z-10">
+            <span className="inline-flex items-center gap-1.5 bg-blue-50/80 border border-blue-200/50 text-blue-600 font-extrabold px-4 py-1.5 rounded-full text-[10px] uppercase tracking-widest shadow-xs mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-ping" /> Our Offerings
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight leading-tight flex flex-wrap items-center justify-center gap-x-2">
+              <span>Comprehensive</span>
+              <FlipWords
+                words={["Support", "Maintenance", "Engineering", "Installation", "Restoration", "Technical"]}
+                className="text-blue-600 font-black"
+                duration={1000}
+              />
+              <span className="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-black">Deliverables</span>
+            </h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto mt-5 rounded-full" />
+            <p className="text-slate-500 text-sm mt-4 font-medium leading-relaxed">
+              We cover all phases of medical machinery management—from architectural layouts to certification, periodic AMC maintenance, and calibration checkups.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {dbServices.map((srv, idx) => {
+              const isAmber = idx % 2 === 1;
+              const deliverables = getDeliverables(srv.title);
+              return (
+                <div
+                  key={srv.id}
+                  className={`border p-8 rounded-3xl transition-all duration-500 flex flex-col h-full group relative overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.02)]
+                    ${isAmber
+                      ? "bg-gradient-to-br from-orange-50/40 via-white to-white border-orange-200/80 hover:border-orange-400 hover:shadow-[0_20px_40px_rgba(249,115,22,0.08)]"
+                      : "bg-gradient-to-br from-blue-50/40 via-white to-white border-blue-200/80 hover:border-blue-400 hover:shadow-[0_20px_40px_rgba(59,130,246,0.08)]"
+                    }
+                  `}
+                >
+                  {/* Decorative card gradient glow */}
+                  <div className={`absolute -right-12 -top-12 w-40 h-40 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none
+                    ${isAmber ? "bg-orange-500/10" : "bg-blue-500/10"}
+                  `} />
+
+                  <span className="absolute top-8 right-8 text-[10px] font-black tracking-widest text-slate-350 group-hover:text-slate-400 uppercase transition-colors">
+                    Service {String(idx + 1).padStart(2, '0')}
+                  </span>
+
+                  <div className={`p-4 rounded-2xl w-14 h-14 flex items-center justify-center mb-6 transition-all duration-500 shadow-sm border
+                    ${isAmber
+                      ? "bg-orange-50 border-orange-200 text-orange-650 group-hover:bg-orange-500 group-hover:border-orange-500 group-hover:text-white group-hover:rotate-6 group-hover:scale-110"
+                      : "bg-blue-50 border-blue-200 text-blue-650 group-hover:bg-blue-600 group-hover:border-blue-600 group-hover:text-white group-hover:rotate-6 group-hover:scale-110"
+                    }
+                  `}>
+                    {renderServiceIcon(srv.iconName, isAmber)}
+                  </div>
+
+                  <h3 className={`text-xl font-extrabold text-slate-900 transition-colors mb-3 pr-8
+                    ${isAmber ? "group-hover:text-orange-600" : "group-hover:text-blue-600"}
+                  `}>
+                    {srv.title}
+                  </h3>
+
+                  <p className="text-slate-500 text-xs sm:text-sm leading-relaxed mb-6 font-medium">
+                    {srv.description}
+                  </p>
+
+                  {/* Key Deliverables Checklists */}
+                  <div className="border-t border-slate-100 pt-5 mt-auto mb-6">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-3">Key Deliverables</span>
+                    <ul className="space-y-2.5">
+                      {deliverables.map((item, dIdx) => (
+                        <li key={dIdx} className="flex items-start gap-2.5 text-xs text-slate-655 font-medium">
+                          <CheckCircle2 className={`w-4 h-4 mt-0.5 shrink-0 ${isAmber ? "text-orange-500" : "text-blue-500"}`} />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <button
+                    onClick={() => startInquiry(`Service: ${srv.title}`)}
+                    className={`w-full bg-slate-50 border font-bold text-xs py-3.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 uppercase tracking-wider cursor-pointer hover:shadow-sm
+                      ${isAmber
+                        ? "border-orange-100 text-slate-700 hover:border-orange-500 hover:bg-orange-500 hover:text-white"
+                        : "border-blue-100 text-slate-700 hover:border-blue-600 hover:bg-blue-600 hover:text-white"
+                      }
+                    `}
+                  >
+                    <span>Book Service</span>
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </motion.div>
+      </section>
+
+      {/* 5. GALLERY SECTION */}
+      <ImageGallery />
 
       {/* 6. VALUABLE CLIENTS LOGO SLIDER */}
       <Logos3

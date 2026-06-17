@@ -49,7 +49,7 @@ function PremiumCard({
       animate={inView ? "visible" : "hidden"}
       variants={fadeUp}
       whileHover={{ y: -8, transition: { duration: 0.35, ease: [0.22, 1, 0.36, 1] as const } }}
-      className="relative rounded-[2.5rem] p-6 sm:p-8 md:p-10 flex flex-col gap-6 sm:gap-8 overflow-hidden group transition-all duration-300"
+      className="relative rounded-[2.5rem] p-5 sm:p-8 md:p-10 flex flex-col gap-6 sm:gap-8 overflow-hidden group transition-all duration-300"
       style={{
         background: `linear-gradient(145deg, ${gradientFrom} 0%, ${gradientTo} 100%)`,
         border: `1px solid rgba(255, 255, 255, 0.85)`,
@@ -157,7 +157,7 @@ export default function VisionMission() {
   return (
     <section
       ref={ref}
-      className="relative py-28 md:py-36 overflow-hidden"
+      className="relative py-16 md:py-28 lg:py-36 overflow-hidden"
       style={{ background: "linear-gradient(170deg, #FFFFFF 0%, #F4F8FD 40%, #E9F1FC 100%)" }}
     >
       {/* Ambient background glows */}
@@ -168,7 +168,7 @@ export default function VisionMission() {
       <div aria-hidden className="pointer-events-none absolute top-1/2 left-10 w-[300px] h-[300px] rounded-full opacity-15"
         style={{ background: "radial-gradient(circle, #F97316 0%, transparent 70%)", filter: "blur(70px)" }} />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
 
         {/* Section header */}
         <motion.div

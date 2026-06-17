@@ -194,23 +194,7 @@ export const Navbar5 = () => {
                 </button>
               </div>
 
-              {/* Services */}
-              <div className="relative">
-                <button
-                  onClick={() => navigateTab("services")}
-                  className={`relative px-4 py-2.5 text-[13px] font-black uppercase tracking-wider transition-colors cursor-pointer border-none bg-transparent ${currentTab === "services" ? "text-blue-600" : "text-slate-600 hover:text-blue-600"
-                    }`}
-                >
-                  <span className="relative z-10">Services</span>
-                  {currentTab === "services" && (
-                    <motion.span
-                      layoutId="activeTab"
-                      className="absolute inset-0 bg-blue-50/70 rounded-full -z-10"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                </button>
-              </div>
+
 
               {/* Products Dropdown */}
               <div
@@ -451,22 +435,7 @@ export const Navbar5 = () => {
                         </button>
                       </motion.div>
 
-                      {/* Services */}
-                      <motion.div variants={itemVariants}>
-                        <button
-                          onClick={() => navigateTab("services")}
-                          className={`flex items-center justify-between w-full p-4 rounded-2xl transition-all cursor-pointer border-none text-left ${currentTab === "services"
-                              ? "bg-blue-50 text-blue-600 font-extrabold border-l-4 border-blue-600 pl-3"
-                              : "bg-slate-50/50 hover:bg-slate-50 text-slate-700 font-bold"
-                            }`}
-                        >
-                          <span className="flex items-center gap-3.5">
-                            <Layers className="w-5 h-5 text-blue-500" />
-                            <span className="text-sm uppercase tracking-wider">Services</span>
-                          </span>
-                          <ArrowRight className="w-4 h-4 opacity-50" />
-                        </button>
-                      </motion.div>
+
 
                       {/* Products & Categories custom accordion */}
                       <motion.div variants={itemVariants} className="flex flex-col">

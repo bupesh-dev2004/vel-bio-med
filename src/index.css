@@ -104,14 +104,21 @@
 /* About Page Parallax Hero Styles */
 .heroEffects {
   position: relative;
-  height: 80vh;
-  min-height: 500px;
+  height: 60vh;
+  min-height: 400px;
   width: 100%;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #081d38;
+}
+
+@media (min-width: 768px) {
+  .heroEffects {
+    height: 80vh;
+    min-height: 550px;
+  }
 }
 
 .heroEffects .bg {

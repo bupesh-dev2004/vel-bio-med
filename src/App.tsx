@@ -4,7 +4,6 @@ import Header from "./components/Header.js";
 import Footer from "./components/Footer.js";
 import HomeView from "./components/HomeView.js";
 import AboutView from "./components/AboutView.js";
-import ServicesView from "./components/ServicesView.js";
 import GalleryView from "./components/GalleryView.js";
 import ProductsView from "./components/ProductsView.js";
 import ContactView from "./components/ContactView.js";
@@ -182,7 +181,6 @@ function AppContent() {
       <main className="flex-grow">
         {currentTab === "home" && <HomeView onOpenProductModal={handleOpenProductModal} showPreloader={showPreloader} />}
         {currentTab === "about" && <AboutView />}
-        {currentTab === "services" && <ServicesView />}
         {currentTab === "gallery" && <GalleryView />}
         {currentTab === "products" && (
           <ProductsView
