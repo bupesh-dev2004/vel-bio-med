@@ -14,7 +14,8 @@ import {
   Activity,
   Award,
   Cpu,
-  Bookmark
+  Bookmark,
+  ChevronDown
 } from "lucide-react";
 import { useAppState } from "../AppContext.js";
 import { Product } from "../types.js";
@@ -31,10 +32,10 @@ export default function ProductsView({
   onOpenProductModal,
   onCloseProductModal,
 }: ProductsViewProps) {
-  const { 
-    state, 
-    setCurrentTab, 
-    setInquiryMachineName, 
+  const {
+    state,
+    setCurrentTab,
+    setInquiryMachineName,
     inquiryMachineName,
     selectedCategory,
     setSelectedCategory
@@ -46,6 +47,7 @@ export default function ProductsView({
   // Filter & Search states
   const [searchText, setSearchText] = useState("");
   const [sortBy, setSortBy] = useState("default");
+  const [isSortOpen, setIsSortOpen] = useState(false);
 
   // Local state for toggling product sheet tabs inside the modal
   const [activeModalTab, setActiveModalTab] = useState<"features" | "specs" | "desc">("desc");
@@ -116,23 +118,26 @@ export default function ProductsView({
   return (
     <div className="bg-slate-50 min-h-screen">
       {/* Search and Category filter banner with premium midnight-tech radial gradient and premium hospital background image */}
-      <section className="bg-slate-950 text-white border-b border-slate-900 py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden shadow-2xl">
-        {/* Background cover image */}
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center opacity-55 pointer-events-none z-0" />
-        <div className="absolute inset-0 bg-slate-950/60 pointer-events-none z-0" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/75 to-slate-950 pointer-events-none z-0" />
+      <section className="bg-slate-950 text-white border-b border-slate-900 py-16 px-4 sm:px-6 lg:px-8 relative shadow-2xl">
+        {/* Background decorative wrapper to isolate overflow hiding to background elements only */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+          {/* Background cover image */}
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center opacity-55 pointer-events-none" />
+          <div className="absolute inset-0 bg-slate-950/60 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/75 to-slate-950 pointer-events-none" />
 
-        {/* Glow rings */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-radial from-blue-600/10 via-blue-900/5 to-transparent rounded-full -mr-40 -mt-40 pointer-events-none z-0" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-radial from-amber-500/10 via-amber-650/5 to-transparent rounded-full -ml-20 -mb-20 pointer-events-none z-0" />
+          {/* Glow rings */}
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-radial from-blue-600/10 via-blue-900/5 to-transparent rounded-full -mr-40 -mt-40 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-radial from-amber-500/10 via-amber-650/5 to-transparent rounded-full -ml-20 -mb-20 pointer-events-none" />
 
-        {/* Abstract grids */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-35 z-0" />
+          {/* Abstract grids */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-35" />
+        </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             {/* Header info */}
-            <motion.div 
+            <motion.div
               initial="hidden"
               animate="visible"
               variants={{
@@ -147,7 +152,7 @@ export default function ProductsView({
               }}
               className="max-w-2xl"
             >
-              <motion.div 
+              <motion.div
                 variants={{
                   hidden: { opacity: 0, y: 12 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
@@ -162,7 +167,7 @@ export default function ProductsView({
                 </span>
               </motion.div>
 
-              <motion.h1 
+              <motion.h1
                 variants={{
                   hidden: { opacity: 0, y: 15 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
@@ -172,7 +177,7 @@ export default function ProductsView({
                 Biomedical Equipment <span className="bg-gradient-to-r from-blue-400 via-indigo-300 to-amber-400 bg-clip-text text-transparent">Catalog</span>
               </motion.h1>
 
-              <motion.p 
+              <motion.p
                 variants={{
                   hidden: { opacity: 0, y: 15 },
                   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
@@ -243,21 +248,69 @@ export default function ProductsView({
               ))}
             </div>
 
-            {/* Sorting trigger select */}
-            <div className="flex items-center gap-3 bg-slate-900/40 border border-slate-800/80 px-4 py-2 rounded-xl">
-              <SlidersHorizontal className="w-3.5 h-3.5 text-slate-400" />
-              <label htmlFor="sort-dropdown" className="text-[10px] font-black uppercase tracking-widest text-slate-400">Sort By:</label>
-              <select
-                id="sort-dropdown"
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="bg-transparent border-none text-xs font-bold focus:outline-none text-white cursor-pointer pr-1"
+            {/* Sorting custom dropdown */}
+            <div className="relative z-30">
+              <button
+                onClick={() => setIsSortOpen(!isSortOpen)}
+                className="flex items-center justify-between gap-3 bg-slate-900/60 hover:bg-slate-850 border border-slate-800/80 px-4 py-2.5 rounded-xl cursor-pointer transition-all duration-200 select-none min-w-[200px]"
               >
-                <option value="default" className="bg-slate-900 text-white">Default Order</option>
-                <option value="rating" className="bg-slate-900 text-white">Top Rated (Stars)</option>
-                <option value="name-asc" className="bg-slate-900 text-white">Alphabetical (A - Z)</option>
-                <option value="name-desc" className="bg-slate-900 text-white">Alphabetical (Z - A)</option>
-              </select>
+                <div className="flex items-center gap-2">
+                  <SlidersHorizontal className="w-3.5 h-3.5 text-slate-400" />
+                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Sort By:</span>
+                  <span className="text-xs font-bold text-white">
+                    {sortBy === "rating"
+                      ? "Top Rated (Stars)"
+                      : sortBy === "name-asc"
+                      ? "Alphabetical (A - Z)"
+                      : sortBy === "name-desc"
+                      ? "Alphabetical (Z - A)"
+                      : "Default Order"}
+                  </span>
+                </div>
+                <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-300 ${isSortOpen ? "rotate-180 text-amber-500" : ""}`} />
+              </button>
+
+              <AnimatePresence>
+                {isSortOpen && (
+                  <>
+                    {/* Click outside backdrop/overlay */}
+                    <div className="fixed inset-0 z-45" onClick={() => setIsSortOpen(false)} />
+                    
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                      transition={{ duration: 0.15, ease: "easeOut" }}
+                      className="absolute right-0 mt-2 w-full min-w-[200px] bg-slate-950/95 border border-slate-800 rounded-xl shadow-2xl backdrop-blur-md overflow-hidden z-50 p-1"
+                    >
+                      {[
+                        { value: "default", label: "Default Order" },
+                        { value: "rating", label: "Top Rated (Stars)" },
+                        { value: "name-asc", label: "Alphabetical (A - Z)" },
+                        { value: "name-desc", label: "Alphabetical (Z - A)" }
+                      ].map((opt) => (
+                        <button
+                          key={opt.value}
+                          onClick={() => {
+                            setSortBy(opt.value);
+                            setIsSortOpen(false);
+                          }}
+                          className={`w-full text-left px-3.5 py-2.5 text-xs rounded-lg transition-all duration-200 cursor-pointer flex items-center justify-between ${
+                            sortBy === opt.value
+                              ? "bg-gradient-to-r from-blue-600/30 via-indigo-650/20 to-amber-500/10 text-white font-bold border-l-2 border-amber-500 pl-2.5"
+                              : "text-slate-400 hover:text-white hover:bg-slate-900/60 font-semibold"
+                          }`}
+                        >
+                          {opt.label}
+                          {sortBy === opt.value && (
+                            <Check className="w-3.5 h-3.5 text-amber-500" />
+                          )}
+                        </button>
+                      ))}
+                    </motion.div>
+                  </>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </div>

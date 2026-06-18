@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useCallback } from "react"
+import React, { useState, useCallback, useEffect } from "react"
 import { ChevronDown } from "lucide-react"
 
 interface MenuProps {
@@ -30,9 +30,8 @@ export function Menu({ trigger, children, align = "left", showChevron = true }: 
 
       {isOpen && (
         <div
-          className={`absolute ${
-            align === "right" ? "right-0" : "left-0"
-          } mt-2 w-56 rounded-md bg-white dark:bg-gray-800 shadow-lg ring-1 ring-black dark:ring-gray-700 ring-opacity-9 focus:outline-none z-50`}
+          className={`absolute ${align === "right" ? "right-0" : "left-0"
+            } mt-2 w-56 rounded-md bg-white dark:bg-gray-800 shadow-lg ring-1 ring-black dark:ring-gray-700 ring-opacity-9 focus:outline-none z-50`}
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="menu-button"
@@ -59,7 +58,7 @@ interface MenuItemProps {
 export function MenuItem({ children, onClick, disabled = false, icon, isActive = false, className = "", title }: MenuItemProps) {
   return (
     <button
-      className={`relative w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 group cursor-pointer
+      className={`relative w-10 h-10 lg:w-11 lg:h-11 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-6 active:scale-95 group cursor-pointer
         ${disabled ? "opacity-50 cursor-not-allowed" : "text-slate-350 hover:text-white"}
         ${isActive ? "bg-white/10" : ""}
         ${className}
@@ -71,7 +70,7 @@ export function MenuItem({ children, onClick, disabled = false, icon, isActive =
     >
       <span className="flex items-center justify-center">
         {icon && (
-          <span className="h-6 w-6 flex items-center justify-center transition-all duration-200 group-hover:[&_svg]:scale-110">
+          <span className="h-5 w-5 lg:h-6 lg:w-6 flex items-center justify-center transition-all duration-200 group-hover:[&_svg]:scale-110">
             {icon}
           </span>
         )}
@@ -81,21 +80,42 @@ export function MenuItem({ children, onClick, disabled = false, icon, isActive =
   )
 }
 
-export function MenuContainer({ children, upward = true }: { children: React.ReactNode; upward?: boolean }) {
+export function MenuContainer({
+  children,
+  upward = true,
+  layout = "radial"
+}: {
+  children: React.ReactNode;
+  upward?: boolean;
+  layout?: "radial" | "vertical";
+}) {
   const [isExpanded, setIsExpanded] = useState(false)
   const childrenArray = React.Children.toArray(children)
+
+  // Track window width dynamically for responsive radial alignment parameters
+  const [windowWidth, setWindowWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 1024);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const isMobile = windowWidth < 640;
+  const isTablet = windowWidth >= 640 && windowWidth < 1024;
 
   const handleToggle = () => {
     setIsExpanded((prev) => !prev);
   }
 
   return (
-    <div className="relative w-16 h-16" data-expanded={isExpanded}>
+    <div className="relative w-12 h-12 lg:w-14 lg:h-14" data-expanded={isExpanded}>
       {/* Container for all items */}
-      <div className="relative">
+      <div className="relative w-full h-full">
         {/* First item - always visible */}
-        <div 
-          className="relative w-16 h-16 bg-blue-600 text-white cursor-pointer rounded-full flex items-center justify-center shadow-lg shadow-blue-500/30 will-change-transform z-50 hover:bg-blue-700 hover:scale-105 active:scale-95 transition-all duration-300"
+        <div
+          className="relative w-full h-full bg-blue-600 text-white cursor-pointer rounded-full flex items-center justify-center shadow-lg shadow-blue-500/30 will-change-transform z-50 hover:bg-blue-700 hover:scale-105 active:scale-95 transition-all duration-300"
           onClick={handleToggle}
         >
           {React.isValidElement(childrenArray[0])
@@ -105,20 +125,43 @@ export function MenuContainer({ children, upward = true }: { children: React.Rea
 
         {/* Other items */}
         {childrenArray.slice(1).map((child, index) => {
+          const totalItems = childrenArray.length - 1;
           const offsetMultiplier = index + 1;
-          const translateValue = upward ? -(offsetMultiplier * 68) : (offsetMultiplier * 68);
+          const translateValue = upward ? -(offsetMultiplier * 52) : (offsetMultiplier * 52);
+
+          let targetX = 0;
+          let targetY = translateValue;
+
+          if (layout === "radial") {
+            // Responsive sizing settings to prevent icon overlapping and edge overflow
+            const radius = isMobile ? 95 : isTablet ? 110 : 135;
+            const startAngle = isMobile ? 165 : isTablet ? 172 : 170;
+            const endAngle = isMobile ? 285 : isTablet ? 278 : 280;
+
+            const angleInDegrees = totalItems > 1
+              ? startAngle + (index / (totalItems - 1)) * (endAngle - startAngle)
+              : startAngle;
+
+            const angleInRadians = (angleInDegrees * Math.PI) / 180;
+            targetX = radius * Math.cos(angleInRadians);
+            targetY = radius * Math.sin(angleInRadians);
+          }
+
+          const transformValue = isExpanded
+            ? `translate(${targetX.toFixed(1)}px, ${targetY.toFixed(1)}px) scale(1) rotate(360deg)`
+            : "translate(0px, 0px) scale(0) rotate(0deg)";
 
           return (
-            <div 
-              key={index} 
-              className="absolute top-0 left-0 w-16 h-16 bg-slate-900 border border-slate-800 text-slate-300 rounded-full flex items-center justify-center shadow-2xl will-change-transform"
+            <div
+              key={index}
+              className="absolute top-1 left-1 lg:top-[6px] lg:left-[6px] w-10 h-10 lg:w-11 lg:h-11 bg-slate-900 border border-slate-800 text-slate-300 rounded-full flex items-center justify-center shadow-2xl will-change-transform"
               style={{
-                transform: `translateY(${isExpanded ? translateValue : 0}px)`,
+                transform: transformValue,
                 opacity: isExpanded ? 1 : 0,
                 zIndex: 40 - index,
-                clipPath: "circle(50% at 50% 50%)",
-                transition: `transform ${isExpanded ? '350ms' : '300ms'} cubic-bezier(0.175, 0.885, 0.32, 1.15),
-                             opacity ${isExpanded ? '300ms' : '250ms'}`,
+                transition: `transform ${isExpanded ? '500ms' : '400ms'} cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                             opacity ${isExpanded ? '400ms' : '300ms'} ease-out`,
+                transitionDelay: isExpanded ? `${index * 50}ms` : `${(totalItems - 1 - index) * 30}ms`,
                 backfaceVisibility: 'hidden',
                 perspective: 1000,
                 WebkitFontSmoothing: 'antialiased'

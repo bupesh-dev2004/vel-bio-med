@@ -102,16 +102,16 @@ export default function ContactView() {
       setFormValidation("Please fill in your full name.");
       return;
     }
-    if (!formData.email.trim() && !formData.mobile.trim()) {
-      setFormValidation("Please supply either an email address or mobile number so we can reach back.");
+    if (!formData.mobile.trim()) {
+      setFormValidation("Please fill in your mobile number.");
+      return;
+    }
+    if (formData.mobile.length !== 10) {
+      setFormValidation("Please provide a valid 10-digit mobile number.");
       return;
     }
     if (formData.email && !formData.email.includes("@")) {
       setFormValidation("Please provide a valid email structure.");
-      return;
-    }
-    if (formData.mobile && formData.mobile.length !== 10) {
-      setFormValidation("Please provide a valid 10-digit mobile number.");
       return;
     }
 
@@ -299,7 +299,7 @@ export default function ContactView() {
                   <div className="absolute -inset-[0.5px] rounded-3xl bg-gradient-to-r from-blue-500/10 via-amber-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                   {/* Glass Card Body */}
-                  <div className="relative bg-slate-950 backdrop-blur-2xl rounded-3xl p-8 sm:p-10 border border-slate-800 shadow-2xl overflow-hidden text-white">
+                  <div className="relative bg-slate-950 backdrop-blur-2xl rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl overflow-hidden text-white">
                     {/* Subtle grid pattern inside */}
                     <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
                       style={{
@@ -342,12 +342,7 @@ export default function ContactView() {
                         )}
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                          <motion.div
-                            whileHover={{ scale: 1.01 }}
-                            whileFocus={{ scale: 1.02 }}
-                            transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                            className="space-y-2"
-                          >
+                          <div className="space-y-2">
                             <label htmlFor="name" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
                               Contact Person Name <span className="text-amber-500">*</span>
                             </label>
@@ -361,16 +356,28 @@ export default function ContactView() {
                               className="w-full bg-white/5 border border-slate-800 rounded-xl py-3 px-4 text-xs font-bold focus:outline-none focus:border-blue-500 focus:bg-white/10 text-white placeholder:text-slate-600 transition-all"
                               required
                             />
-                          </motion.div>
+                          </div>
 
-                          <motion.div
-                            whileHover={{ scale: 1.01 }}
-                            whileFocus={{ scale: 1.02 }}
-                            transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                            className="space-y-2"
-                          >
+                          <div className="space-y-2">
+                            <label htmlFor="mobile" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                              Mobile Number <span className="text-amber-500">*</span>
+                            </label>
+                            <input
+                              type="tel"
+                              name="mobile"
+                              id="mobile"
+                              placeholder="e.g. 9876543210 (10 digits)"
+                              maxLength={10}
+                              value={formData.mobile}
+                              onChange={handleChange}
+                              className="w-full bg-white/5 border border-slate-800 rounded-xl py-3 px-4 text-xs font-bold focus:outline-none focus:border-blue-500 focus:bg-white/10 text-white placeholder:text-slate-600 transition-all"
+                              required
+                            />
+                          </div>
+
+                          <div className="space-y-2">
                             <label htmlFor="email" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                              Institutional Email <span className="text-amber-500">*</span>
+                              Institutional Email
                             </label>
                             <input
                               type="email"
@@ -380,126 +387,94 @@ export default function ContactView() {
                               value={formData.email}
                               onChange={handleChange}
                               className="w-full bg-white/5 border border-slate-800 rounded-xl py-3 px-4 text-xs font-bold focus:outline-none focus:border-blue-500 focus:bg-white/10 text-white placeholder:text-slate-600 transition-all"
-                              required
                             />
-                          </motion.div>
-                        </div>
+                          </div>
 
-                        <motion.div
-                          whileHover={{ scale: 1.01 }}
-                          whileFocus={{ scale: 1.02 }}
-                          transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                          className="space-y-2"
-                        >
-                          <label htmlFor="mobile" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                            Mobile Number
-                          </label>
-                          <input
-                            type="tel"
-                            name="mobile"
-                            id="mobile"
-                            placeholder="e.g. 9876543210 (10 digits)"
-                            maxLength={10}
-                            value={formData.mobile}
-                            onChange={handleChange}
-                            className="w-full bg-white/5 border border-slate-800 rounded-xl py-3 px-4 text-xs font-bold focus:outline-none focus:border-blue-500 focus:bg-white/10 text-white placeholder:text-slate-600 transition-all"
-                          />
-                        </motion.div>
+                          <div className="space-y-2 relative">
+                            <label htmlFor="product" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                              Required Device or Machine
+                            </label>
+                            <div className="relative" ref={dropdownRef}>
+                              <button
+                                type="button"
+                                onClick={() => setIsOpen(!isOpen)}
+                                className="w-full bg-white/5 border border-slate-800 rounded-xl py-3 px-3.5 text-xs font-bold text-left text-white flex items-center justify-between transition-all focus:outline-none focus:border-blue-500 cursor-pointer"
+                              >
+                                <span className={formData.product ? "text-white" : "text-slate-500"}>
+                                  {formData.product || "Select a Device / Machine"}
+                                </span>
+                                <svg className={`w-4 h-4 text-slate-500 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                              </button>
 
-                        <motion.div
-                          whileHover={{ scale: 1.01 }}
-                          whileFocus={{ scale: 1.02 }}
-                          transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                          className="space-y-2 relative"
-                        >
-                          <label htmlFor="product" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                            Required Device or Machine
-                          </label>
-                          <div className="relative" ref={dropdownRef}>
-                            <button
-                              type="button"
-                              onClick={() => setIsOpen(!isOpen)}
-                              className="w-full bg-white/5 border border-slate-800 rounded-xl py-2.5 px-3.5 text-xs font-bold text-left text-white flex items-center justify-between transition-all focus:outline-none focus:border-blue-500 cursor-pointer"
-                            >
-                              <span className={formData.product ? "text-white" : "text-slate-500"}>
-                                {formData.product || "Select a Device / Machine"}
-                              </span>
-                              <svg className={`w-4 h-4 text-slate-500 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                              </svg>
-                            </button>
-
-                            <AnimatePresence>
-                              {isOpen && (
-                                <motion.div
-                                  initial={{ opacity: 0, y: -10 }}
-                                  animate={{ opacity: 1, y: 0 }}
-                                  exit={{ opacity: 0, y: -10 }}
-                                  transition={{ duration: 0.15 }}
-                                  className="absolute z-50 w-full top-full mt-1.5 bg-slate-950 border border-slate-800 rounded-xl shadow-2xl max-h-40 overflow-y-auto"
-                                  style={{
-                                    scrollbarWidth: 'thin',
-                                    scrollbarColor: '#334155 transparent'
-                                  }}
-                                >
-                                  <button
-                                    type="button"
-                                    onClick={() => {
-                                      setFormData(prev => ({ ...prev, product: "General Sourcing Inquiry" }));
-                                      setIsOpen(false);
+                              <AnimatePresence>
+                                {isOpen && (
+                                  <motion.div
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -10 }}
+                                    transition={{ duration: 0.15 }}
+                                    className="absolute z-50 w-full top-full mt-1.5 bg-slate-950 border border-slate-800 rounded-xl shadow-2xl max-h-40 overflow-y-auto"
+                                    style={{
+                                      scrollbarWidth: 'thin',
+                                      scrollbarColor: '#334155 transparent'
                                     }}
-                                    className="w-full px-3.5 py-2 text-left text-xs font-bold text-slate-300 hover:bg-blue-600 hover:text-white transition-colors border-none bg-transparent cursor-pointer"
                                   >
-                                    General Sourcing Inquiry
-                                  </button>
-                                  {(state?.products || []).map((prod) => (
                                     <button
-                                      key={prod.id}
                                       type="button"
                                       onClick={() => {
-                                        setFormData(prev => ({ ...prev, product: prod.name }));
+                                        setFormData(prev => ({ ...prev, product: "General Sourcing Inquiry" }));
                                         setIsOpen(false);
                                       }}
-                                      className="w-full px-3.5 py-2 text-left text-xs font-bold text-white hover:bg-blue-600 hover:text-white transition-colors border-none bg-transparent cursor-pointer"
+                                      className="w-full px-3.5 py-2 text-left text-xs font-bold text-slate-300 hover:bg-blue-600 hover:text-white transition-colors border-none bg-transparent cursor-pointer"
                                     >
-                                      {prod.name}
+                                      General Sourcing Inquiry
                                     </button>
-                                  ))}
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
+                                    {(state?.products || []).map((prod) => (
+                                      <button
+                                        key={prod.id}
+                                        type="button"
+                                        onClick={() => {
+                                          setFormData(prev => ({ ...prev, product: prod.name }));
+                                          setIsOpen(false);
+                                        }}
+                                        className="w-full px-3.5 py-2 text-left text-xs font-bold text-white hover:bg-blue-600 hover:text-white transition-colors border-none bg-transparent cursor-pointer"
+                                      >
+                                        {prod.name}
+                                      </button>
+                                    ))}
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
+                            </div>
                           </div>
-                        </motion.div>
 
-                        <motion.div
-                          whileHover={{ scale: 1.01 }}
-                          whileFocus={{ scale: 1.02 }}
-                          transition={{ type: "spring", stiffness: 350, damping: 25 }}
-                          className="space-y-2"
-                        >
-                          <label htmlFor="feedback" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                            Inquiry Details & Clinic Context
-                          </label>
-                          <textarea
-                            name="feedback"
-                            id="feedback"
-                            rows={4}
-                            placeholder="Specify AMC contracts, transducer requests, or setup timelines..."
-                            value={formData.feedback}
-                            onChange={handleChange}
-                            className="w-full bg-white/5 border border-slate-800 rounded-xl py-3 px-4 text-xs font-bold focus:outline-none focus:border-blue-500 focus:bg-white/10 text-white placeholder:text-slate-600 transition-all resize-none leading-relaxed"
-                          />
-                        </motion.div>
+                          <div className="space-y-2 sm:col-span-2">
+                            <label htmlFor="feedback" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                              Inquiry Details & Clinic Context
+                            </label>
+                            <textarea
+                              name="feedback"
+                              id="feedback"
+                              rows={4}
+                              placeholder="Specify AMC contracts, transducer requests, or setup timelines..."
+                              value={formData.feedback}
+                              onChange={handleChange}
+                              className="w-full bg-white/5 border border-slate-800 rounded-xl py-3 px-4 text-xs font-bold focus:outline-none focus:border-blue-500 focus:bg-white/10 text-white placeholder:text-slate-600 transition-all resize-none leading-relaxed"
+                            />
+                          </div>
+                        </div>
 
                         {/* Native submit button with hover scale effects */}
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="w-full relative group/btn border-none bg-transparent cursor-pointer hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200"
+                          className="w-full p-0 relative group/btn border-none bg-transparent cursor-pointer hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200"
                         >
                           <div className="absolute inset-0 bg-blue-500/20 rounded-xl blur-lg opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
-                          <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-sky-500 text-white font-black h-12 rounded-xl transition-all duration-300 flex items-center justify-center text-xs sm:text-sm uppercase tracking-widest shadow-lg shadow-blue-500/25">
+                          <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-sky-500 text-white font-black h-12 rounded-xl transition-all duration-300 flex items-center justify-center text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-widest shadow-lg shadow-blue-500/25">
                             <motion.div
                               className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -z-10"
                               animate={{ x: ['-100%', '100%'] }}

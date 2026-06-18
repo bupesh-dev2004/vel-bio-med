@@ -454,7 +454,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
           </div>
 
           {/* Embla Carousel Slider */}
-          <Carousel setApi={setProductsApi} opts={{ align: "start", loop: true }} className="w-full max-w-6xl mx-auto relative px-0 sm:px-4">
+          <Carousel setApi={setProductsApi} opts={{ align: "start", loop: true, slidesToScroll: 1, breakpoints: { "(min-width: 640px)": { slidesToScroll: 2 }, "(min-width: 1024px)": { slidesToScroll: 3 } } }} className="w-full max-w-6xl mx-auto relative px-0 sm:px-4">
             <CarouselContent className="-ml-4">
               {dynamicProducts.map((p, idx) => {
                 const isAmber = idx % 2 === 1;
@@ -659,8 +659,8 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className="absolute left-1 md:left-4 bg-white border border-slate-200 text-slate-800 shadow-md hover:bg-blue-600 hover:text-white hover:border-blue-600 w-9 h-9 sm:w-10 sm:h-10 transition-all z-30 animate-pulse" style={{ animationDuration: '3s' }} />
-              <CarouselNext className="absolute right-1 md:right-4 bg-white border border-slate-200 text-slate-800 shadow-md hover:bg-blue-600 hover:text-white hover:border-blue-600 w-9 h-9 sm:w-10 sm:h-10 transition-all z-30 animate-pulse" style={{ animationDuration: '3s' }} />
+              <CarouselPrevious className="absolute left-2 md:left-4 bg-white border border-slate-200 text-slate-800 shadow-md hover:bg-blue-600 hover:text-white hover:border-blue-600 w-9 h-9 sm:w-10 sm:h-10 top-[88px] sm:top-1/2 transition-all z-30 animate-pulse" style={{ animationDuration: '3s' }} />
+              <CarouselNext className="absolute right-2 md:right-4 bg-white border border-slate-200 text-slate-800 shadow-md hover:bg-blue-600 hover:text-white hover:border-blue-600 w-9 h-9 sm:w-10 sm:h-10 top-[88px] sm:top-1/2 transition-all z-30 animate-pulse" style={{ animationDuration: '3s' }} />
             </Carousel>
           </div>
         </motion.div>

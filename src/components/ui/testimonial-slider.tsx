@@ -1,6 +1,6 @@
 // components/ui/testimonial-slider.tsx
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
 import { cn } from '@/lib/utils'; // Assumes shadcn/ui setup
@@ -54,6 +54,18 @@ export const TestimonialSlider = ({ testimonials, className }: TestimonialSlider
     setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
   }, [testimonials.length]);
 
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Auto-scroll effect that pauses on hover or user interaction
+  useEffect(() => {
+    if (testimonials.length <= 1 || isPaused) return;
+    const interval = setInterval(() => {
+      handleNext();
+    }, 4500);
+
+    return () => clearInterval(interval);
+  }, [currentIndex, handleNext, testimonials.length, isPaused]);
+
   const currentTestimonial = testimonials[currentIndex];
 
   // Animation variants for the slide transition using Framer Motion
@@ -79,7 +91,11 @@ export const TestimonialSlider = ({ testimonials, className }: TestimonialSlider
   }
 
   return (
-    <div className={cn("relative w-full max-w-2xl mx-auto overflow-hidden", className)}>
+    <div 
+      className={cn("relative w-full max-w-2xl mx-auto overflow-hidden", className)}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <div className="relative min-h-[440px] sm:min-h-[380px] md:min-h-[290px] lg:min-h-[270px] flex items-center justify-center">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
