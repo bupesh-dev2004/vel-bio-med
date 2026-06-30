@@ -38,14 +38,16 @@ export default function ProductsView({
     setInquiryMachineName,
     inquiryMachineName,
     selectedCategory,
-    setSelectedCategory
+    setSelectedCategory,
+    searchQuery,
+    setSearchQuery
   } = useAppState();
 
   const productsList = state?.products || [];
   const categories = state?.categories || [];
 
   // Filter & Search states
-  const [searchText, setSearchText] = useState("");
+  // Managed globally via AppContext (searchQuery)
   const [sortBy, setSortBy] = useState("default");
   const [isSortOpen, setIsSortOpen] = useState(false);
 
@@ -86,9 +88,9 @@ export default function ProductsView({
 
   // Filter calculations
   const filteredProducts = productsList.filter((p) => {
-    const matchesSearch = p.name.toLowerCase().includes(searchText.toLowerCase()) ||
-      p.shortDesc.toLowerCase().includes(searchText.toLowerCase()) ||
-      p.category.toLowerCase().includes(searchText.toLowerCase());
+    const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      p.shortDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      p.category.toLowerCase().includes(searchQuery.toLowerCase());
 
     const matchesCategory = selectedCategory === "All" || p.category === selectedCategory;
 
@@ -194,8 +196,8 @@ export default function ProductsView({
                 <input
                   type="text"
                   placeholder="Search machines, specs, category..."
-                  value={searchText}
-                  onChange={(e) => setSearchText(e.target.value)}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full bg-slate-900/90 border border-slate-800 focus:border-amber-500 focus:bg-slate-950 rounded-2xl py-4 pl-12 pr-4 text-xs focus:outline-none transition-all text-white font-medium shadow-inner placeholder:text-slate-500"
                 />
                 <Search className="w-4.5 h-4.5 text-slate-400 absolute left-4.5 top-1/2 -translate-y-1/2" />
@@ -455,7 +457,7 @@ export default function ProductsView({
                   </p>
                   <button
                     onClick={() => {
-                      setSearchText("");
+                      setSearchQuery("");
                       setSelectedCategory("All");
                     }}
                     className="bg-amber-50 text-amber-600 hover:bg-amber-100 font-black text-xs py-3 px-6 rounded-xl uppercase tracking-wider transition-all mt-4"

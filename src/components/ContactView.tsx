@@ -1,7 +1,32 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Mail, Phone, MapPin, Clock, ArrowRight, ShieldCheck, HelpCircle, MessageSquare } from "lucide-react";
 import { useAppState } from "../AppContext.js";
-import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useTransform, Variants } from "framer-motion";
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.1,
+    }
+  }
+};
+
+const cardSlideIn: Variants = {
+  hidden: { opacity: 0, x: -35, y: 15 },
+  visible: { 
+    opacity: 1, 
+    x: 0,
+    y: 0,
+    transition: {
+      type: "spring",
+      stiffness: 90,
+      damping: 14
+    }
+  }
+};
 
 export default function ContactView() {
   const { state, submitInquiry, inquiryMachineName, setInquiryMachineName } = useAppState();
@@ -200,7 +225,13 @@ export default function ContactView() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
             {/* Left Column Address Info - Premium Light-Frosted clinical panels */}
-            <div className="lg:col-span-5 space-y-10">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="lg:col-span-5 space-y-10"
+            >
               <div className="space-y-4">
                 <span className="text-blue-600 font-black tracking-widest text-xs uppercase block mb-1">Corporate Details</span>
                 <h2 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight leading-tight">
@@ -215,55 +246,80 @@ export default function ContactView() {
 
               {/* Contact Icons block */}
               <div className="space-y-5">
-                <div className="flex gap-5 items-start bg-white/60 backdrop-blur-xl p-6 rounded-2xl border border-slate-200/60 shadow-lg shadow-slate-100/50 hover:border-blue-500/40 hover:bg-white/80 hover:-translate-y-0.5 transition-all duration-300 group">
-                  <div className="p-3.5 bg-blue-50 text-blue-600 rounded-xl border border-blue-100 group-hover:scale-105 transition-transform">
-                    <MapPin className="w-5 h-5" />
+                <motion.div
+                  variants={cardSlideIn}
+                  className="flex gap-5 items-center relative bg-gradient-to-br from-white/95 via-slate-50/70 to-white/95 backdrop-blur-xl p-6 rounded-2xl border border-slate-200/60 shadow-lg shadow-slate-100/50 hover:shadow-blue-500/8 hover:border-blue-500/40 hover:translate-x-2 transition-all duration-300 group overflow-hidden cursor-pointer"
+                >
+                  {/* Left accent color strip */}
+                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-600 via-indigo-650 to-cyan-500 group-hover:w-2.5 transition-all duration-300" />
+                  
+                  <div className="p-3.5 bg-gradient-to-br from-blue-50 to-indigo-100/60 text-blue-600 rounded-2xl border border-blue-100/80 shadow-md group-hover:scale-105 transition-transform duration-300 flex-shrink-0">
+                    <MapPin className="w-5 h-5 group-hover:animate-bounce" />
                   </div>
                   <div>
-                    <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400">Administration HQ Address</h4>
-                    <p className="text-slate-800 text-xs sm:text-sm font-bold mt-1.5 leading-relaxed">{contact.address}</p>
+                    <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-blue-600 transition-colors">Administration HQ Address</h4>
+                    <p className="text-slate-800 text-xs sm:text-sm font-bold mt-1 leading-relaxed">{contact.address}</p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="flex gap-5 items-start bg-white/60 backdrop-blur-xl p-6 rounded-2xl border border-slate-200/60 shadow-lg shadow-slate-100/50 hover:border-amber-500/40 hover:bg-white/80 hover:-translate-y-0.5 transition-all duration-300 group">
-                  <div className="p-3.5 bg-amber-50 text-amber-600 rounded-xl border border-amber-100 group-hover:scale-105 transition-transform">
-                    <Phone className="w-5 h-5" />
+                <motion.div
+                  variants={cardSlideIn}
+                  className="flex gap-5 items-center relative bg-gradient-to-br from-white/95 via-slate-50/70 to-white/95 backdrop-blur-xl p-6 rounded-2xl border border-slate-200/60 shadow-lg shadow-slate-100/50 hover:shadow-amber-500/8 hover:border-amber-500/40 hover:translate-x-2 transition-all duration-300 group overflow-hidden cursor-pointer"
+                >
+                  {/* Left accent color strip */}
+                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-amber-500 via-orange-500 to-yellow-400 group-hover:w-2.5 transition-all duration-300" />
+                  
+                  <div className="p-3.5 bg-gradient-to-br from-amber-50 to-orange-100/60 text-amber-600 rounded-2xl border border-amber-100/80 shadow-md group-hover:scale-105 transition-transform duration-300 flex-shrink-0">
+                    <Phone className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
                   </div>
                   <div>
-                    <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400">Direct Sourcing Hotlines</h4>
-                    <p className="text-slate-800 text-xs sm:text-sm font-bold mt-1.5 leading-relaxed">{contact.phone}</p>
+                    <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-amber-500 transition-colors">Direct Sourcing Hotlines</h4>
+                    <p className="text-slate-800 text-xs sm:text-sm font-bold mt-1 leading-relaxed">{contact.phone}</p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="flex gap-5 items-start bg-white/60 backdrop-blur-xl p-6 rounded-2xl border border-slate-200/60 shadow-lg shadow-slate-100/50 hover:border-blue-500/40 hover:bg-white/80 hover:-translate-y-0.5 transition-all duration-300 group">
-                  <div className="p-3.5 bg-blue-50 text-blue-600 rounded-xl border border-blue-100 group-hover:scale-105 transition-transform">
-                    <Mail className="w-5 h-5" />
+                <motion.div
+                  variants={cardSlideIn}
+                  className="flex gap-5 items-center relative bg-gradient-to-br from-white/95 via-slate-50/70 to-white/95 backdrop-blur-xl p-6 rounded-2xl border border-slate-200/60 shadow-lg shadow-slate-100/50 hover:shadow-blue-500/8 hover:border-blue-500/40 hover:translate-x-2 transition-all duration-300 group overflow-hidden cursor-pointer"
+                >
+                  {/* Left accent color strip */}
+                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-600 via-sky-600 to-cyan-500 group-hover:w-2.5 transition-all duration-300" />
+                  
+                  <div className="p-3.5 bg-gradient-to-br from-blue-50 to-sky-100/60 text-blue-600 rounded-2xl border border-blue-100/80 shadow-md group-hover:scale-105 transition-transform duration-300 flex-shrink-0">
+                    <Mail className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
                   </div>
                   <div>
-                    <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400">Electronic Mail Setup</h4>
-                    <p className="text-blue-600 text-xs sm:text-sm font-bold mt-1.5 hover:text-blue-500 transition-colors">
-                      <a href={`mailto:${contact.email}`}>{contact.email}</a>
+                    <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-blue-600 transition-colors">Electronic Mail Setup</h4>
+                    <p className="text-blue-600 text-xs sm:text-sm font-bold mt-1 leading-relaxed">
+                      <a href={`mailto:${contact.email}`} className="hover:underline">{contact.email}</a>
                     </p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="flex gap-5 items-start bg-white/60 backdrop-blur-xl p-6 rounded-2xl border border-slate-200/60 shadow-lg shadow-slate-100/50 hover:border-amber-500/40 hover:bg-white/80 hover:-translate-y-0.5 transition-all duration-300 group">
-                  <div className="p-3.5 bg-amber-50 text-amber-600 rounded-xl border border-amber-100 group-hover:scale-105 transition-transform">
-                    <Clock className="w-5 h-5" />
+                <motion.div
+                  variants={cardSlideIn}
+                  className="flex gap-5 items-center relative bg-gradient-to-br from-white/95 via-slate-50/70 to-white/95 backdrop-blur-xl p-6 rounded-2xl border border-slate-200/60 shadow-lg shadow-slate-100/50 hover:shadow-amber-500/8 hover:border-amber-500/40 hover:translate-x-2 transition-all duration-300 group overflow-hidden cursor-pointer"
+                >
+                  {/* Left accent color strip */}
+                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-amber-500 via-orange-500 to-yellow-400 group-hover:w-2.5 transition-all duration-300" />
+                  
+                  <div className="p-3.5 bg-gradient-to-br from-amber-50 to-orange-100/60 text-amber-600 rounded-2xl border border-amber-100/80 shadow-md group-hover:scale-105 transition-transform duration-300 flex-shrink-0">
+                    <Clock className="w-5 h-5 group-hover:rotate-[360deg] transition-transform duration-1000 ease-in-out" />
                   </div>
                   <div>
-                    <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400">Administrative Working Hours</h4>
-                    <p className="text-slate-800 text-xs sm:text-sm font-bold mt-1.5 leading-relaxed">{contact.workingHours}</p>
+                    <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-amber-500 transition-colors">Administrative Working Hours</h4>
+                    <p className="text-slate-800 text-xs sm:text-sm font-bold mt-1 leading-relaxed">{contact.workingHours}</p>
                   </div>
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Right Column Interactive Form with stable glassmorphic fade-in effect */}
+            {/* Right Column Interactive Form with premium glassmorphic fade-up effect */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
               className="lg:col-span-7 w-full relative z-10"
             >
               <div className="relative group">

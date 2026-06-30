@@ -24,10 +24,9 @@ import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon, YoutubeIcon } from ".
 
 
 export const Navbar5 = () => {
-  const { currentTab, setCurrentTab, setSelectedCategory } = useAppState();
+  const { currentTab, setCurrentTab, setSelectedCategory, searchQuery, setSearchQuery } = useAppState();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -406,8 +405,8 @@ export const Navbar5 = () => {
                         <button
                           onClick={() => navigateTab("home")}
                           className={`flex items-center justify-between w-full p-4 rounded-2xl transition-all cursor-pointer border-none text-left ${currentTab === "home"
-                              ? "bg-blue-50 text-blue-600 font-extrabold border-l-4 border-blue-600 pl-3"
-                              : "bg-slate-50/50 hover:bg-slate-50 text-slate-700 font-bold"
+                            ? "bg-blue-50 text-blue-600 font-extrabold border-l-4 border-blue-600 pl-3"
+                            : "bg-slate-50/50 hover:bg-slate-50 text-slate-700 font-bold"
                             }`}
                         >
                           <span className="flex items-center gap-3.5">
@@ -423,8 +422,8 @@ export const Navbar5 = () => {
                         <button
                           onClick={() => navigateTab("about")}
                           className={`flex items-center justify-between w-full p-4 rounded-2xl transition-all cursor-pointer border-none text-left ${currentTab === "about"
-                              ? "bg-blue-50 text-blue-600 font-extrabold border-l-4 border-blue-600 pl-3"
-                              : "bg-slate-50/50 hover:bg-slate-50 text-slate-700 font-bold"
+                            ? "bg-blue-50 text-blue-600 font-extrabold border-l-4 border-blue-600 pl-3"
+                            : "bg-slate-50/50 hover:bg-slate-50 text-slate-700 font-bold"
                             }`}
                         >
                           <span className="flex items-center gap-3.5">
@@ -442,8 +441,8 @@ export const Navbar5 = () => {
                         <button
                           onClick={() => setIsProductsOpen(!isProductsOpen)}
                           className={`flex items-center justify-between w-full p-4 rounded-2xl transition-all cursor-pointer border-none text-left ${currentTab === "products"
-                              ? "bg-blue-50 text-blue-600 font-extrabold border-l-4 border-blue-600 pl-3"
-                              : "bg-slate-50/50 hover:bg-slate-50 text-slate-700 font-bold"
+                            ? "bg-blue-50 text-blue-600 font-extrabold border-l-4 border-blue-600 pl-3"
+                            : "bg-slate-50/50 hover:bg-slate-50 text-slate-700 font-bold"
                             }`}
                         >
                           <span className="flex items-center gap-3.5">
@@ -498,8 +497,8 @@ export const Navbar5 = () => {
                         <button
                           onClick={() => navigateTab("gallery")}
                           className={`flex items-center justify-between w-full p-4 rounded-2xl transition-all cursor-pointer border-none text-left ${currentTab === "gallery"
-                              ? "bg-blue-50 text-blue-600 font-extrabold border-l-4 border-blue-600 pl-3"
-                              : "bg-slate-50/50 hover:bg-slate-50 text-slate-700 font-bold"
+                            ? "bg-blue-50 text-blue-600 font-extrabold border-l-4 border-blue-600 pl-3"
+                            : "bg-slate-50/50 hover:bg-slate-50 text-slate-700 font-bold"
                             }`}
                         >
                           <span className="flex items-center gap-3.5">
@@ -515,8 +514,8 @@ export const Navbar5 = () => {
                         <button
                           onClick={() => navigateTab("contact")}
                           className={`flex items-center justify-between w-full p-4 rounded-2xl transition-all cursor-pointer border-none text-left ${currentTab === "contact"
-                              ? "bg-blue-50 text-blue-600 font-extrabold border-l-4 border-blue-600 pl-3"
-                              : "bg-slate-50/50 hover:bg-slate-50 text-slate-700 font-bold"
+                            ? "bg-blue-50 text-blue-600 font-extrabold border-l-4 border-blue-600 pl-3"
+                            : "bg-slate-50/50 hover:bg-slate-50 text-slate-700 font-bold"
                             }`}
                         >
                           <span className="flex items-center gap-3.5">

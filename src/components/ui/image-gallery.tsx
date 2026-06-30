@@ -74,18 +74,18 @@ export default function ImageGallery() {
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   const dbGallery = state?.gallery || [];
-  
+
   // Normalize items from state.gallery, fallback to medicalImages if empty
   const displayItems: GalleryItem[] = dbGallery.length > 0
     ? dbGallery.slice(0, 6).map((item: any) => ({
-        src: item.image,
-        title: item.title,
-        category: item.category,
-        description: item.video
-          ? "Interactive video walkthrough and clinical customer feedback for this modular installation setup."
-          : `Professional real-world clinical sizing and installation of ${item.title} under category ${item.category} by Vel Bio Med.`,
-        objectFit: "cover" as const
-      }))
+      src: item.image,
+      title: item.title,
+      category: item.category,
+      description: item.video
+        ? "Interactive video walkthrough and clinical customer feedback for this modular installation setup."
+        : `Professional real-world clinical sizing and installation of ${item.title} under category ${item.category} by Vel Bio Med.`,
+      objectFit: "cover" as const
+    }))
     : medicalImages;
 
   return (
@@ -128,8 +128,8 @@ export default function ImageGallery() {
                 onMouseLeave={() => setHoveredIdx(null)}
                 className={cn(
                   "relative group flex-grow transition-[flex-grow,border-color,box-shadow] duration-700 ease-out rounded-[24px] overflow-hidden shadow-xl border cursor-pointer w-full lg:w-28 h-[250px] lg:h-full [backface-visibility:hidden] transform-gpu",
-                  hoveredIdx === idx 
-                    ? "lg:flex-[3.5] shadow-blue-500/5" 
+                  hoveredIdx === idx
+                    ? "lg:flex-[3.5] shadow-blue-500/5"
                     : "lg:flex-[1] shadow-black/40",
                   hoveredIdx === idx
                     ? (idx % 2 === 0 ? "border-blue-500/40" : "border-amber-500/40")
@@ -150,11 +150,11 @@ export default function ImageGallery() {
                 />
 
                 {/* Gradient Overlay for text contrast */}
-                <div 
+                <div
                   className={cn(
                     "absolute inset-0 bg-gradient-to-t to-transparent transition-all duration-500 z-10",
-                    hoveredIdx === idx 
-                      ? "from-slate-950 via-slate-950/40 opacity-95" 
+                    hoveredIdx === idx
+                      ? "from-slate-950 via-slate-950/40 opacity-95"
                       : "from-slate-950 via-slate-950/20 opacity-80"
                   )}
                 />
@@ -163,8 +163,8 @@ export default function ImageGallery() {
                 <div
                   className={cn(
                     "absolute top-0 left-0 right-0 h-1 transition-all duration-500 z-20",
-                    idx % 2 === 0 
-                      ? "bg-gradient-to-r from-blue-500 via-sky-400 to-transparent" 
+                    idx % 2 === 0
+                      ? "bg-gradient-to-r from-blue-500 via-sky-400 to-transparent"
                       : "bg-gradient-to-r from-amber-500 via-orange-400 to-transparent"
                   )}
                 />

@@ -12,6 +12,8 @@ interface AppContextType {
   setInquiryMachineName: (name: string | null) => void;
   selectedCategory: string;
   setSelectedCategory: (category: string) => void;
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
   refreshState: () => Promise<void>;
   submitInquiry: (inquiry: Omit<Inquiry, "id" | "date" | "attended">) => Promise<boolean>;
 
@@ -38,6 +40,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [currentTab, setCurrentTab] = useState("home");
   const [inquiryMachineName, setInquiryMachineName] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const refreshState = async () => {
     // Pure static implementation, nothing to refresh
@@ -165,6 +168,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         setSelectedCategory: (cat) => {
           setSelectedCategory(cat);
         },
+        searchQuery,
+        setSearchQuery,
         refreshState,
         submitInquiry,
         toggleInquiryAttended,

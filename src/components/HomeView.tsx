@@ -357,7 +357,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
           transition={{ duration: 1.8, ease: "easeOut" }}
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url(${slides[0]?.image || "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1600&q=80"})`
+            backgroundImage: `url(${slides[0]?.image || "/icu-monitor.png"})`
           }}
         />
         {/* Overlay with Medical blue tint gradient */}
@@ -418,8 +418,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
 
       {/* 2. OUR PRODUCTS SECTION */}
       <section className="py-24 bg-linear-to-br from-blue-50/50 via-white to-orange-50/50 relative overflow-hidden border-b border-slate-100">
-        {/* Ambient Grid Background */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)] opacity-40 pointer-events-none" />
+
 
         {/* Ambient Decorative Light Orbs - Blue and Orange Gradient Glows */}
         <div className="absolute top-10 -left-10 w-[500px] h-[500px] bg-radial from-blue-500/15 via-blue-900/0 to-transparent rounded-full pointer-events-none" />
@@ -561,8 +560,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
 
       {/* 3. TRENDING PRODUCTS GRID */}
       <section className="py-24 bg-gradient-to-b from-slate-900 via-slate-950 to-blue-950 relative overflow-hidden border-b border-slate-900">
-        {/* Ambient Grid Background */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)] opacity-35 pointer-events-none" />
+
 
         {/* Glowing Ambient Light Orbs */}
         <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-radial from-blue-600/18 via-blue-950/0 to-transparent rounded-full pointer-events-none" />
@@ -682,14 +680,16 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
             <span className="inline-flex items-center gap-1.5 bg-blue-50/80 border border-blue-200/50 text-blue-600 font-extrabold px-4 py-1.5 rounded-full text-[10px] uppercase tracking-widest shadow-xs mb-3">
               <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-ping" /> Our Offerings
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight leading-tight flex flex-wrap items-center justify-center gap-x-2">
-              <span>Comprehensive</span>
-              <FlipWords
-                words={["Support", "Maintenance", "Engineering", "Installation", "Restoration", "Technical"]}
-                className="text-blue-600 font-black"
-                duration={1000}
-              />
-              <span className="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-black">Deliverables</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight leading-tight text-center">
+              <span className="block md:inline-block">Comprehensive </span>
+              <span className="block md:inline-block md:ml-2">
+                <FlipWords
+                  words={["Support", "Maintenance", "Engineering", "Installation", "Restoration", "Technical"]}
+                  className="text-blue-600 font-black"
+                  duration={1000}
+                />
+              </span>
+              <span className="bg-gradient-to-r from-amber-500 to-orange-500 bg-clip-text text-transparent font-black block lg:inline-block lg:ml-2">Deliverables</span>
             </h2>
             <div className="w-16 h-1 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto mt-5 rounded-full" />
             <p className="text-slate-500 text-sm mt-4 font-medium leading-relaxed">

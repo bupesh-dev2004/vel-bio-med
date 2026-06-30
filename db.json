@@ -2,21 +2,21 @@
   "homeSlides": [
     {
       "id": "slide-1",
-      "image": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1400&q=80",
+      "image": "/icu-monitor.png",
       "heading": "Transforming Healthcare One Installation at a Time",
       "tagline": "GLOBAL STANDARDS OF MEDICAL SUPPLIES",
       "description": "Vel Bio Med delivers high-caliber diagnostics and life-support machinery from world-renowned healthcare manufacturers to premium hospitals."
     },
     {
       "id": "slide-2",
-      "image": "https://img.freepik.com/free-psd/interior-modern-emergency-room-with-empty-nurses-station-generative-ai_587448-2137.jpg",
+      "image": "/corporate-profile.png",
       "heading": "Your Trusted Partner in Medical Excellence",
       "tagline": "END-TO-END CRITICAL CARE SOLUTIONS",
       "description": "We specialize in turn-key hospital installations, robust critical-care set ups, and intensive care ventilations with certified quality compliance."
     },
     {
       "id": "slide-3",
-      "image": "https://img.magnific.com/premium-photo/recovery-icu-intensive-care-unit-room-ward-with-life-support-hospital-medical-care-emergency_641503-363641.jpg?semt=ais_hybrid&w=740&q=80",
+      "image": "/icu-monitor.png",
       "heading": "Innovative Medical Equipment Solutions",
       "tagline": "24/7 AMC AND SERVICE SUPPORT",
       "description": "Equipped with senior biomedical engineers, our division assures maximum operating-time and seamless maintenance across major clinical facilities."

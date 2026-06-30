@@ -536,7 +536,7 @@ export default function AboutView() {
 
               {/* Right Column Corporate Profile */}
               <div className="lg:col-span-7 space-y-8">
-                <div className="space-y-4">
+                 <div className="space-y-4 border border-blue-200 bg-white/90 p-5 rounded-3xl sm:border-none sm:bg-transparent sm:p-0 sm:shadow-none shadow-md">
                   <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-50 text-blue-700 border border-blue-100 font-extrabold tracking-widest text-[10px] uppercase">
                     <Building2 className="w-3.5 h-3.5 text-blue-600" /> Corporate Profile
                   </span>
@@ -594,7 +594,7 @@ export default function AboutView() {
                   icon: MapPin,
                   gradient: "from-blue-500 to-blue-600",
                   cardBg: "from-blue-50/20 via-white to-white",
-                  borderColor: "border-blue-100/80 hover:border-blue-400 hover:shadow-[0_15px_35px_rgba(59,130,246,0.08)]",
+                  borderColor: "border-blue-200 hover:border-blue-400 hover:shadow-[0_15px_35px_rgba(59,130,246,0.08)]",
                   hoverGlow: "from-blue-50/50 to-blue-100/20",
                   badgeColor: "text-blue-500 bg-blue-50"
                 },
@@ -604,7 +604,7 @@ export default function AboutView() {
                   icon: Activity,
                   gradient: "from-orange-500 to-orange-600",
                   cardBg: "from-orange-50/20 via-white to-white",
-                  borderColor: "border-orange-100/80 hover:border-orange-400 hover:shadow-[0_15px_35px_rgba(249,115,22,0.08)]",
+                  borderColor: "border-orange-200 hover:border-orange-400 hover:shadow-[0_15px_35px_rgba(249,115,22,0.08)]",
                   hoverGlow: "from-orange-50/50 to-orange-100/20",
                   badgeColor: "text-orange-500 bg-orange-50"
                 },
@@ -614,7 +614,7 @@ export default function AboutView() {
                   icon: Award,
                   gradient: "from-blue-500 to-blue-600",
                   cardBg: "from-blue-50/20 via-white to-white",
-                  borderColor: "border-blue-100/80 hover:border-blue-400 hover:shadow-[0_15px_35px_rgba(59,130,246,0.08)]",
+                  borderColor: "border-blue-200 hover:border-blue-400 hover:shadow-[0_15px_35px_rgba(59,130,246,0.08)]",
                   hoverGlow: "from-blue-50/50 to-blue-100/20",
                   badgeColor: "text-blue-500 bg-blue-50"
                 },
@@ -624,7 +624,7 @@ export default function AboutView() {
                   icon: HeartHandshake,
                   gradient: "from-orange-500 to-orange-600",
                   cardBg: "from-orange-50/20 via-white to-white",
-                  borderColor: "border-orange-100/80 hover:border-orange-400 hover:shadow-[0_15px_35px_rgba(249,115,22,0.08)]",
+                  borderColor: "border-orange-200 hover:border-orange-400 hover:shadow-[0_15px_35px_rgba(249,115,22,0.08)]",
                   hoverGlow: "from-orange-50/50 to-orange-100/20",
                   badgeColor: "text-orange-500 bg-orange-50"
                 },
