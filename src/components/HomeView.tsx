@@ -4,7 +4,7 @@ import { useAppState } from "../AppContext.js";
 import { Product } from "../types.js";
 import { FrostedGlassCard } from "@/components/ui/interactive-frosted-glass-card";
 import { BorderRotate } from "@/components/ui/animated-gradient-border";
-import { TestimonialSlider } from "@/components/ui/testimonial-slider";
+import { TestimonialsColumn } from "@/components/ui/testimonials-columns-1";
 import { Logos3 } from "@/components/ui/logos3";
 import ImageGallery from "@/components/ui/image-gallery";
 import {
@@ -338,8 +338,18 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
     { name: "Narayana Health", icon: <Dna className="w-4 h-4" /> }
   ];
 
-  // Testimonials Carousel
+  // Testimonials Columns Layout Setup
   const testimonials = state?.testimonials || [];
+  const formattedTestimonials = testimonials.map((t: any) => ({
+    text: t.reviewText,
+    image: t.image,
+    name: t.name,
+    role: t.designation
+  }));
+
+  const firstColumn = formattedTestimonials.filter((_, idx) => idx % 3 === 0);
+  const secondColumn = formattedTestimonials.filter((_, idx) => idx % 3 === 1);
+  const thirdColumn = formattedTestimonials.filter((_, idx) => idx % 3 === 2);
 
   const startInquiry = (productName: string) => {
     setInquiryMachineName(productName);
@@ -799,15 +809,11 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
             <div className="w-12 h-1 bg-blue-600 mx-auto mt-4 rounded-full" />
           </div>
 
-          <TestimonialSlider
-            testimonials={testimonials.map((t: any) => ({
-              image: t.image,
-              quote: t.reviewText,
-              name: t.name,
-              role: t.designation,
-              rating: t.rating
-            }))}
-          />
+          <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)] max-h-[640px] overflow-hidden">
+            <TestimonialsColumn testimonials={firstColumn} duration={15} />
+            <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={19} />
+            <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={17} />
+          </div>
         </motion.div>
       </section>
     </div>

@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useAppState } from "../../AppContext.js";
 import { ArrowRight } from "lucide-react";
@@ -71,22 +71,65 @@ const fadeUpVariants = {
 
 export default function ImageGallery() {
   const { state, setCurrentTab } = useAppState();
-  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
-
+  const [show, setShow] = useState(false);
+  const [activeImageUrl, setActiveImageUrl] = useState<string | null>(null);
+  
   const dbGallery = state?.gallery || [];
+  const baseItems = dbGallery.length > 0
+    ? dbGallery.map((item: any) => ({
+        src: item.image,
+        title: item.title,
+        category: item.category
+      }))
+    : medicalImages;
 
-  // Normalize items from state.gallery, fallback to medicalImages if empty
-  const displayItems: GalleryItem[] = dbGallery.length > 0
-    ? dbGallery.slice(0, 6).map((item: any) => ({
-      src: item.image,
+  const gridClasses = [
+    "block relative bg-slate-900 w-full h-24 rounded-xl overflow-hidden border border-slate-800 shadow-md group hover:scale-[1.02] hover:border-blue-500/50 transition-all duration-300",
+    "block relative bg-slate-900 row-span-2 rounded-xl overflow-hidden border border-slate-800 shadow-md group hover:scale-[1.02] hover:border-blue-500/50 transition-all duration-300",
+    "block relative bg-slate-900 col-span-2 row-span-2 rounded-xl overflow-hidden border border-slate-800 shadow-md group hover:scale-[1.02] hover:border-blue-500/50 transition-all duration-300",
+    "block relative bg-slate-900 row-span-2 rounded-xl overflow-hidden border border-slate-800 shadow-md group hover:scale-[1.02] hover:border-blue-500/50 transition-all duration-300",
+    "block relative bg-slate-900 rounded-xl overflow-hidden border border-slate-800 shadow-md group hover:scale-[1.02] hover:border-blue-500/50 transition-all duration-300",
+    "block relative bg-slate-900 w-full h-24 rounded-xl overflow-hidden border border-slate-800 shadow-md group hover:scale-[1.02] hover:border-blue-500/50 transition-all duration-300",
+    "block relative bg-slate-900 row-span-2 rounded-xl overflow-hidden border border-slate-800 shadow-md group hover:scale-[1.02] hover:border-blue-500/50 transition-all duration-300",
+    "block relative bg-slate-900 col-span-2 row-span-2 rounded-xl overflow-hidden border border-slate-800 shadow-md group hover:scale-[1.02] hover:border-blue-500/50 transition-all duration-300",
+    "block relative bg-slate-900 row-span-2 rounded-xl overflow-hidden border border-slate-800 shadow-md group hover:scale-[1.02] hover:border-blue-500/50 transition-all duration-300",
+    "block relative bg-slate-900 rounded-xl overflow-hidden border border-slate-800 shadow-md group hover:scale-[1.02] hover:border-blue-500/50 transition-all duration-300"
+  ];
+
+  const displayImages = Array.from({ length: 10 }).map((_, idx) => {
+    const item = baseItems[idx % baseItems.length];
+    return {
+      thumb: item.src,
+      full: item.src,
       title: item.title,
       category: item.category,
-      description: item.video
-        ? "Interactive video walkthrough and clinical customer feedback for this modular installation setup."
-        : `Professional real-world clinical sizing and installation of ${item.title} under category ${item.category} by Vel Bio Med.`,
-      objectFit: "cover" as const
-    }))
-    : medicalImages;
+      className: gridClasses[idx]
+    };
+  });
+
+  const open = (url: string) => {
+    setActiveImageUrl(url);
+    setShow(true);
+  };
+
+  const close = () => {
+    setShow(false);
+    setTimeout(() => {
+      setActiveImageUrl(null);
+    }, 300);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        close();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   return (
     <>
@@ -119,85 +162,24 @@ export default function ImageGallery() {
             </p>
           </div>
 
-          {/* Dynamic Accordion Gallery */}
-          <div className="flex flex-col lg:flex-row items-center gap-3 h-auto lg:h-[450px] w-full max-w-6xl mt-2 px-6">
-            {displayItems.map((item, idx) => (
-              <div
-                key={idx}
-                onMouseEnter={() => setHoveredIdx(idx)}
-                onMouseLeave={() => setHoveredIdx(null)}
-                className={cn(
-                  "relative group flex-grow transition-[flex-grow,border-color,box-shadow] duration-700 ease-out rounded-[24px] overflow-hidden shadow-xl border cursor-pointer w-full lg:w-28 h-[250px] lg:h-full [backface-visibility:hidden] transform-gpu",
-                  hoveredIdx === idx
-                    ? "lg:flex-[3.5] shadow-blue-500/5"
-                    : "lg:flex-[1] shadow-black/40",
-                  hoveredIdx === idx
-                    ? (idx % 2 === 0 ? "border-blue-500/40" : "border-amber-500/40")
-                    : "border-slate-800/80 hover:border-slate-700/80"
-                )}
+          {/* Dynamic Grid Gallery */}
+          <div className="mt-6 max-w-4xl w-full mx-auto grid gap-3 grid-cols-4 grid-rows-5 px-6 h-[600px]">
+            {displayImages.map((image, index) => (
+              <a
+                key={index}
+                href={image.full}
+                onClick={(e) => {
+                  e.preventDefault();
+                  open(image.full);
+                }}
+                className={image.className}
               >
-                {/* Image with zoom on hover */}
                 <img
-                  className={cn(
-                    "h-full w-full transition-transform duration-1000 ease-out group-hover:scale-105",
-                    item.objectFit === "contain"
-                      ? "object-contain p-6 bg-white"
-                      : "object-cover object-center bg-slate-900"
-                  )}
-                  src={item.src}
-                  alt={item.title}
-                  loading="lazy"
+                  src={image.thumb}
+                  alt={image.title}
+                  className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                 />
-
-                {/* Gradient Overlay for text contrast */}
-                <div
-                  className={cn(
-                    "absolute inset-0 bg-gradient-to-t to-transparent transition-all duration-500 z-10",
-                    hoveredIdx === idx
-                      ? "from-slate-950 via-slate-950/40 opacity-95"
-                      : "from-slate-950 via-slate-950/20 opacity-80"
-                  )}
-                />
-
-                {/* Top Accent Gradient Border */}
-                <div
-                  className={cn(
-                    "absolute top-0 left-0 right-0 h-1 transition-all duration-500 z-20",
-                    idx % 2 === 0
-                      ? "bg-gradient-to-r from-blue-500 via-sky-400 to-transparent"
-                      : "bg-gradient-to-r from-amber-500 via-orange-400 to-transparent"
-                  )}
-                />
-
-                {/* Text content card details */}
-                <div className="absolute inset-x-0 bottom-0 p-6 flex flex-col justify-end min-h-[120px] text-white z-20">
-                  <span
-                    className={cn(
-                      "text-[10px] font-black uppercase tracking-widest transition-all duration-500 mb-1.5 block",
-                      idx % 2 === 0 ? "text-sky-300" : "text-amber-400"
-                    )}
-                  >
-                    {item.category}
-                  </span>
-
-                  {/* Title changes structure when active/hovered */}
-                  <h3 className="text-base md:text-lg font-bold tracking-tight text-white line-clamp-1 leading-snug">
-                    {item.title}
-                  </h3>
-
-                  {/* Subtitle description revealed smoothly on accordion expand */}
-                  <div
-                    className={cn(
-                      "grid transition-all duration-700 ease-out opacity-0",
-                      hoveredIdx === idx ? "grid-rows-[1fr] opacity-100 mt-2.5" : "grid-rows-[0fr]"
-                    )}
-                  >
-                    <p className="text-xs text-slate-300 font-medium leading-relaxed overflow-hidden">
-                      {item.description || "Delivered, calibrated, and maintained to the highest clinical parameters by Vel Bio Med."}
-                    </p>
-                  </div>
-                </div>
-              </div>
+              </a>
             ))}
           </div>
 
@@ -213,6 +195,20 @@ export default function ImageGallery() {
           </div>
         </motion.div>
       </section>
+
+      {/* Lightbox Modal */}
+      {show && (
+        <div
+          onClick={close}
+          className="fixed inset-0 bg-black/90 flex justify-center items-center z-50 transition-opacity duration-300 animate-fade-in cursor-zoom-out"
+        >
+          <img
+            src={activeImageUrl ?? ""}
+            alt="Enlarged gallery view"
+            className="max-w-[90%] max-h-[90%] object-contain object-center rounded-lg shadow-2xl transition-all duration-300"
+          />
+        </div>
+      )}
     </>
   );
 }
