@@ -359,7 +359,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* 1. HERO SECTION */}
-      <section className="relative h-[480px] md:h-[600px] overflow-hidden bg-slate-900">
+      <section className="relative h-[480px] md:h-[600px] overflow-hidden bg-slate-50">
         {/* Background with zoom and fade in effect */}
         <motion.div
           initial={{ opacity: 0, scale: 1.1 }}
@@ -367,11 +367,9 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
           transition={{ duration: 1.8, ease: "easeOut" }}
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url(${slides[0]?.image || "/icu-monitor.png"})`
+            backgroundImage: `url(${slides[0]?.image || "/hero-bg.jpg"})`
           }}
         />
-        {/* Overlay with Medical blue tint gradient */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/80 to-blue-950/40" />
 
         {/* Background Glows */}
         <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-radial from-blue-500/12 via-blue-900/0 to-transparent rounded-full pointer-events-none z-10" />
@@ -379,12 +377,12 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
 
         {/* Hero Content */}
         <div className="absolute inset-0 flex items-center z-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="max-w-7xl mr-auto ml-0 px-6 sm:px-12 lg:px-20 w-full">
             <motion.div
               initial="hidden"
               animate={showPreloader ? "hidden" : "visible"}
               variants={heroContainerVariants}
-              className="max-w-2xl text-left text-white space-y-4 md:space-y-6"
+              className="max-w-2xl text-left text-slate-900 space-y-4 md:space-y-6"
             >
               <motion.span
                 variants={heroItemVariants}
@@ -394,13 +392,13 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
               </motion.span>
               <motion.h1
                 variants={heroItemVariants}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-slate-900"
               >
-                Transforming <AnimatedText asSpan text="Healthcare" gradientColors="linear-gradient(90deg, #0A6EBD 0%, #00e5ff 30%, #ffffff 50%, #00e5ff 70%, #0A6EBD 100%)" gradientAnimationDuration={1.6} textClassName="bg-clip-text text-transparent" /> One Installation at a Time
+                Transforming <AnimatedText asSpan text="Healthcare" gradientColors="linear-gradient(90deg, #0A6EBD 0%, #00e5ff 30%, #3b82f6 50%, #00e5ff 70%, #0A6EBD 100%)" gradientAnimationDuration={1.6} textClassName="bg-clip-text text-transparent" /> One Installation at a Time
               </motion.h1>
               <motion.p
                 variants={heroItemVariants}
-                className="text-sm sm:text-base md:text-lg text-slate-200/90 leading-relaxed font-medium"
+                className="text-sm sm:text-base md:text-lg text-slate-600 leading-relaxed font-medium"
               >
                 Vel Bio Med delivers high-caliber diagnostics and life-support machinery from world-renowned healthcare manufacturers to premium hospitals.
               </motion.p>
@@ -472,8 +470,8 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                     <div
                       onClick={() => onOpenProductModal(p)}
                       className={`group relative bg-gradient-to-b from-white to-slate-50/40 border border-slate-200/60 rounded-[32px] p-4 sm:p-6 hover:-translate-y-2.5 transition-[transform,border-color,box-shadow] duration-500 flex flex-col h-[400px] sm:h-[500px] overflow-hidden cursor-pointer
-                        ${isAmber 
-                          ? "hover:border-amber-300 hover:shadow-[0_20px_45px_rgba(245,158,11,0.08)]" 
+                        ${isAmber
+                          ? "hover:border-amber-300 hover:shadow-[0_20px_45px_rgba(245,158,11,0.08)]"
                           : "hover:border-blue-300 hover:shadow-[0_20px_45px_rgba(37,99,235,0.08)]"
                         }
                       `}
@@ -555,11 +553,10 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 <button
                   key={index}
                   onClick={() => productsApi?.scrollTo(index)}
-                  className={`h-2 rounded-full transition-all duration-350 ${
-                    currentProductIndex === index 
-                      ? "w-8 bg-gradient-to-r from-blue-600 to-indigo-500 shadow-sm" 
+                  className={`h-2 rounded-full transition-all duration-350 ${currentProductIndex === index
+                      ? "w-8 bg-gradient-to-r from-blue-600 to-indigo-500 shadow-sm"
                       : "w-2 bg-slate-300 hover:bg-slate-400 cursor-pointer"
-                  }`}
+                    }`}
                   aria-label={`Go to page ${index + 1}`}
                 />
               ))}

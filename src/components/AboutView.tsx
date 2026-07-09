@@ -536,7 +536,7 @@ export default function AboutView() {
 
               {/* Right Column Corporate Profile */}
               <div className="lg:col-span-7 space-y-8">
-                 <div className="space-y-4 border border-blue-200 bg-white/90 p-5 rounded-3xl sm:border-none sm:bg-transparent sm:p-0 sm:shadow-none shadow-md">
+                <div className="space-y-4 border border-blue-200 bg-white/90 p-5 rounded-3xl sm:border-none sm:bg-transparent sm:p-0 sm:shadow-none shadow-md">
                   <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-50 text-blue-700 border border-blue-100 font-extrabold tracking-widest text-[10px] uppercase">
                     <Building2 className="w-3.5 h-3.5 text-blue-600" /> Corporate Profile
                   </span>
@@ -694,7 +694,7 @@ export default function AboutView() {
             className="pointer-events-none absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full opacity-15"
             style={{ background: "radial-gradient(circle, #f97316 0%, transparent 70%)", filter: "blur(120px)" }}
           />
-          
+
           <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
             <motion.div
               variants={fadeUpVariants}
@@ -719,7 +719,7 @@ export default function AboutView() {
                   <p className="text-slate-600 text-sm font-semibold leading-relaxed">
                     Partnering with us means securing top-tier medical solutions backed by regional expertise and global manufacturer relationships.
                   </p>
-                  
+
                   {/* Floating Badges */}
                   <div className="grid grid-cols-1 gap-3.5 pt-4">
                     {[
