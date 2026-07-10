@@ -301,10 +301,10 @@ export default function AboutView() {
     const handleScroll = () => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
-      // Update Shade Opacity (starts at 0.65, increases to 0.90 as you scroll)
-      const num = 0.65 + (scrollTop / 500) * 0.25;
+      // Update Shade Opacity (starts at 0.20, increases to 0.50 as you scroll)
+      const num = 0.20 + (scrollTop / 500) * 0.30;
       if (shadeRef.current) {
-        shadeRef.current.style.opacity = Math.min(num, 0.90).toString();
+        shadeRef.current.style.opacity = Math.min(num, 0.50).toString();
       }
 
       // Update BG Scale
@@ -681,89 +681,7 @@ export default function AboutView() {
         {/* Core Values Section */}
         <CorporateValuesStack values={values} />
 
-        {/* Why Choose Vel Bio Med Section */}
-        <section className="py-16 md:py-24 bg-gradient-to-br from-[#f0f6ff] via-white to-[#fff7ed] border-t border-blue-100/60 relative overflow-hidden">
-          {/* Ambient background glows */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full opacity-20"
-            style={{ background: "radial-gradient(circle, #3b82f6 0%, transparent 70%)", filter: "blur(120px)" }}
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full opacity-15"
-            style={{ background: "radial-gradient(circle, #f97316 0%, transparent 70%)", filter: "blur(120px)" }}
-          />
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
-            <motion.div
-              variants={fadeUpVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, margin: "-100px" }}
-              className="bg-white/80 backdrop-blur-2xl rounded-[2.5rem] p-5 sm:p-10 md:p-16 border border-blue-100/80 shadow-2xl relative overflow-hidden"
-            >
-              {/* Inner card subtle decorative items */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-500/5 to-orange-500/5 rounded-full blur-3xl -z-10" />
-              <div className="absolute -bottom-10 -left-10 w-72 h-72 bg-gradient-to-br from-blue-500/5 to-orange-500/5 rounded-full blur-3xl -z-10" />
-
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                {/* Left Side: Header & Graphic representation of core benefits */}
-                <div className="lg:col-span-5 space-y-6">
-                  <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-50 text-blue-700 border border-blue-100 font-extrabold tracking-widest text-[10px] uppercase">
-                    <Sparkles className="w-3.5 h-3.5 text-blue-600" /> Your Sourcing Advantage
-                  </span>
-                  <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight">
-                    Why Choose <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-[#f97316] bg-clip-text text-transparent">Vel Bio Med</span>?
-                  </h2>
-                  <p className="text-slate-600 text-sm font-semibold leading-relaxed">
-                    Partnering with us means securing top-tier medical solutions backed by regional expertise and global manufacturer relationships.
-                  </p>
-
-                  {/* Floating Badges */}
-                  <div className="grid grid-cols-1 gap-3.5 pt-4">
-                    {[
-                      { label: "Excellence", desc: "Top-tier quality controls", icon: Award, color: "from-blue-500 to-blue-700", hoverBg: "hover:bg-blue-50/30 hover:border-blue-300/80", hoverText: "group-hover:text-blue-650 text-blue-600" },
-                      { label: "Reliability", desc: "Unwavering client uptime", icon: ShieldCheck, color: "from-amber-500 to-orange-600", hoverBg: "hover:bg-orange-50/30 hover:border-orange-300/80", hoverText: "group-hover:text-orange-650 text-orange-600" },
-                      { label: "Satisfaction", desc: "Dedicated partnerships", icon: HeartHandshake, color: "from-indigo-500 to-blue-600", hoverBg: "hover:bg-indigo-50/30 hover:border-indigo-300/80", hoverText: "group-hover:text-indigo-650 text-indigo-600" }
-                    ].map((badge, idx) => {
-                      const IconComponent = badge.icon;
-                      return (
-                        <div
-                          key={idx}
-                          className={`group flex flex-row items-center gap-4 p-4 rounded-2xl bg-white border border-blue-50/80 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:translate-x-1.5 justify-start w-full text-left cursor-default ${badge.hoverBg}`}
-                        >
-                          <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-white bg-gradient-to-br ${badge.color} shadow-md flex-shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6`}>
-                            <IconComponent className="w-5 h-5" strokeWidth={2.2} />
-                          </div>
-                          <div className="min-w-0">
-                            <span className={`text-xs sm:text-sm font-black text-slate-800 block leading-tight transition-colors duration-300 ${badge.hoverText}`}>{badge.label}</span>
-                            <span className="text-[10px] sm:text-xs font-bold text-slate-400 mt-1 block leading-tight">{badge.desc}</span>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Right Side: Professional text blocks with premium styling */}
-                <div className="lg:col-span-7 space-y-6 text-slate-700">
-                  <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-blue-50/50 to-white backdrop-blur-md border border-blue-100/80 shadow-inner hover:border-blue-300 transition-colors">
-                    <p className="text-base sm:text-lg font-medium leading-relaxed">
-                      When you choose <span className="font-extrabold bg-gradient-to-r from-blue-600 to-[#f97316] bg-clip-text text-transparent">Vel Bio Med</span>, you are choosing a partner committed to <span className="font-extrabold text-blue-700 underline decoration-blue-400/50 decoration-2">excellence</span>, <span className="font-extrabold text-[#e0690f] underline decoration-orange-400/50 decoration-2">reliability</span>, and <span className="font-extrabold text-indigo-700 underline decoration-indigo-400/50 decoration-2">customer satisfaction</span>. We are dedicated to making a positive impact on healthcare delivery by providing superior products and services.
-                    </p>
-                  </div>
-
-                  <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-slate-900 via-[#0f2445] to-[#251508] text-slate-200 shadow-xl border border-blue-900/30">
-                    <p className="text-sm sm:text-base font-medium leading-relaxed">
-                      Thank you for considering Vel Bio Med as your trusted partner in medical solutions. We look forward to serving you and contributing to the success of your healthcare endeavors.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
 
         {/* Corporate Strengths Section (relocated from Home) */}
         <section className="py-16 md:py-24 bg-slate-950 relative overflow-hidden">
@@ -886,30 +804,7 @@ export default function AboutView() {
               </div>
             </div>
           </div>
-        </section>
-
-        {/* Success Stories Metric Blocks */}
-        <section className="py-16 md:py-24 bg-white border-t border-slate-100">
-          <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
-            <div className="bg-gradient-to-br from-slate-900 to-slate-950 rounded-[2.5rem] p-6 sm:p-10 md:p-16 shadow-2xl text-white relative overflow-hidden">
-              <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1200&q=80')] bg-cover bg-center opacity-5 pointer-events-none" />
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:divide-x divide-white/10 relative z-10">
-                {metrics.map((m, idx) => (
-                  <div key={idx} className="space-y-2 py-4 md:py-0">
-                    <p className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400 tracking-tight">
-                      <AnimatedCounter target={m.target} suffix={m.suffix} />
-                    </p>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                      {m.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-      </div>
+        </section>      </div>
     </div>
   );
 }
