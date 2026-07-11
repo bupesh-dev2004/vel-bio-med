@@ -2,7 +2,7 @@ import { Award, ShieldCheck, Users, Activity, Sparkles, Building2, Globe, HeartH
 import LeadershipMessage from "./ui/LeadershipMessage";
 import VisionMission from "./ui/VisionMission";
 import React, { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useAppState } from "../AppContext.js";
 import { FrostedGlassCard } from "@/components/ui/interactive-frosted-glass-card";
 import { BorderRotate } from "@/components/ui/animated-gradient-border";
@@ -290,6 +290,233 @@ function CorporateValuesStack({ values }: { values: ValueItem[] }) {
   );
 }
 
+const timelineMilestones = [
+  {
+    year: "2006",
+    title: "Company Foundation",
+    description: "Vel Bio Med is established with a foundational vision: bridging the gap in biological science distribution by delivering world-class hospital and diagnostic machinery.",
+    icon: Building2
+  },
+  {
+    year: "2010",
+    title: "Expanding Critical Care",
+    description: "We expanded our product portfolio to provide comprehensive critical care equipment and life-support systems, earning the trust of regional clinics.",
+    icon: Cpu
+  },
+  {
+    year: "2013",
+    title: "Official Incorporation",
+    description: "Officially incorporated under the leadership of Mr. Muralikrishnan Gokulakrishnan, committing to robust turnkey installations across Tamil Nadu.",
+    icon: Globe
+  },
+  {
+    year: "2017",
+    title: "Authorized Dealerships",
+    description: "Secured official status as authorized dealers for renowned global healthcare brands including Maestros, Akas Infusions, and Sharkclave Systems.",
+    icon: Award
+  },
+  {
+    year: "2019",
+    title: "Advanced Service Division",
+    description: "Launched our dedicated 24/7 service engineering and AMC support division, ensuring maximum operating uptime for all critical care installations.",
+    icon: Activity
+  },
+  {
+    year: "2023",
+    title: "6,000+ Successful Installations",
+    description: "Celebrated a major milestone of over 6,000 successful medical equipment installations serving more than 800 premium hospitals state-wide.",
+    icon: ThumbsUp
+  },
+  {
+    year: "2026",
+    title: "Clinical Sourcing Excellence",
+    description: "Celebrating 20 years of clinical sourcing leadership, delivering state-of-the-art diagnostics and intensive care units with certified quality.",
+    icon: Sparkles
+  }
+];
+
+function TimelineMilestone({ milestone, index, activeIndex, setActiveIndex }: {
+  milestone: typeof timelineMilestones[0];
+  index: number;
+  activeIndex: number;
+  setActiveIndex: (idx: number) => void;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isLeft = index % 2 === 0;
+  const isActive = index === activeIndex;
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  // Smooth out scroll progress using spring physics
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 80, damping: 25, mass: 0.8 });
+  const opacity = useTransform(smoothProgress, [0.15, 0.45, 0.55, 0.85], [0, 1, 1, 0]);
+  const y = useTransform(smoothProgress, [0.15, 0.45, 0.55, 0.85], [60, 0, 0, -60]);
+  
+  // Dynamic horizontal fly-in based on alternating column position (left or right)
+  const rawX = useTransform(smoothProgress, [0.15, 0.45, 0.55, 0.85], [isLeft ? -45 : 45, 0, 0, isLeft ? -45 : 45]);
+  const x = useSpring(rawX, { stiffness: 80, damping: 25, mass: 0.8 });
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && activeIndex !== index) {
+          setActiveIndex(index);
+        }
+      },
+      {
+        rootMargin: "-45% 0px -45% 0px",
+        threshold: 0
+      }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+    return () => observer.disconnect();
+  }, [index, activeIndex, setActiveIndex]);
+
+  const IconComponent = milestone.icon;
+
+  return (
+    <div ref={ref} className="relative min-h-[260px] sm:min-h-[300px] md:min-h-[380px] flex items-center w-full py-8 md:py-16">
+      {/* Node dot on the vertical timeline with expanding scale and pulse shadow */}
+      <motion.div 
+        animate={{
+          scale: isActive ? 1.3 : 1,
+          backgroundColor: isActive ? "#0284C7" : "#cbd5e1",
+          boxShadow: isActive ? "0 0 20px rgba(2, 132, 199, 0.6)" : "0 0 0px rgba(0,0,0,0)"
+        }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute left-4 md:left-1/2 -translate-x-1/2 z-30 flex items-center justify-center rounded-full w-5 h-5 cursor-pointer"
+      >
+        {isActive && (
+          <span className="absolute inset-0 rounded-full bg-[#0284C7] animate-ping opacity-75" />
+        )}
+        <div className="rounded-full w-2 h-2 bg-white" />
+      </motion.div>
+
+      {/* Horizontal Connector Line (desktop only) that expands smoothly when active */}
+      <motion.div 
+        animate={{ 
+          width: isActive ? "5%" : "0%", 
+          backgroundColor: isActive ? "#0284C7" : "#e2e8f0" 
+        }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className={`hidden md:block absolute top-1/2 -translate-y-1/2 h-0.5 z-20 ${isLeft ? "left-[45%]" : "right-[45%]"}`}
+      />
+
+      {/* Card Wrapper with Parallax Scroll Transition (Vertical + Horizontal Fly-in) */}
+      <motion.div 
+        style={{ opacity, y, x }}
+        className={`w-full flex ${isLeft ? "md:justify-start" : "md:justify-end"} pl-12 md:pl-0`}
+      >
+        <motion.div 
+          whileHover={{
+            y: -10,
+            scale: isActive ? 1.05 : 1.01,
+            boxShadow: isActive 
+              ? "0 30px 60px -15px rgba(2, 132, 199, 0.2)" 
+              : "0 20px 40px -10px rgba(0, 0, 0, 0.08)",
+          }}
+          animate={{
+            scale: isActive ? 1.03 : 0.98,
+            borderColor: isActive ? "#bae6fd" : "#f1f5f9",
+            boxShadow: isActive ? "0 25px 50px -12px rgba(2, 132, 199, 0.12)" : "0 4px 6px -1px rgba(0, 0, 0, 0.03)"
+          }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full md:w-[45%] rounded-3xl p-6 sm:p-8 bg-white border flex flex-col sm:flex-row gap-6 items-start cursor-pointer"
+        >
+          {/* Milestone Icon with glow, scale, and subtle hover wiggle */}
+          <motion.div 
+            whileHover={{
+              rotate: [0, -10, 10, 0],
+              scale: 1.15
+            }}
+            animate={{
+              scale: isActive ? 1.1 : 1,
+              boxShadow: isActive ? "0 10px 15px -3px rgba(2, 132, 199, 0.2)" : "0 0px 0px rgba(0,0,0,0)"
+            }}
+            transition={{ duration: 0.5 }}
+            className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center text-white flex-shrink-0 bg-gradient-to-br ${isLeft ? "from-sky-500 to-indigo-600" : "from-orange-500 to-amber-500"}`}
+          >
+            <IconComponent className="w-6 h-6" strokeWidth={2.2} />
+          </motion.div>
+
+          {/* Text Content */}
+          <div className="space-y-2 text-left">
+            <span 
+              className={`text-xl sm:text-2xl font-black tracking-tight transition-all duration-500 block
+                ${isActive ? "text-[#0284C7]" : "text-slate-400"}
+              `}
+            >
+              {milestone.year}
+            </span>
+            <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight leading-snug">
+              {milestone.title}
+            </h3>
+            <p className="text-slate-500 font-medium text-xs sm:text-sm leading-relaxed">
+              {milestone.description}
+            </p>
+          </div>
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+}
+
+function TimelineSection() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  return (
+    <section className="py-20 md:py-32 bg-slate-50 border-t border-slate-100 relative overflow-hidden">
+      {/* Background patterns */}
+      <div className="absolute inset-0 opacity-[0.015] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none" />
+      
+      <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
+        {/* Header */}
+        <div className="max-w-2xl mx-auto mb-16 md:mb-24 space-y-4">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 text-[#0284C7] border border-sky-100 font-extrabold tracking-widest text-[10px] uppercase">
+            <Activity className="w-3.5 h-3.5" /> Our Journey
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+            Our Evolution & Milestones
+          </h2>
+          <p className="text-slate-500 text-sm sm:text-base font-semibold leading-relaxed">
+            A timeline of continuous sourcing growth, critical installations, and healthcare transformations.
+          </p>
+        </div>
+
+        {/* Timeline wrapper */}
+        <div className="relative max-w-4xl mx-auto">
+          {/* Vertical progress timeline line */}
+          <div className="absolute left-4 md:left-1/2 -translate-x-1/2 top-[60px] bottom-[60px] w-1 bg-slate-200 z-10 rounded-full overflow-hidden">
+            <div 
+              className="w-full bg-[#0284C7] transition-all duration-500 ease-out origin-top" 
+              style={{ height: `${(activeIndex / (timelineMilestones.length - 1)) * 100}%` }} 
+            />
+          </div>
+
+          {/* Timeline Milestones list */}
+          <div className="relative z-20 space-y-4">
+            {timelineMilestones.map((m, idx) => (
+              <TimelineMilestone 
+                key={idx}
+                milestone={m}
+                index={idx}
+                activeIndex={activeIndex}
+                setActiveIndex={setActiveIndex}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function AboutView() {
   const { setCurrentTab } = useAppState();
   const bgRef = useRef<HTMLDivElement>(null);
@@ -392,7 +619,7 @@ export default function AboutView() {
         />
 
         {/* Top Gradient Overlay to blend with sticky navigation */}
-        <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#081d38]/75 to-transparent pointer-events-none z-10" />
+        <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#0f172a]/60 to-transparent pointer-events-none z-10" />
 
         {/* Title Content */}
         <div className="title">
@@ -511,7 +738,7 @@ export default function AboutView() {
                   className="absolute -bottom-6 -left-6 bg-slate-900/95 backdrop-blur-md text-white p-6 rounded-2xl shadow-2xl border border-slate-800 hidden sm:block"
                 >
                   <span className="text-3xl font-black block tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500">
-                    12+ Years
+                    16+ Years
                   </span>
                   <span className="text-[10px] uppercase font-black tracking-widest text-slate-400 mt-1 block">
                     Clinical Sourcing Excellence
@@ -579,94 +806,6 @@ export default function AboutView() {
 
             </div>
 
-            {/* Highly structured, premium interactive grids */}
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, margin: "-100px" }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12 md:mt-20"
-            >
-              {[
-                {
-                  title: "Location",
-                  desc: "Headquartered in Trichy, Vel Bio Med strategically positions itself to cater to the diverse healthcare needs of the region. Our central location enables us to efficiently reach and serve medical establishments throughout Tamil Nadu.",
-                  icon: MapPin,
-                  gradient: "from-blue-500 to-blue-600",
-                  cardBg: "from-blue-50/20 via-white to-white",
-                  borderColor: "border-blue-200 hover:border-blue-400 hover:shadow-[0_15px_35px_rgba(59,130,246,0.08)]",
-                  hoverGlow: "from-blue-50/50 to-blue-100/20",
-                  badgeColor: "text-blue-500 bg-blue-50"
-                },
-                {
-                  title: "Comprehensive Sales & Service",
-                  desc: "At Vel Bio Med, we specialize in the sales and service of a wide array of medical equipment. Whether you are a hospital, clinic, or healthcare facility, we understand the importance of reliable and efficient equipment to provide optimum patient care. Our team of experts is committed to delivering prompt and effective service to keep your medical equipment in optimal condition.",
-                  icon: Activity,
-                  gradient: "from-orange-500 to-orange-600",
-                  cardBg: "from-orange-50/20 via-white to-white",
-                  borderColor: "border-orange-200 hover:border-orange-400 hover:shadow-[0_15px_35px_rgba(249,115,22,0.08)]",
-                  hoverGlow: "from-orange-50/50 to-orange-100/20",
-                  badgeColor: "text-orange-500 bg-orange-50"
-                },
-                {
-                  title: "Authorized Dealer for Leading Brands",
-                  desc: "We take pride in being authorized dealers for renowned brands in the medical equipment industry. Vel Bio Med is the trusted dealer for Maestros, Akas Infusions, Sharkclave Systems, and SIMED. These partnerships ensure that our clients receive state-of-the-art products backed by the latest technology and innovation.",
-                  icon: Award,
-                  gradient: "from-blue-500 to-blue-600",
-                  cardBg: "from-blue-50/20 via-white to-white",
-                  borderColor: "border-blue-200 hover:border-blue-400 hover:shadow-[0_15px_35px_rgba(59,130,246,0.08)]",
-                  hoverGlow: "from-blue-50/50 to-blue-100/20",
-                  badgeColor: "text-blue-500 bg-blue-50"
-                },
-                {
-                  title: "Strategic Collaborations",
-                  desc: "Vel Bio Med believes in the power of collaboration. We have established strong ties with numerous companies to ensure a seamless and continuous supply of high-quality medical equipment. Our collaborations enable us to offer a diverse range of products to meet the evolving needs of the healthcare sector.",
-                  icon: HeartHandshake,
-                  gradient: "from-orange-500 to-orange-600",
-                  cardBg: "from-orange-50/20 via-white to-white",
-                  borderColor: "border-orange-200 hover:border-orange-400 hover:shadow-[0_15px_35px_rgba(249,115,22,0.08)]",
-                  hoverGlow: "from-orange-50/50 to-orange-100/20",
-                  badgeColor: "text-orange-500 bg-orange-50"
-                },
-              ].map((item, idx) => {
-                const IconComponent = item.icon;
-                return (
-                  <motion.div
-                    key={idx}
-                    variants={fadeUpVariants}
-                    whileHover={{ y: -6, scale: 1.01 }}
-                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                    className={`group p-5 sm:p-8 rounded-3xl border bg-gradient-to-br ${item.cardBg} ${item.borderColor} transition-all duration-500 relative overflow-hidden flex flex-col justify-between`}
-                  >
-                    {/* Hover glow background */}
-                    <div
-                      className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 bg-gradient-to-br ${item.hoverGlow}`}
-                    />
-
-                    <div className="space-y-5">
-                      <div className="flex justify-between items-center">
-                        <div
-                          className={`w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 text-white bg-gradient-to-br ${item.gradient} transition-all duration-500 group-hover:rotate-6 shadow-md`}
-                        >
-                          <IconComponent className="w-6 h-6" strokeWidth={2.2} />
-                        </div>
-                        <span className={`text-[11px] font-black px-2.5 py-1 rounded-full ${item.badgeColor}`}>
-                          0{idx + 1}
-                        </span>
-                      </div>
-                      <div className="space-y-2.5">
-                        <h4 className="text-slate-900 font-extrabold text-sm sm:text-base tracking-tight leading-snug">
-                          {item.title}
-                        </h4>
-                        <p className="text-slate-500 font-medium text-xs leading-relaxed">
-                          {item.desc}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
 
           </div>
         </section>
@@ -674,6 +813,9 @@ export default function AboutView() {
 
         {/* Leadership Founder Message Section */}
         <LeadershipMessage />
+
+        {/* Alternate Journey Timeline Section */}
+        <TimelineSection />
 
         {/* Vision & Mission Section */}
         <VisionMission />

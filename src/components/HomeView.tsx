@@ -133,9 +133,11 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
   useEffect(() => {
     if (!trendingApi) return;
     let intervalId: any = null;
+    let isHovered = false;
 
     const startAutoplay = () => {
       stopAutoplay();
+      if (isHovered) return;
       intervalId = setInterval(() => {
         if (!trendingApi) return;
         if (trendingApi.canScrollNext()) {
@@ -153,11 +155,26 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
       }
     };
 
+    const root = trendingApi.rootNode();
+    const onMouseEnter = () => {
+      isHovered = true;
+      stopAutoplay();
+    };
+    const onMouseLeave = () => {
+      isHovered = false;
+      startAutoplay();
+    };
+
+    root.addEventListener("mouseenter", onMouseEnter);
+    root.addEventListener("mouseleave", onMouseLeave);
+
     startAutoplay();
     trendingApi.on("pointerDown", stopAutoplay);
     trendingApi.on("settle", startAutoplay);
 
     return () => {
+      root.removeEventListener("mouseenter", onMouseEnter);
+      root.removeEventListener("mouseleave", onMouseLeave);
       trendingApi.off("pointerDown", stopAutoplay);
       trendingApi.off("settle", startAutoplay);
       stopAutoplay();
@@ -177,9 +194,11 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
     productsApi.on("reInit", updateSnaps);
 
     let intervalId: any = null;
+    let isHovered = false;
 
     const startAutoplay = () => {
       stopAutoplay();
+      if (isHovered) return;
       intervalId = setInterval(() => {
         if (!productsApi) return;
         if (productsApi.canScrollNext()) {
@@ -197,11 +216,26 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
       }
     };
 
+    const root = productsApi.rootNode();
+    const onMouseEnter = () => {
+      isHovered = true;
+      stopAutoplay();
+    };
+    const onMouseLeave = () => {
+      isHovered = false;
+      startAutoplay();
+    };
+
+    root.addEventListener("mouseenter", onMouseEnter);
+    root.addEventListener("mouseleave", onMouseLeave);
+
     startAutoplay();
     productsApi.on("pointerDown", stopAutoplay);
     productsApi.on("settle", startAutoplay);
 
     return () => {
+      root.removeEventListener("mouseenter", onMouseEnter);
+      root.removeEventListener("mouseleave", onMouseLeave);
       productsApi.off("select", updateSnaps);
       productsApi.off("reInit", updateSnaps);
       productsApi.off("pointerDown", stopAutoplay);
@@ -377,13 +411,13 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
         <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-radial from-amber-500/10 via-amber-650/0 to-transparent rounded-full pointer-events-none z-10" />
 
         {/* Hero Content */}
-        <div className="absolute inset-0 flex items-start md:items-center z-20 pt-16 sm:pt-20 md:pt-0">
-          <div className="max-w-7xl mr-auto ml-0 px-6 sm:px-12 lg:px-16 xl:px-16 w-full transition-all duration-300 lg:-translate-y-4 lg:-translate-x-6 xl:-translate-y-6 xl:-translate-x-12">
+        <div className="absolute inset-0 flex items-start md:items-center z-20 pt-12 sm:pt-14 md:pt-0">
+          <div className="max-w-7xl mr-auto ml-0 px-6 sm:px-12 lg:px-16 xl:px-16 w-full transition-all duration-300 lg:-translate-y-12 lg:-translate-x-6 xl:-translate-y-16 xl:-translate-x-12">
             <motion.div
               initial="hidden"
               animate={showPreloader ? "hidden" : "visible"}
               variants={heroContainerVariants}
-              className="max-w-[450px] sm:max-w-[500px] md:max-w-[550px] lg:max-w-[600px] xl:max-w-[650px] text-left text-slate-900 space-y-5"
+              className="max-w-[450px] sm:max-w-[500px] md:max-w-[550px] lg:max-w-[600px] xl:max-w-[650px] text-left text-slate-900 space-y-4"
             >
               <motion.span
                 variants={heroItemVariants}
@@ -393,7 +427,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
               </motion.span>
               <motion.h1
                 variants={heroItemVariants}
-                className="text-3xl sm:text-4xl md:text-[42px] lg:text-[48px] xl:text-[54px] font-black tracking-tight leading-[1.12] text-slate-900"
+                className="text-2xl sm:text-3xl md:text-[38px] lg:text-[42px] xl:text-[48px] font-black tracking-tight leading-[1.12] text-slate-900"
               >
                 Transforming <AnimatedText asSpan text="Healthcare" gradientColors="linear-gradient(90deg, #0A6EBD 0%, #00e5ff 30%, #3b82f6 50%, #00e5ff 70%, #0A6EBD 100%)" gradientAnimationDuration={1.6} textClassName="bg-clip-text text-transparent" /><br className="hidden sm:inline" />
                 One Installation at a<br className="hidden sm:inline" />
@@ -401,7 +435,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
               </motion.h1>
               <motion.p
                 variants={heroItemVariants}
-                className="text-xs sm:text-sm md:text-base text-slate-650 leading-relaxed font-semibold max-w-[520px]"
+                className="text-[11px] sm:text-xs md:text-sm text-slate-650 leading-relaxed font-semibold max-w-[500px]"
               >
                 Vel Bio Med delivers high-caliber diagnostics and life-support machinery from world-renowned healthcare manufacturers to premium hospitals.
               </motion.p>

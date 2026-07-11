@@ -7,7 +7,6 @@ import AboutView from "./components/AboutView.js";
 import GalleryView from "./components/GalleryView.js";
 import ProductsView from "./components/ProductsView.js";
 import ContactView from "./components/ContactView.js";
-import Breadcrumbs from "./components/Breadcrumbs.js";
 import ScrollToTop from "./components/ScrollToTop.js";
 import FloatingSocialMenu from "./components/FloatingSocialMenu.js";
 import { Product } from "./types.js";
@@ -174,10 +173,6 @@ function AppContent() {
       {/* Dynamic Sticky Header Navigation */}
       <Header />
 
-      {/* Dynamic Breadcrumbs Navigation indicator bar */}
-      {currentTab !== "home" && (
-        <Breadcrumbs currentTab={currentTab} onNavigate={setCurrentTab} extraItem={selectedProductModal?.name} />
-      )}
 
       {/* Main active sub views switcher panel */}
       <main className="flex-grow">

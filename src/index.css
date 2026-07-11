@@ -111,7 +111,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #081d38;
+  background-color: #0f172a;
 }
 
 @media (min-width: 768px) {
@@ -124,19 +124,19 @@
 .heroEffects .bg {
   position: absolute;
   inset: 0;
-  background-image: url('https://m.media-amazon.com/images/I/614LZeigCZL._AC_UF1000,1000_QL80_.jpg');
+  background-image: url('/about-bg.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   z-index: 1;
-  opacity: 0.45;
+  opacity: 0.55;
   will-change: transform;
 }
 
 .heroEffects .shade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(10, 37, 64, 0.45) 0%, rgba(8, 29, 56, 0.95) 100%);
+  background: linear-gradient(to bottom, rgba(15, 23, 42, 0.2) 0%, rgba(15, 23, 42, 0.7) 100%);
   z-index: 2;
   pointer-events: none;
   will-change: opacity;
