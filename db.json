@@ -2,7 +2,7 @@
   "homeSlides": [
     {
       "id": "slide-1",
-      "image": "/hero-bg.jpg",
+      "image": "/hero-bg.png",
       "heading": "Transforming Healthcare One Installation at a Time",
       "tagline": "GLOBAL STANDARDS OF MEDICAL SUPPLIES",
       "description": "Vel Bio Med delivers high-caliber diagnostics and life-support machinery from world-renowned healthcare manufacturers to premium hospitals."
@@ -16,7 +16,7 @@
     },
     {
       "id": "slide-3",
-      "image": "/hero-bg.jpg",
+      "image": "/hero-bg.png",
       "heading": "Innovative Medical Equipment Solutions",
       "tagline": "24/7 AMC AND SERVICE SUPPORT",
       "description": "Equipped with senior biomedical engineers, our division assures maximum operating-time and seamless maintenance across major clinical facilities."

@@ -175,7 +175,9 @@ function AppContent() {
       <Header />
 
       {/* Dynamic Breadcrumbs Navigation indicator bar */}
-      <Breadcrumbs currentTab={currentTab} onNavigate={setCurrentTab} extraItem={selectedProductModal?.name} />
+      {currentTab !== "home" && (
+        <Breadcrumbs currentTab={currentTab} onNavigate={setCurrentTab} extraItem={selectedProductModal?.name} />
+      )}
 
       {/* Main active sub views switcher panel */}
       <main className="flex-grow">

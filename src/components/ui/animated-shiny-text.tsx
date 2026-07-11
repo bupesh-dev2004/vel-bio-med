@@ -49,7 +49,7 @@ const AnimatedText = React.forwardRef<HTMLSpanElement, AnimatedTextProps>(
       color: "transparent",
       WebkitTextFillColor: "transparent",
       textShadow: isHovered ? "0 0 8px rgba(255,255,255,0.3)" : "none",
-      display: "inline-block",
+      display: asSpan ? "inline" : "inline-block",
       "--shiny-duration": `${gradientAnimationDuration}s`,
     } as React.CSSProperties;
 
@@ -59,7 +59,7 @@ const AnimatedText = React.forwardRef<HTMLSpanElement, AnimatedTextProps>(
         {asSpan ? (
           <span
             ref={ref}
-            className={cn("inline-block shiny-text-animated", textClassName, className)}
+            className={cn("inline shiny-text-animated", textClassName, className)}
             style={styleProps}
             onMouseEnter={() => hoverEffect && setIsHovered(true)}
             onMouseLeave={() => hoverEffect && setIsHovered(false)}

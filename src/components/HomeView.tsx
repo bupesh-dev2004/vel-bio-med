@@ -378,44 +378,46 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
 
         {/* Hero Content */}
         <div className="absolute inset-0 flex items-start md:items-center z-20 pt-16 sm:pt-20 md:pt-0">
-          <div className="max-w-7xl mr-auto ml-0 px-6 sm:px-12 lg:px-16 xl:px-12 w-full transition-all duration-300 lg:-translate-y-8 lg:-translate-x-2 xl:-translate-y-12 xl:-translate-x-4">
+          <div className="max-w-7xl mr-auto ml-0 px-6 sm:px-12 lg:px-16 xl:px-16 w-full transition-all duration-300 lg:-translate-y-4 lg:-translate-x-6 xl:-translate-y-6 xl:-translate-x-12">
             <motion.div
               initial="hidden"
               animate={showPreloader ? "hidden" : "visible"}
               variants={heroContainerVariants}
-              className="max-w-[500px] sm:max-w-[540px] md:max-w-[600px] lg:max-w-[640px] xl:max-w-[680px] text-left text-slate-900 space-y-5 md:space-y-6"
+              className="max-w-[450px] sm:max-w-[500px] md:max-w-[550px] lg:max-w-[600px] xl:max-w-[650px] text-left text-slate-900 space-y-5"
             >
               <motion.span
                 variants={heroItemVariants}
-                className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[10px] sm:text-xs font-black tracking-widest px-4 py-1.5 rounded-full uppercase shadow-lg shadow-blue-500/20"
+                className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[9px] sm:text-[10px] font-black tracking-widest px-3.5 py-1.5 rounded-full uppercase shadow-lg shadow-blue-500/20"
               >
                 Clinical Sourcing Excellence
               </motion.span>
               <motion.h1
                 variants={heroItemVariants}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-[54px] xl:text-[60px] font-black tracking-tight leading-[1.15] text-slate-900"
+                className="text-3xl sm:text-4xl md:text-[42px] lg:text-[48px] xl:text-[54px] font-black tracking-tight leading-[1.12] text-slate-900"
               >
-                Transforming <AnimatedText asSpan text="Healthcare" gradientColors="linear-gradient(90deg, #0A6EBD 0%, #00e5ff 30%, #3b82f6 50%, #00e5ff 70%, #0A6EBD 100%)" gradientAnimationDuration={1.6} textClassName="bg-clip-text text-transparent" /> One Installation at a Time
+                Transforming <AnimatedText asSpan text="Healthcare" gradientColors="linear-gradient(90deg, #0A6EBD 0%, #00e5ff 30%, #3b82f6 50%, #00e5ff 70%, #0A6EBD 100%)" gradientAnimationDuration={1.6} textClassName="bg-clip-text text-transparent" /><br className="hidden sm:inline" />
+                One Installation at a<br className="hidden sm:inline" />
+                Time
               </motion.h1>
               <motion.p
                 variants={heroItemVariants}
-                className="text-sm sm:text-base md:text-lg text-slate-600 leading-relaxed font-semibold max-w-[560px]"
+                className="text-xs sm:text-sm md:text-base text-slate-650 leading-relaxed font-semibold max-w-[520px]"
               >
                 Vel Bio Med delivers high-caliber diagnostics and life-support machinery from world-renowned healthcare manufacturers to premium hospitals.
               </motion.p>
               <motion.div
                 variants={heroItemVariants}
-                className="flex flex-wrap gap-3 pt-1.5"
+                className="flex flex-wrap gap-3 pt-1"
               >
                 <button
                   onClick={() => setCurrentTab("products")}
-                  className="bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 text-white font-black text-xs py-2.5 px-5 rounded-lg shadow-lg shadow-blue-500/20 hover:scale-102 transition-all flex items-center gap-1.5 uppercase tracking-wider cursor-pointer border-none"
+                  className="bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 text-white font-black text-xs py-3 px-5 rounded-lg shadow-lg shadow-blue-500/20 hover:scale-102 transition-all flex items-center gap-1.5 uppercase tracking-wider cursor-pointer border-none"
                 >
                   Explore Products <ArrowRight className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setCurrentTab("contact")}
-                  className="bg-gradient-to-r from-amber-500 to-orange-400 hover:from-amber-600 hover:to-orange-500 text-white font-black text-xs py-2.5 px-5 rounded-lg shadow-md shadow-amber-500/20 hover:scale-102 transition-all flex items-center gap-1.5 uppercase tracking-wider cursor-pointer border-none"
+                  className="bg-gradient-to-r from-amber-500 to-orange-400 hover:from-amber-600 hover:to-orange-500 text-white font-black text-xs py-3 px-5 rounded-lg shadow-md shadow-amber-500/20 hover:scale-102 transition-all flex items-center gap-1.5 uppercase tracking-wider cursor-pointer border-none"
                 >
                   Contact Us
                 </button>
