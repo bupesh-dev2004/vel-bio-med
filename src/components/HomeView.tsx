@@ -358,7 +358,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[480px] lg:min-h-[580px] xl:min-h-[700px] flex items-center bg-slate-50 overflow-hidden pt-6 pb-5 lg:pt-10 lg:pb-8 xl:pt-[80px] xl:pb-[60px]">
+      <section className="relative min-h-[480px] lg:min-h-[580px] xl:min-h-[700px] flex items-center bg-slate-50 overflow-hidden pt-[280px] pb-8 sm:pt-[340px] md:pt-10 md:pb-8 lg:pt-10 lg:pb-8 xl:pt-[80px] xl:pb-[60px]">
         {/* Background with zoom and fade in effect */}
         <motion.div
           initial={{ opacity: 0, scale: 1 }}
@@ -367,18 +367,20 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
           className="absolute inset-0"
         >
           <picture>
-            {/* Desktop & Tablet: screens larger than mobile (min-width: 640px) */}
-            <source media="(min-width: 640px)" srcSet={slides[0]?.image || "/hero-bg.png"} />
-            {/* Standard Mobile: screens between 321px and 639px */}
-            <source media="(min-width: 321px)" srcSet="/Home-bg-mobile.webp" />
-            {/* Very Small Mobile: screens 320px and below */}
+            {/* Desktop & Tablet: screens larger than mobile (min-width: 768px) */}
+            <source media="(min-width: 768px)" srcSet={slides[0]?.image || "/hero-bg.png"} />
+            {/* Standard Mobile: screens 376px to 767px */}
+            <source media="(min-width: 376px)" srcSet="/hero-bg-mobile.webp" />
+            {/* Very Small Mobile: screens 320px to 375px */}
             <img
-              src="/Home-bg-mobile-320px.webp"
+              src="/hero-bg-mobile-320px.webp"
               alt="Vel Bio Med Hero Background"
-              className="w-full h-full object-cover object-center pointer-events-none"
+              className="mobile-hero-bg-img w-full h-full object-cover pointer-events-none"
               loading="eager"
             />
           </picture>
+          {/* Light readability white gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/15 to-white/20 pointer-events-none z-[5]" />
         </motion.div>
 
         {/* Background Glows */}
@@ -394,7 +396,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 initial="hidden"
                 animate={showPreloader ? "hidden" : "visible"}
                 variants={heroContainerVariants}
-                className="flex flex-col items-center lg:items-start text-center lg:text-left text-slate-900"
+                className="flex flex-col items-center lg:items-start text-center lg:text-left text-slate-900 gap-y-5 lg:gap-y-0"
               >
                 {/* Badge */}
                 <motion.div variants={heroItemVariants} className="w-full text-center lg:text-left">
@@ -406,7 +408,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 {/* Heading */}
                 <motion.h1
                   variants={heroItemVariants}
-                  className="text-2xl sm:text-3xl md:text-[38px] lg:text-[36px] xl:text-[44px] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] w-full text-center lg:text-left mt-4 sm:mt-5 xl:mt-6"
+                  className="text-2xl sm:text-3xl md:text-[38px] lg:text-[36px] xl:text-[44px] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] w-full text-center lg:text-left mt-0 lg:mt-5 xl:mt-6"
                 >
                   <span className="whitespace-nowrap">
                     Transforming{" "}
@@ -425,7 +427,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 {/* Description */}
                 <motion.p
                   variants={heroItemVariants}
-                  className="text-[11px] sm:text-xs md:text-sm text-slate-650 leading-relaxed font-semibold max-w-[520px] w-full text-center lg:text-left mt-4 sm:mt-6 xl:mt-7"
+                  className="text-[11px] sm:text-xs md:text-sm text-slate-650 leading-relaxed font-semibold max-w-[520px] w-full text-center lg:text-left mt-0 lg:mt-6 xl:mt-7"
                 >
                   Vel Bio Med delivers high-caliber diagnostics and life-support machinery from world-renowned healthcare manufacturers to premium hospitals.
                 </motion.p>
@@ -433,7 +435,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 {/* CTA Buttons */}
                 <motion.div
                   variants={heroItemVariants}
-                  className="flex flex-wrap justify-center lg:justify-start gap-[20px] w-full mt-5 sm:mt-8 xl:mt-9"
+                  className="flex flex-wrap justify-center lg:justify-start gap-[20px] w-full mt-0 lg:mt-8 xl:mt-9"
                 >
                   <button
                     onClick={() => setCurrentTab("products")}
@@ -452,7 +454,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 {/* Statistics Cards */}
                 <motion.div
                   variants={heroItemVariants}
-                  className="grid grid-cols-4 gap-2.5 w-full lg:mx-0 mx-auto mt-6 sm:mt-8 xl:mt-10"
+                  className="grid grid-cols-4 gap-2.5 w-full lg:mx-0 mx-auto mt-0 lg:mt-8 xl:mt-10"
                 >
                   {[
                     { target: 16, suffix: "+", label: "Years Exp.", icon: Award, color: "text-blue-600", iconBg: "bg-blue-50", border: "border-blue-100/70", glow: "from-blue-500/5" },
@@ -467,7 +469,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                         className={`flex flex-col items-center justify-center text-center gap-1.5 py-3.5 px-2 rounded-xl border ${m.border} bg-gradient-to-b ${m.glow} to-white/70 backdrop-blur-sm shadow-[0_1px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_3px_14px_rgba(0,0,0,0.09)] hover:scale-[1.02] transition-all duration-200`}
                       >
                         <div className={`w-9 h-9 flex items-center justify-center rounded-xl ${m.iconBg} border border-white/90 shadow-sm`}>
-                          <IconComponent className={`w-4 h-4 ${m.color}`} strokeWidth={2} />
+                           <IconComponent className={`w-4 h-4 ${m.color}`} strokeWidth={2} />
                         </div>
                         <p className="text-lg font-black text-slate-800 tracking-tight leading-none">
                           <AnimatedCounter target={m.target} suffix={m.suffix} duration={2000} startSignal={!showPreloader} />

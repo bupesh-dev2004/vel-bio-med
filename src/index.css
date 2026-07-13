@@ -417,3 +417,60 @@
   transform: translateX(-50%);
   transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* Mobile Hero Background Responsive Positioning (< 768px) */
+@media (max-width: 767.98px) {
+  .mobile-hero-bg-img {
+    object-fit: cover !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    /* Default for mobile is center top */
+    object-position: center top !important; 
+    background-position: center top !important;
+  }
+  
+  /* 320px devices (Small Mobile: 320px - 359px) */
+  @media (min-width: 320px) and (max-width: 359.98px) {
+    .mobile-hero-bg-img {
+      /* Move image slightly upward, keep surgical lights visible and operating table centered. Avoid excessive empty space. */
+      object-position: center 2% !important;
+      background-position: center 2% !important;
+    }
+  }
+
+  /* 360px devices */
+  @media (min-width: 360px) and (max-width: 374.98px) {
+    .mobile-hero-bg-img {
+      /* Center operating table, keep equipment balanced, maintain proper spacing above content */
+      object-position: center 10% !important;
+      background-position: center 10% !important;
+    }
+  }
+
+  /* 375px devices */
+  @media (min-width: 375px) and (max-width: 389.98px) {
+    .mobile-hero-bg-img {
+      /* Keep hero image naturally centered, ensure medical equipment remains visible */
+      object-position: center 18% !important;
+      background-position: center 18% !important;
+    }
+  }
+
+  /* 390px–430px devices */
+  @media (min-width: 390px) and (max-width: 479.98px) {
+    .mobile-hero-bg-img {
+      /* Slightly increase visible background area, prevent unnecessary cropping */
+      object-position: center 25% !important;
+      background-position: center 25% !important;
+    }
+  }
+
+  /* 480px+ devices */
+  @media (min-width: 480px) {
+    .mobile-hero-bg-img {
+      /* Display almost complete background image, keep composition balanced */
+      object-position: center 30% !important;
+      background-position: center 30% !important;
+    }
+  }
+}
