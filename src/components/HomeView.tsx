@@ -70,12 +70,21 @@ interface HomeViewProps {
   showPreloader?: boolean;
 }
 
-function AnimatedCounter({ target, duration = 1500, suffix = "" }: { target: number; duration?: number; suffix?: string }) {
+function AnimatedCounter({ target, duration = 1500, suffix = "", startSignal }: { target: number; duration?: number; suffix?: string; startSignal?: boolean }) {
   const [count, setCount] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
   const elementRef = useRef<HTMLSpanElement>(null);
 
+  // If an external startSignal is provided, use it; otherwise use IntersectionObserver
   useEffect(() => {
+    if (startSignal !== undefined) {
+      if (startSignal && !hasStarted) {
+        const timer = setTimeout(() => setHasStarted(true), 400);
+        return () => clearTimeout(timer);
+      }
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -91,7 +100,7 @@ function AnimatedCounter({ target, duration = 1500, suffix = "" }: { target: num
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [startSignal, hasStarted]);
 
   useEffect(() => {
     if (!hasStarted) return;
@@ -193,54 +202,9 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
     productsApi.on("select", updateSnaps);
     productsApi.on("reInit", updateSnaps);
 
-    let intervalId: any = null;
-    let isHovered = false;
-
-    const startAutoplay = () => {
-      stopAutoplay();
-      if (isHovered) return;
-      intervalId = setInterval(() => {
-        if (!productsApi) return;
-        if (productsApi.canScrollNext()) {
-          productsApi.scrollNext();
-        } else {
-          productsApi.scrollTo(0);
-        }
-      }, 3000);
-    };
-
-    const stopAutoplay = () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-        intervalId = null;
-      }
-    };
-
-    const root = productsApi.rootNode();
-    const onMouseEnter = () => {
-      isHovered = true;
-      stopAutoplay();
-    };
-    const onMouseLeave = () => {
-      isHovered = false;
-      startAutoplay();
-    };
-
-    root.addEventListener("mouseenter", onMouseEnter);
-    root.addEventListener("mouseleave", onMouseLeave);
-
-    startAutoplay();
-    productsApi.on("pointerDown", stopAutoplay);
-    productsApi.on("settle", startAutoplay);
-
     return () => {
-      root.removeEventListener("mouseenter", onMouseEnter);
-      root.removeEventListener("mouseleave", onMouseLeave);
       productsApi.off("select", updateSnaps);
       productsApi.off("reInit", updateSnaps);
-      productsApi.off("pointerDown", stopAutoplay);
-      productsApi.off("settle", startAutoplay);
-      stopAutoplay();
     };
   }, [productsApi]);
 
@@ -394,132 +358,135 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* 1. HERO SECTION */}
-      <section className="relative h-[480px] md:h-[600px] overflow-hidden bg-slate-50">
+      <section className="relative min-h-[480px] lg:min-h-[580px] xl:min-h-[700px] flex items-center bg-slate-50 overflow-hidden pt-6 pb-5 lg:pt-10 lg:pb-8 xl:pt-[80px] xl:pb-[60px]">
         {/* Background with zoom and fade in effect */}
         <motion.div
           initial={{ opacity: 0, scale: 1 }}
           animate={showPreloader ? { opacity: 0, scale: 1 } : { opacity: 1, scale: 1 }}
           transition={{ duration: 1.8, ease: "easeOut" }}
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${slides[0]?.image || "/hero-bg.png"})`
-          }}
-        />
+          className="absolute inset-0"
+        >
+          <picture>
+            {/* Desktop & Tablet: screens larger than mobile (min-width: 640px) */}
+            <source media="(min-width: 640px)" srcSet={slides[0]?.image || "/hero-bg.png"} />
+            {/* Standard Mobile: screens between 321px and 639px */}
+            <source media="(min-width: 321px)" srcSet="/Home-bg-mobile.webp" />
+            {/* Very Small Mobile: screens 320px and below */}
+            <img
+              src="/Home-bg-mobile-320px.webp"
+              alt="Vel Bio Med Hero Background"
+              className="w-full h-full object-cover object-center pointer-events-none"
+              loading="eager"
+            />
+          </picture>
+        </motion.div>
 
         {/* Background Glows */}
         <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-radial from-blue-500/12 via-blue-900/0 to-transparent rounded-full pointer-events-none z-10" />
         <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-radial from-amber-500/10 via-amber-650/0 to-transparent rounded-full pointer-events-none z-10" />
 
-        {/* Hero Content */}
-        <div className="absolute inset-0 flex items-start md:items-center z-20 pt-12 sm:pt-14 md:pt-0">
-          <div className="max-w-7xl mr-auto ml-0 px-6 sm:px-12 lg:px-16 xl:px-16 w-full transition-all duration-300 lg:-translate-y-12 lg:-translate-x-6 xl:-translate-y-16 xl:-translate-x-12">
-            <motion.div
-              initial="hidden"
-              animate={showPreloader ? "hidden" : "visible"}
-              variants={heroContainerVariants}
-              className="max-w-[450px] sm:max-w-[500px] md:max-w-[550px] lg:max-w-[600px] xl:max-w-[650px] text-left text-slate-900 space-y-4"
-            >
-              <motion.span
-                variants={heroItemVariants}
-                className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[9px] sm:text-[10px] font-black tracking-widest px-3.5 py-1.5 rounded-full uppercase shadow-lg shadow-blue-500/20"
-              >
-                Clinical Sourcing Excellence
-              </motion.span>
-              <motion.h1
-                variants={heroItemVariants}
-                className="text-2xl sm:text-3xl md:text-[38px] lg:text-[42px] xl:text-[48px] font-black tracking-tight leading-[1.12] text-slate-900"
-              >
-                Transforming <AnimatedText asSpan text="Healthcare" gradientColors="linear-gradient(90deg, #0A6EBD 0%, #00e5ff 30%, #3b82f6 50%, #00e5ff 70%, #0A6EBD 100%)" gradientAnimationDuration={1.6} textClassName="bg-clip-text text-transparent" /><br className="hidden sm:inline" />
-                One Installation at a<br className="hidden sm:inline" />
-                Time
-              </motion.h1>
-              <motion.p
-                variants={heroItemVariants}
-                className="text-[11px] sm:text-xs md:text-sm text-slate-650 leading-relaxed font-semibold max-w-[500px]"
-              >
-                Vel Bio Med delivers high-caliber diagnostics and life-support machinery from world-renowned healthcare manufacturers to premium hospitals.
-              </motion.p>
+        {/* Hero Content Wrapper */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 xl:px-10 w-full z-20 relative">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* Left Side (45%) */}
+            <div className="col-span-1 lg:col-span-6 xl:col-span-5 flex flex-col justify-center text-center lg:text-left text-slate-900 lg:-translate-x-14 lg:-translate-y-6 xl:-translate-x-20 xl:-translate-y-8">
               <motion.div
-                variants={heroItemVariants}
-                className="flex flex-wrap gap-3 pt-1"
+                initial="hidden"
+                animate={showPreloader ? "hidden" : "visible"}
+                variants={heroContainerVariants}
+                className="flex flex-col items-center lg:items-start text-center lg:text-left text-slate-900"
               >
-                <button
-                  onClick={() => setCurrentTab("products")}
-                  className="bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 text-white font-black text-xs py-3 px-5 rounded-lg shadow-lg shadow-blue-500/20 hover:scale-102 transition-all flex items-center gap-1.5 uppercase tracking-wider cursor-pointer border-none"
+                {/* Badge */}
+                <motion.div variants={heroItemVariants} className="w-full text-center lg:text-left">
+                  <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[9px] sm:text-[10px] font-black tracking-widest px-3.5 py-1.5 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
+                    Clinical Sourcing Excellence
+                  </span>
+                </motion.div>
+
+                {/* Heading */}
+                <motion.h1
+                  variants={heroItemVariants}
+                  className="text-2xl sm:text-3xl md:text-[38px] lg:text-[36px] xl:text-[44px] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] w-full text-center lg:text-left mt-4 sm:mt-5 xl:mt-6"
                 >
-                  Explore Products <ArrowRight className="w-4 h-4" />
-                </button>
-                <button
-                  onClick={() => setCurrentTab("contact")}
-                  className="bg-gradient-to-r from-amber-500 to-orange-400 hover:from-amber-600 hover:to-orange-500 text-white font-black text-xs py-3 px-5 rounded-lg shadow-md shadow-amber-500/20 hover:scale-102 transition-all flex items-center gap-1.5 uppercase tracking-wider cursor-pointer border-none"
+                  <span className="whitespace-nowrap">
+                    Transforming{" "}
+                    <AnimatedText
+                      asSpan
+                      text="Healthcare"
+                      gradientColors="linear-gradient(90deg, #0A6EBD 0%, #00e5ff 30%, #3b82f6 50%, #00e5ff 70%, #0A6EBD 100%)"
+                      gradientAnimationDuration={1.6}
+                      textClassName="bg-clip-text text-transparent"
+                    />
+                  </span>
+                  <br />
+                  One Installation at a Time
+                </motion.h1>
+
+                {/* Description */}
+                <motion.p
+                  variants={heroItemVariants}
+                  className="text-[11px] sm:text-xs md:text-sm text-slate-650 leading-relaxed font-semibold max-w-[520px] w-full text-center lg:text-left mt-4 sm:mt-6 xl:mt-7"
                 >
-                  Contact Us
-                </button>
+                  Vel Bio Med delivers high-caliber diagnostics and life-support machinery from world-renowned healthcare manufacturers to premium hospitals.
+                </motion.p>
+
+                {/* CTA Buttons */}
+                <motion.div
+                  variants={heroItemVariants}
+                  className="flex flex-wrap justify-center lg:justify-start gap-[20px] w-full mt-5 sm:mt-8 xl:mt-9"
+                >
+                  <button
+                    onClick={() => setCurrentTab("products")}
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer border-none h-[44px]"
+                  >
+                    Explore Products <ArrowRight className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => setCurrentTab("contact")}
+                    className="bg-white border border-slate-200 text-blue-600 hover:bg-slate-50 font-bold text-xs py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer h-[44px]"
+                  >
+                    <PhoneCall className="w-4 h-4 text-blue-600" /> Contact Us
+                  </button>
+                </motion.div>
+
+                {/* Statistics Cards */}
+                <motion.div
+                  variants={heroItemVariants}
+                  className="grid grid-cols-4 gap-2.5 w-full lg:mx-0 mx-auto mt-6 sm:mt-8 xl:mt-10"
+                >
+                  {[
+                    { target: 16, suffix: "+", label: "Years Exp.", icon: Award, color: "text-blue-600", iconBg: "bg-blue-50", border: "border-blue-100/70", glow: "from-blue-500/5" },
+                    { target: 6000, suffix: "+", label: "Installations", icon: Wrench, color: "text-emerald-600", iconBg: "bg-emerald-50", border: "border-emerald-100/70", glow: "from-emerald-500/5" },
+                    { target: 800, suffix: "+", label: "Hospitals", icon: Building, color: "text-sky-600", iconBg: "bg-sky-50", border: "border-sky-100/70", glow: "from-sky-500/5" },
+                    { target: 1000, suffix: "+", label: "Clients", icon: ThumbsUp, color: "text-rose-500", iconBg: "bg-rose-50", border: "border-rose-100/70", glow: "from-rose-500/5" }
+                  ].map((m, idx) => {
+                    const IconComponent = m.icon;
+                    return (
+                      <div
+                        key={idx}
+                        className={`flex flex-col items-center justify-center text-center gap-1.5 py-3.5 px-2 rounded-xl border ${m.border} bg-gradient-to-b ${m.glow} to-white/70 backdrop-blur-sm shadow-[0_1px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_3px_14px_rgba(0,0,0,0.09)] hover:scale-[1.02] transition-all duration-200`}
+                      >
+                        <div className={`w-9 h-9 flex items-center justify-center rounded-xl ${m.iconBg} border border-white/90 shadow-sm`}>
+                          <IconComponent className={`w-4 h-4 ${m.color}`} strokeWidth={2} />
+                        </div>
+                        <p className="text-lg font-black text-slate-800 tracking-tight leading-none">
+                          <AnimatedCounter target={m.target} suffix={m.suffix} duration={2000} startSignal={!showPreloader} />
+                        </p>
+                        <p className="text-[8px] font-bold text-slate-400 uppercase tracking-wider leading-none">
+                          {m.label}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </motion.div>
               </motion.div>
-            </motion.div>
+            </div>
+
+            {/* Right Side (55%) is empty to allow the background operation theatre image to display fully */}
+            <div className="hidden lg:block lg:col-span-6 xl:col-span-7 pointer-events-none" />
           </div>
         </div>
       </section>
-
-      {/* METRICS AUTO-SCROLL CAROUSEL SECTION */}
-      <motion.section
-        variants={fadeUpVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="py-10 bg-gradient-to-r from-blue-50/30 via-white/50 to-blue-50/30 border-y border-slate-200/50 overflow-hidden relative"
-      >
-        <div className="absolute inset-0 opacity-[0.02] bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
-        <div className="max-w-none w-full px-6 sm:px-12 lg:px-20 relative z-10">
-          <Carousel
-            opts={{ loop: true }}
-            plugins={[
-              AutoScroll({
-                playOnInit: true,
-                speed: 1.2,
-                stopOnInteraction: false,
-                stopOnMouseEnter: false
-              })
-            ]}
-            className="w-full"
-          >
-            <CarouselContent className="-ml-10 flex items-center">
-              {[
-                { target: 16, suffix: "+", label: "Years of Experience", icon: Award, color: "text-blue-500" },
-                { target: 13, suffix: "+", label: "Years of Excellence in Biomedical Solutions", icon: Zap, color: "text-amber-500" },
-                { target: 6000, suffix: "+", label: "Successful Installations", icon: Wrench, color: "text-emerald-500" },
-                { target: 800, suffix: "+", label: "Hospitals Served", icon: Building, color: "text-indigo-500" },
-                { target: 1000, suffix: "+", label: "Satisfied Clients", icon: ThumbsUp, color: "text-rose-500" }
-              ].map((m, idx) => {
-                const IconComponent = m.icon;
-                return (
-                  <CarouselItem
-                    key={idx}
-                    className="pl-10 basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 flex-shrink-0"
-                  >
-                    <div className="bg-gradient-to-br from-blue-50/80 via-blue-50/20 to-blue-100/40 backdrop-blur-md border-2 border-blue-200/80 rounded-2xl p-6 text-center hover:bg-white hover:border-blue-500 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 hover:scale-[1.02] transition-all duration-350 shadow-md shadow-blue-500/5 group h-44 flex flex-col justify-center items-center relative overflow-hidden">
-                      {/* Subtle inner blue glow decoration */}
-                      <div className="absolute -bottom-8 -right-8 w-16 h-16 bg-blue-500/10 rounded-full blur-xl group-hover:bg-blue-500/20 transition-colors duration-300" />
-
-                      {/* Floating SVG Icon */}
-                      <div className={`mb-3 p-2.5 rounded-xl bg-white border border-blue-100 shadow-sm transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6 ${m.color}`}>
-                        <IconComponent className="w-5 h-5" strokeWidth={2.5} />
-                      </div>
-
-                      <p className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-sky-500 to-blue-800 tracking-tight mb-1 transition-transform duration-300 relative z-10">
-                        <AnimatedCounter target={m.target} suffix={m.suffix} />
-                      </p>
-                      <p className="text-[10px] sm:text-[11px] font-black text-slate-600 uppercase tracking-widest leading-normal relative z-10 max-w-[180px] mx-auto">
-                        {m.label}
-                      </p>
-                    </div>
-                  </CarouselItem>
-                );
-              })}
-            </CarouselContent>
-          </Carousel>
-        </div>
-      </motion.section>
 
       {/* 2. WHY CHOOSE VEL BIO MED SECTION */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-[#f0f6ff] via-white to-[#fff7ed] border-t border-blue-100/60 relative overflow-hidden">
@@ -642,7 +609,27 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
           </div>
 
           {/* Embla Carousel Slider */}
-          <Carousel setApi={setProductsApi} opts={{ align: "start", loop: true, slidesToScroll: 1, breakpoints: { "(min-width: 640px)": { slidesToScroll: 2 }, "(min-width: 1024px)": { slidesToScroll: 3 } } }} className="w-full max-w-6xl mx-auto relative px-0 sm:px-4">
+          <Carousel
+            setApi={setProductsApi}
+            opts={{
+              align: "start",
+              loop: true,
+              slidesToScroll: 1,
+              breakpoints: {
+                "(min-width: 640px)": { slidesToScroll: 2 },
+                "(min-width: 1024px)": { slidesToScroll: 3 }
+              }
+            }}
+            plugins={[
+              AutoScroll({
+                playOnInit: true,
+                speed: 0.8,
+                stopOnInteraction: false,
+                stopOnMouseEnter: true
+              })
+            ]}
+            className="w-full max-w-6xl mx-auto relative px-0 sm:px-4"
+          >
             <CarouselContent className="-ml-4">
               {dynamicProducts.map((p, idx) => {
                 const isAmber = idx % 2 === 1;

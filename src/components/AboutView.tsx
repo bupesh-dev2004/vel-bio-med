@@ -1,4 +1,4 @@
-import { Award, ShieldCheck, Users, Activity, Sparkles, Building2, Globe, HeartHandshake, Scale, Cpu, Heart, MapPin, ThumbsUp, CheckSquare, Zap, ArrowRight } from "lucide-react";
+import { Award, ShieldCheck, Users, Activity, Sparkles, Building2, Globe, HeartHandshake, Scale, Cpu, Heart, MapPin, ThumbsUp, CheckSquare, Zap, ArrowRight, Briefcase, Wrench, TrendingUp, Trophy } from "lucide-react";
 import LeadershipMessage from "./ui/LeadershipMessage";
 import VisionMission from "./ui/VisionMission";
 import React, { useEffect, useRef, useState } from "react";
@@ -293,45 +293,45 @@ function CorporateValuesStack({ values }: { values: ValueItem[] }) {
 const timelineMilestones = [
   {
     year: "2006",
-    title: "Company Foundation",
-    description: "Vel Bio Med is established with a foundational vision: bridging the gap in biological science distribution by delivering world-class hospital and diagnostic machinery.",
-    icon: Building2
+    title: "Career Began as an Employee",
+    description: "Began a career in the biomedical industry as an employee, building valuable experience and industry expertise.",
+    icon: Briefcase
   },
   {
     year: "2010",
-    title: "Expanding Critical Care",
-    description: "We expanded our product portfolio to provide comprehensive critical care equipment and life-support systems, earning the trust of regional clinics.",
-    icon: Cpu
+    title: "Sales & Service Operations",
+    description: "Expanded expertise in biomedical sales and service, delivering reliable solutions and building strong relationships with healthcare providers.",
+    icon: Wrench
   },
   {
     year: "2013",
-    title: "Official Incorporation",
-    description: "Officially incorporated under the leadership of Mr. Muralikrishnan Gokulakrishnan, committing to robust turnkey installations across Tamil Nadu.",
-    icon: Globe
+    title: "Founded Vel Bio Med",
+    description: "Founded Vel Bio Med with a vision to provide high-quality biomedical equipment and reliable healthcare solutions.",
+    icon: Building2
   },
   {
     year: "2017",
-    title: "Authorized Dealerships",
-    description: "Secured official status as authorized dealers for renowned global healthcare brands including Maestros, Akas Infusions, and Sharkclave Systems.",
-    icon: Award
+    title: "200+ Clients Served",
+    description: "Reached the milestone of serving over 200 healthcare clients, earning trust through quality products and dependable service.",
+    icon: Users
   },
   {
     year: "2019",
-    title: "Advanced Service Division",
-    description: "Launched our dedicated 24/7 service engineering and AMC support division, ensuring maximum operating uptime for all critical care installations.",
-    icon: Activity
+    title: "500+ Clients Served",
+    description: "Expanded the customer base to 500+ clients, strengthening long-term partnerships across the healthcare sector.",
+    icon: HeartHandshake
   },
   {
     year: "2023",
-    title: "6,000+ Successful Installations",
-    description: "Celebrated a major milestone of over 6,000 successful medical equipment installations serving more than 800 premium hospitals state-wide.",
-    icon: ThumbsUp
+    title: "1,000+ Clients Served",
+    description: "Achieved the milestone of serving 1,000+ clients, reflecting sustained growth and customer confidence.",
+    icon: TrendingUp
   },
   {
     year: "2026",
-    title: "Clinical Sourcing Excellence",
-    description: "Celebrating 20 years of clinical sourcing leadership, delivering state-of-the-art diagnostics and intensive care units with certified quality.",
-    icon: Sparkles
+    title: "2,000+ Clients Served",
+    description: "Proudly serving 2,000+ healthcare clients, continuing a commitment to excellence, innovation, and trusted biomedical solutions.",
+    icon: Trophy
   }
 ];
 
@@ -354,7 +354,7 @@ function TimelineMilestone({ milestone, index, activeIndex, setActiveIndex }: {
   const smoothProgress = useSpring(scrollYProgress, { stiffness: 80, damping: 25, mass: 0.8 });
   const opacity = useTransform(smoothProgress, [0.15, 0.45, 0.55, 0.85], [0, 1, 1, 0]);
   const y = useTransform(smoothProgress, [0.15, 0.45, 0.55, 0.85], [60, 0, 0, -60]);
-  
+
   // Dynamic horizontal fly-in based on alternating column position (left or right)
   const rawX = useTransform(smoothProgress, [0.15, 0.45, 0.55, 0.85], [isLeft ? -45 : 45, 0, 0, isLeft ? -45 : 45]);
   const x = useSpring(rawX, { stiffness: 80, damping: 25, mass: 0.8 });
@@ -383,7 +383,7 @@ function TimelineMilestone({ milestone, index, activeIndex, setActiveIndex }: {
   return (
     <div ref={ref} className="relative min-h-[260px] sm:min-h-[300px] md:min-h-[380px] flex items-center w-full py-8 md:py-16">
       {/* Node dot on the vertical timeline with expanding scale and pulse shadow */}
-      <motion.div 
+      <motion.div
         animate={{
           scale: isActive ? 1.3 : 1,
           backgroundColor: isActive ? "#0284C7" : "#cbd5e1",
@@ -399,26 +399,26 @@ function TimelineMilestone({ milestone, index, activeIndex, setActiveIndex }: {
       </motion.div>
 
       {/* Horizontal Connector Line (desktop only) that expands smoothly when active */}
-      <motion.div 
-        animate={{ 
-          width: isActive ? "5%" : "0%", 
-          backgroundColor: isActive ? "#0284C7" : "#e2e8f0" 
+      <motion.div
+        animate={{
+          width: isActive ? "5%" : "0%",
+          backgroundColor: isActive ? "#0284C7" : "#e2e8f0"
         }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`hidden md:block absolute top-1/2 -translate-y-1/2 h-0.5 z-20 ${isLeft ? "left-[45%]" : "right-[45%]"}`}
       />
 
       {/* Card Wrapper with Parallax Scroll Transition (Vertical + Horizontal Fly-in) */}
-      <motion.div 
+      <motion.div
         style={{ opacity, y, x }}
         className={`w-full flex ${isLeft ? "md:justify-start" : "md:justify-end"} pl-12 md:pl-0`}
       >
-        <motion.div 
+        <motion.div
           whileHover={{
             y: -10,
             scale: isActive ? 1.05 : 1.01,
-            boxShadow: isActive 
-              ? "0 30px 60px -15px rgba(2, 132, 199, 0.2)" 
+            boxShadow: isActive
+              ? "0 30px 60px -15px rgba(2, 132, 199, 0.2)"
               : "0 20px 40px -10px rgba(0, 0, 0, 0.08)",
           }}
           animate={{
@@ -430,7 +430,7 @@ function TimelineMilestone({ milestone, index, activeIndex, setActiveIndex }: {
           className="w-full md:w-[45%] rounded-3xl p-6 sm:p-8 bg-white border flex flex-col sm:flex-row gap-6 items-start cursor-pointer"
         >
           {/* Milestone Icon with glow, scale, and subtle hover wiggle */}
-          <motion.div 
+          <motion.div
             whileHover={{
               rotate: [0, -10, 10, 0],
               scale: 1.15
@@ -447,7 +447,7 @@ function TimelineMilestone({ milestone, index, activeIndex, setActiveIndex }: {
 
           {/* Text Content */}
           <div className="space-y-2 text-left">
-            <span 
+            <span
               className={`text-xl sm:text-2xl font-black tracking-tight transition-all duration-500 block
                 ${isActive ? "text-[#0284C7]" : "text-slate-400"}
               `}
@@ -474,7 +474,7 @@ function TimelineSection() {
     <section className="py-20 md:py-32 bg-slate-50 border-t border-slate-100 relative overflow-hidden">
       {/* Background patterns */}
       <div className="absolute inset-0 opacity-[0.015] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none" />
-      
+
       <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
         {/* Header */}
         <div className="max-w-2xl mx-auto mb-16 md:mb-24 space-y-4">
@@ -493,16 +493,16 @@ function TimelineSection() {
         <div className="relative max-w-4xl mx-auto">
           {/* Vertical progress timeline line */}
           <div className="absolute left-4 md:left-1/2 -translate-x-1/2 top-[60px] bottom-[60px] w-1 bg-slate-200 z-10 rounded-full overflow-hidden">
-            <div 
-              className="w-full bg-[#0284C7] transition-all duration-500 ease-out origin-top" 
-              style={{ height: `${(activeIndex / (timelineMilestones.length - 1)) * 100}%` }} 
+            <div
+              className="w-full bg-[#0284C7] transition-all duration-500 ease-out origin-top"
+              style={{ height: `${(activeIndex / (timelineMilestones.length - 1)) * 100}%` }}
             />
           </div>
 
           {/* Timeline Milestones list */}
           <div className="relative z-20 space-y-4">
             {timelineMilestones.map((m, idx) => (
-              <TimelineMilestone 
+              <TimelineMilestone
                 key={idx}
                 milestone={m}
                 index={idx}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 import { AppProvider, useAppState } from "./AppContext.js";
 import Header from "./components/Header.js";
 import Footer from "./components/Footer.js";
@@ -15,6 +15,13 @@ import { motion, AnimatePresence } from "framer-motion";
 
 function AppContent() {
   const { currentTab, setCurrentTab, isLoading, error, refreshState, state } = useAppState();
+
+  useLayoutEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, [currentTab]);
 
   // Selected product modal state - shared so hot-selling or latest items on Home can open detail modal immediately!
   const [selectedProductModal, setSelectedProductModal] = useState<Product | null>(null);
