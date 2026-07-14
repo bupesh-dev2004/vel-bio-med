@@ -129,7 +129,10 @@ export const Navbar5 = () => {
       {/* Premium Top Brand Accent Strip */}
       <div className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-blue-600 via-sky-400 to-emerald-500 z-[60] w-full" />
 
-      <section
+      <motion.section
+        initial={{ y: -40, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className={`py-2 px-0 transition-all duration-500 border-b relative z-50 ${isScrolled
           ? "bg-white/80 backdrop-blur-md shadow-lg shadow-slate-900/5 border-slate-200/60"
           : "bg-white border-slate-100"
@@ -252,8 +255,11 @@ export const Navbar5 = () => {
                       {productCategories.map((cat, idx) => {
                         const CatIcon = cat.icon;
                         return (
-                          <button
+                          <motion.button
                             key={idx}
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: idx * 0.05, duration: 0.35, ease: "easeOut" }}
                             onClick={() => {
                               handleCategorySelect(cat.title);
                               setIsDropdownOpen(false);
@@ -271,7 +277,7 @@ export const Navbar5 = () => {
                                 {cat.description}
                               </p>
                             </div>
-                          </button>
+                          </motion.button>
                         );
                       })}
                     </motion.div>
@@ -536,7 +542,7 @@ export const Navbar5 = () => {
 
           </nav>
         </div>
-      </section>
+      </motion.section>
     </>
   );
 };

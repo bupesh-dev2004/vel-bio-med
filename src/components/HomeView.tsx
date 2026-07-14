@@ -441,18 +441,30 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                     variants={heroItemVariants}
                     className="flex flex-row justify-center md:justify-start gap-3 sm:gap-4 w-full mt-2 sm:mt-4 md:mt-5 lg:mt-5 xl:mt-9"
                   >
-                    <button
+                    <motion.button
+                      whileHover={{
+                        scale: 1.04,
+                        y: -2,
+                        boxShadow: "0 10px 25px rgba(37,99,235,0.25)"
+                      }}
+                      whileTap={{ scale: 0.98 }}
                       onClick={() => setCurrentTab("products")}
-                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[11px] sm:text-xs py-2.5 px-4 sm:px-6 rounded-lg transition-colors flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer border-none h-[40px] sm:h-[44px] flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
+                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[11px] sm:text-xs py-2.5 px-4 sm:px-6 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer border-none h-[40px] sm:h-[44px] flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
                     >
                       Explore Products <ArrowRight className="w-4 h-4" />
-                    </button>
-                    <button
+                    </motion.button>
+                    <motion.button
+                      whileHover={{
+                        scale: 1.04,
+                        y: -2,
+                        boxShadow: "0 10px 25px rgba(0,0,0,0.08)"
+                      }}
+                      whileTap={{ scale: 0.98 }}
                       onClick={() => setCurrentTab("contact")}
-                      className="bg-white border border-slate-200 text-blue-600 hover:bg-slate-50 font-bold text-[11px] sm:text-xs py-2.5 px-4 sm:px-6 rounded-lg transition-colors flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer h-[40px] sm:h-[44px] flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
+                      className="bg-white border border-slate-200 text-blue-600 hover:bg-slate-50 font-bold text-[11px] sm:text-xs py-2.5 px-4 sm:px-6 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer h-[40px] sm:h-[44px] flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
                     >
                       <PhoneCall className="w-4 h-4 text-blue-600" /> Contact Us
-                    </button>
+                    </motion.button>
                   </motion.div>
                 </div>
 
