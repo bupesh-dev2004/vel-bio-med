@@ -55,15 +55,13 @@ export default function GalleryView() {
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 40, scale: 0.96 },
+    hidden: { opacity: 0, y: 15 },
     show: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
-        type: "spring" as const,
-        stiffness: 80,
-        damping: 15
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number]
       }
     }
   };
@@ -280,13 +278,20 @@ export default function GalleryView() {
 
           {/* Masonry image grid */}
           {filteredItems.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: false, margin: "-80px" }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
               <AnimatePresence mode="popLayout">
                 {filteredItems.map((item, idx) => {
                   const isAmber = idx % 2 === 1;
                   return (
                     <motion.div
                       layout
+                      variants={cardVariants}
                       exit={{ opacity: 0, scale: 0.9, y: 20 }}
                       key={item.id}
                       onClick={() => openLightbox(idx)}
@@ -368,15 +373,15 @@ export default function GalleryView() {
                           {/* Slide up Expand Action */}
                           <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pt-1">
                             {item.video ? (
-                              <>
-                                <Play className={cn("w-4 h-4 fill-current", isAmber ? "text-amber-400" : "text-sky-300")} />
-                                <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">Play Video</span>
-                              </>
+                               <>
+                                 <Play className={cn("w-4 h-4 fill-current", isAmber ? "text-amber-400" : "text-sky-300")} />
+                                 <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">Play Video</span>
+                               </>
                             ) : (
-                              <>
-                                <Maximize2 className={cn("w-4 h-4", isAmber ? "text-amber-400" : "text-sky-300")} />
-                                <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">Expand Photo</span>
-                              </>
+                               <>
+                                 <Maximize2 className={cn("w-4 h-4", isAmber ? "text-amber-400" : "text-sky-300")} />
+                                 <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">Expand Photo</span>
+                               </>
                             )}
                           </div>
                         </div>
@@ -385,7 +390,7 @@ export default function GalleryView() {
                   );
                 })}
               </AnimatePresence>
-            </div>
+            </motion.div>
           ) : (
             <div className="py-24 text-center border border-dashed border-slate-200 rounded-[24px] bg-slate-50">
               <p className="text-slate-400 text-sm font-medium">No portfolio assets found under this filtering selection.</p>

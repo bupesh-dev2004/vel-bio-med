@@ -58,13 +58,24 @@ const medicalImages: GalleryItem[] = [
 ];
 
 const fadeUpVariants = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 15 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
+      duration: 0.8,
       ease: [0.16, 1, 0.3, 1] as [number, number, number, number]
+    }
+  }
+};
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.07,
+      delayChildren: 0.05
     }
   }
 };
@@ -163,9 +174,16 @@ export default function ImageGallery() {
           </div>
 
           {/* Dynamic Grid Gallery */}
-          <div className="mt-6 max-w-4xl w-full mx-auto grid gap-3 grid-cols-4 grid-rows-5 px-6 h-[600px]">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: false, margin: "-80px" }}
+            className="mt-6 max-w-4xl w-full mx-auto grid gap-3 grid-cols-4 grid-rows-5 px-6 h-[600px]"
+          >
             {displayImages.map((image, index) => (
-              <a
+              <motion.a
+                variants={fadeUpVariants}
                 key={index}
                 href={image.full}
                 onClick={(e) => {
@@ -179,11 +197,10 @@ export default function ImageGallery() {
                   alt={image.title}
                   className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                 />
-              </a>
+              </motion.a>
             ))}
-          </div>
-
-          {/* View Full Gallery Button */}
+          </motion.div>
+            {/* View Full Gallery Button */}
           <div className="mt-12 flex justify-center relative z-10">
             <button
               onClick={() => setCurrentTab("gallery")}

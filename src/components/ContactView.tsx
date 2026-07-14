@@ -135,6 +135,10 @@ export default function ContactView() {
       setFormValidation("Please provide a valid 10-digit mobile number.");
       return;
     }
+    if (!formData.feedback.trim()) {
+      setFormValidation("Please fill in the Inquiry Details & Clinic Context.");
+      return;
+    }
     if (formData.email && !formData.email.includes("@")) {
       setFormValidation("Please provide a valid email structure.");
       return;
@@ -508,7 +512,7 @@ export default function ContactView() {
 
                           <div className="space-y-2 sm:col-span-2">
                             <label htmlFor="feedback" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                              Inquiry Details & Clinic Context
+                              Inquiry Details & Clinic Context <span className="text-amber-500">*</span>
                             </label>
                             <textarea
                               name="feedback"
@@ -518,6 +522,7 @@ export default function ContactView() {
                               value={formData.feedback}
                               onChange={handleChange}
                               className="w-full bg-white/5 border border-slate-800 rounded-xl py-3 px-4 text-xs font-bold focus:outline-none focus:border-blue-500 focus:bg-white/10 text-white placeholder:text-slate-600 transition-all resize-none leading-relaxed"
+                              required
                             />
                           </div>
                         </div>

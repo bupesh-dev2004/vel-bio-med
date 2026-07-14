@@ -177,7 +177,19 @@ export default function Footer() {
             {["home", "about", "services", "gallery", "products", "contact"].map((tab) => (
               <li key={tab}>
                 <button
-                  onClick={() => setCurrentTab(tab)}
+                  onClick={() => {
+                    if (tab === "services") {
+                      setCurrentTab("home");
+                      setTimeout(() => {
+                        const element = document.getElementById("services-section");
+                        if (element) {
+                          element.scrollIntoView({ behavior: "smooth" });
+                        }
+                      }, 100);
+                    } else {
+                      setCurrentTab(tab);
+                    }
+                  }}
                   className="hover:text-[#00A8CC] hover:translate-x-2 transition-all outline-none text-left flex items-center gap-1.5 cursor-pointer font-bold tracking-wide"
                 >
                   <span className="text-[#0A6EBD] font-extrabold text-xs">›</span>

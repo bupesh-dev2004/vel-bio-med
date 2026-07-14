@@ -71,17 +71,14 @@ export default function ProductsView({
   const cardVariants = {
     hidden: {
       opacity: 0,
-      y: 25,
-      scale: 0.96,
+      y: 15,
     },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: {
-        type: "spring" as const,
-        stiffness: 280,
-        damping: 22,
+        duration: 0.8,
+        ease: [0.16, 1, 0.3, 1] as [number, number, number, number]
       }
     }
   };
@@ -125,8 +122,8 @@ export default function ProductsView({
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
           {/* Background cover image */}
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center opacity-55 pointer-events-none" />
-          <div className="absolute inset-0 bg-slate-950/60 pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/75 to-slate-950 pointer-events-none" />
+          <div className="absolute inset-0 bg-slate-955/60 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-955/75 to-slate-950 pointer-events-none" />
 
           {/* Glow rings */}
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-radial from-blue-600/10 via-blue-900/5 to-transparent rounded-full -mr-40 -mt-40 pointer-events-none" />
@@ -338,7 +335,8 @@ export default function ProductsView({
             <motion.div
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10"
               initial={shouldAnimate ? "hidden" : "visible"}
-              animate="visible"
+              whileInView="visible"
+              viewport={{ once: false, margin: "-80px" }}
               variants={cardContainerVariants}
             >
               {sortedProducts.length > 0 ? (
@@ -351,9 +349,9 @@ export default function ProductsView({
                       className="bg-white border border-slate-200/60 overflow-hidden rounded-3xl shadow-sm hover:shadow-[0_20px_40px_rgba(37,99,235,0.08)] hover:border-slate-350 transition-all duration-355 flex flex-col h-full group cursor-pointer"
                       variants={cardVariants}
                       whileHover={shouldAnimate ? {
-                        y: -8,
-                        scale: 1.015,
-                        transition: { type: "spring" as const, stiffness: 400, damping: 25 }
+                        y: -6,
+                        scale: 1.01,
+                        transition: { duration: 0.3, ease: "easeOut" }
                       } : {}}
                       onClick={() => onOpenProductModal(p)}
                     >

@@ -358,7 +358,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[480px] lg:min-h-[580px] xl:min-h-[700px] flex items-center bg-slate-50 overflow-hidden pt-[280px] pb-8 sm:pt-[340px] md:pt-10 md:pb-8 lg:pt-10 lg:pb-8 xl:pt-[80px] xl:pb-[60px]">
+      <section className="relative min-h-[500px] xs:min-h-[540px] sm:min-h-[600px] lg:min-h-[500px] xl:min-h-[700px] flex items-stretch md:items-center bg-slate-50 overflow-hidden pt-[44px] pb-6 md:pt-[96px] md:pb-12 lg:pt-10 lg:pb-8 xl:pt-[80px] xl:pb-[60px]">
         {/* Background with zoom and fade in effect */}
         <motion.div
           initial={{ opacity: 0, scale: 1 }}
@@ -366,9 +366,11 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
           transition={{ duration: 1.8, ease: "easeOut" }}
           className="absolute inset-0"
         >
-          <picture>
-            {/* Desktop & Tablet: screens larger than mobile (min-width: 768px) */}
-            <source media="(min-width: 768px)" srcSet={slides[0]?.image || "/hero-bg.png"} />
+          <picture className="block w-full h-full overflow-hidden">
+            {/* Desktop: screens 1024px and larger */}
+            <source media="(min-width: 1024px)" srcSet={slides[0]?.image || "/hero-bg.png"} />
+            {/* Tablet: screens 768px to 1023px */}
+            <source media="(min-width: 768px)" srcSet="/hero-bg-tablet.jpg" />
             {/* Standard Mobile: screens 376px to 767px */}
             <source media="(min-width: 376px)" srcSet="/hero-bg-mobile.webp" />
             {/* Very Small Mobile: screens 320px to 375px */}
@@ -379,8 +381,8 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
               loading="eager"
             />
           </picture>
-          {/* Light readability white gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/15 to-white/20 pointer-events-none z-[5]" />
+          {/* Light readability white gradient overlay (removed on desktop md/lg for crispness) */}
+          <div className="absolute inset-0 bg-white/45 md:bg-transparent pointer-events-none z-[5]" />
         </motion.div>
 
         {/* Background Glows */}
@@ -388,73 +390,76 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
         <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-radial from-amber-500/10 via-amber-650/0 to-transparent rounded-full pointer-events-none z-10" />
 
         {/* Hero Content Wrapper */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 xl:px-10 w-full z-20 relative">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Left Side (45%) */}
-            <div className="col-span-1 lg:col-span-6 xl:col-span-5 flex flex-col justify-center text-center lg:text-left text-slate-900 lg:-translate-x-14 lg:-translate-y-6 xl:-translate-x-20 xl:-translate-y-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 xl:px-10 w-full z-20 relative flex flex-col justify-stretch h-full">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch md:items-center h-full w-full">
+            {/* Left Side (45% on desktop xl, 58% on tablet/medium desktop) */}
+            <div className="col-span-1 md:col-span-7 lg:col-span-7 xl:col-span-5 flex flex-col justify-between h-full text-center md:text-left text-slate-900 -translate-y-3 md:translate-y-0 lg:-translate-x-14 lg:-translate-y-6 xl:-translate-x-20 xl:-translate-y-8">
               <motion.div
                 initial="hidden"
                 animate={showPreloader ? "hidden" : "visible"}
                 variants={heroContainerVariants}
-                className="flex flex-col items-center lg:items-start text-center lg:text-left text-slate-900 gap-y-5 lg:gap-y-0"
+                className="flex flex-col items-center md:items-start text-center md:text-left text-slate-900 justify-between min-h-[460px] xs:min-h-[500px] sm:min-h-[540px] md:min-h-0 w-full gap-y-6 md:gap-y-0"
               >
-                {/* Badge */}
-                <motion.div variants={heroItemVariants} className="w-full text-center lg:text-left">
-                  <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[9px] sm:text-[10px] font-black tracking-widest px-3.5 py-1.5 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
-                    Clinical Sourcing Excellence
-                  </span>
-                </motion.div>
+                {/* Top Group: Text & Buttons */}
+                <div className="flex flex-col items-center md:items-start text-center md:text-left gap-y-4 md:gap-y-0 w-full">
+                  {/* Badge */}
+                  <motion.div variants={heroItemVariants} className="w-full text-center md:text-left">
+                    <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[9px] sm:text-[10px] font-black tracking-widest px-3.5 py-1.5 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
+                      Clinical Sourcing Excellence
+                    </span>
+                  </motion.div>
 
-                {/* Heading */}
-                <motion.h1
-                  variants={heroItemVariants}
-                  className="text-2xl sm:text-3xl md:text-[38px] lg:text-[36px] xl:text-[44px] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] w-full text-center lg:text-left mt-0 lg:mt-5 xl:mt-6"
-                >
-                  <span className="whitespace-nowrap">
-                    Transforming{" "}
-                    <AnimatedText
-                      asSpan
-                      text="Healthcare"
-                      gradientColors="linear-gradient(90deg, #0A6EBD 0%, #00e5ff 30%, #3b82f6 50%, #00e5ff 70%, #0A6EBD 100%)"
-                      gradientAnimationDuration={1.6}
-                      textClassName="bg-clip-text text-transparent"
-                    />
-                  </span>
-                  <br />
-                  One Installation at a Time
-                </motion.h1>
-
-                {/* Description */}
-                <motion.p
-                  variants={heroItemVariants}
-                  className="text-[11px] sm:text-xs md:text-sm text-slate-650 leading-relaxed font-semibold max-w-[520px] w-full text-center lg:text-left mt-0 lg:mt-6 xl:mt-7"
-                >
-                  Vel Bio Med delivers high-caliber diagnostics and life-support machinery from world-renowned healthcare manufacturers to premium hospitals.
-                </motion.p>
-
-                {/* CTA Buttons */}
-                <motion.div
-                  variants={heroItemVariants}
-                  className="flex flex-wrap justify-center lg:justify-start gap-[20px] w-full mt-0 lg:mt-8 xl:mt-9"
-                >
-                  <button
-                    onClick={() => setCurrentTab("products")}
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer border-none h-[44px]"
+                  {/* Heading */}
+                  <motion.h1
+                    variants={heroItemVariants}
+                    className="text-2xl sm:text-3xl md:text-[32px] lg:text-[34px] xl:text-[44px] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] w-full text-center md:text-left mt-0 md:mt-4 lg:mt-3 xl:mt-6"
                   >
-                    Explore Products <ArrowRight className="w-4 h-4" />
-                  </button>
-                  <button
-                    onClick={() => setCurrentTab("contact")}
-                    className="bg-white border border-slate-200 text-blue-600 hover:bg-slate-50 font-bold text-xs py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer h-[44px]"
+                    <span className="sm:whitespace-nowrap">
+                      Transforming{" "}
+                      <AnimatedText
+                        asSpan
+                        text="Healthcare"
+                        gradientColors="linear-gradient(90deg, #0A6EBD 0%, #00e5ff 30%, #3b82f6 50%, #00e5ff 70%, #0A6EBD 100%)"
+                        gradientAnimationDuration={1.6}
+                        textClassName="bg-clip-text text-transparent"
+                      />
+                    </span>
+                    <br />
+                    One Installation at a Time
+                  </motion.h1>
+
+                  {/* Description */}
+                  <motion.p
+                    variants={heroItemVariants}
+                    className="text-[11px] sm:text-xs md:text-sm text-slate-650 leading-relaxed font-semibold max-w-[520px] w-full text-center md:text-left mt-0 md:mt-4 lg:mt-4 xl:mt-7"
                   >
-                    <PhoneCall className="w-4 h-4 text-blue-600" /> Contact Us
-                  </button>
-                </motion.div>
+                    Vel Bio Med delivers high-caliber diagnostics and life-support machinery from world-renowned healthcare manufacturers to premium hospitals.
+                  </motion.p>
+
+                  {/* CTA Buttons */}
+                  <motion.div
+                    variants={heroItemVariants}
+                    className="flex flex-row justify-center md:justify-start gap-3 sm:gap-4 w-full mt-2 sm:mt-4 md:mt-5 lg:mt-5 xl:mt-9"
+                  >
+                    <button
+                      onClick={() => setCurrentTab("products")}
+                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[11px] sm:text-xs py-2.5 px-4 sm:px-6 rounded-lg transition-colors flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer border-none h-[40px] sm:h-[44px] flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
+                    >
+                      Explore Products <ArrowRight className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => setCurrentTab("contact")}
+                      className="bg-white border border-slate-200 text-blue-600 hover:bg-slate-50 font-bold text-[11px] sm:text-xs py-2.5 px-4 sm:px-6 rounded-lg transition-colors flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer h-[40px] sm:h-[44px] flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
+                    >
+                      <PhoneCall className="w-4 h-4 text-blue-600" /> Contact Us
+                    </button>
+                  </motion.div>
+                </div>
 
                 {/* Statistics Cards */}
                 <motion.div
                   variants={heroItemVariants}
-                  className="grid grid-cols-4 gap-2.5 w-full lg:mx-0 mx-auto mt-0 lg:mt-8 xl:mt-10"
+                  className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 w-full md:mx-0 mx-auto mt-auto md:mt-6 lg:mt-6 xl:mt-10 pt-4"
                 >
                   {[
                     { target: 16, suffix: "+", label: "Years Exp.", icon: Award, color: "text-blue-600", iconBg: "bg-blue-50", border: "border-blue-100/70", glow: "from-blue-500/5" },
@@ -466,15 +471,15 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                     return (
                       <div
                         key={idx}
-                        className={`flex flex-col items-center justify-center text-center gap-1.5 py-3.5 px-2 rounded-xl border ${m.border} bg-gradient-to-b ${m.glow} to-white/70 backdrop-blur-sm shadow-[0_1px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_3px_14px_rgba(0,0,0,0.09)] hover:scale-[1.02] transition-all duration-200`}
+                        className={`flex flex-col items-center justify-center text-center gap-1.5 py-2.5 sm:py-3.5 px-1.5 sm:px-2 rounded-xl border ${m.border} bg-gradient-to-b ${m.glow} to-white/45 sm:to-white/70 backdrop-blur-[3px] sm:backdrop-blur-sm shadow-[0_1px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_3px_14px_rgba(0,0,0,0.09)] hover:scale-[1.02] transition-all duration-200`}
                       >
-                        <div className={`w-9 h-9 flex items-center justify-center rounded-xl ${m.iconBg} border border-white/90 shadow-sm`}>
-                           <IconComponent className={`w-4 h-4 ${m.color}`} strokeWidth={2} />
+                        <div className={`w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-xl ${m.iconBg} border border-white/90 shadow-sm`}>
+                           <IconComponent className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${m.color}`} strokeWidth={2} />
                         </div>
-                        <p className="text-lg font-black text-slate-800 tracking-tight leading-none">
+                        <p className="text-base sm:text-lg font-black text-slate-800 tracking-tight leading-none">
                           <AnimatedCounter target={m.target} suffix={m.suffix} duration={2000} startSignal={!showPreloader} />
                         </p>
-                        <p className="text-[8px] font-bold text-slate-400 uppercase tracking-wider leading-none">
+                        <p className="text-[7.5px] sm:text-[8px] font-bold text-slate-400 uppercase tracking-wider leading-none">
                           {m.label}
                         </p>
                       </div>
@@ -485,7 +490,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
             </div>
 
             {/* Right Side (55%) is empty to allow the background operation theatre image to display fully */}
-            <div className="hidden lg:block lg:col-span-6 xl:col-span-7 pointer-events-none" />
+            <div className="hidden md:block md:col-span-5 lg:col-span-5 xl:col-span-7 pointer-events-none" />
           </div>
         </div>
       </section>
@@ -518,19 +523,25 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
               {/* Left Side: Header & Graphic representation of core benefits */}
-              <div className="lg:col-span-5 space-y-6">
-                <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-50 text-blue-700 border border-blue-100 font-extrabold tracking-widest text-[10px] uppercase">
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                className="lg:col-span-5 space-y-6"
+              >
+                <motion.span variants={fadeUpVariants} className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-50/80 text-blue-700 border border-blue-100 font-extrabold tracking-widest text-[10px] uppercase">
                   <Sparkles className="w-3.5 h-3.5 text-blue-600" /> Your Sourcing Advantage
-                </span>
-                <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+                </motion.span>
+                <motion.h2 variants={fadeUpVariants} className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight">
                   Why Choose <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-[#f97316] bg-clip-text text-transparent">Vel Bio Med</span>?
-                </h2>
-                <p className="text-slate-600 text-sm font-semibold leading-relaxed">
+                </motion.h2>
+                <motion.p variants={fadeUpVariants} className="text-slate-600 text-sm font-semibold leading-relaxed">
                   Partnering with us means securing top-tier medical solutions backed by regional expertise and global manufacturer relationships.
-                </p>
+                </motion.p>
 
                 {/* Floating Badges */}
-                <div className="grid grid-cols-1 gap-3.5 pt-4">
+                <motion.div variants={containerVariants} className="grid grid-cols-1 gap-3.5 pt-4">
                   {[
                     { label: "Excellence", desc: "Top-tier quality controls", icon: Award, color: "from-blue-500 to-blue-700", hoverBg: "hover:bg-blue-50/30 hover:border-blue-300/80", hoverText: "group-hover:text-blue-650 text-blue-600" },
                     { label: "Reliability", desc: "Unwavering client uptime", icon: ShieldCheck, color: "from-amber-500 to-orange-600", hoverBg: "hover:bg-orange-50/30 hover:border-orange-300/80", hoverText: "group-hover:text-orange-650 text-orange-600" },
@@ -538,7 +549,8 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   ].map((badge, idx) => {
                     const IconComponent = badge.icon;
                     return (
-                      <div
+                      <motion.div
+                        variants={fadeUpVariants}
                         key={idx}
                         className={`group flex flex-row items-center gap-4 p-4 rounded-2xl bg-white border border-blue-50/80 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:translate-x-1.5 justify-start w-full text-left cursor-default ${badge.hoverBg}`}
                       >
@@ -549,26 +561,32 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                           <span className={`text-xs sm:text-sm font-black text-slate-800 block leading-tight transition-colors duration-300 ${badge.hoverText}`}>{badge.label}</span>
                           <span className="text-[10px] sm:text-xs font-bold text-slate-400 mt-1 block leading-tight">{badge.desc}</span>
                         </div>
-                      </div>
+                      </motion.div>
                     );
                   })}
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
 
               {/* Right Side: Professional text blocks with premium styling */}
-              <div className="lg:col-span-7 space-y-6 text-slate-700">
-                <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-blue-50/50 to-white backdrop-blur-md border border-blue-100/80 shadow-inner hover:border-blue-300 transition-colors">
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-80px" }}
+                className="lg:col-span-7 space-y-6 text-slate-700"
+              >
+                <motion.div variants={fadeUpVariants} className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-blue-50/50 to-white backdrop-blur-md border border-blue-100/80 shadow-inner hover:border-blue-300 transition-colors">
                   <p className="text-base sm:text-lg font-medium leading-relaxed">
                     When you choose <span className="font-extrabold bg-gradient-to-r from-blue-600 to-[#f97316] bg-clip-text text-transparent">Vel Bio Med</span>, you are choosing a partner committed to <span className="font-extrabold text-blue-700 underline decoration-blue-400/50 decoration-2">excellence</span>, <span className="font-extrabold text-[#e0690f] underline decoration-orange-400/50 decoration-2">reliability</span>, and <span className="font-extrabold text-indigo-700 underline decoration-indigo-400/50 decoration-2">customer satisfaction</span>. We are dedicated to making a positive impact on healthcare delivery by providing superior products and services.
                   </p>
-                </div>
+                </motion.div>
 
-                <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-slate-900 via-[#0f2445] to-[#251508] text-slate-200 shadow-xl border border-blue-900/30">
+                <motion.div variants={fadeUpVariants} className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-slate-900 via-[#0f2445] to-[#251508] text-slate-200 shadow-xl border border-blue-900/30">
                   <p className="text-sm sm:text-base font-medium leading-relaxed">
                     Thank you for considering Vel Bio Med as your trusted partner in medical solutions. We look forward to serving you and contributing to the success of your healthcare endeavors.
                   </p>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </div>
           </motion.div>
         </div>
@@ -637,7 +655,11 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 const isAmber = idx % 2 === 1;
                 return (
                   <CarouselItem key={p.id} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
-                    <div
+                    <motion.div
+                      variants={fadeUpVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true, margin: "-50px" }}
                       onClick={() => onOpenProductModal(p)}
                       className={`group relative bg-gradient-to-b from-white to-slate-50/40 border border-slate-200/60 rounded-[32px] p-4 sm:p-6 hover:-translate-y-2.5 transition-[transform,border-color,box-shadow] duration-500 flex flex-col h-[400px] sm:h-[500px] overflow-hidden cursor-pointer
                         ${isAmber
@@ -707,7 +729,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   </CarouselItem>
                 );
               })}
@@ -842,7 +864,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
       </section>
 
       {/* 4. SERVICES SECTION - COMPREHENSIVE SUPPORT DELIVERABLES */}
-      <section className="py-24 bg-slate-50/40 relative overflow-hidden border-b border-slate-100">
+      <section id="services-section" className="py-24 bg-slate-50/40 relative overflow-hidden border-b border-slate-100">
         <div className="absolute top-1/3 left-0 w-[500px] h-[500px] bg-blue-100/30 rounded-full blur-3xl pointer-events-none -translate-x-1/2" />
         <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-orange-100/30 rounded-full blur-3xl pointer-events-none translate-x-1/2" />
 
