@@ -358,7 +358,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* 1. HERO SECTION */}
-      <section className="relative h-[100dvh] lg:h-auto lg:min-h-[500px] xl:min-h-[700px] flex items-stretch md:items-center bg-slate-50 overflow-hidden pt-[44px] pb-6 md:pt-[96px] md:pb-12 lg:pt-10 lg:pb-8 xl:pt-[80px] xl:pb-[60px]">
+      <section className="relative h-[100vh] w-full flex flex-col md:flex-row items-stretch md:items-center bg-slate-50 overflow-hidden pt-[56px] pb-4 md:pt-[96px] md:pb-12 lg:pt-10 lg:pb-8 xl:pt-[80px] xl:pb-[60px]">
         {/* Background with zoom and fade in effect */}
         <motion.div
           initial={{ opacity: 0, scale: 1 }}
