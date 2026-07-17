@@ -411,7 +411,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   {/* Heading */}
                   <motion.h1
                     variants={heroItemVariants}
-                    className="text-[clamp(1.25rem,3.2vw+0.5rem,2.75rem)] md:text-[3rem] lg:text-[3.4rem] xl:text-[2.75rem] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] md:max-w-[780px] xl:max-w-[680px] w-full text-center md:text-center xl:text-left mt-0 md:mt-4 lg:mt-3 xl:mt-6"
+                    className="text-[clamp(1.25rem,3.2vw+0.5rem,2.75rem)] md:text-[3rem] lg:text-[3.4rem] xl:text-[2.75rem] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] md:max-w-[780px] xl:max-w-[680px] w-full text-center md:text-center xl:text-left mt-3 md:mt-4 lg:mt-3 xl:mt-6"
                   >
                     <span className="sm:whitespace-nowrap">
                       Transforming{" "}
@@ -430,7 +430,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   {/* Description */}
                   <motion.p
                     variants={heroItemVariants}
-                    className="text-[clamp(11px,1.2vw+8px,14px)] md:text-[20px] lg:text-[22px] xl:text-base text-slate-650 leading-relaxed font-semibold max-w-[520px] md:max-w-[680px] xl:max-w-[520px] w-full text-center md:text-center xl:text-left mt-0 md:mt-4 lg:mt-4 xl:mt-7"
+                    className="text-[clamp(11px,1.2vw+8px,14px)] md:text-[20px] lg:text-[22px] xl:text-base text-slate-650 leading-relaxed font-semibold max-w-[520px] md:max-w-[680px] xl:max-w-[520px] w-full text-center md:text-center xl:text-left mt-3 md:mt-4 lg:mt-4 xl:mt-7"
                   >
                     Vel Bio Med delivers high-caliber diagnostics and life-support machinery from world-renowned healthcare manufacturers to premium hospitals.
                   </motion.p>
