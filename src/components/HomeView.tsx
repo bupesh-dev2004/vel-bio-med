@@ -372,10 +372,10 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
             {/* Tablet: screens 768px to 1023px */}
             <source media="(min-width: 768px)" srcSet="/hero-bg-tablet.jpg" />
             {/* Standard Mobile: screens 376px to 767px */}
-            <source media="(min-width: 376px)" srcSet="/hero-bg-mobile.webp" />
+            <source media="(min-width: 376px)" srcSet="/mobile pic.jpeg" />
             {/* Very Small Mobile: screens 320px to 375px */}
             <img
-              src="/hero-bg-mobile-320px.webp"
+              src="/mobile pic.jpeg"
               alt="Vel Bio Med Hero Background"
               className="mobile-hero-bg-img w-full h-full object-cover pointer-events-none"
               loading="eager"
@@ -386,32 +386,32 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
         </motion.div>
 
         {/* Background Glows */}
-        <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-radial from-blue-500/12 via-blue-900/0 to-transparent rounded-full pointer-events-none z-10" />
+        <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-radial from-blue-500/12 via-blue-900/0 to-transparent pointer-events-none z-10" />
         <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-radial from-amber-500/10 via-amber-650/0 to-transparent rounded-full pointer-events-none z-10" />
 
         {/* Hero Content Wrapper */}
         <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 xl:px-10 w-full z-20 relative flex flex-col justify-stretch h-full">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch md:items-center h-full w-full">
             {/* Left Side (45% on desktop xl, 58% on tablet/medium desktop) */}
-            <div className="col-span-1 md:col-span-7 lg:col-span-7 xl:col-span-5 flex flex-col justify-center md:justify-between h-auto md:h-full text-center md:text-left text-slate-900 -translate-y-1 md:translate-y-0 lg:-translate-x-14 lg:-translate-y-6 xl:-translate-x-20 xl:-translate-y-8">
+            <div className="col-span-1 md:col-span-7 lg:col-span-7 xl:col-span-5 flex flex-col justify-center md:justify-between h-full text-center md:text-left text-slate-900 translate-y-[28px] md:translate-y-0 lg:-translate-x-14 lg:-translate-y-6 xl:-translate-x-20 xl:-translate-y-8">
               <motion.div
                 initial="hidden"
                 animate={showPreloader ? "hidden" : "visible"}
                 variants={heroContainerVariants}
-                className="flex flex-col items-center md:items-start text-center md:text-left text-slate-900 justify-center md:justify-between h-auto md:h-full w-full gap-y-[clamp(12px,2.5vw,20px)] md:gap-y-0"
+                className="flex flex-col items-center md:items-start text-center md:text-left text-slate-900 justify-start md:justify-between h-full w-full gap-y-[clamp(12px,2.5vw,20px)] md:gap-y-0"
               >
                 {/* Top Group: Text & Buttons */}
                 <div className="flex flex-col items-center md:items-start text-center md:text-left gap-y-[clamp(8px,1.8vw,16px)] md:gap-y-0 w-full">
                   {/* Badge */}
                   <motion.div variants={heroItemVariants} className="w-full text-center md:text-left">
-                    <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[9px] sm:text-[10px] font-black tracking-widest px-3.5 py-1.5 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
+                    <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[clamp(10.5px,1.2vw+9px,13px)] font-black tracking-widest px-3.5 py-1.5 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
                       Clinical Sourcing Excellence
                     </span>
                   </motion.div>
                   {/* Heading */}
                   <motion.h1
                     variants={heroItemVariants}
-                    className="text-[clamp(1.25rem,3.2vw+0.5rem,2.75rem)] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] w-full text-center md:text-left mt-0 md:mt-4 lg:mt-3 xl:mt-6"
+                    className="text-[clamp(1.45rem,3.5vw+0.5rem,2.75rem)] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] w-full text-center md:text-left mt-0 md:mt-4 lg:mt-3 xl:mt-6"
                   >
                     <span className="sm:whitespace-nowrap">
                       Transforming{" "}
@@ -430,7 +430,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   {/* Description */}
                   <motion.p
                     variants={heroItemVariants}
-                    className="text-[clamp(11px,1.2vw+8px,14px)] text-slate-650 leading-relaxed font-semibold max-w-[520px] w-full text-center md:text-left mt-0 md:mt-4 lg:mt-4 xl:mt-7"
+                    className="text-[clamp(12px,1.5vw+8px,15px)] text-slate-650 leading-relaxed font-semibold max-w-[520px] w-full text-center md:text-left mt-0 md:mt-4 lg:mt-4 xl:mt-7"
                   >
                     Vel Bio Med delivers high-caliber diagnostics and life-support machinery from world-renowned healthcare manufacturers to premium hospitals.
                   </motion.p>
@@ -470,7 +470,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 {/* Statistics Cards */}
                 <motion.div
                   variants={heroItemVariants}
-                  className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(6px,1.5vw,12px)] w-full md:mx-0 mx-auto mt-[clamp(12px,2.5vw,20px)] md:mt-auto pt-2 xs:pt-3 sm:pt-4"
+                  className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(8px,1.8vw,14px)] w-full md:mx-0 mx-auto mt-[clamp(12px,2.5vw,20px)] md:mt-auto pt-2 xs:pt-3 sm:pt-4 justify-items-center"
                 >
                   {[
                     { target: 16, suffix: "+", label: "Years Exp.", icon: Award, color: "text-blue-600", iconBg: "bg-blue-50", border: "border-blue-100/70", glow: "from-blue-500/5" },
@@ -482,15 +482,15 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                     return (
                       <div
                         key={idx}
-                        className={`flex flex-col items-center justify-center text-center gap-1 xs:gap-1.5 py-1.5 xs:py-2.5 sm:py-3.5 px-1 xs:px-1.5 sm:px-2 rounded-xl border ${m.border} bg-gradient-to-b ${m.glow} to-white/45 sm:to-white/70 backdrop-blur-[3px] sm:backdrop-blur-sm shadow-[0_1px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_3px_14px_rgba(0,0,0,0.09)] hover:scale-[1.02] transition-all duration-200`}
+                        className={`flex flex-col items-center justify-center text-center gap-1 xs:gap-1.5 py-[clamp(10px,2vw+2px,16px)] px-[clamp(4px,1vw+2px,8px)] rounded-xl border ${m.border} bg-gradient-to-b ${m.glow} to-white/45 sm:to-white/70 backdrop-blur-[3px] sm:backdrop-blur-sm shadow-[0_1px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_3px_14px_rgba(0,0,0,0.09)] hover:scale-[1.02] transition-all duration-200 w-full max-w-[130px] xs:max-w-[150px] md:max-w-none h-[92px] xs:h-[102px] md:h-auto`}
                       >
-                        <div className={`w-6 h-6 xs:w-8 xs:h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-lg xs:rounded-xl ${m.iconBg} border border-white/90 shadow-sm`}>
-                          <IconComponent className={`w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 ${m.color}`} strokeWidth={2} />
+                        <div className={`w-[clamp(30px,2.8vw+14px,38px)] h-[clamp(30px,2.8vw+14px,38px)] flex items-center justify-center rounded-lg xs:rounded-xl ${m.iconBg} border border-white/90 shadow-sm`}>
+                          <IconComponent className={`w-[clamp(15px,1.2vw+8px,18px)] h-[clamp(15px,1.2vw+8px,18px)] ${m.color}`} strokeWidth={2} />
                         </div>
-                        <p className="text-sm xs:text-base sm:text-lg font-black text-slate-800 tracking-tight leading-none">
+                        <p className="text-[clamp(15px,1.8vw+8px,20px)] font-black text-slate-800 tracking-tight leading-none">
                           <AnimatedCounter target={m.target} suffix={m.suffix} duration={2000} startSignal={!showPreloader} />
                         </p>
-                        <p className="text-[6.5px] xs:text-[7.5px] sm:text-[8px] font-bold text-slate-400 uppercase tracking-wider leading-none">
+                        <p className="text-[clamp(8px,0.7vw+6px,9.5px)] font-bold text-slate-400 uppercase tracking-wider leading-none">
                           {m.label}
                         </p>
                       </div>
