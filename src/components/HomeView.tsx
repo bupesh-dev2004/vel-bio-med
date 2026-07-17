@@ -393,15 +393,15 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
         <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 xl:px-10 w-full z-20 relative flex flex-col justify-stretch h-full">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch md:items-center h-full w-full">
             {/* Left Side (45% on desktop xl, 58% on tablet/medium desktop) */}
-            <div className="col-span-1 md:col-span-7 lg:col-span-7 xl:col-span-5 flex flex-col justify-between h-full text-center md:text-left text-slate-900 -translate-y-3 md:translate-y-0 lg:-translate-x-14 lg:-translate-y-6 xl:-translate-x-20 xl:-translate-y-8">
+            <div className="col-span-1 md:col-span-7 lg:col-span-7 xl:col-span-5 flex flex-col justify-center md:justify-between h-auto md:h-full text-center md:text-left text-slate-900 -translate-y-1 md:translate-y-0 lg:-translate-x-14 lg:-translate-y-6 xl:-translate-x-20 xl:-translate-y-8">
               <motion.div
                 initial="hidden"
                 animate={showPreloader ? "hidden" : "visible"}
                 variants={heroContainerVariants}
-                className="flex flex-col items-center md:items-start text-center md:text-left text-slate-900 justify-between min-h-[380px] xs:min-h-[420px] sm:min-h-[500px] md:min-h-0 w-full gap-y-3 sm:gap-y-4 md:gap-y-0"
+                className="flex flex-col items-center md:items-start text-center md:text-left text-slate-900 justify-center md:justify-between h-auto md:h-full w-full gap-y-[clamp(12px,2.5vw,20px)] md:gap-y-0"
               >
                 {/* Top Group: Text & Buttons */}
-                <div className="flex flex-col items-center md:items-start text-center md:text-left gap-y-2.5 sm:gap-y-4 md:gap-y-0 w-full">
+                <div className="flex flex-col items-center md:items-start text-center md:text-left gap-y-[clamp(8px,1.8vw,16px)] md:gap-y-0 w-full">
                   {/* Badge */}
                   <motion.div variants={heroItemVariants} className="w-full text-center md:text-left">
                     <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[9px] sm:text-[10px] font-black tracking-widest px-3.5 py-1.5 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
@@ -411,7 +411,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   {/* Heading */}
                   <motion.h1
                     variants={heroItemVariants}
-                    className="text-xl xs:text-2xl sm:text-3xl md:text-[32px] lg:text-[34px] xl:text-[44px] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] w-full text-center md:text-left mt-0 md:mt-4 lg:mt-3 xl:mt-6"
+                    className="text-[clamp(1.25rem,3.2vw+0.5rem,2.75rem)] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] w-full text-center md:text-left mt-0 md:mt-4 lg:mt-3 xl:mt-6"
                   >
                     <span className="sm:whitespace-nowrap">
                       Transforming{" "}
@@ -430,7 +430,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   {/* Description */}
                   <motion.p
                     variants={heroItemVariants}
-                    className="text-[11px] sm:text-xs md:text-sm text-slate-650 leading-relaxed font-semibold max-w-[520px] w-full text-center md:text-left mt-0 md:mt-4 lg:mt-4 xl:mt-7"
+                    className="text-[clamp(11px,1.2vw+8px,14px)] text-slate-650 leading-relaxed font-semibold max-w-[520px] w-full text-center md:text-left mt-0 md:mt-4 lg:mt-4 xl:mt-7"
                   >
                     Vel Bio Med delivers high-caliber diagnostics and life-support machinery from world-renowned healthcare manufacturers to premium hospitals.
                   </motion.p>
@@ -438,7 +438,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   {/* CTA Buttons */}
                   <motion.div
                     variants={heroItemVariants}
-                    className="flex flex-row justify-center md:justify-start gap-3 sm:gap-4 w-full mt-1.5 xs:mt-2 sm:mt-4 md:mt-5 lg:mt-5 xl:mt-9"
+                    className="flex flex-row justify-center md:justify-start gap-3 sm:gap-4 w-full mt-[clamp(6px,2vw,20px)] md:mt-5 lg:mt-5 xl:mt-9"
                   >
                     <motion.button
                       whileHover={{
@@ -448,7 +448,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                       }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => setCurrentTab("products")}
-                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[11px] sm:text-xs py-2.5 px-4 sm:px-6 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer border-none h-[40px] sm:h-[44px] flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
+                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[clamp(10px,0.8vw+8px,12px)] py-2.5 px-4 sm:px-6 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer border-none h-[clamp(38px,1vw+34px,44px)] flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
                     >
                       Explore Products <ArrowRight className="w-4 h-4" />
                     </motion.button>
@@ -460,7 +460,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                       }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => setCurrentTab("contact")}
-                      className="bg-white border border-slate-200 text-blue-600 hover:bg-slate-50 font-bold text-[11px] sm:text-xs py-2.5 px-4 sm:px-6 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer h-[40px] sm:h-[44px] flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
+                      className="bg-white border border-slate-200 text-blue-600 hover:bg-slate-50 font-bold text-[clamp(10px,0.8vw+8px,12px)] py-2.5 px-4 sm:px-6 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer h-[clamp(38px,1vw+34px,44px)] flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
                     >
                       <PhoneCall className="w-4 h-4 text-blue-600" /> Contact Us
                     </motion.button>
@@ -470,7 +470,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 {/* Statistics Cards */}
                 <motion.div
                   variants={heroItemVariants}
-                  className="grid grid-cols-2 md:grid-cols-4 gap-1.5 xs:gap-2 sm:gap-3 w-full md:mx-0 mx-auto mt-auto md:mt-6 lg:mt-6 xl:mt-10 pt-2 xs:pt-3 sm:pt-4"
+                  className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(6px,1.5vw,12px)] w-full md:mx-0 mx-auto mt-[clamp(12px,2.5vw,20px)] md:mt-auto pt-2 xs:pt-3 sm:pt-4"
                 >
                   {[
                     { target: 16, suffix: "+", label: "Years Exp.", icon: Award, color: "text-blue-600", iconBg: "bg-blue-50", border: "border-blue-100/70", glow: "from-blue-500/5" },
