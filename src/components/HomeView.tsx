@@ -368,14 +368,14 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
         >
           <picture className="block w-full h-full overflow-hidden">
             {/* Desktop: screens 1025px and larger */}
-            <source media="(min-width: 1025px)" srcSet={slides[0]?.image || "/hero-bg.png"} />
+            <source media="(min-width: 1025px)" srcSet="/desktop%20pic.png" />
             {/* Tablet: screens 768px to 1024px */}
-            <source media="(min-width: 768px)" srcSet="/tablet pic.png" />
+            <source media="(min-width: 768px)" srcSet="/tablet%20pic.png" />
             {/* Standard Mobile: screens 376px to 767px */}
-            <source media="(min-width: 376px)" srcSet="/mobile pic.jpeg" />
+            <source media="(min-width: 376px)" srcSet="/mobile%20pic.png" />
             {/* Very Small Mobile: screens 320px to 375px */}
             <img
-              src="/mobile pic.jpeg"
+              src="/mobile%20pic.png"
               alt="Vel Bio Med Hero Background"
               className="mobile-hero-bg-img w-full h-full object-cover pointer-events-none"
               loading="eager"
@@ -401,7 +401,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 className="flex flex-col items-center md:items-center xl:items-start text-center md:text-center xl:text-left text-slate-900 justify-between md:justify-start h-auto w-full gap-y-[clamp(12px,2.5vw,20px)] md:gap-y-0"
               >
                 {/* Top Group: Text & Buttons */}
-                <div className="flex flex-col items-center md:items-center xl:items-start text-center md:text-center xl:text-left gap-y-[clamp(8px,1.8vw,16px)] md:gap-y-0 w-full mt-1 sm:mt-0 -translate-y-5 md:-translate-y-[120px] xl:translate-y-0">
+                <div className="flex flex-col items-center md:items-center xl:items-start text-center md:text-center xl:text-left gap-y-[clamp(8px,1.8vw,16px)] md:gap-y-0 w-full mt-1 sm:mt-0 -translate-y-10 md:-translate-y-[120px] xl:translate-y-0">
                   {/* Badge */}
                   <motion.div variants={heroItemVariants} className="w-full text-center md:text-center xl:text-left">
                     <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[clamp(9.5px,1vw+9px,12.5px)] md:text-[16px] lg:text-[18px] xl:text-[13px] font-black tracking-widest px-3.5 py-1.5 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
