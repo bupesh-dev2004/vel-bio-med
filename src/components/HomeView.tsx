@@ -367,10 +367,10 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
           className="absolute inset-0"
         >
           <picture className="block w-full h-full overflow-hidden">
-            {/* Desktop: screens 1024px and larger */}
-            <source media="(min-width: 1024px)" srcSet={slides[0]?.image || "/hero-bg.png"} />
-            {/* Tablet: screens 768px to 1023px */}
-            <source media="(min-width: 768px)" srcSet="/hero-bg-tablet.jpg" />
+            {/* Desktop: screens 1025px and larger */}
+            <source media="(min-width: 1025px)" srcSet={slides[0]?.image || "/hero-bg.png"} />
+            {/* Tablet: screens 768px to 1024px */}
+            <source media="(min-width: 768px)" srcSet="/tablet pic.png" />
             {/* Standard Mobile: screens 376px to 767px */}
             <source media="(min-width: 376px)" srcSet="/mobile pic.jpeg" />
             {/* Very Small Mobile: screens 320px to 375px */}
@@ -391,27 +391,27 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
 
         {/* Hero Content Wrapper */}
         <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 xl:px-10 w-full z-20 relative flex flex-col justify-stretch h-full">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch md:items-center h-full w-full">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center h-full w-full">
             {/* Left Side (45% on desktop xl, 58% on tablet/medium desktop) */}
-            <div className="col-span-1 md:col-span-7 lg:col-span-7 xl:col-span-5 flex flex-col justify-between md:justify-start h-full text-center md:text-left text-slate-900 -translate-y-6 md:translate-y-0 lg:-translate-x-14 lg:-translate-y-6 xl:-translate-x-20 xl:-translate-y-8">
+            <div className="col-span-1 md:col-span-12 xl:col-span-5 flex flex-col justify-between md:justify-start h-auto text-center md:text-center xl:text-left text-slate-900 -translate-y-6 md:translate-y-0 lg:translate-x-0 lg:translate-y-0 xl:-translate-x-20 xl:-translate-y-8">
               <motion.div
                 initial="hidden"
                 animate={showPreloader ? "hidden" : "visible"}
                 variants={heroContainerVariants}
-                className="flex flex-col items-center md:items-start text-center md:text-left text-slate-900 justify-between md:justify-start h-full w-full gap-y-[clamp(12px,2.5vw,20px)] md:gap-y-0"
+                className="flex flex-col items-center md:items-center xl:items-start text-center md:text-center xl:text-left text-slate-900 justify-between md:justify-start h-auto w-full gap-y-[clamp(12px,2.5vw,20px)] md:gap-y-0"
               >
                 {/* Top Group: Text & Buttons */}
-                <div className="flex flex-col items-center md:items-start text-center md:text-left gap-y-[clamp(8px,1.8vw,16px)] md:gap-y-0 w-full mt-1 sm:mt-0 -translate-y-3 sm:translate-y-0">
+                <div className="flex flex-col items-center md:items-center xl:items-start text-center md:text-center xl:text-left gap-y-[clamp(8px,1.8vw,16px)] md:gap-y-0 w-full mt-1 sm:mt-0 -translate-y-5 md:-translate-y-[120px] xl:translate-y-0">
                   {/* Badge */}
-                  <motion.div variants={heroItemVariants} className="w-full text-center md:text-left">
-                    <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[clamp(10.5px,1.2vw+9px,13px)] font-black tracking-widest px-3.5 py-1.5 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
+                  <motion.div variants={heroItemVariants} className="w-full text-center md:text-center xl:text-left">
+                    <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[clamp(9.5px,1vw+9px,12.5px)] md:text-[16px] lg:text-[18px] xl:text-[13px] font-black tracking-widest px-3.5 py-1.5 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
                       Clinical Sourcing Excellence
                     </span>
                   </motion.div>
                   {/* Heading */}
                   <motion.h1
                     variants={heroItemVariants}
-                    className="text-[clamp(1.45rem,3.5vw+0.5rem,2.75rem)] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] w-full text-center md:text-left mt-0 md:mt-4 lg:mt-3 xl:mt-6"
+                    className="text-[clamp(1.25rem,3.2vw+0.5rem,2.75rem)] md:text-[3rem] lg:text-[3.4rem] xl:text-[2.75rem] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] md:max-w-[780px] xl:max-w-[680px] w-full text-center md:text-center xl:text-left mt-0 md:mt-4 lg:mt-3 xl:mt-6"
                   >
                     <span className="sm:whitespace-nowrap">
                       Transforming{" "}
@@ -430,7 +430,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   {/* Description */}
                   <motion.p
                     variants={heroItemVariants}
-                    className="text-[clamp(12px,1.5vw+8px,15px)] text-slate-650 leading-relaxed font-semibold max-w-[520px] w-full text-center md:text-left mt-0 md:mt-4 lg:mt-4 xl:mt-7"
+                    className="text-[clamp(11px,1.2vw+8px,14px)] md:text-[20px] lg:text-[22px] xl:text-base text-slate-650 leading-relaxed font-semibold max-w-[520px] md:max-w-[680px] xl:max-w-[520px] w-full text-center md:text-center xl:text-left mt-0 md:mt-4 lg:mt-4 xl:mt-7"
                   >
                     Vel Bio Med delivers high-caliber diagnostics and life-support machinery from world-renowned healthcare manufacturers to premium hospitals.
                   </motion.p>
@@ -438,7 +438,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   {/* CTA Buttons */}
                   <motion.div
                     variants={heroItemVariants}
-                    className="flex flex-row justify-center md:justify-start gap-3 sm:gap-4 w-full mt-[clamp(6px,2vw,20px)] md:mt-5 lg:mt-5 xl:mt-9"
+                    className="flex flex-row justify-center md:justify-center xl:justify-start gap-3 sm:gap-4 w-full mt-[clamp(6px,2vw,20px)] md:mt-5 lg:mt-5 xl:mt-9"
                   >
                     <motion.button
                       whileHover={{
@@ -470,27 +470,27 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 {/* Statistics Cards */}
                 <motion.div
                   variants={heroItemVariants}
-                  className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(8px,1.8vw,14px)] w-full md:mx-0 mx-auto mt-[clamp(10px,2vw,16px)] md:mt-5 pt-2 xs:pt-3 sm:pt-4 justify-items-center -translate-y-8 md:translate-y-0"
+                  className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(8px,1.8vw,14px)] w-full md:mx-auto xl:mx-0 mt-[clamp(10px,2vw,16px)] md:mt-2 lg:mt-3 xl:mt-4 pt-2 xs:pt-3 sm:pt-4 justify-items-center translate-y-3 md:-translate-y-6 xl:-translate-y-4"
                 >
                   {[
-                    { target: 16, suffix: "+", label: "Years Exp.", icon: Award, color: "text-blue-600", iconBg: "bg-blue-50", border: "border-blue-100/70", glow: "from-blue-500/5" },
-                    { target: 6000, suffix: "+", label: "Installations", icon: Wrench, color: "text-emerald-600", iconBg: "bg-emerald-50", border: "border-emerald-100/70", glow: "from-emerald-500/5" },
-                    { target: 800, suffix: "+", label: "Hospitals", icon: Building, color: "text-sky-600", iconBg: "bg-sky-50", border: "border-sky-100/70", glow: "from-sky-500/5" },
-                    { target: 1000, suffix: "+", label: "Clients", icon: ThumbsUp, color: "text-rose-500", iconBg: "bg-rose-50", border: "border-rose-100/70", glow: "from-rose-500/5" }
+                    { target: 16, suffix: "+", label: "Years Exp.", icon: Award, color: "text-blue-600", iconBg: "bg-blue-50", border: "border-blue-100/40 hover:border-orange-200/60", glow: "from-blue-500/5" },
+                    { target: 6000, suffix: "+", label: "Installations", icon: Wrench, color: "text-emerald-600", iconBg: "bg-emerald-50", border: "border-emerald-100/40 hover:border-orange-200/60", glow: "from-emerald-500/5" },
+                    { target: 800, suffix: "+", label: "Hospitals", icon: Building, color: "text-sky-600", iconBg: "bg-sky-50", border: "border-sky-100/40 hover:border-orange-200/60", glow: "from-sky-500/5" },
+                    { target: 1000, suffix: "+", label: "Clients", icon: ThumbsUp, color: "text-rose-500", iconBg: "bg-rose-50", border: "border-rose-100/40 hover:border-orange-200/60", glow: "from-rose-500/5" }
                   ].map((m, idx) => {
                     const IconComponent = m.icon;
                     return (
                       <div
                         key={idx}
-                        className={`flex flex-col items-center justify-center text-center gap-1 xs:gap-1.5 py-[clamp(10px,2vw+2px,16px)] px-[clamp(4px,1vw+2px,8px)] rounded-xl border ${m.border} bg-gradient-to-b ${m.glow} to-white/45 sm:to-white/70 backdrop-blur-[3px] sm:backdrop-blur-sm shadow-[0_1px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_3px_14px_rgba(0,0,0,0.09)] hover:scale-[1.02] transition-all duration-200 w-full max-w-[130px] xs:max-w-[150px] md:max-w-none h-[92px] xs:h-[102px] md:h-auto`}
+                        className={`flex flex-col items-center justify-center text-center gap-1.5 xs:gap-2 py-[clamp(8px,1.8vw+2px,14px)] md:py-5 lg:py-6 xl:py-[clamp(10px,2vw+2px,16px)] px-[clamp(4px,1vw+2px,8px)] md:px-4 lg:px-5 xl:px-[clamp(4px,1vw+2px,8px)] rounded-xl border ${m.border} bg-gradient-to-br from-blue-500/8 via-white/80 to-orange-500/8 backdrop-blur-[3px] sm:backdrop-blur-sm shadow-[0_1px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_3px_14px_rgba(0,0,0,0.09)] hover:scale-[1.02] transition-all duration-200 w-full max-w-[130px] xs:max-w-[150px] md:max-w-none md:w-[170px] md:h-[150px] lg:w-[190px] lg:h-[170px] xl:w-full xl:max-w-none xl:h-auto`}
                       >
-                        <div className={`w-[clamp(30px,2.8vw+14px,38px)] h-[clamp(30px,2.8vw+14px,38px)] flex items-center justify-center rounded-lg xs:rounded-xl ${m.iconBg} border border-white/90 shadow-sm`}>
-                          <IconComponent className={`w-[clamp(15px,1.2vw+8px,18px)] h-[clamp(15px,1.2vw+8px,18px)] ${m.color}`} strokeWidth={2} />
+                        <div className={`w-[clamp(26px,2.2vw+14px,36px)] md:w-11 md:h-11 lg:w-12 lg:h-12 xl:w-[clamp(30px,2.8vw+14px,38px)] h-[clamp(26px,2.2vw+14px,36px)] md:h-11 lg:h-12 xl:h-[clamp(30px,2.8vw+14px,38px)] flex items-center justify-center rounded-lg xs:rounded-xl ${m.iconBg} border border-white/90 shadow-sm`}>
+                          <IconComponent className={`w-[clamp(12px,1vw+8px,16px)] md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-[clamp(15px,1.2vw+8px,18px)] h-[clamp(12px,1vw+8px,16px)] md:h-5 lg:h-6 xl:h-[clamp(15px,1.2vw+8px,18px)] ${m.color}`} strokeWidth={2} />
                         </div>
-                        <p className="text-[clamp(15px,1.8vw+8px,20px)] font-black text-slate-800 tracking-tight leading-none">
+                        <p className="text-[clamp(13px,1.5vw+8px,18px)] md:text-xl lg:text-2xl xl:text-[clamp(15px,1.8vw+8px,20px)] font-black text-slate-800 tracking-tight leading-none mt-1">
                           <AnimatedCounter target={m.target} suffix={m.suffix} duration={2000} startSignal={!showPreloader} />
                         </p>
-                        <p className="text-[clamp(8px,0.7vw+6px,9.5px)] font-bold text-slate-400 uppercase tracking-wider leading-none">
+                        <p className="text-[clamp(7px,0.6vw+6px,8.5px)] md:text-[11px] lg:text-[12px] xl:text-[clamp(8px,0.7vw+6px,9.5px)] font-bold text-slate-400 uppercase tracking-wider leading-none mt-0.5">
                           {m.label}
                         </p>
                       </div>
@@ -501,7 +501,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
             </div>
 
             {/* Right Side (55%) is empty to allow the background operation theatre image to display fully */}
-            <div className="hidden md:block md:col-span-5 lg:col-span-5 xl:col-span-7 pointer-events-none" />
+            <div className="hidden xl:block xl:col-span-7 pointer-events-none" />
           </div>
         </div>
       </section>

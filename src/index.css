@@ -428,5 +428,11 @@
     object-position: center bottom !important;
     background-position: center bottom !important;
   }
+}
 
+@media (min-width: 768px) and (max-width: 1024px) {
+  .mobile-hero-bg-img {
+    filter: blur(3px) !important;
+    transform: scale(1.03) !important;
+  }
 }
