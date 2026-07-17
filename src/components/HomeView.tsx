@@ -358,7 +358,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* 1. HERO SECTION */}
-      <section className="relative h-[100vh] w-full flex flex-col md:flex-row items-stretch md:items-center bg-slate-50 overflow-hidden pt-[56px] pb-4 md:pt-[96px] md:pb-12 lg:pt-10 lg:pb-8 xl:pt-[80px] xl:pb-[60px]">
+      <section className="relative h-[82vh] lg:h-[100dvh] w-full flex flex-col md:flex-row items-stretch md:items-center bg-slate-50 overflow-hidden pt-[56px] pb-4 md:pt-[96px] md:pb-12 lg:pt-10 lg:pb-8 xl:pt-[80px] xl:pb-[60px]">
         {/* Background with zoom and fade in effect */}
         <motion.div
           initial={{ opacity: 0, scale: 1 }}
@@ -393,15 +393,15 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
         <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 xl:px-10 w-full z-20 relative flex flex-col justify-stretch h-full">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch md:items-center h-full w-full">
             {/* Left Side (45% on desktop xl, 58% on tablet/medium desktop) */}
-            <div className="col-span-1 md:col-span-7 lg:col-span-7 xl:col-span-5 flex flex-col justify-center md:justify-between h-full text-center md:text-left text-slate-900 translate-y-[28px] md:translate-y-0 lg:-translate-x-14 lg:-translate-y-6 xl:-translate-x-20 xl:-translate-y-8">
+            <div className="col-span-1 md:col-span-7 lg:col-span-7 xl:col-span-5 flex flex-col justify-between md:justify-start h-full text-center md:text-left text-slate-900 md:translate-y-0 lg:-translate-x-14 lg:-translate-y-6 xl:-translate-x-20 xl:-translate-y-8">
               <motion.div
                 initial="hidden"
                 animate={showPreloader ? "hidden" : "visible"}
                 variants={heroContainerVariants}
-                className="flex flex-col items-center md:items-start text-center md:text-left text-slate-900 justify-start md:justify-between h-full w-full gap-y-[clamp(12px,2.5vw,20px)] md:gap-y-0"
+                className="flex flex-col items-center md:items-start text-center md:text-left text-slate-900 justify-between md:justify-start h-full w-full gap-y-[clamp(12px,2.5vw,20px)] md:gap-y-0"
               >
                 {/* Top Group: Text & Buttons */}
-                <div className="flex flex-col items-center md:items-start text-center md:text-left gap-y-[clamp(8px,1.8vw,16px)] md:gap-y-0 w-full">
+                <div className="flex flex-col items-center md:items-start text-center md:text-left gap-y-[clamp(8px,1.8vw,16px)] md:gap-y-0 w-full mt-4 sm:mt-0">
                   {/* Badge */}
                   <motion.div variants={heroItemVariants} className="w-full text-center md:text-left">
                     <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[clamp(10.5px,1.2vw+9px,13px)] font-black tracking-widest px-3.5 py-1.5 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
@@ -470,7 +470,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 {/* Statistics Cards */}
                 <motion.div
                   variants={heroItemVariants}
-                  className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(8px,1.8vw,14px)] w-full md:mx-0 mx-auto mt-[clamp(12px,2.5vw,20px)] md:mt-auto pt-2 xs:pt-3 sm:pt-4 justify-items-center"
+                  className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(8px,1.8vw,14px)] w-full md:mx-0 mx-auto mt-auto md:mt-5 lg:mt-6 xl:mt-8 pt-2 xs:pt-3 sm:pt-4 justify-items-center"
                 >
                   {[
                     { target: 16, suffix: "+", label: "Years Exp.", icon: Award, color: "text-blue-600", iconBg: "bg-blue-50", border: "border-blue-100/70", glow: "from-blue-500/5" },
