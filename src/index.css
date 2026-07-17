@@ -425,10 +425,10 @@
     background-size: cover !important;
     background-repeat: no-repeat !important;
     /* Default for mobile is center top */
-    object-position: center top !important; 
+    object-position: center top !important;
     background-position: center top !important;
   }
-  
+
   /* 320px devices (Small Mobile: 320px - 359px) */
   @media (min-width: 320px) and (max-width: 359.98px) {
     .mobile-hero-bg-img {
@@ -473,4 +473,4 @@
       background-position: center 30% !important;
     }
   }
-}
+}
