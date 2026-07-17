@@ -436,3 +436,85 @@
     transform: scale(1.03) !important;
   }
 }
+
+@media (min-width: 768px) and (max-height: 720px) {
+  /* Reduce top padding of the hero section */
+  section {
+    padding-top: 70px !important;
+    padding-bottom: 8px !important;
+  }
+  
+  /* Reduce badge size */
+  section .md\:col-span-12 span.inline-block {
+    font-size: 10px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+  }
+
+  /* Reduce heading font size */
+  section .md\:col-span-12 h1 {
+    font-size: 1.65rem !important;
+    margin-top: 6px !important;
+  }
+  
+  /* Reduce description size */
+  section .md\:col-span-12 p {
+    font-size: 12px !important;
+    margin-top: 6px !important;
+  }
+  
+  /* Reduce button sizes and container margins */
+  section .md\:col-span-12 button {
+    height: 34px !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+    font-size: 9px !important;
+  }
+  section .md\:col-span-12 div.flex-row {
+    margin-top: 6px !important;
+  }
+  
+  /* Reduce gap on Top Group container */
+  section .md\:col-span-12 > div > div {
+    gap-y: 4px !important;
+  }
+
+  /* Reduce statistics cards container margin and spacing */
+  section .md\:col-span-12 .grid {
+    margin-top: 4px !important;
+    gap: 6px !important;
+  }
+  
+  /* Reduce statistics cards dimensions */
+  section .md\:col-span-12 .grid > div {
+    height: 86px !important;
+    width: 130px !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    gap: 2px !important;
+  }
+  
+  /* Reduce icon container size in cards */
+  section .md\:col-span-12 .grid > div > div:first-child {
+    width: 26px !important;
+    height: 26px !important;
+  }
+  
+  /* Reduce icon size inside cards */
+  section .md\:col-span-12 .grid > div > div:first-child svg {
+    width: 12px !important;
+    height: 12px !important;
+  }
+  
+  /* Reduce counter number text size inside cards */
+  section .md\:col-span-12 .grid > div > p:nth-child(2) {
+    font-size: 13px !important;
+  }
+  
+  /* Reduce label text size inside cards */
+  section .md\:col-span-12 .grid > div > p:last-child {
+    font-size: 7.5px !important;
+  }
+}
