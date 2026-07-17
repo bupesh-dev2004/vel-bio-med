@@ -470,7 +470,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 {/* Statistics Cards */}
                 <motion.div
                   variants={heroItemVariants}
-                  className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(8px,1.8vw,14px)] w-full md:mx-0 mx-auto mt-auto md:mt-5 lg:mt-6 xl:mt-8 pt-2 xs:pt-3 sm:pt-4 justify-items-center"
+                  className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(8px,1.8vw,14px)] w-full md:mx-0 mx-auto mt-[clamp(10px,2vw,16px)] md:mt-5 pt-2 xs:pt-3 sm:pt-4 justify-items-center -translate-y-4 md:translate-y-0"
                 >
                   {[
                     { target: 16, suffix: "+", label: "Years Exp.", icon: Award, color: "text-blue-600", iconBg: "bg-blue-50", border: "border-blue-100/70", glow: "from-blue-500/5" },
