@@ -358,7 +358,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* 1. HERO SECTION */}
-      <section className="relative h-[82vh] lg:h-[100dvh] w-full flex flex-col md:flex-row items-stretch md:items-center bg-slate-50 overflow-hidden pt-[56px] pb-4 md:pt-[96px] md:pb-12 lg:pt-10 lg:pb-8 xl:pt-[80px] xl:pb-[60px]">
+      <section className="relative h-[82vh] lg:h-auto w-full flex flex-col md:flex-row items-stretch md:items-center bg-slate-50 overflow-hidden pt-11 pb-4 md:pt-[96px] md:pb-12 lg:pt-[120px] lg:pb-16 xl:pt-[140px] xl:pb-20">
         {/* Background with zoom and fade in effect */}
         <motion.div
           initial={{ opacity: 0, scale: 1 }}
@@ -401,10 +401,10 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 className="flex flex-col items-center md:items-center xl:items-start text-center md:text-center xl:text-left text-slate-900 justify-between md:justify-start h-full md:h-auto w-full gap-y-[clamp(12px,2.5vw,20px)] md:gap-y-0"
               >
                 {/* Top Group: Text & Buttons */}
-                <div className="flex flex-col items-center md:items-center xl:items-start text-center md:text-center xl:text-left gap-y-[clamp(8px,1.8vw,16px)] md:gap-y-0 w-full mt-1 sm:mt-0 -translate-y-4 md:-translate-y-[120px] xl:translate-y-0">
+                <div className="flex flex-col items-center md:items-center xl:items-start text-center md:text-center xl:text-left gap-y-[clamp(8px,1.8vw,16px)] md:gap-y-0 w-full mt-1 sm:mt-0 -translate-y-12 md:-translate-y-[120px] xl:translate-y-0">
                   {/* Badge */}
-                  <motion.div variants={heroItemVariants} className="w-full text-center md:text-center xl:text-left">
-                    <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[clamp(9.5px,1vw+9px,12.5px)] md:text-[16px] lg:text-[18px] xl:text-[13px] font-black tracking-widest px-3.5 py-1.5 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
+                  <motion.div variants={heroItemVariants} className="w-full text-center md:text-center xl:text-left translate-y-1 md:translate-y-0">
+                    <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[8.5px] md:text-[16px] lg:text-[18px] xl:text-[13px] font-black tracking-widest px-2.5 py-0.5 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
                       Clinical Sourcing Excellence
                     </span>
                   </motion.div>
@@ -448,7 +448,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                       }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => setCurrentTab("products")}
-                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[clamp(10px,0.8vw+8px,12px)] py-2.5 px-4 sm:px-6 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer border-none h-[clamp(38px,1vw+34px,44px)] flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
+                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[10px] md:text-[clamp(10px,0.8vw+8px,12px)] py-2 px-3 sm:px-6 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer border-none h-9 md:h-[clamp(38px,1vw+34px,44px)] flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
                     >
                       Explore Products <ArrowRight className="w-4 h-4" />
                     </motion.button>
@@ -460,7 +460,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                       }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => setCurrentTab("contact")}
-                      className="bg-white border border-slate-200 text-blue-600 hover:bg-slate-50 font-bold text-[clamp(10px,0.8vw+8px,12px)] py-2.5 px-4 sm:px-6 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer h-[clamp(38px,1vw+34px,44px)] flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
+                      className="bg-white border border-slate-200 text-blue-600 hover:bg-slate-50 font-bold text-[10px] md:text-[clamp(10px,0.8vw+8px,12px)] py-2 px-3 sm:px-6 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer h-9 md:h-[clamp(38px,1vw+34px,44px)] flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
                     >
                       <PhoneCall className="w-4 h-4 text-blue-600" /> Contact Us
                     </motion.button>
@@ -470,7 +470,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 {/* Statistics Cards */}
                 <motion.div
                   variants={heroItemVariants}
-                  className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(8px,1.8vw,14px)] w-full md:mx-auto xl:mx-0 mt-[clamp(10px,2vw,16px)] md:mt-2 lg:mt-3 xl:mt-4 pt-2 xs:pt-3 sm:pt-4 justify-items-center translate-y-2 md:-translate-y-6 xl:-translate-y-4"
+                  className="grid grid-cols-2 md:grid-cols-4 gap-[clamp(8px,1.8vw,14px)] w-full md:mx-auto xl:mx-0 mt-[clamp(10px,2vw,16px)] md:mt-2 lg:mt-3 xl:mt-4 pt-2 xs:pt-3 sm:pt-4 justify-items-center -translate-y-6 md:-translate-y-6 xl:-translate-y-4"
                 >
                   {[
                     { target: 16, suffix: "+", label: "Years Exp.", icon: Award, color: "text-blue-600", iconBg: "bg-blue-50", border: "border-blue-100/40 hover:border-orange-200/60", glow: "from-blue-500/5" },
@@ -482,15 +482,15 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                     return (
                       <div
                         key={idx}
-                        className={`flex flex-col items-center justify-center text-center gap-1.5 xs:gap-2 py-[clamp(8px,1.8vw+2px,14px)] md:py-5 lg:py-6 xl:py-[clamp(10px,2vw+2px,16px)] px-[clamp(4px,1vw+2px,8px)] md:px-4 lg:px-5 xl:px-[clamp(4px,1vw+2px,8px)] rounded-xl border ${m.border} bg-gradient-to-br from-blue-500/8 via-white/80 to-orange-500/8 backdrop-blur-[3px] sm:backdrop-blur-sm shadow-[0_1px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_3px_14px_rgba(0,0,0,0.09)] hover:scale-[1.02] transition-all duration-200 w-full max-w-[130px] xs:max-w-[150px] md:max-w-none md:w-[170px] md:h-[150px] lg:w-[190px] lg:h-[170px] xl:w-full xl:max-w-none xl:h-auto`}
+                        className={`flex flex-col items-center justify-center text-center gap-1 py-2.5 md:py-5 lg:py-6 xl:py-[clamp(10px,2vw+2px,16px)] px-1.5 md:px-4 lg:px-5 xl:px-[clamp(4px,1vw+2px,8px)] rounded-xl border ${m.border} bg-gradient-to-br from-blue-500/8 via-white/80 to-orange-500/8 backdrop-blur-[3px] sm:backdrop-blur-sm shadow-[0_1px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_3px_14px_rgba(0,0,0,0.09)] hover:scale-[1.02] transition-all duration-200 w-full max-w-[115px] xs:max-w-[130px] md:max-w-none md:w-[170px] md:h-[150px] lg:w-[190px] lg:h-[170px] xl:w-full xl:max-w-none xl:h-auto`}
                       >
-                        <div className={`w-[clamp(26px,2.2vw+14px,36px)] md:w-11 md:h-11 lg:w-12 lg:h-12 xl:w-[clamp(30px,2.8vw+14px,38px)] h-[clamp(26px,2.2vw+14px,36px)] md:h-11 lg:h-12 xl:h-[clamp(30px,2.8vw+14px,38px)] flex items-center justify-center rounded-lg xs:rounded-xl ${m.iconBg} border border-white/90 shadow-sm`}>
-                          <IconComponent className={`w-[clamp(12px,1vw+8px,16px)] md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-[clamp(15px,1.2vw+8px,18px)] h-[clamp(12px,1vw+8px,16px)] md:h-5 lg:h-6 xl:h-[clamp(15px,1.2vw+8px,18px)] ${m.color}`} strokeWidth={2} />
+                        <div className={`w-7 h-7 xs:w-8 xs:h-8 md:w-11 md:h-11 lg:w-12 lg:h-12 xl:w-[clamp(30px,2.8vw+14px,38px)] h-7 xs:h-8 md:h-11 lg:h-12 xl:h-[clamp(30px,2.8vw+14px,38px)] flex items-center justify-center rounded-lg xs:rounded-xl ${m.iconBg} border border-white/90 shadow-sm`}>
+                          <IconComponent className={`w-4.5 h-4.5 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-[clamp(15px,1.2vw+8px,18px)] h-4.5 md:h-5 lg:h-6 xl:h-[clamp(15px,1.2vw+8px,18px)] ${m.color}`} strokeWidth={2} />
                         </div>
-                        <p className="text-[clamp(13px,1.5vw+8px,18px)] md:text-xl lg:text-2xl xl:text-[clamp(15px,1.8vw+8px,20px)] font-black text-slate-800 tracking-tight leading-none mt-1">
+                        <p className="text-[13px] xs:text-[15px] md:text-xl lg:text-2xl xl:text-[clamp(15px,1.8vw+8px,20px)] font-black text-slate-800 tracking-tight leading-none mt-1">
                           <AnimatedCounter target={m.target} suffix={m.suffix} duration={2000} startSignal={!showPreloader} />
                         </p>
-                        <p className="text-[clamp(7px,0.6vw+6px,8.5px)] md:text-[11px] lg:text-[12px] xl:text-[clamp(8px,0.7vw+6px,9.5px)] font-bold text-slate-400 uppercase tracking-wider leading-none mt-0.5">
+                        <p className="text-[7.5px] xs:text-[8.5px] md:text-[11px] lg:text-[12px] xl:text-[clamp(8px,0.7vw+6px,9.5px)] font-bold text-slate-400 uppercase tracking-wider leading-none mt-0.5">
                           {m.label}
                         </p>
                       </div>
