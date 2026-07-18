@@ -482,15 +482,15 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                     return (
                       <div
                         key={idx}
-                        className={`flex flex-col items-center justify-center text-center gap-1 py-2.5 md:py-5 lg:py-6 xl:py-[clamp(10px,2vw+2px,16px)] px-1.5 md:px-4 lg:px-5 xl:px-[clamp(4px,1vw+2px,8px)] rounded-xl border ${m.border} bg-gradient-to-br from-blue-500/8 via-white/80 to-orange-500/8 backdrop-blur-[3px] sm:backdrop-blur-sm shadow-[0_1px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_3px_14px_rgba(0,0,0,0.09)] hover:scale-[1.02] transition-all duration-200 w-full max-w-[115px] xs:max-w-[130px] md:max-w-none md:w-[170px] md:h-[150px] lg:w-[190px] lg:h-[170px] xl:w-full xl:max-w-none xl:h-auto`}
+                        className={`flex flex-col items-center justify-center text-center gap-1 py-1.5 md:py-5 lg:py-6 xl:py-[clamp(10px,2vw+2px,16px)] px-1 md:px-4 lg:px-5 xl:px-[clamp(4px,1vw+2px,8px)] rounded-xl border ${m.border} bg-gradient-to-br from-blue-500/8 via-white/80 to-orange-500/8 backdrop-blur-[3px] sm:backdrop-blur-sm shadow-[0_1px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_3px_14px_rgba(0,0,0,0.09)] hover:scale-[1.02] transition-all duration-200 w-full max-w-[95px] xs:max-w-[110px] md:max-w-none md:w-[170px] md:h-[150px] lg:w-[190px] lg:h-[170px] xl:w-full xl:max-w-none xl:h-auto`}
                       >
-                        <div className={`w-7 h-7 xs:w-8 xs:h-8 md:w-11 md:h-11 lg:w-12 lg:h-12 xl:w-[clamp(30px,2.8vw+14px,38px)] h-7 xs:h-8 md:h-11 lg:h-12 xl:h-[clamp(30px,2.8vw+14px,38px)] flex items-center justify-center rounded-lg xs:rounded-xl ${m.iconBg} border border-white/90 shadow-sm`}>
-                          <IconComponent className={`w-4.5 h-4.5 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-[clamp(15px,1.2vw+8px,18px)] h-4.5 md:h-5 lg:h-6 xl:h-[clamp(15px,1.2vw+8px,18px)] ${m.color}`} strokeWidth={2} />
+                        <div className={`w-6 h-6 xs:w-7 xs:h-7 md:w-11 md:h-11 lg:w-12 lg:h-12 xl:w-[clamp(30px,2.8vw+14px,38px)] h-6 xs:h-7 md:h-11 lg:h-12 xl:h-[clamp(30px,2.8vw+14px,38px)] flex items-center justify-center rounded-lg xs:rounded-xl ${m.iconBg} border border-white/90 shadow-sm`}>
+                          <IconComponent className={`w-3.5 h-3.5 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-[clamp(15px,1.2vw+8px,18px)] h-3.5 md:h-5 lg:h-6 xl:h-[clamp(15px,1.2vw+8px,18px)] ${m.color}`} strokeWidth={2} />
                         </div>
-                        <p className="text-[13px] xs:text-[15px] md:text-xl lg:text-2xl xl:text-[clamp(15px,1.8vw+8px,20px)] font-black text-slate-800 tracking-tight leading-none mt-1">
+                        <p className="text-[11px] xs:text-[13px] md:text-xl lg:text-2xl xl:text-[clamp(15px,1.8vw+8px,20px)] font-black text-slate-800 tracking-tight leading-none mt-1">
                           <AnimatedCounter target={m.target} suffix={m.suffix} duration={2000} startSignal={!showPreloader} />
                         </p>
-                        <p className="text-[7.5px] xs:text-[8.5px] md:text-[11px] lg:text-[12px] xl:text-[clamp(8px,0.7vw+6px,9.5px)] font-bold text-slate-400 uppercase tracking-wider leading-none mt-0.5">
+                        <p className="text-[6.5px] xs:text-[7.5px] md:text-[11px] lg:text-[12px] xl:text-[clamp(8px,0.7vw+6px,9.5px)] font-bold text-slate-400 uppercase tracking-wider leading-none mt-0.5">
                           {m.label}
                         </p>
                       </div>
