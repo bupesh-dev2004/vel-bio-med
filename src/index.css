@@ -436,8 +436,7 @@
 
 @media (min-width: 768px) and (max-width: 1024px) {
   .mobile-hero-bg-img {
-    filter: blur(3px) !important;
-    transform: scale(1.03) !important;
+    /* Blur and scale removed as requested */
   }
 }
 
@@ -522,5 +521,50 @@
   /* Reduce label text size inside cards */
   section .md\:col-span-12 .grid>div>p:last-child {
     font-size: 7.5px !important;
+  }
+}
+
+/* iPad Pro Portrait (1024x1366) specific overrides */
+@media (min-width: 1024px) and (max-width: 1024px) {
+  .ipad-pro-hero-section {
+    height: 100vh !important;
+    padding-top: 130px !important;
+    padding-bottom: 50px !important;
+  }
+  
+  .ipad-pro-left-side {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
+
+  .ipad-pro-motion-container {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
+  
+  /* Top Group positioning (moved down slightly) */
+  .ipad-pro-top-group {
+    transform: translateY(40px) !important;
+  }
+
+  /* Increase button size on iPad Pro portrait */
+  .ipad-pro-top-group button {
+    height: 50px !important;
+    font-size: 13px !important;
+    padding-left: 28px !important;
+    padding-right: 28px !important;
+  }
+  
+  /* Statistics Cards positioning (moved up slightly) */
+  .ipad-pro-cards-container {
+    transform: translateY(-50px) !important;
+  }
+
+  .mobile-hero-bg-img {
+    object-position: center 45% !important;
   }
 }
