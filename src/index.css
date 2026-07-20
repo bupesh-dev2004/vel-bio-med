@@ -104,12 +104,13 @@
 /* About Page Parallax Hero Styles */
 .heroEffects {
   position: relative;
-  height: 60vh;
+  height: 100vh;
   min-height: 400px;
   width: 100%;
   overflow: hidden;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  padding-top: 16vh;
   justify-content: center;
   background-color: #0f172a;
 }
@@ -118,13 +119,24 @@
   .heroEffects {
     height: 80vh;
     min-height: 550px;
+    align-items: center;
+    padding-top: 0;
+  }
+  .heroEffects .bg {
+    background-image: url('/about-bg.png');
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .heroEffects {
+    height: 100vh;
   }
 }
 
 .heroEffects .bg {
   position: absolute;
   inset: 0;
-  background-image: url('/about-bg.jpg');
+  background-image: url('/about%20mobile%20BG.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
