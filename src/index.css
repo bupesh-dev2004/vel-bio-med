@@ -531,7 +531,7 @@
     padding-top: 130px !important;
     padding-bottom: 50px !important;
   }
-  
+
   .ipad-pro-left-side {
     height: 100% !important;
     display: flex !important;
@@ -545,7 +545,7 @@
     flex-direction: column !important;
     justify-content: space-between !important;
   }
-  
+
   /* Top Group positioning (moved down slightly) */
   .ipad-pro-top-group {
     transform: translateY(40px) !important;
@@ -558,7 +558,7 @@
     padding-left: 28px !important;
     padding-right: 28px !important;
   }
-  
+
   /* Statistics Cards positioning (moved up slightly) */
   .ipad-pro-cards-container {
     transform: translateY(-50px) !important;
@@ -566,5 +566,12 @@
 
   .mobile-hero-bg-img {
     object-position: center 45% !important;
+  }
+}
+
+/* Desktop View Specific Adjustments */
+@media (min-width: 1280px) {
+  .mobile-hero-bg-img {
+    object-position: 54% 80% !important;
   }
 }

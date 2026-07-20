@@ -393,7 +393,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
         <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 xl:px-10 w-full z-20 relative flex flex-col justify-stretch h-full">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center h-full w-full">
             {/* Left Side (45% on desktop xl, 58% on tablet/medium desktop) */}
-            <div className="ipad-pro-left-side col-span-1 md:col-span-12 xl:col-span-5 flex flex-col justify-between md:justify-between lg:justify-start h-full md:h-full lg:h-auto text-center md:text-center xl:text-left text-slate-900 translate-y-0 md:translate-y-0 lg:translate-x-0 lg:translate-y-0 xl:-translate-x-20 xl:-translate-y-20">
+            <div className="ipad-pro-left-side col-span-1 md:col-span-12 xl:col-span-5 flex flex-col justify-between md:justify-between lg:justify-start h-full md:h-full lg:h-auto text-center md:text-center xl:text-left text-slate-900 translate-y-0 md:translate-y-0 lg:translate-x-0 lg:translate-y-0 xl:-translate-x-36 xl:-translate-y-20">
               <motion.div
                 initial="hidden"
                 animate={showPreloader ? "hidden" : "visible"}
@@ -411,18 +411,19 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   {/* Heading */}
                   <motion.h1
                     variants={heroItemVariants}
-                    className="text-[clamp(1.25rem,3.2vw+0.5rem,2.75rem)] md:text-[2.5rem] lg:text-[3.4rem] xl:text-[2.75rem] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] md:max-w-[780px] xl:max-w-[680px] w-full text-center md:text-center xl:text-left mt-3 md:mt-4 lg:mt-3 xl:mt-6"
+                    className="text-[clamp(1.25rem,3.2vw+0.5rem,2.75rem)] md:text-[2.5rem] lg:text-[3.4rem] xl:text-[2.35rem] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] md:max-w-[780px] xl:max-w-[680px] w-full text-center md:text-center xl:text-left mt-3 md:mt-4 lg:mt-3 xl:mt-6"
                   >
-                    <span className="sm:whitespace-nowrap">
-                      Transforming{" "}
-                      <AnimatedText
-                        asSpan
-                        text="Healthcare"
-                        gradientColors="linear-gradient(90deg, #0A6EBD 0%, #00e5ff 30%, #3b82f6 50%, #00e5ff 70%, #0A6EBD 100%)"
-                        gradientAnimationDuration={1.6}
-                        textClassName="bg-clip-text text-transparent"
-                      />
+                    <span className="sm:whitespace-nowrap xl:whitespace-normal">
+                      Transforming
                     </span>
+                    <br className="hidden xl:inline" />
+                    <AnimatedText
+                      asSpan
+                      text="Healthcare"
+                      gradientColors="linear-gradient(90deg, #0A6EBD 0%, #00e5ff 30%, #3b82f6 50%, #00e5ff 70%, #0A6EBD 100%)"
+                      gradientAnimationDuration={1.6}
+                      textClassName="bg-clip-text text-transparent"
+                    />
                     <br />
                     One Installation at a Time
                   </motion.h1>
@@ -432,7 +433,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                     variants={heroItemVariants}
                     className="text-[clamp(11px,1.2vw+8px,14px)] md:text-[17px] lg:text-[22px] xl:text-base text-slate-650 leading-relaxed font-semibold max-w-[520px] md:max-w-[680px] xl:max-w-[520px] w-full text-center md:text-center xl:text-left mt-3 md:mt-4 lg:mt-4 xl:mt-7"
                   >
-                    Vel Bio Med delivers high-caliber diagnostics and life-support machinery from world-renowned healthcare manufacturers to premium hospitals.
+                    Vel Bio Med delivers high-caliber diagnostics and life-support machinery to premium hospitals.
                   </motion.p>
 
                   {/* CTA Buttons */}
