@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { DatabaseState, Inquiry, Product, ContactInfo, GalleryItem, Service } from "./types.js";
 import dbData from "../db.json";
+import { submitPublicInquiry, PublicInquiryPayload } from "./lib/api.js";
 
 interface AppContextType {
   state: DatabaseState;
@@ -15,7 +16,7 @@ interface AppContextType {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
   refreshState: () => Promise<void>;
-  submitInquiry: (inquiry: Omit<Inquiry, "id" | "date" | "attended">) => Promise<boolean>;
+  submitInquiry: (inquiry: Omit<Inquiry, "id" | "date" | "attended">) => Promise<{ success: boolean; message: string }>;
 
   // Administrative Actions (Static In-Memory)
   toggleInquiryAttended: (id: string) => Promise<void>;
@@ -47,18 +48,40 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   };
 
   const submitInquiry = async (inquiry: Omit<Inquiry, "id" | "date" | "attended">) => {
-    const newInquiry: Inquiry = {
-      ...inquiry,
-      id: "inq-" + Date.now(),
-      date: new Date().toISOString(),
-      attended: false
-    };
-    setState(prev => ({
-      ...prev,
-      inquiries: [...prev.inquiries, newInquiry]
-    }));
-    return true;
+    try {
+      const payload: PublicInquiryPayload = {
+        contact_person: inquiry.name,
+        mobile_number: inquiry.mobile,
+        email: inquiry.email,
+        device: inquiry.product || null,
+        message: inquiry.feedback || null,
+      };
+      const res = await submitPublicInquiry(payload);
+      if (res && res.success) {
+        const newInquiry: Inquiry = {
+          ...inquiry,
+          id: res.data?.id || "inq-" + Date.now(),
+          date: res.data?.created_at || new Date().toISOString(),
+          attended: false
+        };
+        setState(prev => ({
+          ...prev,
+          inquiries: [...prev.inquiries, newInquiry]
+        }));
+        return { success: true, message: res.message || "Inquiry submitted successfully." };
+      }
+      return { success: false, message: res.message || "Failed to submit inquiry." };
+    } catch (err: any) {
+      console.error("Inquiry submission error:", err);
+      const errMsg =
+        err.response?.data?.message ||
+        err.response?.data?.errors?.[0]?.message ||
+        err.message ||
+        "Failed to submit inquiry. Please try again.";
+      return { success: false, message: errMsg };
+    }
   };
+
 
   const toggleInquiryAttended = async (id: string) => {
     setState(prev => ({

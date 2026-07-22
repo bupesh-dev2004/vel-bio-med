@@ -84,6 +84,19 @@ export default function ContactView() {
   const [formSuccess, setFormSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Toast Notification state
+  const [toastNotification, setToastNotification] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
+
+  const showToast = (type: "success" | "error", message: string) => {
+    setToastNotification({ type, message });
+    setTimeout(() => {
+      setToastNotification(null);
+    }, 4500);
+  };
+
   // Autofill product logic when user comes from products page selection!
   useEffect(() => {
     if (inquiryMachineName) {
@@ -122,43 +135,62 @@ export default function ContactView() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (isSubmitting) return;
+
     // Check basic validations
     if (!formData.name.trim()) {
-      setFormValidation("Please fill in your full name.");
+      const msg = "Please fill in your Contact Person Name.";
+      setFormValidation(msg);
+      showToast("error", msg);
       return;
     }
     if (!formData.mobile.trim()) {
-      setFormValidation("Please fill in your mobile number.");
+      const msg = "Please fill in your Mobile Number.";
+      setFormValidation(msg);
+      showToast("error", msg);
       return;
     }
     if (formData.mobile.length !== 10) {
-      setFormValidation("Please provide a valid 10-digit mobile number.");
+      const msg = "Please provide a valid 10-digit Mobile Number.";
+      setFormValidation(msg);
+      showToast("error", msg);
+      return;
+    }
+    if (!formData.email.trim()) {
+      const msg = "Please fill in your Institutional Email address.";
+      setFormValidation(msg);
+      showToast("error", msg);
+      return;
+    }
+    if (!formData.email.includes("@") || !formData.email.includes(".")) {
+      const msg = "Please provide a valid Institutional Email address (e.g. name@hospital.org).";
+      setFormValidation(msg);
+      showToast("error", msg);
       return;
     }
     if (!formData.feedback.trim()) {
-      setFormValidation("Please fill in the Inquiry Details & Clinic Context.");
-      return;
-    }
-    if (formData.email && !formData.email.includes("@")) {
-      setFormValidation("Please provide a valid email structure.");
+      const msg = "Please fill in the Inquiry Details & Clinic Context.";
+      setFormValidation(msg);
+      showToast("error", msg);
       return;
     }
 
     setIsSubmitting(true);
     setFormValidation(null);
 
-    const success = await submitInquiry({
-      name: formData.name,
-      email: formData.email,
-      mobile: formData.mobile,
+    const result = await submitInquiry({
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      mobile: formData.mobile.trim(),
       product: formData.product || "General Consultation Request",
-      feedback: formData.feedback
+      feedback: formData.feedback.trim()
     });
 
     setIsSubmitting(false);
 
-    if (success) {
+    if (result.success) {
       setFormSuccess(true);
+      showToast("success", result.message || "Inquiry submitted successfully!");
       // Reset form variables
       setFormData({
         name: "",
@@ -170,12 +202,57 @@ export default function ContactView() {
       // Clear product redirect identifier from global context
       setInquiryMachineName(null);
     } else {
-      setFormValidation("Failed to deliver inquiry metrics. Please try again or call our support directly.");
+      setFormValidation(result.message);
+      showToast("error", result.message);
     }
   };
 
   return (
-    <div className="bg-gradient-to-tr from-slate-50 via-slate-100 to-blue-50/50 min-h-screen text-slate-800 selection:bg-blue-500/10">
+    <div className="bg-gradient-to-tr from-slate-50 via-slate-100 to-blue-50/50 min-h-screen text-slate-800 selection:bg-blue-500/10 relative">
+      {/* Toast Notification Container */}
+      <AnimatePresence>
+        {toastNotification && (
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl border backdrop-blur-xl max-w-md ${
+              toastNotification.type === "success"
+                ? "bg-slate-900/95 border-emerald-500/40 text-emerald-300"
+                : "bg-slate-900/95 border-rose-500/40 text-rose-300"
+            }`}
+          >
+            <div
+              className={`p-2 rounded-xl ${
+                toastNotification.type === "success"
+                  ? "bg-emerald-500/10 text-emerald-400"
+                  : "bg-rose-500/10 text-rose-400"
+              }`}
+            >
+              {toastNotification.type === "success" ? (
+                <ShieldCheck className="w-5 h-5" />
+              ) : (
+                <HelpCircle className="w-5 h-5" />
+              )}
+            </div>
+            <div className="flex-1">
+              <h5 className="text-xs font-black uppercase tracking-wider">
+                {toastNotification.type === "success" ? "Success" : "Error"}
+              </h5>
+              <p className="text-xs font-medium mt-0.5 leading-relaxed text-slate-200">
+                {toastNotification.message}
+              </p>
+            </div>
+            <button
+              onClick={() => setToastNotification(null)}
+              className="text-slate-400 hover:text-white transition-colors bg-transparent border-none cursor-pointer"
+            >
+              ✕
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Top cover title with cinematic high-contrast backdrop */}
       <section className="relative py-32 border-b border-slate-900 overflow-hidden bg-slate-950">
         <div className="absolute inset-0 bg-[url('https://wallpaperbat.com/img/1872990-modern-hospital-modular-in-environments.jpg')] bg-cover bg-center opacity-[0.25] pointer-events-none" />
