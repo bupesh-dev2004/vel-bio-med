@@ -107,7 +107,7 @@ function CorporateValueCard({ handleShuffle, title, desc, icon: IconComponent, g
   const dragRef = React.useRef(0);
   const isFront = position === "front";
 
-  const getPositionStyles = () => {
+  const posStyles = React.useMemo(() => {
     const shift = isMobile ? 8 : 18;
     switch (position) {
       case "front":
@@ -121,9 +121,7 @@ function CorporateValueCard({ handleShuffle, title, desc, icon: IconComponent, g
       default:
         return { rotate: "12deg", x: `${shift * 4}%`, zIndex: 0, opacity: 0, scale: 0.76 };
     }
-  };
-
-  const posStyles = getPositionStyles();
+  }, [position, isMobile]);
 
   return (
     <motion.div
@@ -138,11 +136,11 @@ function CorporateValueCard({ handleShuffle, title, desc, icon: IconComponent, g
         opacity: posStyles.opacity
       }}
       drag={isFront ? "x" : false}
-      dragElastic={0.25}
+      dragElastic={0.2}
       dragListener={isFront}
       dragConstraints={{
-        left: -200,
-        right: 200,
+        left: -150,
+        right: 150,
         top: 0,
         bottom: 0
       }}
@@ -152,12 +150,12 @@ function CorporateValueCard({ handleShuffle, title, desc, icon: IconComponent, g
       }}
       onDragEnd={(e) => {
         const clientX = 'clientX' in e ? e.clientX : (e as any).changedTouches?.[0]?.clientX || 0;
-        if (dragRef.current - clientX > 100) {
+        if (Math.abs(dragRef.current - clientX) > 60) {
           handleShuffle();
         }
         dragRef.current = 0;
       }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
       className={`absolute left-0 top-0 flex flex-col justify-between h-[340px] w-[250px] sm:h-[430px] sm:w-[330px] select-none rounded-3xl border border-slate-800 bg-[#0f172a] p-6 sm:p-8 shadow-2xl text-white ${isFront ? "cursor-grab active:cursor-grabbing hover:border-slate-700" : ""}`}
     >
       {/* Decorative top line */}
@@ -170,7 +168,7 @@ function CorporateValueCard({ handleShuffle, title, desc, icon: IconComponent, g
           <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-white bg-gradient-to-br ${gradient} shadow-lg`}>
             <IconComponent className="w-7 h-7" strokeWidth={2} />
           </div>
-          <div className={`absolute -inset-2 rounded-3xl blur-xl opacity-30 -z-10 bg-gradient-to-br ${gradient}`} />
+          <div className={`absolute -inset-2 rounded-3xl blur-md opacity-30 -z-10 bg-gradient-to-br ${gradient}`} />
         </div>
 
         {/* Title */}
@@ -205,26 +203,26 @@ function CorporateValuesStack({ values }: { values: ValueItem[] }) {
       setIsMobile(window.innerWidth < 640);
     };
     checkMobile();
-    window.addEventListener("resize", checkMobile);
+    window.addEventListener("resize", checkMobile, { passive: true });
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  const handleShuffle = () => {
+  const handleShuffle = React.useCallback(() => {
     setPositions((prev) => {
       const copy = [...prev];
       const popped = copy.pop();
       if (popped) copy.unshift(popped);
       return copy;
     });
-  };
+  }, []);
 
   useEffect(() => {
     if (isHovered) return;
     const interval = setInterval(() => {
       handleShuffle();
-    }, 1800);
+    }, 2800);
     return () => clearInterval(interval);
-  }, [isHovered]);
+  }, [isHovered, handleShuffle]);
 
   return (
     <section className="py-16 sm:py-24 md:py-36 bg-slate-950 text-slate-100 border-t border-slate-900 relative overflow-hidden">
@@ -239,13 +237,13 @@ function CorporateValuesStack({ values }: { values: ValueItem[] }) {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-20 animate-pulse"
-        style={{ background: "radial-gradient(circle, #0A6EBD 0%, transparent 70%)", filter: "blur(100px)" }}
+        className="pointer-events-none absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-15"
+        style={{ background: "radial-gradient(circle, #0A6EBD 0%, transparent 70%)" }}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full opacity-15"
-        style={{ background: "radial-gradient(circle, #F97316 0%, transparent 70%)", filter: "blur(100px)" }}
+        className="pointer-events-none absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full opacity-10"
+        style={{ background: "radial-gradient(circle, #F97316 0%, transparent 70%)" }}
       />
 
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
