@@ -569,17 +569,33 @@
     justify-content: space-between !important;
   }
 
-  /* Top Group positioning (moved down slightly) */
+  /* Top Group positioning & font size increases for iPad Pro portrait (1024x1366) */
   .ipad-pro-top-group {
-    transform: translateY(40px) !important;
+    transform: translateY(30px) !important;
+  }
+
+  .ipad-pro-top-group span.inline-block {
+    font-size: 21px !important;
+    padding: 6px 20px !important;
+  }
+
+  .ipad-pro-top-group h1 {
+    font-size: 3.85rem !important;
+    line-height: 1.15 !important;
+  }
+
+  .ipad-pro-top-group p {
+    font-size: 24px !important;
+    line-height: 1.6 !important;
+    max-width: 720px !important;
   }
 
   /* Increase button size on iPad Pro portrait */
   .ipad-pro-top-group button {
-    height: 50px !important;
-    font-size: 13px !important;
-    padding-left: 28px !important;
-    padding-right: 28px !important;
+    height: 56px !important;
+    font-size: 15px !important;
+    padding-left: 32px !important;
+    padding-right: 32px !important;
   }
 
   /* Statistics Cards positioning (moved up slightly) */
@@ -596,5 +612,98 @@
 @media (min-width: 1280px) {
   .mobile-hero-bg-img {
     object-position: center center !important;
+  }
+}
+
+/* Dedicated Laptop L (1366px - 1440px width) Hero Overrides */
+@media screen and (min-width: 1366px) and (max-width: 1440px) {
+  .ipad-pro-hero-section {
+    height: 100vh !important;
+    min-height: 780px !important;
+  }
+
+  /* Left content container occupies 43-45% of width shifted left/top */
+  .ipad-pro-left-side {
+    max-width: 630px !important;
+    transform: translate(-55px, -45px) !important;
+    text-align: left !important;
+  }
+
+  .ipad-pro-motion-container {
+    align-items: flex-start !important;
+    text-align: left !important;
+  }
+
+  .ipad-pro-top-group {
+    transform: translateY(0px) !important;
+    align-items: flex-start !important;
+    text-align: left !important;
+    gap: 16px !important;
+    margin-left: -20px !important;
+  }
+
+  /* Badge typography */
+  .ipad-pro-top-group span.inline-block {
+    font-size: 13px !important;
+    padding: 5px 16px !important;
+  }
+
+  /* Main heading typography (slightly reduced for 1440px) */
+  .ipad-pro-top-group h1 {
+    font-size: 3.25rem !important;
+    line-height: 1.15 !important;
+    max-width: 530px !important;
+    text-align: left !important;
+    margin-top: 10px !important;
+  }
+
+  /* Paragraph typography (slightly reduced for 1440px) */
+  .ipad-pro-top-group p {
+    font-size: 1.15rem !important;
+    line-height: 1.6 !important;
+    max-width: 500px !important;
+    text-align: left !important;
+    margin-top: 12px !important;
+  }
+
+  /* Buttons typography and padding */
+  .ipad-pro-top-group button {
+    height: 46px !important;
+    font-size: 13px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  /* Statistics cards - Generous spacing between cards and refined sizing */
+  .ipad-pro-cards-container {
+    transform: translateY(32px) translate-x(-35px) !important;
+    gap: 28px !important;
+    justify-content: flex-start !important;
+    max-width: 650px !important;
+  }
+
+  .ipad-pro-cards-container > div {
+    padding: 14px 12px !important;
+    min-width: 110px !important;
+  }
+
+  .ipad-pro-cards-container > div > div {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .ipad-pro-cards-container > div > div svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .ipad-pro-cards-container p:nth-of-type(1) {
+    font-size: 19px !important;
+    margin-top: 5px !important;
+  }
+
+  .ipad-pro-cards-container p:nth-of-type(2) {
+    font-size: 9.5px !important;
+    margin-top: 2px !important;
   }
 }

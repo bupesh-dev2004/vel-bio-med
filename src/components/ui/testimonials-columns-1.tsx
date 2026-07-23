@@ -15,7 +15,7 @@ export const TestimonialsColumn = (props: {
   duration?: number;
 }) => {
   return (
-    <div className={props.className}>
+    <div className={`w-full flex justify-center ${props.className || ""}`}>
       <motion.div
         animate={{
           translateY: "-50%",
@@ -32,19 +32,19 @@ export const TestimonialsColumn = (props: {
           ...new Array(2).fill(0).map((_, index) => (
             <React.Fragment key={index}>
               {props.testimonials.map(({ text, image, name, role }, i) => (
-                <div className="p-10 rounded-3xl border shadow-lg shadow-primary/10 max-w-xs w-full bg-card text-card-foreground" key={i}>
-                  <div>{text}</div>
-                  <div className="flex items-center gap-2 mt-5">
+                <div className="p-5 sm:p-8 md:p-10 rounded-3xl border border-slate-200/80 shadow-lg shadow-slate-900/5 max-w-[320px] sm:max-w-xs w-full mx-auto bg-white text-slate-800 transition-all duration-300" key={i}>
+                  <div className="text-xs sm:text-sm text-slate-650 leading-relaxed font-medium">{text}</div>
+                  <div className="flex items-center gap-3 mt-5 pt-4 border-t border-slate-100">
                     <img
                       width={40}
                       height={40}
                       src={image}
                       alt={name}
-                      className="h-10 w-10 rounded-full object-cover"
+                      className="h-10 w-10 rounded-full object-cover shrink-0 border border-slate-200 shadow-xs"
                     />
-                    <div className="flex flex-col">
-                      <div className="font-medium tracking-tight leading-5">{name}</div>
-                      <div className="leading-5 opacity-60 tracking-tight">{role}</div>
+                    <div className="flex flex-col min-w-0">
+                      <div className="font-extrabold text-slate-900 text-xs sm:text-sm tracking-tight leading-snug truncate">{name}</div>
+                      <div className="text-[10px] sm:text-xs font-semibold text-slate-500 tracking-tight truncate">{role}</div>
                     </div>
                   </div>
                 </div>
