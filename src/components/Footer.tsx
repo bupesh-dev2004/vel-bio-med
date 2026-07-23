@@ -7,11 +7,9 @@ import {
   MapPin,
   Phone,
   Mail,
-  Award,
   ArrowRight,
   Send,
-  CheckCircle2,
-  Sparkles
+  CheckCircle2
 } from "lucide-react";
 import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon, YoutubeIcon } from "./ui/BrandSocialIcons.js";
 import { useAppState } from "../AppContext.js";
@@ -78,39 +76,6 @@ export default function Footer() {
       {/* Top radial gradient aura */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[300px] bg-[radial-gradient(ellipse_at_center,rgba(10,110,189,0.12),transparent_65%)] pointer-events-none rounded-full blur-3xl" />
       <div className="absolute top-0 right-1/2 left-1/2 h-[2px] w-[60%] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#0A6EBD]/55 to-transparent rounded-full blur-[1px]" />
-
-      {/* ISO Certifications Ribbon */}
-      <div className="max-w-7xl mx-auto mb-16 border-b border-slate-900/60 pb-10 flex flex-col lg:flex-row justify-between items-stretch lg:items-center gap-8 relative z-10">
-        <AnimatedContainer className="flex items-center gap-4 flex-1">
-          <div className="p-4 bg-gradient-to-br from-[#0A6EBD]/20 to-[#0A6EBD]/5 rounded-2xl text-[#0A6EBD] border border-[#0A6EBD]/30 shadow-lg shadow-[#0A6EBD]/10 flex-shrink-0">
-            <Award className="w-7 h-7 animate-pulse text-amber-500" />
-          </div>
-          <div>
-            <p className="text-sm font-black text-white tracking-wide flex flex-wrap items-center gap-1.5">
-              ISO 13485 Certified Medical Supplier
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-amber-500/10 border border-amber-500/20 text-amber-500 text-[9px] font-black uppercase tracking-wider whitespace-nowrap">
-                <Sparkles className="w-2.5 h-2.5" /> High Quality
-              </span>
-            </p>
-            <p className="text-xs text-slate-400 mt-1 leading-relaxed max-w-2xl">
-              Assuring world-class quality controls, rigorous compliance verification, and premium equipment testing standards for state-of-the-art diagnostic and clinical ICU setups.
-            </p>
-          </div>
-        </AnimatedContainer>
-        <AnimatedContainer delay={0.2} className="flex flex-wrap items-center gap-5 justify-start lg:justify-end">
-          <div className="text-left lg:text-right">
-            <span className="text-xs text-slate-300 font-bold block">Looking for a tailored medical setup?</span>
-            <span className="text-[10px] text-slate-500 font-semibold block mt-0.5">Custom configurations designed for modern hospitals</span>
-          </div>
-          <button
-            onClick={() => setCurrentTab("contact")}
-            className="group relative bg-[#0A6EBD] hover:bg-[#085a9c] text-white font-black text-xs py-3 px-6 rounded-xl shadow-lg shadow-[#0A6EBD]/20 hover:shadow-[#0A6EBD]/40 transition-all duration-300 flex items-center gap-2 cursor-pointer hover:scale-103 active:scale-97 overflow-hidden border border-white/10"
-          >
-            <span className="relative z-10 tracking-wider uppercase">Get Free Sourcing Quote</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform relative z-10" />
-          </button>
-        </AnimatedContainer>
-      </div>
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 relative z-10">
         {/* Column 1: Brand Info & Newsletter (lg:col-span-5) */}
