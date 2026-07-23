@@ -358,7 +358,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* 1. HERO SECTION */}
-      <section className="ipad-pro-hero-section relative h-[82vh] lg:h-auto w-full flex flex-col md:flex-row items-stretch md:items-center bg-slate-50 overflow-hidden pt-11 pb-4 md:pt-[96px] md:pb-12 lg:pt-[120px] lg:pb-16 xl:pt-[140px] xl:pb-20">
+      <section className="ipad-pro-hero-section relative h-[82vh] lg:h-auto xl:h-[100dvh] w-full flex flex-col md:flex-row items-stretch md:items-center bg-slate-50 overflow-hidden pt-11 pb-4 md:pt-[96px] md:pb-12 lg:pt-[120px] lg:pb-16 xl:pt-[72px] xl:pb-6">
         {/* Background with zoom and fade in effect */}
         <motion.div
           initial={{ opacity: 0, scale: 1 }}
@@ -393,30 +393,29 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
         <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 xl:px-10 w-full z-20 relative flex flex-col justify-stretch h-full">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center h-full w-full">
             {/* Left Side (45% on desktop xl, 58% on tablet/medium desktop) */}
-            <div className="ipad-pro-left-side col-span-1 md:col-span-12 xl:col-span-5 flex flex-col justify-between md:justify-between lg:justify-start h-full md:h-full lg:h-auto text-center md:text-center xl:text-left text-slate-900 translate-y-0 md:translate-y-0 lg:translate-x-0 lg:translate-y-0 xl:-translate-x-36 xl:-translate-y-20">
+            <div className="ipad-pro-left-side col-span-1 md:col-span-12 xl:col-span-5 flex flex-col justify-between md:justify-between lg:justify-start xl:justify-start h-full md:h-full lg:h-auto text-center md:text-center xl:text-left text-slate-900 translate-y-0 md:translate-y-0 lg:translate-x-0 lg:translate-y-0 xl:translate-x-0 xl:-translate-y-6">
               <motion.div
                 initial="hidden"
                 animate={showPreloader ? "hidden" : "visible"}
                 variants={heroContainerVariants}
-                className="ipad-pro-motion-container flex flex-col items-center md:items-center xl:items-start text-center md:text-center xl:text-left text-slate-900 justify-between md:justify-between lg:justify-start h-full md:h-full lg:h-auto w-full gap-y-[clamp(12px,2.5vw,20px)] md:gap-y-0"
+                className="ipad-pro-motion-container flex flex-col items-center md:items-center xl:items-start text-center md:text-center xl:text-left text-slate-900 justify-between md:justify-between lg:justify-start xl:justify-start h-full md:h-full lg:h-auto w-full gap-y-[clamp(12px,2.5vw,20px)] md:gap-y-0 xl:gap-y-5"
               >
                 {/* Top Group: Text & Buttons */}
-                <div className="ipad-pro-top-group flex flex-col items-center md:items-center xl:items-start text-center md:text-center xl:text-left gap-y-[clamp(8px,1.8vw,16px)] md:gap-y-0 w-full mt-1 sm:mt-0 -translate-y-12 md:-translate-y-24 lg:-translate-y-[120px] xl:-translate-y-6">
+                <div className="ipad-pro-top-group flex flex-col items-center md:items-center xl:items-start text-center md:text-center xl:text-left gap-y-[clamp(8px,1.8vw,16px)] md:gap-y-0 xl:gap-y-4 w-full mt-1 sm:mt-0 -translate-y-12 md:-translate-y-24 lg:-translate-y-[120px] xl:-translate-y-14">
                   {/* Badge */}
-                  <motion.div variants={heroItemVariants} className="w-full text-center md:text-center xl:text-left translate-y-1 md:translate-y-2 lg:translate-y-0">
-                    <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[8.5px] md:text-[13px] lg:text-[18px] xl:text-[13px] font-black tracking-widest px-2.5 py-0.5 md:px-3 md:py-1 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
+                  <motion.div variants={heroItemVariants} className="w-full text-center md:text-center xl:text-left translate-y-1 md:translate-y-2 lg:translate-y-0 xl:translate-y-0">
+                    <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[8.5px] md:text-[13px] lg:text-[18px] xl:text-[13.5px] font-black tracking-widest px-2.5 py-0.5 md:px-3 md:py-1 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
                       Clinical Sourcing Excellence
                     </span>
                   </motion.div>
                   {/* Heading */}
                   <motion.h1
                     variants={heroItemVariants}
-                    className="text-[clamp(1.25rem,3.2vw+0.5rem,2.75rem)] md:text-[2.5rem] lg:text-[3.4rem] xl:text-[2.35rem] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] md:max-w-[780px] xl:max-w-[680px] w-full text-center md:text-center xl:text-left mt-3 md:mt-4 lg:mt-3 xl:mt-6"
+                    className="text-[clamp(1.25rem,3.2vw+0.5rem,2.75rem)] md:text-[2.5rem] lg:text-[3.4rem] xl:text-[2.65rem] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] md:max-w-[780px] xl:max-w-[720px] w-full text-center md:text-center xl:text-left mt-3 md:mt-4 lg:mt-3 xl:mt-2"
                   >
-                    <span className="sm:whitespace-nowrap xl:whitespace-normal">
-                      Transforming
+                    <span className="whitespace-nowrap">
+                      Transforming{" "}
                     </span>
-                    <br className="hidden xl:inline" />
                     <AnimatedText
                       asSpan
                       text="Healthcare"
@@ -431,7 +430,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   {/* Description */}
                   <motion.p
                     variants={heroItemVariants}
-                    className="text-[clamp(11px,1.2vw+8px,14px)] md:text-[17px] lg:text-[22px] xl:text-base text-slate-650 leading-relaxed font-semibold max-w-[520px] md:max-w-[680px] xl:max-w-[520px] w-full text-center md:text-center xl:text-left mt-3 md:mt-4 lg:mt-4 xl:mt-7"
+                    className="text-[clamp(11px,1.2vw+8px,14px)] md:text-[17px] lg:text-[22px] xl:text-lg text-slate-650 leading-relaxed font-semibold max-w-[520px] md:max-w-[680px] xl:max-w-[560px] w-full text-center md:text-center xl:text-left mt-3 md:mt-4 lg:mt-4 xl:mt-2"
                   >
                     Vel Bio Med delivers high-caliber diagnostics and life-support machinery to premium hospitals.
                   </motion.p>
@@ -439,7 +438,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   {/* CTA Buttons */}
                   <motion.div
                     variants={heroItemVariants}
-                    className="flex flex-row justify-center md:justify-center xl:justify-start gap-3 sm:gap-4 w-full mt-[clamp(6px,2vw,20px)] md:mt-5 lg:mt-5 xl:mt-9"
+                    className="flex flex-row justify-center md:justify-center xl:justify-start gap-3 sm:gap-4 w-full mt-[clamp(6px,2vw,20px)] md:mt-5 lg:mt-5 xl:mt-5"
                   >
                     <motion.button
                       whileHover={{
@@ -449,7 +448,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                       }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => setCurrentTab("products")}
-                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[10px] md:text-[clamp(10px,0.8vw+8px,12px)] py-2 px-3 sm:px-6 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer border-none h-9 md:h-[clamp(38px,1vw+34px,44px)] flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
+                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[10px] md:text-[clamp(10px,0.8vw+8px,12px)] xl:text-sm py-2 px-3 sm:px-6 xl:px-7 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer border-none h-9 md:h-[clamp(38px,1vw+34px,44px)] xl:h-12 flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
                     >
                       Explore Products <ArrowRight className="w-4 h-4" />
                     </motion.button>
@@ -461,7 +460,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                       }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => setCurrentTab("contact")}
-                      className="bg-white border border-slate-200 text-blue-600 hover:bg-slate-50 font-bold text-[10px] md:text-[clamp(10px,0.8vw+8px,12px)] py-2 px-3 sm:px-6 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer h-9 md:h-[clamp(38px,1vw+34px,44px)] flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
+                      className="bg-white border border-slate-200 text-blue-600 hover:bg-slate-50 font-bold text-[10px] md:text-[clamp(10px,0.8vw+8px,12px)] xl:text-sm py-2 px-3 sm:px-6 xl:px-7 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer h-9 md:h-[clamp(38px,1vw+34px,44px)] xl:h-12 flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
                     >
                       <PhoneCall className="w-4 h-4 text-blue-600" /> Contact Us
                     </motion.button>
@@ -471,7 +470,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 {/* Statistics Cards */}
                 <motion.div
                   variants={heroItemVariants}
-                  className="ipad-pro-cards-container grid grid-cols-2 md:grid-cols-4 gap-[clamp(8px,1.8vw,14px)] w-full md:mx-auto xl:mx-0 mt-[clamp(10px,2vw,16px)] md:mt-2 lg:mt-3 xl:mt-4 pt-2 xs:pt-3 sm:pt-4 justify-items-center -translate-y-12 md:translate-y-4 lg:-translate-y-4"
+                  className="ipad-pro-cards-container grid grid-cols-2 md:grid-cols-4 gap-[clamp(8px,1.8vw,14px)] xl:gap-3.5 w-full md:mx-auto xl:mx-0 mt-[clamp(10px,2vw,16px)] md:mt-2 lg:mt-3 xl:mt-2 pt-2 xs:pt-3 sm:pt-4 xl:pt-0 justify-items-center -translate-y-12 md:translate-y-4 lg:-translate-y-4 xl:-translate-y-6 xl:-translate-x-6"
                 >
                   {[
                     { target: 16, suffix: "+", label: "Years Exp.", icon: Award, color: "text-blue-600", iconBg: "bg-blue-50", border: "border-blue-100/40 hover:border-orange-200/60", glow: "from-blue-500/5" },
@@ -483,15 +482,15 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                     return (
                       <div
                         key={idx}
-                        className={`flex flex-col items-center justify-center text-center gap-1 py-1.5 md:py-5 lg:py-6 xl:py-[clamp(10px,2vw+2px,16px)] px-1 md:px-4 lg:px-5 xl:px-[clamp(4px,1vw+2px,8px)] rounded-xl border ${m.border} bg-gradient-to-br from-blue-500/8 via-white/80 to-orange-500/8 backdrop-blur-[3px] sm:backdrop-blur-sm shadow-[0_1px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_3px_14px_rgba(0,0,0,0.09)] hover:scale-[1.02] transition-all duration-200 w-full max-w-[95px] xs:max-w-[110px] md:max-w-none md:w-[170px] md:h-[150px] lg:w-[190px] lg:h-[170px] xl:w-full xl:max-w-none xl:h-auto`}
+                        className={`flex flex-col items-center justify-center text-center gap-1 py-1.5 md:py-5 lg:py-6 xl:py-3.5 px-1 md:px-4 lg:px-5 xl:px-2 rounded-xl border ${m.border} bg-gradient-to-br from-blue-500/8 via-white/80 to-orange-500/8 backdrop-blur-[3px] sm:backdrop-blur-sm shadow-[0_1px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_3px_14px_rgba(0,0,0,0.09)] hover:scale-[1.02] transition-all duration-200 w-full max-w-[95px] xs:max-w-[110px] md:max-w-none md:w-[170px] md:h-[150px] lg:w-[190px] lg:h-[170px] xl:w-full xl:max-w-none xl:h-auto`}
                       >
-                        <div className={`w-6 h-6 xs:w-7 xs:h-7 md:w-11 md:h-11 lg:w-12 lg:h-12 xl:w-[clamp(30px,2.8vw+14px,38px)] h-6 xs:h-7 md:h-11 lg:h-12 xl:h-[clamp(30px,2.8vw+14px,38px)] flex items-center justify-center rounded-lg xs:rounded-xl ${m.iconBg} border border-white/90 shadow-sm`}>
-                          <IconComponent className={`w-3.5 h-3.5 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-[clamp(15px,1.2vw+8px,18px)] h-3.5 md:h-5 lg:h-6 xl:h-[clamp(15px,1.2vw+8px,18px)] ${m.color}`} strokeWidth={2} />
+                        <div className={`w-6 h-6 xs:w-7 xs:h-7 md:w-11 md:h-11 lg:w-12 lg:h-12 xl:w-9 xl:h-9 flex items-center justify-center rounded-lg xs:rounded-xl ${m.iconBg} border border-white/90 shadow-sm`}>
+                          <IconComponent className={`w-3.5 h-3.5 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-4.5 xl:h-4.5 ${m.color}`} strokeWidth={2} />
                         </div>
-                        <p className="text-[11px] xs:text-[13px] md:text-xl lg:text-2xl xl:text-[clamp(15px,1.8vw+8px,20px)] font-black text-slate-800 tracking-tight leading-none mt-1">
+                        <p className="text-[11px] xs:text-[13px] md:text-xl lg:text-2xl xl:text-lg font-black text-slate-800 tracking-tight leading-none mt-1">
                           <AnimatedCounter target={m.target} suffix={m.suffix} duration={2000} startSignal={!showPreloader} />
                         </p>
-                        <p className="text-[6.5px] xs:text-[7.5px] md:text-[11px] lg:text-[12px] xl:text-[clamp(8px,0.7vw+6px,9.5px)] font-bold text-slate-400 uppercase tracking-wider leading-none mt-0.5">
+                        <p className="text-[6.5px] xs:text-[7.5px] md:text-[11px] lg:text-[12px] xl:text-[9.5px] font-bold text-slate-400 uppercase tracking-wider leading-none mt-0.5">
                           {m.label}
                         </p>
                       </div>

@@ -595,6 +595,6 @@
 /* Desktop View Specific Adjustments */
 @media (min-width: 1280px) {
   .mobile-hero-bg-img {
-    object-position: 54% 80% !important;
+    object-position: center center !important;
   }
 }
