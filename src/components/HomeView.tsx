@@ -1009,10 +1009,10 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
             <div className="w-12 h-1 bg-blue-600 mx-auto mt-4 rounded-full" />
           </div>
 
-          <div className="flex justify-center gap-6 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)] max-h-[640px] overflow-hidden">
-            <TestimonialsColumn testimonials={firstColumn} duration={15} />
-            <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={19} />
-            <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={17} />
+          <div className="flex justify-center gap-6 md:gap-8 lg:gap-8 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)] max-h-[640px] overflow-hidden">
+            <TestimonialsColumn testimonials={firstColumn} duration={22} />
+            <TestimonialsColumn testimonials={secondColumn} className="hidden md:block" duration={22} />
+            <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block" duration={22} />
           </div>
         </motion.div>
       </section>
