@@ -404,14 +404,14 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 <div className="ipad-pro-top-group flex flex-col items-center md:items-center xl:items-start text-center md:text-center xl:text-left gap-y-[clamp(8px,1.8vw,16px)] md:gap-y-0 xl:gap-y-4 w-full mt-1 sm:mt-0 -translate-y-12 md:-translate-y-24 lg:-translate-y-[120px] xl:-translate-y-14">
                   {/* Badge */}
                   <motion.div variants={heroItemVariants} className="w-full text-center md:text-center xl:text-left translate-y-1 md:translate-y-2 lg:translate-y-0 xl:translate-y-0">
-                    <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[8.5px] md:text-[13px] lg:text-[18px] xl:text-[13.5px] font-black tracking-widest px-2.5 py-0.5 md:px-3 md:py-1 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
+                    <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[10.5px] md:text-[13px] lg:text-[18px] xl:text-[13.5px] font-black tracking-widest px-3 py-1 md:px-3 md:py-1 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
                       Clinical Sourcing Excellence
                     </span>
                   </motion.div>
                   {/* Heading */}
                   <motion.h1
                     variants={heroItemVariants}
-                    className="text-[clamp(1.25rem,3.2vw+0.5rem,2.75rem)] md:text-[2.5rem] lg:text-[3.4rem] xl:text-[2.65rem] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] md:max-w-[780px] xl:max-w-[720px] w-full text-center md:text-center xl:text-left mt-3 md:mt-4 lg:mt-3 xl:mt-2"
+                    className="text-[clamp(1.45rem,4vw+0.5rem,2.75rem)] md:text-[2.5rem] lg:text-[3.4rem] xl:text-[2.65rem] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] md:max-w-[780px] xl:max-w-[720px] w-full text-center md:text-center xl:text-left mt-3 md:mt-4 lg:mt-3 xl:mt-2"
                   >
                     <span className="whitespace-nowrap">
                       Transforming{" "}
@@ -430,9 +430,9 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   {/* Description */}
                   <motion.p
                     variants={heroItemVariants}
-                    className="text-[clamp(11px,1.2vw+8px,14px)] md:text-[17px] lg:text-[22px] xl:text-lg text-slate-650 leading-relaxed font-semibold max-w-[520px] md:max-w-[680px] xl:max-w-[560px] w-full text-center md:text-center xl:text-left mt-3 md:mt-4 lg:mt-4 xl:mt-2"
+                    className="text-[clamp(13px,1.5vw+9px,15px)] md:text-[17px] lg:text-[22px] xl:text-lg text-slate-650 leading-relaxed font-semibold max-w-[520px] md:max-w-[680px] xl:max-w-[560px] w-full text-center md:text-center xl:text-left mt-3 md:mt-4 lg:mt-4 xl:mt-2"
                   >
-                    Vel Bio Med delivers high-caliber diagnostics and life-support machinery to premium hospitals.
+                    Vel Bio Med delivers high-caliber diagnostics, ICU patient monitors, operation theatre machinery, and life-support equipment to premium hospitals.
                   </motion.p>
 
                   {/* CTA Buttons */}
@@ -448,7 +448,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                       }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => setCurrentTab("products")}
-                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[10px] md:text-[clamp(10px,0.8vw+8px,12px)] xl:text-sm py-2 px-3 sm:px-6 xl:px-7 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer border-none h-9 md:h-[clamp(38px,1vw+34px,44px)] xl:h-12 flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
+                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[11.5px] sm:text-xs md:text-[clamp(10px,0.8vw+8px,12px)] xl:text-sm py-2 px-3 sm:px-6 xl:px-7 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer border-none h-10 md:h-[clamp(38px,1vw+34px,44px)] xl:h-12 flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
                     >
                       Explore Products <ArrowRight className="w-4 h-4" />
                     </motion.button>
@@ -460,7 +460,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                       }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => setCurrentTab("contact")}
-                      className="bg-white border border-slate-200 text-blue-600 hover:bg-slate-50 font-bold text-[10px] md:text-[clamp(10px,0.8vw+8px,12px)] xl:text-sm py-2 px-3 sm:px-6 xl:px-7 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer h-9 md:h-[clamp(38px,1vw+34px,44px)] xl:h-12 flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
+                      className="bg-white border border-slate-200 text-blue-600 hover:bg-slate-50 font-bold text-[11.5px] sm:text-xs md:text-[clamp(10px,0.8vw+8px,12px)] xl:text-sm py-2 px-3 sm:px-6 xl:px-7 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer h-10 md:h-[clamp(38px,1vw+34px,44px)] xl:h-12 flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
                     >
                       <PhoneCall className="w-4 h-4 text-blue-600" /> Contact Us
                     </motion.button>
@@ -470,7 +470,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 {/* Statistics Cards */}
                 <motion.div
                   variants={heroItemVariants}
-                  className="ipad-pro-cards-container grid grid-cols-2 md:grid-cols-4 gap-[clamp(8px,1.8vw,14px)] xl:gap-3.5 w-full md:mx-auto xl:mx-0 mt-[clamp(10px,2vw,16px)] md:mt-2 lg:mt-3 xl:mt-2 pt-2 xs:pt-3 sm:pt-4 xl:pt-0 justify-items-center -translate-y-12 md:translate-y-4 lg:-translate-y-4 xl:-translate-y-6 xl:-translate-x-6"
+                  className="ipad-pro-cards-container grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3.5 md:gap-[clamp(8px,1.8vw,14px)] xl:gap-3.5 w-full md:mx-auto xl:mx-0 mt-[clamp(10px,2vw,16px)] md:mt-2 lg:mt-3 xl:mt-2 pt-2 xs:pt-3 sm:pt-4 xl:pt-0 justify-items-center -translate-y-12 md:translate-y-4 lg:-translate-y-4 xl:-translate-y-6 xl:-translate-x-6"
                 >
                   {[
                     { target: 16, suffix: "+", label: "Years Exp.", icon: Award, color: "text-blue-600", iconBg: "bg-blue-50", border: "border-blue-100/40 hover:border-orange-200/60", glow: "from-blue-500/5" },
@@ -482,15 +482,15 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                     return (
                       <div
                         key={idx}
-                        className={`flex flex-col items-center justify-center text-center gap-1 py-1.5 md:py-5 lg:py-6 xl:py-3.5 px-1 md:px-4 lg:px-5 xl:px-2 rounded-xl border ${m.border} bg-gradient-to-br from-blue-500/8 via-white/80 to-orange-500/8 backdrop-blur-[3px] sm:backdrop-blur-sm shadow-[0_1px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_3px_14px_rgba(0,0,0,0.09)] hover:scale-[1.02] transition-all duration-200 w-full max-w-[95px] xs:max-w-[110px] md:max-w-none md:w-[170px] md:h-[150px] lg:w-[190px] lg:h-[170px] xl:w-full xl:max-w-none xl:h-auto`}
+                        className={`flex flex-col items-center justify-center text-center gap-1 py-2.5 sm:py-3 md:py-5 lg:py-6 xl:py-3.5 px-2 sm:px-3 md:px-4 lg:px-5 xl:px-2 rounded-xl sm:rounded-2xl border ${m.border} bg-gradient-to-br from-blue-500/8 via-white/80 to-orange-500/8 backdrop-blur-[3px] sm:backdrop-blur-sm shadow-[0_1px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_3px_14px_rgba(0,0,0,0.09)] hover:scale-[1.02] transition-all duration-200 w-full max-w-[115px] sm:max-w-[135px] md:max-w-none md:w-[170px] md:h-[150px] lg:w-[190px] lg:h-[170px] xl:w-full xl:max-w-none xl:h-auto`}
                       >
-                        <div className={`w-6 h-6 xs:w-7 xs:h-7 md:w-11 md:h-11 lg:w-12 lg:h-12 xl:w-9 xl:h-9 flex items-center justify-center rounded-lg xs:rounded-xl ${m.iconBg} border border-white/90 shadow-sm`}>
-                          <IconComponent className={`w-3.5 h-3.5 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-4.5 xl:h-4.5 ${m.color}`} strokeWidth={2} />
+                        <div className={`w-7 h-7 sm:w-8 sm:h-8 md:w-11 md:h-11 lg:w-12 lg:h-12 xl:w-9 xl:h-9 flex items-center justify-center rounded-lg sm:rounded-xl ${m.iconBg} border border-white/90 shadow-sm`}>
+                          <IconComponent className={`w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-4.5 xl:h-4.5 ${m.color}`} strokeWidth={2} />
                         </div>
-                        <p className="text-[11px] xs:text-[13px] md:text-xl lg:text-2xl xl:text-lg font-black text-slate-800 tracking-tight leading-none mt-1">
+                        <p className="text-[13.5px] sm:text-[15px] md:text-xl lg:text-2xl xl:text-lg font-black text-slate-800 tracking-tight leading-none mt-1">
                           <AnimatedCounter target={m.target} suffix={m.suffix} duration={2000} startSignal={!showPreloader} />
                         </p>
-                        <p className="text-[6.5px] xs:text-[7.5px] md:text-[11px] lg:text-[12px] xl:text-[9.5px] font-bold text-slate-400 uppercase tracking-wider leading-none mt-0.5">
+                        <p className="text-[8px] sm:text-[9.5px] md:text-[11px] lg:text-[12px] xl:text-[9.5px] font-bold text-slate-400 uppercase tracking-wider leading-none mt-0.5">
                           {m.label}
                         </p>
                       </div>
@@ -548,7 +548,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   Why Choose <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-[#f97316] bg-clip-text text-transparent">Vel Bio Med</span>?
                 </motion.h2>
                 <motion.p variants={fadeUpVariants} className="text-slate-600 text-sm font-semibold leading-relaxed">
-                  Partnering with us means securing top-tier medical solutions backed by regional expertise and global manufacturer relationships.
+                  Partnering with Vel Bio Med means securing top-tier healthcare solutions from a premier Medical Equipment Supplier in Tamil Nadu and India. Backed by extensive regional expertise and OEM relationships, we provide comprehensive hospital equipment supply, ICU machinery, operation theatre setups, and dedicated biomedical engineering services.
                 </motion.p>
 
                 {/* Floating Badges */}
@@ -588,13 +588,13 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
               >
                 <motion.div variants={fadeUpVariants} className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-blue-50/50 to-white backdrop-blur-md border border-blue-100/80 shadow-inner hover:border-blue-300 transition-colors">
                   <p className="text-base sm:text-lg font-medium leading-relaxed">
-                    When you choose <span className="font-extrabold bg-gradient-to-r from-blue-600 to-[#f97316] bg-clip-text text-transparent">Vel Bio Med</span>, you are choosing a partner committed to <span className="font-extrabold text-blue-700 underline decoration-blue-400/50 decoration-2">excellence</span>, <span className="font-extrabold text-[#e0690f] underline decoration-orange-400/50 decoration-2">reliability</span>, and <span className="font-extrabold text-indigo-700 underline decoration-indigo-400/50 decoration-2">customer satisfaction</span>. We are dedicated to making a positive impact on healthcare delivery by providing superior products and services.
+                    When you choose <span className="font-extrabold bg-gradient-to-r from-blue-600 to-[#f97316] bg-clip-text text-transparent">Vel Bio Med</span>, you are partnering with a leading <span className="font-extrabold text-blue-700 underline decoration-blue-400/50 decoration-2">Medical Equipment Supplier</span> committed to excellence, reliability, and customer satisfaction across hospitals in Tamil Nadu & South India. As a trusted hospital equipment distributor, we deliver certified ECG machines, patient monitors, steam sterilizers, electric OT tables, and 24/7 AMC maintenance to power critical care delivery.
                   </p>
                 </motion.div>
 
                 <motion.div variants={fadeUpVariants} className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-slate-900 via-[#0f2445] to-[#251508] text-slate-200 shadow-xl border border-blue-900/30">
                   <p className="text-sm sm:text-base font-medium leading-relaxed">
-                    Thank you for considering Vel Bio Med as your trusted partner in medical solutions. We look forward to serving you and contributing to the success of your healthcare endeavors.
+                    Thank you for considering Vel Bio Med as your trusted biomedical equipment supplier and hospital equipment dealer. We look forward to serving your healthcare institution with rapid equipment installation, preventive maintenance, and expert technical support.
                   </p>
                 </motion.div>
               </motion.div>

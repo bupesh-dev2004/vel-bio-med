@@ -16,37 +16,37 @@ export default function ServicesView() {
     {
       id: "srv-1",
       title: "AMC for Operation Theatre Equipment",
-      description: "An Annual Maintenance Contract (AMC) for operation theatre equipment ensures regular maintenance, emergency support to optimize equipment performance.",
+      description: "An Annual Maintenance Contract (AMC) for operation theatre and ICU equipment ensures regular preventive maintenance, calibration, component replacement, and 24/7 emergency support across hospitals in Tamil Nadu and South India to optimize machinery performance.",
       iconName: "Shield"
     },
     {
       id: "srv-2",
       title: "Troubleshooting of all medical equipment (Any brand)",
-      description: "We provide expert troubleshooting services for all medical equipment brands, resolution of issues to maintain uninterrupted equipment reliability.",
+      description: "We provide expert biomedical troubleshooting and repair services for all medical equipment brands, resolving electronic, mechanical, and sensor issues to maintain uninterrupted hospital equipment reliability.",
       iconName: "Wrench"
     },
     {
       id: "srv-3",
       title: "Installation & Commissioning of new medical equipment",
-      description: "We excel in the seamless installation and commissioning of new medical equipment, ensuring optimal functionality and readiness .",
+      description: "We excel in the seamless medical equipment installation and commissioning of new healthcare devices, ensuring optimal functionality, safety compliance, and operational staff training for multi-specialty hospitals.",
       iconName: "Briefcase"
     },
     {
       id: "srv-4",
       title: "Restoration of medical equipment",
-      description: "We specialize in restoring medical equipment to peak performance, ensuring reliability and longevity to support uninterrupted patient care.",
+      description: "We specialize in restoring medical equipment to peak performance through biomedical engineering services, component recalibration, and hardware refurbishing to extend life-support machinery longevity.",
       iconName: "Activity"
     },
     {
       id: "srv-5",
       title: "Customised Product solutions for all medical equipment",
-      description: "We provide customized solutions for all medical equipment, meeting diverse needs with precision and innovation.",
+      description: "We provide customized healthcare equipment solutions and OEM adaptations for all medical devices, meeting diverse hospital needs with precision engineering and innovation.",
       iconName: "PhoneCall"
     },
     {
       id: "srv-6",
       title: "Hygienic Cleaning services",
-      description: "Our hygienic cleaning services ensure meticulous sterilization and sanitation of medical equipment and facilities, maintaining impeccable standards for patient safety and healthcare hygiene.",
+      description: "Our hygienic cleaning services ensure meticulous sterilization and sanitation of medical equipment, autoclaves, and clinical facilities, maintaining impeccable standards for patient safety and healthcare hygiene.",
       iconName: "LifeBuoy"
     }
   ];

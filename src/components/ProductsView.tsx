@@ -260,10 +260,10 @@ export default function ProductsView({
                     {sortBy === "rating"
                       ? "Top Rated (Stars)"
                       : sortBy === "name-asc"
-                      ? "Alphabetical (A - Z)"
-                      : sortBy === "name-desc"
-                      ? "Alphabetical (Z - A)"
-                      : "Default Order"}
+                        ? "Alphabetical (A - Z)"
+                        : sortBy === "name-desc"
+                          ? "Alphabetical (Z - A)"
+                          : "Default Order"}
                   </span>
                 </div>
                 <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-300 ${isSortOpen ? "rotate-180 text-amber-500" : ""}`} />
@@ -274,7 +274,7 @@ export default function ProductsView({
                   <>
                     {/* Click outside backdrop/overlay */}
                     <div className="fixed inset-0 z-45" onClick={() => setIsSortOpen(false)} />
-                    
+
                     <motion.div
                       initial={{ opacity: 0, y: 10, scale: 0.95 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -294,11 +294,10 @@ export default function ProductsView({
                             setSortBy(opt.value);
                             setIsSortOpen(false);
                           }}
-                          className={`w-full text-left px-3.5 py-2.5 text-xs rounded-lg transition-all duration-200 cursor-pointer flex items-center justify-between ${
-                            sortBy === opt.value
+                          className={`w-full text-left px-3.5 py-2.5 text-xs rounded-lg transition-all duration-200 cursor-pointer flex items-center justify-between ${sortBy === opt.value
                               ? "bg-gradient-to-r from-blue-600/30 via-indigo-650/20 to-amber-500/10 text-white font-bold border-l-2 border-amber-500 pl-2.5"
                               : "text-slate-400 hover:text-white hover:bg-slate-900/60 font-semibold"
-                          }`}
+                            }`}
                         >
                           {opt.label}
                           {sortBy === opt.value && (

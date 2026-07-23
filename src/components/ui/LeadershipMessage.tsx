@@ -19,10 +19,10 @@ const fadeUp = {
 };
 
 const stats = [
-    { icon: TrendingUp, value: "12+", label: "Years Leading", gradient: "from-blue-400 to-cyan-300", iconColor: "text-blue-400", bgGlow: "bg-slate-800/80" },
-    { icon: Users, value: "450+", label: "Hospitals Served", gradient: "from-emerald-400 to-teal-300", iconColor: "text-emerald-400", bgGlow: "bg-slate-800/80" },
-    { icon: Award, value: "1,500+", label: "Installations", gradient: "from-amber-400 to-orange-300", iconColor: "text-amber-400", bgGlow: "bg-slate-800/80" },
-    { icon: Stethoscope, value: "100%", label: "Uptime SLA", gradient: "from-indigo-400 to-purple-300", iconColor: "text-indigo-400", bgGlow: "bg-slate-800/80" },
+    { icon: TrendingUp, value: "16+", label: "Years Leading", gradient: "from-blue-400 to-cyan-300", iconColor: "text-blue-400", bgGlow: "bg-slate-800/80" },
+    { icon: Users, value: "800+", label: "Hospitals Served", gradient: "from-emerald-400 to-teal-300", iconColor: "text-emerald-400", bgGlow: "bg-slate-800/80" },
+    { icon: Award, value: "6000+", label: "Installations", gradient: "from-amber-400 to-orange-300", iconColor: "text-amber-400", bgGlow: "bg-slate-800/80" },
+    { icon: Stethoscope, value: "1000", label: "Clients", gradient: "from-indigo-400 to-purple-300", iconColor: "text-indigo-400", bgGlow: "bg-slate-800/80" },
 ];
 
 const highlights: [string, string][] = [
@@ -188,7 +188,7 @@ export default function LeadershipMessage() {
 
                     {/* RIGHT COLUMN - Portrait & Modern Stats */}
                     <div className="lg:col-span-5 space-y-8">
-                        
+
                         {/* Portrait Container */}
                         <motion.div
                             custom={1.5} initial="hidden" animate={inView ? "visible" : "hidden"} variants={fadeUp}
@@ -209,19 +209,7 @@ export default function LeadershipMessage() {
                                     whileHover={{ scale: 1.04, transition: { duration: 0.5 } }}
                                 />
 
-                                {/* Floating experience badge */}
-                                <motion.div
-                                    animate={{ y: [0, -6, 0] }}
-                                    transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
-                                    className="absolute top-5 right-5 rounded-2xl px-4 py-2.5 text-center bg-slate-950/90 border border-slate-800/80 shadow-xl backdrop-blur-md z-20"
-                                >
-                                    <p
-                                        className="text-2xl font-black leading-none bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent"
-                                    >
-                                        12+
-                                    </p>
-                                    <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-0.5">Years</p>
-                                </motion.div>
+
 
                                 {/* Floating expert chip */}
                                 <motion.div

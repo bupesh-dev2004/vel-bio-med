@@ -775,7 +775,7 @@ export default function AboutView() {
 
                 <div className="space-y-6">
                   <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-semibold">
-                    At Vel Bio Med, we are dedicated to providing cutting-edge medical equipment, unparalleled service, and unwavering commitment to healthcare excellence. Established in 2013 by Mr. Muralikrishnan Gokulakrishnan, Vel Bio Med started as a proprietorship and has since grown to become a leading player in the medical equipment industry, offering sales and services across the vibrant healthcare landscape of Tamil Nadu.
+                    At Vel Bio Med, we are a leading Medical Equipment Supplier in Tamil Nadu and South India, dedicated to providing cutting-edge hospital equipment, ICU machinery, operation theatre devices, and expert biomedical engineering services. Established in 2013 by Mr. Muralikrishnan Gokulakrishnan, Vel Bio Med started as a proprietorship and has since grown into a premier medical device supplier and hospital equipment distributor, offering sales, installation, AMC maintenance, and calibration services across Chennai, Coimbatore, Trichy, Madurai, and all India.
                   </p>
 
                   {/* Highlights Grid */}
