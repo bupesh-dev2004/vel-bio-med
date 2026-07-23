@@ -733,12 +733,12 @@ export default function AboutView() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                   whileHover={{ y: -6, transition: { duration: 0.3 } }}
-                  className="absolute -bottom-6 -left-6 bg-slate-900/95 backdrop-blur-md text-white p-6 rounded-2xl shadow-2xl border border-slate-800 hidden sm:block"
+                  className="absolute bottom-3 left-3 sm:-bottom-6 sm:-left-6 bg-slate-900/95 backdrop-blur-md text-white p-4 sm:p-6 rounded-2xl shadow-2xl border border-slate-800 z-10"
                 >
-                  <span className="text-3xl font-black block tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500">
+                  <span className="text-2xl sm:text-3xl font-black block tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500">
                     16+ Years
                   </span>
-                  <span className="text-[10px] uppercase font-black tracking-widest text-slate-400 mt-1 block">
+                  <span className="text-[9px] sm:text-[10px] uppercase font-black tracking-widest text-slate-400 mt-0.5 sm:mt-1 block">
                     Clinical Sourcing Excellence
                   </span>
                 </motion.div>

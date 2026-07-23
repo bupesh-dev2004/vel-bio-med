@@ -140,9 +140,11 @@
   .heroEffects {
     height: 100dvh;
   }
+
   .heroEffects .title {
     margin-top: -130px;
   }
+
   .heroEffects .bg {
     background-image: url('/about-bg.png');
   }
