@@ -721,17 +721,17 @@
     max-width: 650px !important;
   }
 
-  .ipad-pro-cards-container>div {
+  .ipad-pro-cards-container > div {
     padding: 14px 12px !important;
     min-width: 110px !important;
   }
 
-  .ipad-pro-cards-container>div>div {
+  .ipad-pro-cards-container > div > div {
     width: 38px !important;
     height: 38px !important;
   }
 
-  .ipad-pro-cards-container>div>div svg {
+  .ipad-pro-cards-container > div > div svg {
     width: 18px !important;
     height: 18px !important;
   }
