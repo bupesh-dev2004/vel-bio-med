@@ -447,13 +447,52 @@
 }
 
 @media (max-width: 767.98px) {
+  .ipad-pro-hero-section {
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    padding-top: clamp(26px, 4vh, 40px) !important;
+    padding-bottom: 20px !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+  }
+
+  .ipad-pro-left-side,
+  .ipad-pro-motion-container {
+    height: auto !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: center !important;
+    margin: 0 auto !important;
+  }
+
+  .ipad-pro-top-group {
+    transform: translateY(0px) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin-top: 0 !important;
+  }
+
+  .ipad-pro-top-group h1,
+  .ipad-pro-top-group p {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
   .mobile-hero-bg-img {
     object-fit: cover !important;
     background-size: cover !important;
     background-repeat: no-repeat !important;
-    /* Zoom out feel by centering the medical equipment and lights */
-    object-position: center 45% !important;
-    background-position: center 45% !important;
+    object-position: center bottom !important;
+    background-position: center bottom !important;
   }
 }
 
@@ -682,17 +721,17 @@
     max-width: 650px !important;
   }
 
-  .ipad-pro-cards-container > div {
+  .ipad-pro-cards-container>div {
     padding: 14px 12px !important;
     min-width: 110px !important;
   }
 
-  .ipad-pro-cards-container > div > div {
+  .ipad-pro-cards-container>div>div {
     width: 38px !important;
     height: 38px !important;
   }
 
-  .ipad-pro-cards-container > div > div svg {
+  .ipad-pro-cards-container>div>div svg {
     width: 18px !important;
     height: 18px !important;
   }

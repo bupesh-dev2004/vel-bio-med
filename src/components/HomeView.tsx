@@ -358,7 +358,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* 1. HERO SECTION */}
-      <section className="ipad-pro-hero-section relative h-[82vh] lg:h-auto xl:h-[100dvh] w-full flex flex-col md:flex-row items-stretch md:items-center bg-slate-50 overflow-hidden pt-11 pb-4 md:pt-[96px] md:pb-12 lg:pt-[120px] lg:pb-16 xl:pt-[72px] xl:pb-6">
+      <section className="ipad-pro-hero-section relative h-[100dvh] md:h-[82vh] lg:h-auto xl:h-[100dvh] w-full flex flex-col md:flex-row items-stretch md:items-center bg-slate-50 overflow-hidden pt-16 pb-4 md:pt-[96px] md:pb-12 lg:pt-[120px] lg:pb-16 xl:pt-[72px] xl:pb-6">
         {/* Background with zoom and fade in effect */}
         <motion.div
           initial={{ opacity: 0, scale: 1 }}
@@ -390,18 +390,18 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
         <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-radial from-amber-500/10 via-amber-650/0 to-transparent rounded-full pointer-events-none z-10" />
 
         {/* Hero Content Wrapper */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 xl:px-10 w-full z-20 relative flex flex-col justify-stretch h-full">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center h-full w-full">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 xl:px-10 w-full z-20 relative flex flex-col justify-start md:justify-stretch h-full">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start md:items-center h-full w-full">
             {/* Left Side (45% on desktop xl, 58% on tablet/medium desktop) */}
-            <div className="ipad-pro-left-side col-span-1 md:col-span-12 xl:col-span-5 flex flex-col justify-between md:justify-between lg:justify-start xl:justify-start h-full md:h-full lg:h-auto text-center md:text-center xl:text-left text-slate-900 translate-y-0 md:translate-y-0 lg:translate-x-0 lg:translate-y-0 xl:translate-x-0 xl:-translate-y-6">
+            <div className="ipad-pro-left-side col-span-1 md:col-span-12 xl:col-span-5 flex flex-col justify-start md:justify-between lg:justify-start xl:justify-start h-auto md:h-full lg:h-auto text-center md:text-center xl:text-left text-slate-900 translate-y-0 md:translate-y-0 lg:translate-x-0 lg:translate-y-0 xl:translate-x-0 xl:-translate-y-6">
               <motion.div
                 initial="hidden"
                 animate={showPreloader ? "hidden" : "visible"}
                 variants={heroContainerVariants}
-                className="ipad-pro-motion-container flex flex-col items-center md:items-center xl:items-start text-center md:text-center xl:text-left text-slate-900 justify-between md:justify-between lg:justify-start xl:justify-start h-full md:h-full lg:h-auto w-full gap-y-[clamp(12px,2.5vw,20px)] md:gap-y-0 xl:gap-y-5"
+                className="ipad-pro-motion-container flex flex-col items-center md:items-center xl:items-start text-center md:text-center xl:text-left text-slate-900 justify-start md:justify-between lg:justify-start xl:justify-start h-auto md:h-full lg:h-auto w-full gap-y-[clamp(10px,2vw,16px)] md:gap-y-0 xl:gap-y-5"
               >
                 {/* Top Group: Text & Buttons */}
-                <div className="ipad-pro-top-group flex flex-col items-center md:items-center xl:items-start text-center md:text-center xl:text-left gap-y-[clamp(8px,1.8vw,16px)] md:gap-y-0 xl:gap-y-4 w-full mt-1 sm:mt-0 -translate-y-12 md:-translate-y-24 lg:-translate-y-[120px] xl:-translate-y-14">
+                <div className="ipad-pro-top-group flex flex-col items-center md:items-center xl:items-start text-center md:text-center xl:text-left gap-y-[clamp(8px,1.8vw,16px)] md:gap-y-0 xl:gap-y-4 w-full mt-1 sm:mt-0 translate-y-0 md:-translate-y-24 lg:-translate-y-[120px] xl:-translate-y-14">
                   {/* Badge */}
                   <motion.div variants={heroItemVariants} className="w-full text-center md:text-center xl:text-left translate-y-1 md:translate-y-2 lg:translate-y-0 xl:translate-y-0">
                     <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[10.5px] md:text-[13px] lg:text-[21px] xl:text-[13.5px] font-black tracking-widest px-3 py-1 md:px-3 md:py-1 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
@@ -467,10 +467,10 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   </motion.div>
                 </div>
 
-                {/* Statistics Cards */}
+                {/* Statistics Cards (Desktop & Tablet View) */}
                 <motion.div
                   variants={heroItemVariants}
-                  className="ipad-pro-cards-container grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3.5 md:gap-[clamp(8px,1.8vw,14px)] xl:gap-3.5 w-full md:mx-auto xl:mx-0 mt-[clamp(10px,2vw,16px)] md:mt-2 lg:mt-3 xl:mt-2 pt-2 xs:pt-3 sm:pt-4 xl:pt-0 justify-items-center -translate-y-12 md:translate-y-4 lg:-translate-y-4 xl:-translate-y-6 xl:-translate-x-6"
+                  className="ipad-pro-cards-container hidden md:grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3.5 md:gap-[clamp(8px,1.8vw,14px)] xl:gap-3.5 w-full md:mx-auto xl:mx-0 mt-[clamp(10px,2vw,16px)] md:mt-2 lg:mt-3 xl:mt-2 pt-2 xs:pt-3 sm:pt-4 xl:pt-0 justify-items-center md:translate-y-4 lg:-translate-y-4 xl:-translate-y-6 xl:-translate-x-6"
                 >
                   {[
                     { target: 16, suffix: "+", label: "Years Exp.", icon: Award, color: "text-blue-600", iconBg: "bg-blue-50", border: "border-blue-100/40 hover:border-orange-200/60", glow: "from-blue-500/5" },
@@ -502,6 +502,38 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
 
             {/* Right Side (55%) is empty to allow the background operation theatre image to display fully */}
             <div className="hidden xl:block xl:col-span-7 pointer-events-none" />
+          </div>
+        </div>
+      </section>
+
+      {/* 1.5 MOBILE STATISTICS SECTION (Mobile View Only) */}
+      <section className="block md:hidden py-6 sm:py-8 px-4 sm:px-6 bg-gradient-to-b from-blue-50/50 via-white to-slate-50 border-y border-blue-100/60 relative shadow-sm z-20">
+        <div className="max-w-md mx-auto">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
+            {[
+              { target: 16, suffix: "+", label: "Years Exp.", icon: Award, color: "text-blue-600", iconBg: "bg-blue-50", border: "border-blue-100/40 hover:border-orange-200/60" },
+              { target: 6000, suffix: "+", label: "Installations", icon: Wrench, color: "text-emerald-600", iconBg: "bg-emerald-50", border: "border-emerald-100/40 hover:border-orange-200/60" },
+              { target: 800, suffix: "+", label: "Hospitals", icon: Building, color: "text-sky-600", iconBg: "bg-sky-50", border: "border-sky-100/40 hover:border-orange-200/60" },
+              { target: 1000, suffix: "+", label: "Clients", icon: ThumbsUp, color: "text-rose-500", iconBg: "bg-rose-50", border: "border-rose-100/40 hover:border-orange-200/60" }
+            ].map((m, idx) => {
+              const IconComponent = m.icon;
+              return (
+                <div
+                  key={idx}
+                  className={`flex flex-col items-center justify-center text-center gap-1.5 py-4 px-3 rounded-2xl border ${m.border} bg-white/90 backdrop-blur-md shadow-[0_2px_12px_rgba(0,0,0,0.05)] hover:shadow-md transition-all duration-200 w-full`}
+                >
+                  <div className={`w-10 h-10 flex items-center justify-center rounded-xl ${m.iconBg} border border-white/90 shadow-sm`}>
+                    <IconComponent className={`w-5 h-5 ${m.color}`} strokeWidth={2} />
+                  </div>
+                  <p className="text-xl sm:text-2xl font-black text-slate-800 tracking-tight leading-none mt-1">
+                    <AnimatedCounter target={m.target} suffix={m.suffix} duration={2000} startSignal={!showPreloader} />
+                  </p>
+                  <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider leading-none mt-0.5">
+                    {m.label}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
