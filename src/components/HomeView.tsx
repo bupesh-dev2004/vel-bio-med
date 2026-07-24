@@ -364,7 +364,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
           initial={{ opacity: 0, scale: 1 }}
           animate={showPreloader ? { opacity: 0, scale: 1 } : { opacity: 1, scale: 1 }}
           transition={{ duration: 1.8, ease: "easeOut" }}
-          className="absolute inset-0"
+          className="mobile-hero-bg-wrapper absolute inset-0"
         >
           <picture className="block w-full h-full overflow-hidden">
             {/* Desktop: screens 1025px and larger */}
@@ -526,7 +526,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                     <IconComponent className={`w-5 h-5 ${m.color}`} strokeWidth={2} />
                   </div>
                   <p className="text-xl sm:text-2xl font-black text-slate-800 tracking-tight leading-none mt-1">
-                    <AnimatedCounter target={m.target} suffix={m.suffix} duration={2000} startSignal={!showPreloader} />
+                    <AnimatedCounter target={m.target} suffix={m.suffix} duration={2000} />
                   </p>
                   <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider leading-none mt-0.5">
                     {m.label}
