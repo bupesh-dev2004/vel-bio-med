@@ -86,7 +86,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const toggleInquiryAttended = async (id: string) => {
     setState(prev => ({
       ...prev,
-      inquiries: prev.inquiries.map(inq => 
+      inquiries: prev.inquiries.map(inq =>
         inq.id === id ? { ...inq, attended: !inq.attended } : inq
       )
     }));
