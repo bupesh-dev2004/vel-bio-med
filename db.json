@@ -38,7 +38,7 @@
     {
       "id": "srv-3",
       "title": "Installation & Commissioning of new medical equipment",
-      "description": "We excel in the seamless installation and commissioning of new medical equipment, ensuring optimal functionality and readiness .",
+      "description": "We excel in the seamless installation and commissioning of new medical equipment, ensuring optimal functionality and readiness.",
       "iconName": "Briefcase"
     },
     {
@@ -49,7 +49,7 @@
     },
     {
       "id": "srv-5",
-      "title": "Customised Product solutions for all medical equipment",
+      "title": "Customized Product Solutions for all medical equipment",
       "description": "We provide customized solutions for all medical equipment, meeting diverse needs with precision and innovation.",
       "iconName": "PhoneCall"
     },
@@ -63,11 +63,11 @@
   "products": [
     {
       "id": "prod-1",
-      "name": "ANAESTHESIA MACHINE",
+      "name": "ANESTHESIA MACHINE",
       "category": "Operating Theatre (OT)",
       "image": "/images/prod-1.jpg",
-      "shortDesc": "Advanced anaesthesia delivery system engineered for precise gas administration and patient safety.",
-      "description": "Advanced anaesthesia delivery system engineered for precise gas administration, patient safety, and reliable performance during surgical procedures. Features advanced ventilation modes and digital flow meters for optimized surgical control.",
+      "shortDesc": "Advanced anesthesia delivery system engineered for precise gas administration and patient safety.",
+      "description": "Advanced anesthesia delivery system engineered for precise gas administration, patient safety, and reliable performance during surgical procedures. Features advanced ventilation modes and digital flow meters for optimized surgical control.",
       "rating": 5,
       "features": [
         "High-precision digital flow control systems",
@@ -405,11 +405,11 @@
     },
     {
       "id": "prod-13",
-      "name": "LED OT Light Round Doom",
+      "name": "LED OT Light Round Dome",
       "category": "Operating Theatre (OT)",
       "image": "/images/prod-13.jpg",
       "shortDesc": "Classic round dome operating theatre light combining robust mechanics with premium LED illumination.",
-      "description": "The LED OT Light Round Doom is a premium surgical lighting solution engineered to deliver consistent, shadow-free illumination for advanced surgical and medical procedures. Featuring high-performance LED technology, adjustable intensity control, and superior color accuracy, it enhances surgical precision and operational efficiency in modern healthcare environments.",
+      "description": "The LED OT Light Round Dome is a premium surgical lighting solution engineered to deliver consistent, shadow-free illumination for advanced surgical and medical procedures. Featuring high-performance LED technology, adjustable intensity control, and superior color accuracy, it enhances surgical precision and operational efficiency in modern healthcare environments.",
       "rating": 4,
       "features": [
         "High-intensity shadow-free surgical illumination",
@@ -510,7 +510,7 @@
       "category": "Critical Care & ICU",
       "image": "/images/prod-16.png",
       "shortDesc": "High performance biphasic defibrillator with integrated patient monitoring and AED functionality.",
-      "description": "The Defibrillator Biphasic is a high-performance cardiac emergency system engineered for rapid and precise defibrillation during critical cardiac events. Featuring advanced biphasic waveform technology, integrated patient monitoring, and intelligent safety controls, it delivers dependable emergency response performance for hospitals, ambulances, and intensive care environments",
+      "description": "The Defibrillator Biphasic is a high-performance cardiac emergency system engineered for rapid and precise defibrillation during critical cardiac events. Featuring advanced biphasic waveform technology, integrated patient monitoring, and intelligent safety controls, it delivers dependable emergency response performance for hospitals, ambulances, and intensive care environments.",
       "rating": 5,
       "features": [
         "Advanced biphasic waveform defibrillation technology",
@@ -544,7 +544,7 @@
       "category": "Critical Care & ICU",
       "image": "/images/prod-17.png",
       "shortDesc": "Advanced critical care lung ventilator utilizing a quiet internal turbine compressor.",
-      "description": "The Ventilator Turbine is a high-performance critical care ventilation system engineered to deliver precise and dependable respiratory support across a wide range of clinical environments. Featuring advanced turbine-driven technology, intelligent ventilation modes, and real-time patient monitoring, it ensures efficient respiratory management for adult, pediatric, and neonatal care applications",
+      "description": "The Ventilator Turbine is a high-performance critical care ventilation system engineered to deliver precise and dependable respiratory support across a wide range of clinical environments. Featuring advanced turbine-driven technology, intelligent ventilation modes, and real-time patient monitoring, it ensures efficient respiratory management for adult, pediatric, and neonatal care applications.",
       "rating": 5,
       "features": [
         "Integrated turbine-driven ventilation technology",
@@ -612,7 +612,7 @@
       "category": "Critical Care & ICU",
       "image": "/images/prod-19.jpg",
       "shortDesc": "High intensity neonatal phototherapy light utilizing premium narrow-band blue LEDs.",
-      "description": "The LED Photo Therapy Neonatal system is a precision-engineered phototherapy solution designed for the safe and effective treatment of neonatal jaundice. Featuring advanced LED technology, uniform light distribution, and low heat emission, it ensures reliable therapeutic performance and enhanced neonatal comfort in NICU and pediatric care environments",
+      "description": "The LED Photo Therapy Neonatal system is a precision-engineered phototherapy solution designed for the safe and effective treatment of neonatal jaundice. Featuring advanced LED technology, uniform light distribution, and low heat emission, it ensures reliable therapeutic performance and enhanced neonatal comfort in NICU and pediatric care environments.",
       "rating": 4,
       "features": [
         "High-intensity LED phototherapy treatment system",

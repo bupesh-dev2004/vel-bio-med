@@ -570,7 +570,7 @@ export default function AboutView() {
   const values = [
     {
       title: "Integrity",
-      desc: "Upholding honesty, transparency, and ethical conduct is non-negotiable. We build trust through our commitment to the highest standards of integrity",
+      desc: "Upholding honesty, transparency, and ethical conduct is non-negotiable. We build trust through our commitment to the highest standards of integrity.",
       icon: Scale,
       gradient: "from-blue-500 to-indigo-600"
     },
@@ -594,7 +594,7 @@ export default function AboutView() {
     },
     {
       title: "Reliability",
-      desc: "Vel Bio Med is synonymous with reliability. Our commitment is unwavering, ensuring the quality of our products and the efficiency of our services instill confidence in our clients",
+      desc: "Vel Bio Med is synonymous with reliability. Our commitment is unwavering, ensuring the quality of our products and the efficiency of our services instill confidence in our clients.",
       icon: ShieldCheck,
       gradient: "from-emerald-500 to-teal-600"
     }
