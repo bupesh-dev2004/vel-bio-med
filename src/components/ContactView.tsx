@@ -1,674 +1,757 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Mail, Phone, MapPin, Clock, ArrowRight, ShieldCheck, HelpCircle, MessageSquare } from "lucide-react";
-import { useAppState } from "../AppContext.js";
-import { motion, AnimatePresence, useMotionValue, useTransform, Variants } from "framer-motion";
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  User,
+  Phone,
+  Mail,
+  Building2,
+  MapPin,
+  Clock,
+  ShieldCheck,
+  Send,
+  Lock,
+  Activity,
+  CheckCircle2,
+  ArrowRight,
+  Stethoscope,
+  HelpCircle,
+  Compass,
+  Globe,
+  Award
+} from 'lucide-react';
+import Logo from './Logo';
+import HeartbeatLine from './HeartbeatLine';
+import { useAppState } from '../AppContext';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
+import Lenis from 'lenis';
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
+      staggerChildren: 0.08,
+      delayChildren: 0.05,
     }
   }
 };
 
-const cardSlideIn: Variants = {
-  hidden: { opacity: 0, x: -35, y: 15 },
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 14 },
   visible: {
     opacity: 1,
-    x: 0,
     y: 0,
     transition: {
       type: "spring",
-      stiffness: 90,
-      damping: 14
+      stiffness: 120,
+      damping: 16
     }
   }
 };
 
 export default function ContactView() {
-  const { state, submitInquiry, inquiryMachineName, setInquiryMachineName } = useAppState();
+  const { state, submitInquiry, setCurrentTab } = useAppState();
 
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
+  // Initialize Lenis Smooth Scroll for buttery smooth 60fps scrolling
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
     }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+
+    const animationFrameId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      lenis.destroy();
+    };
   }, []);
 
-  // For 3D card tilt effect
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const rotateX = useTransform(mouseY, [-350, 350], [8, -8]);
-  const rotateY = useTransform(mouseX, [-350, 350], [-8, 8]);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    mouseX.set(e.clientX - rect.left - rect.width / 2);
-    mouseY.set(e.clientY - rect.top - rect.height / 2);
-  };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
-
   const defaultContact = {
-    address: "704-B, Phoenix Corporate Park, Outer Ring Road, Bengaluru - 560103, Karnataka, India",
-    phone: "+91 80 4930 2930",
-    email: "sales@velbiomed.co.in",
-    workingHours: "Monday - Saturday: 9:00 AM - 6:30 PM (IST)",
+    address: "Vel Bio Healthcare, India",
+    phone: "+91 7094878251",
+    email: "velbio@gmail.com",
+    workingHours: "Mon - Sat, 9:00 AM - 7:00 PM",
     mapUrl: "https://maps.google.com/maps?q=Vel%20Bio%20Med%20Outer%20Ring%20Road,%20Bengaluru&t=&z=14&ie=UTF8&iwloc=&output=embed"
   };
 
   const contact = state?.contactInfo || defaultContact;
 
-  // Form hooks
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    mobile: "",
-    product: "",
-    feedback: ""
+    fullName: '',
+    mobileNumber: '',
+    emailAddress: '',
+    hospitalName: '',
+    doctorName: '',
+    city: '',
+    message: '',
+    consent: false
   });
 
-  const [formValidation, setFormValidation] = useState<string | null>(null);
-  const [formSuccess, setFormSuccess] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string | null>>({});
+  const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [locationLoading, setLocationLoading] = useState(false);
+  const [locationError, setLocationError] = useState('');
+  const [isTracking, setIsTracking] = useState(false);
+  const watchIdRef = useRef<number | null>(null);
 
-  // Toast Notification state
-  const [toastNotification, setToastNotification] = useState<{
-    type: "success" | "error";
-    message: string;
-  } | null>(null);
+  // SweetAlert Modal & Toast states
+  const [showSweetAlert, setShowSweetAlert] = useState(false);
+  const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
-  const showToast = (type: "success" | "error", message: string) => {
-    setToastNotification({ type, message });
-    setTimeout(() => {
-      setToastNotification(null);
-    }, 4500);
+  const showToast = (type: 'success' | 'error', message: string) => {
+    setToast({ type, message });
+    setTimeout(() => setToast(null), 4500);
   };
 
-  // Autofill product logic when user comes from products page selection!
-  useEffect(() => {
-    if (inquiryMachineName) {
-      setFormData((prev) => ({
-        ...prev,
-        product: inquiryMachineName
-      }));
-    }
-  }, [inquiryMachineName]);
+  useEffect(() => () => {
+    if (watchIdRef.current !== null) navigator.geolocation.clearWatch(watchIdRef.current);
+  }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-
-    if (name === "mobile") {
-      // Allow only digits
-      const digitsOnly = value.replace(/\D/g, "");
-      // Limit to 10 digits
-      if (digitsOnly.length > 10) {
-        return;
-      }
-      setFormData((prev) => ({
-        ...prev,
-        mobile: digitsOnly
-      }));
-      setFormValidation(null);
+  const onlyLetters = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (
+      e.ctrlKey || e.metaKey || e.altKey ||
+      ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Tab', 'Enter', 'Home', 'End', 'Escape'].includes(e.key)
+    ) {
       return;
     }
+    if (!/^[a-zA-Z\s]$/.test(e.key)) {
+      e.preventDefault();
+    }
+  };
 
-    setFormData((prev) => ({
+  const onlyDigits = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (
+      e.ctrlKey || e.metaKey || e.altKey ||
+      ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Tab', 'Enter', 'Home', 'End', 'Escape'].includes(e.key)
+    ) {
+      return;
+    }
+    if (!/^[0-9]$/.test(e.key)) {
+      e.preventDefault();
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const target = e.target;
+    const name = target.name;
+    const value = target.value;
+    const type = target.type;
+    const checked = (target as HTMLInputElement).checked;
+
+    setFormData(prev => ({
       ...prev,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     }));
-    setFormValidation(null);
+
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: null }));
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+    if (!formData.fullName.trim()) newErrors.fullName = 'Full name is required';
+    if (!formData.mobileNumber.trim()) {
+      newErrors.mobileNumber = 'Mobile number is required';
+    } else if (!/^\+?[0-9]{10,15}$/.test(formData.mobileNumber.replace(/\s+/g, ''))) {
+      newErrors.mobileNumber = 'Please enter a valid 10-digit mobile number';
+    }
+    if (!formData.emailAddress.trim()) {
+      newErrors.emailAddress = 'Email address is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.emailAddress)) {
+      newErrors.emailAddress = 'Please enter a valid email address';
+    }
+    if (!formData.hospitalName.trim()) newErrors.hospitalName = 'Hospital name is required';
+    if (!formData.city.trim()) newErrors.city = 'City is required';
+    if (!formData.message.trim()) newErrors.message = 'Message is required';
+    if (!formData.consent) newErrors.consent = 'You must accept the contact terms';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const fetchCity = async ({ coords }: GeolocationPosition) => {
+    setLocationLoading(true);
+    setLocationError('');
+    try {
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?lat=${coords.latitude}&lon=${coords.longitude}&format=json`
+      );
+      const data = await res.json();
+      const city =
+        data.address?.city ||
+        data.address?.town ||
+        data.address?.village ||
+        data.address?.county ||
+        '';
+      if (city) {
+        setFormData(prev => ({ ...prev, city }));
+        setErrors(prev => ({ ...prev, city: null }));
+        showToast('success', `City detected: ${city}`);
+      } else {
+        setLocationError('Could not determine city from your location.');
+      }
+    } catch {
+      setLocationError('Failed to fetch location data.');
+    } finally {
+      setLocationLoading(false);
+    }
+  };
+
+  const handleDetectCity = () => {
+    if (!navigator.geolocation) {
+      setLocationError('Geolocation is not supported by your browser.');
+      return;
+    }
+    if (isTracking && watchIdRef.current !== null) {
+      navigator.geolocation.clearWatch(watchIdRef.current);
+      watchIdRef.current = null;
+      setIsTracking(false);
+      setLocationLoading(false);
+      return;
+    }
+    setLocationError('');
+    setIsTracking(true);
+    watchIdRef.current = navigator.geolocation.watchPosition(
+      fetchCity,
+      () => {
+        setLocationError('Location access denied. Please type city manually.');
+        setIsTracking(false);
+        setLocationLoading(false);
+        showToast('error', 'Location permission denied.');
+      },
+      { enableHighAccuracy: true }
+    );
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (validateForm()) {
+      setIsSubmitting(true);
 
-    if (isSubmitting) return;
+      if (submitInquiry) {
+        await submitInquiry({
+          name: formData.fullName.trim(),
+          email: formData.emailAddress.trim(),
+          mobile: formData.mobileNumber.trim(),
+          product: `Hospital: ${formData.hospitalName} | Doctor: ${formData.doctorName || 'N/A'}`,
+          feedback: `[City: ${formData.city}] ${formData.message.trim()}`
+        });
+      }
 
-    // Check basic validations
-    if (!formData.name.trim()) {
-      const msg = "Please fill in your Contact Person Name.";
-      setFormValidation(msg);
-      showToast("error", msg);
-      return;
-    }
-    if (!formData.mobile.trim()) {
-      const msg = "Please fill in your Mobile Number.";
-      setFormValidation(msg);
-      showToast("error", msg);
-      return;
-    }
-    if (formData.mobile.length !== 10) {
-      const msg = "Please provide a valid 10-digit Mobile Number.";
-      setFormValidation(msg);
-      showToast("error", msg);
-      return;
-    }
-    if (!formData.email.trim()) {
-      const msg = "Please fill in your Institutional Email address.";
-      setFormValidation(msg);
-      showToast("error", msg);
-      return;
-    }
-    if (!formData.email.includes("@") || !formData.email.includes(".")) {
-      const msg = "Please provide a valid Institutional Email address (e.g. name@hospital.org).";
-      setFormValidation(msg);
-      showToast("error", msg);
-      return;
-    }
-    if (!formData.feedback.trim()) {
-      const msg = "Please fill in the Inquiry Details & Clinic Context.";
-      setFormValidation(msg);
-      showToast("error", msg);
-      return;
-    }
+      setIsSubmitting(false);
+      setSubmitted(true);
 
-    setIsSubmitting(true);
-    setFormValidation(null);
+      // Trigger SweetAlert Popup Modal!
+      setShowSweetAlert(true);
 
-    const result = await submitInquiry({
-      name: formData.name.trim(),
-      email: formData.email.trim(),
-      mobile: formData.mobile.trim(),
-      product: formData.product || "General Consultation Request",
-      feedback: formData.feedback.trim()
-    });
-
-    setIsSubmitting(false);
-
-    if (result.success) {
-      setFormSuccess(true);
-      showToast("success", result.message || "Inquiry submitted successfully!");
-      // Reset form variables
       setFormData({
-        name: "",
-        email: "",
-        mobile: "",
-        product: "",
-        feedback: ""
+        fullName: '',
+        mobileNumber: '',
+        emailAddress: '',
+        hospitalName: '',
+        doctorName: '',
+        city: '',
+        message: '',
+        consent: false
       });
-      // Clear product redirect identifier from global context
-      setInquiryMachineName(null);
     } else {
-      setFormValidation(result.message);
-      showToast("error", result.message);
+      showToast('error', 'Please complete all required fields.');
     }
   };
 
   return (
-    <div className="bg-gradient-to-tr from-slate-50 via-slate-100 to-blue-50/50 min-h-screen text-slate-800 selection:bg-blue-500/10 relative">
-      {/* Toast Notification Container */}
+    <div className="contact-page-wrapper bg-gradient-to-tr from-sky-50/40 via-slate-50 to-orange-50/30 min-h-screen relative text-slate-800 font-sans selection:bg-sky-500/20 overflow-hidden tracking-tight">
+
+      {/* GPU Hardware-Accelerated Ambient Backdrop (Zero Scroll Lag) */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 transform-gpu translate-z-0">
+        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-gradient-to-br from-sky-400/12 via-blue-500/08 to-transparent rounded-full blur-[140px] will-change-transform" />
+        <div className="absolute top-1/4 -right-40 w-[650px] h-[650px] bg-gradient-to-bl from-orange-400/12 via-amber-500/08 to-transparent rounded-full blur-[150px] will-change-transform" />
+        <div className="absolute -bottom-40 left-10 w-[550px] h-[550px] bg-gradient-to-tr from-blue-600/08 via-sky-400/08 to-transparent rounded-full blur-[140px] will-change-transform" />
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `linear-gradient(135deg, #0284c7 0.5px, transparent 0.5px), linear-gradient(45deg, #f97316 0.5px, transparent 0.5px)`,
+            backgroundSize: '36px 36px'
+          }}
+        />
+      </div>
+
+      {/* SWEETALERT SUCCESS MODAL POPUP */}
       <AnimatePresence>
-        {toastNotification && (
-          <motion.div
-            initial={{ opacity: 0, y: -20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl border backdrop-blur-xl max-w-md ${toastNotification.type === "success"
-                ? "bg-slate-900/95 border-emerald-500/40 text-emerald-300"
-                : "bg-slate-900/95 border-rose-500/40 text-rose-300"
-              }`}
-          >
-            <div
-              className={`p-2 rounded-xl ${toastNotification.type === "success"
-                  ? "bg-emerald-500/10 text-emerald-400"
-                  : "bg-rose-500/10 text-rose-400"
-                }`}
+        {showSweetAlert && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowSweetAlert(false)}
+              className="absolute inset-0 bg-slate-950/75 backdrop-blur-md cursor-pointer"
+            />
+
+            {/* SweetAlert Popup Box */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.8, y: 20 }}
+              transition={{ type: "spring", stiffness: 300, damping: 22 }}
+              className="relative bg-white rounded-3xl p-8 sm:p-10 max-w-md w-full text-center shadow-2xl border border-slate-100 z-10 space-y-6"
             >
-              {toastNotification.type === "success" ? (
-                <ShieldCheck className="w-5 h-5" />
-              ) : (
-                <HelpCircle className="w-5 h-5" />
-              )}
+              {/* SweetAlert Animated Checkmark Badge */}
+              <div className="relative w-20 h-20 mx-auto flex items-center justify-center">
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: [0, 1.2, 1] }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center border-4 border-emerald-500/30 shadow-lg shadow-emerald-500/20"
+                >
+                  <CheckCircle2 className="w-11 h-11 text-emerald-600" />
+                </motion.div>
+                <div className="absolute inset-0 rounded-full border-2 border-emerald-400 animate-ping opacity-25" />
+              </div>
+
+              {/* Modal Title & Text */}
+              <div className="space-y-2">
+                <h3 className="text-2xl font-black text-slate-900 tracking-tight">Inquiry Sent Successfully!</h3>
+                <p className="text-slate-600 text-xs sm:text-sm font-medium leading-relaxed">
+                  Thank you for reaching out to <span className="font-bold text-sky-600">Vel Bio Healthcare</span>. Our biomedical technical consultant will contact you shortly.
+                </p>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+                {/* Explore Website Button -> Navigates to Home */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowSweetAlert(false);
+                    if (setCurrentTab) {
+                      setCurrentTab('home');
+                    }
+                  }}
+                  className="w-full sm:w-auto flex-1 py-3.5 px-6 bg-gradient-to-r from-sky-600 via-blue-600 to-sky-700 hover:from-sky-700 hover:to-blue-800 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-sky-600/30 hover:shadow-sky-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-none"
+                >
+                  <Compass className="w-4 h-4" />
+                  <span>Explore Website</span>
+                </button>
+
+                {/* Close Button */}
+                <button
+                  type="button"
+                  onClick={() => setShowSweetAlert(false)}
+                  className="w-full sm:w-auto py-3.5 px-5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs uppercase tracking-wider rounded-xl transition-colors cursor-pointer border-none"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
+      {/* Floating Toast Notification */}
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            initial={{ opacity: 0, y: -30, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.9 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl border backdrop-blur-xl max-w-md ${
+              toast.type === 'success'
+                ? 'bg-slate-900/95 border-emerald-500/40 text-emerald-300'
+                : 'bg-slate-900/95 border-rose-500/40 text-rose-300'
+            }`}
+          >
+            <div className={`p-2 rounded-xl ${toast.type === 'success' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'}`}>
+              {toast.type === 'success' ? <ShieldCheck className="w-5 h-5" /> : <HelpCircle className="w-5 h-5" />}
             </div>
             <div className="flex-1">
               <h5 className="text-xs font-black uppercase tracking-wider">
-                {toastNotification.type === "success" ? "Success" : "Error"}
+                {toast.type === 'success' ? 'Request Status' : 'Notice'}
               </h5>
-              <p className="text-xs font-medium mt-0.5 leading-relaxed text-slate-200">
-                {toastNotification.message}
-              </p>
+              <p className="text-xs font-semibold mt-0.5 text-slate-200">{toast.message}</p>
             </div>
-            <button
-              onClick={() => setToastNotification(null)}
-              className="text-slate-400 hover:text-white transition-colors bg-transparent border-none cursor-pointer"
-            >
+            <button onClick={() => setToast(null)} className="text-slate-400 hover:text-white border-none bg-transparent cursor-pointer">
               ✕
             </button>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Top cover title with cinematic high-contrast backdrop */}
-      <section className="relative py-32 border-b border-slate-900 overflow-hidden bg-slate-950">
-        <div className="absolute inset-0 bg-[url('https://wallpaperbat.com/img/1872990-modern-hospital-modular-in-environments.jpg')] bg-cover bg-center opacity-[0.25] pointer-events-none" />
+      {/* MAIN CONTENT SECTION */}
+      <section className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 
-        {/* Floating gradient radial accent spots */}
-        <div className="absolute -top-40 right-0 w-[450px] h-[450px] bg-blue-500/15 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute -bottom-40 left-0 w-[350px] h-[350px] bg-amber-500/10 rounded-full blur-[140px] pointer-events-none" />
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 z-10">
+          {/* LEFT COLUMN: Executive Branding & Direct Contact Cards */}
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-block bg-gradient-to-r from-blue-500/10 to-sky-500/10 border border-blue-500/30 px-4 py-1.5 rounded-full"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="lg:col-span-5 space-y-8"
           >
-            <span className="text-blue-300 font-extrabold tracking-widest text-[10px] uppercase block font-sans">
-              Contact Desk
-            </span>
+            {/* Executive Branding Panel */}
+            <motion.div variants={itemVariants} className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xl shadow-slate-200/40 space-y-4 relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-4 opacity-5">
+                <Award className="w-32 h-32 text-sky-600" />
+              </div>
+              <Logo />
+              <div className="h-1 w-20 bg-gradient-to-r from-sky-500 via-blue-600 to-amber-500 rounded-full" />
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
+                Vel Bio Healthcare is a premier medical & biomedical equipment supplier in India, specializing in high-precision ICU systems, diagnostic ultrasound, surgical OT setups, and 24/7 technical AMC services.
+              </p>
+            </motion.div>
+
+            {/* Direct Contact Cards */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-between px-1">
+                <h3 className="text-xs font-black uppercase tracking-widest text-slate-400">
+                  Direct Communication Channels
+                </h3>
+              </div>
+
+              {/* Phone Hotline Card */}
+              <motion.a
+                variants={itemVariants}
+                href="tel:+917094878251"
+                className="group flex items-center gap-4 p-5 bg-white rounded-2xl border border-slate-200/80 shadow-md hover:shadow-xl hover:border-sky-400 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
+              >
+                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-sky-500 to-blue-600 group-hover:w-2.5 transition-all duration-300" />
+                <div className="p-3.5 rounded-xl bg-sky-50 text-sky-600 group-hover:bg-sky-600 group-hover:text-white transition-all duration-300 group-hover:scale-110">
+                  <Phone className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 block">Phone Hotline</span>
+                  <span className="text-slate-900 font-extrabold text-sm sm:text-base group-hover:text-sky-600 transition-colors">+91 7094878251</span>
+                  <span className="text-slate-500 text-xs block font-medium">Mon - Sat: 9:00 AM - 7:00 PM | Priority Desk</span>
+                </div>
+              </motion.a>
+
+              {/* Email Desk Card */}
+              <motion.a
+                variants={itemVariants}
+                href="mailto:velbio@gmail.com"
+                className="group flex items-center gap-4 p-5 bg-white rounded-2xl border border-slate-200/80 shadow-md hover:shadow-xl hover:border-emerald-400 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
+              >
+                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-emerald-500 to-teal-600 group-hover:w-2.5 transition-all duration-300" />
+                <div className="p-3.5 rounded-xl bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 group-hover:scale-110">
+                  <Mail className="w-5 h-5 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 block">Official Email Desk</span>
+                  <span className="text-slate-900 font-extrabold text-sm sm:text-base group-hover:text-emerald-600 transition-colors">velbio@gmail.com</span>
+                  <span className="text-slate-500 text-xs block font-medium">Guaranteed response within 24 business hours</span>
+                </div>
+              </motion.a>
+
+              {/* Business Hours Card */}
+              <motion.div
+                variants={itemVariants}
+                className="group flex items-center gap-4 p-5 bg-white rounded-2xl border border-slate-200/80 shadow-md hover:shadow-xl hover:border-amber-400 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
+              >
+                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-amber-500 to-orange-500 group-hover:w-2.5 transition-all duration-300" />
+                <div className="p-3.5 rounded-xl bg-amber-50 text-amber-600 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300 group-hover:scale-110">
+                  <Clock className="w-5 h-5 group-hover:rotate-[360deg] transition-transform duration-700 ease-in-out" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 block">Business Hours</span>
+                  <span className="text-slate-900 font-extrabold text-sm">Monday – Saturday: 9:00 AM – 7:00 PM</span>
+                  <span className="text-slate-500 text-xs block font-medium">Sunday: Emergency Critical Care Support</span>
+                </div>
+              </motion.div>
+
+              {/* Corporate Office Card */}
+              <motion.a
+                variants={itemVariants}
+                href="https://www.google.com/maps/place/VEL+BIO+MED+-+Medical+equipment+supplier/@11.3431194,78.2216324,9.64z/data=!4m10!1m2!2m1!1sVel+Bio+Healthcare+India!3m6!1s0x3baaf51c4fca421d:0x599b7e0900cf70b5!8m2!3d10.827287!4d78.676879!15sChhWZWwgQmlvIEhlYWx0aGNhcmUgSW5kaWFaGiIYdmVsIGJpbyBoZWFsdGhjYXJlIGluZGlhkgEabWVkaWNhbF_lcXVpcG1lbnRfc3VwcGxpZXKaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMjVPYjAxV2FFZFhWR3Q0V2xaa1RsZHFXWGRTUmpsVlZqRm9NMDlGUlJBQuABAPoBBAgAEDQ!16s%2Fg%2F11qkn5ljt_?entry=ttu&g_ep=EgoyMDI2MDYyOC4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-4 p-5 bg-white rounded-2xl border border-slate-200/80 shadow-md hover:shadow-xl hover:border-indigo-400 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
+              >
+                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-indigo-500 to-purple-600 group-hover:w-2.5 transition-all duration-300" />
+                <div className="p-3.5 rounded-xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 group-hover:scale-110">
+                  <MapPin className="w-5 h-5 group-hover:animate-bounce" />
+                </div>
+                <div>
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 block">Corporate Office</span>
+                  <span className="text-slate-900 font-extrabold text-sm group-hover:text-indigo-600 transition-colors">Vel Bio Healthcare, India</span>
+                  <span className="text-slate-500 text-xs block font-medium">Click to open Google Maps directions</span>
+                </div>
+              </motion.a>
+            </div>
+
           </motion.div>
 
-          <motion.h1
+          {/* RIGHT COLUMN: Executive Official Enquiry Form */}
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="text-4xl md:text-6xl font-black text-white tracking-tight leading-tight max-w-4xl mx-auto"
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="lg:col-span-7"
           >
-            Request <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-sky-400 bg-clip-text text-transparent">Quotations</span> & <span className="bg-gradient-to-r from-amber-400 via-orange-300 to-amber-500 bg-clip-text text-transparent">Handovers</span>
-          </motion.h1>
+            <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-2xl shadow-slate-200/60 relative overflow-hidden">
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="max-w-2xl mx-auto text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed font-semibold"
-          >
-            Our corporate clinical agents supply <span className="text-blue-300 font-bold">quote sheets</span>, arrange <span className="text-white">logistics timelines</span>, and program <span className="text-cyan-300 font-bold">live virtual system presentations</span> on request.
-          </motion.p>
+              {/* Form Header */}
+              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-6 mb-6">
+                <div>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 text-sky-600 text-xs font-extrabold uppercase tracking-wider border border-sky-100 mb-2">
+                    Official Enquiry Desk <Send className="w-3 h-3 -rotate-45" />
+                  </span>
+                  <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+                    Send an <span className="text-sky-600">Official Enquiry</span>
+                  </h2>
+                  <p className="text-slate-500 text-xs sm:text-sm font-medium mt-1">
+                    Fill out the form below. Our biomedical technical consultants will provide datasheets and an instant quote.
+                  </p>
+                </div>
+                <HeartbeatLine />
+              </div>
+
+              {/* Contact Form */}
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+                  {/* Full Name */}
+                  <div className="space-y-2">
+                    <label htmlFor="fullName" className="block text-xs font-bold text-slate-700 tracking-wide">
+                      Full Name <span className="text-rose-500">*</span>
+                    </label>
+                    <div className="relative flex items-center group/input">
+                      <User className="absolute left-3.5 w-4 h-4 text-slate-400 group-focus-within/input:text-sky-600 transition-colors pointer-events-none" />
+                      <input
+                        type="text"
+                        id="fullName"
+                        name="fullName"
+                        placeholder="e.g. Dr. Rajesh Kumar"
+                        value={formData.fullName}
+                        onKeyDown={onlyLetters}
+                        onChange={handleInputChange}
+                        className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-500/10 transition-all duration-200"
+                      />
+                    </div>
+                    {errors.fullName && <span className="text-xs text-rose-500 font-bold block">{errors.fullName}</span>}
+                  </div>
+
+                  {/* Mobile Number */}
+                  <div className="space-y-2">
+                    <label htmlFor="mobileNumber" className="block text-xs font-bold text-slate-700 tracking-wide">
+                      Mobile Number <span className="text-rose-500">*</span>
+                    </label>
+                    <div className="relative flex items-center group/input">
+                      <Phone className="absolute left-3.5 w-4 h-4 text-slate-400 group-focus-within/input:text-sky-600 transition-colors pointer-events-none" />
+                      <input
+                        type="tel"
+                        id="mobileNumber"
+                        name="mobileNumber"
+                        placeholder="10-digit mobile number"
+                        value={formData.mobileNumber}
+                        maxLength={10}
+                        onKeyDown={onlyDigits}
+                        onChange={handleInputChange}
+                        className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-500/10 transition-all duration-200"
+                      />
+                    </div>
+                    {errors.mobileNumber && <span className="text-xs text-rose-500 font-bold block">{errors.mobileNumber}</span>}
+                  </div>
+
+                  {/* Email Address */}
+                  <div className="space-y-2">
+                    <label htmlFor="emailAddress" className="block text-xs font-bold text-slate-700 tracking-wide">
+                      Email Address <span className="text-rose-500">*</span>
+                    </label>
+                    <div className="relative flex items-center group/input">
+                      <Mail className="absolute left-3.5 w-4 h-4 text-slate-400 group-focus-within/input:text-sky-600 transition-colors pointer-events-none" />
+                      <input
+                        type="email"
+                        id="emailAddress"
+                        name="emailAddress"
+                        placeholder="e.g. name@hospital.com"
+                        value={formData.emailAddress}
+                        onChange={handleInputChange}
+                        className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-500/10 transition-all duration-200"
+                      />
+                    </div>
+                    {errors.emailAddress && <span className="text-xs text-rose-500 font-bold block">{errors.emailAddress}</span>}
+                  </div>
+
+                  {/* Hospital Name */}
+                  <div className="space-y-2">
+                    <label htmlFor="hospitalName" className="block text-xs font-bold text-slate-700 tracking-wide">
+                      Hospital / Clinic Name <span className="text-rose-500">*</span>
+                    </label>
+                    <div className="relative flex items-center group/input">
+                      <Building2 className="absolute left-3.5 w-4 h-4 text-slate-400 group-focus-within/input:text-sky-600 transition-colors pointer-events-none" />
+                      <input
+                        type="text"
+                        id="hospitalName"
+                        name="hospitalName"
+                        placeholder="e.g. Apollo Multi-Specialty Hospital"
+                        value={formData.hospitalName}
+                        onChange={handleInputChange}
+                        className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-500/10 transition-all duration-200"
+                      />
+                    </div>
+                    {errors.hospitalName && <span className="text-xs text-rose-500 font-bold block">{errors.hospitalName}</span>}
+                  </div>
+
+                  {/* Doctor Name */}
+                  <div className="space-y-2 sm:col-span-2">
+                    <label htmlFor="doctorName" className="block text-xs font-bold text-slate-700 tracking-wide">
+                      Doctor / Consultant Name <span className="text-slate-400 font-normal">(Optional)</span>
+                    </label>
+                    <div className="relative flex items-center group/input">
+                      <Stethoscope className="absolute left-3.5 w-4 h-4 text-slate-400 group-focus-within/input:text-sky-600 transition-colors pointer-events-none" />
+                      <input
+                        type="text"
+                        id="doctorName"
+                        name="doctorName"
+                        placeholder="e.g. Dr. S. Sharma, Chief Cardiologist"
+                        value={formData.doctorName}
+                        onKeyDown={onlyLetters}
+                        onChange={handleInputChange}
+                        className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-500/10 transition-all duration-200"
+                      />
+                    </div>
+                  </div>
+
+                  {/* City with Live Geolocation Detection */}
+                  <div className="space-y-2 sm:col-span-2">
+                    <label htmlFor="city" className="block text-xs font-bold text-slate-700 tracking-wide">
+                      City / Location <span className="text-rose-500">*</span>
+                    </label>
+                    <div className="relative flex items-center group/input">
+                      <button
+                        type="button"
+                        onClick={handleDetectCity}
+                        title={isTracking ? 'Stop live tracking' : 'Detect my city using location'}
+                        className="absolute left-3.5 p-1 rounded-lg hover:bg-slate-200/60 transition-colors z-10 flex items-center justify-center border-none bg-transparent cursor-pointer"
+                        style={{
+                          color: isTracking ? '#ef4444' : '#0284c7'
+                        }}
+                      >
+                        <MapPin className={`w-4 h-4 ${isTracking ? 'animate-bounce text-rose-500' : 'text-sky-600'}`} />
+                      </button>
+                      <input
+                        type="text"
+                        id="city"
+                        name="city"
+                        placeholder={locationLoading ? 'Detecting location...' : 'Type city name (or click location pin to auto-detect)'}
+                        value={formData.city}
+                        onChange={handleInputChange}
+                        onKeyDown={onlyLetters}
+                        className="w-full pl-11 pr-20 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-500/10 transition-all duration-200"
+                      />
+                      {isTracking && (
+                        <span className="absolute right-3.5 text-[10px] font-black text-rose-500 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full tracking-wider animate-pulse">
+                          LIVE GPS
+                        </span>
+                      )}
+                    </div>
+                    {locationError && <span className="text-xs text-rose-500 font-bold block">{locationError}</span>}
+                    {errors.city && <span className="text-xs text-rose-500 font-bold block">{errors.city}</span>}
+                  </div>
+
+                  {/* Message textarea */}
+                  <div className="space-y-2 sm:col-span-2">
+                    <label htmlFor="message" className="block text-xs font-bold text-slate-700 tracking-wide">
+                      Message & Equipment Specifications <span className="text-rose-500">*</span>
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      placeholder="Specify required equipment specs, transducers, quantity, or warranty preferences..."
+                      maxLength={250}
+                      rows={4}
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      className="w-full p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-500/10 transition-all duration-200 resize-none leading-relaxed"
+                    />
+                    <div className="flex items-center justify-between mt-1">
+                      {errors.message ? (
+                        <span className="text-xs text-rose-500 font-bold">{errors.message}</span>
+                      ) : (
+                        <span />
+                      )}
+                      <span className="text-[11px] font-semibold text-slate-400">{formData.message.length}/250 characters</span>
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* Consent Checkbox */}
+                <div className="pt-2">
+                  <label className={`flex items-start gap-3 p-4 rounded-xl border transition-all duration-200 cursor-pointer ${formData.consent ? 'bg-sky-50/70 border-sky-300 shadow-sm' : 'bg-slate-50 border-slate-200'}`}>
+                    <input
+                      type="checkbox"
+                      name="consent"
+                      checked={formData.consent}
+                      onChange={handleInputChange}
+                      className="w-4 h-4 mt-0.5 accent-sky-600 rounded cursor-pointer"
+                    />
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck className="w-4 h-4 text-sky-600 flex-shrink-0" />
+                      <span className="text-xs font-semibold text-slate-700 leading-snug">
+                        I authorize Vel Bio Healthcare representatives to contact me with official quotes, datasheets, and equipment specifications.
+                      </span>
+                    </div>
+                  </label>
+                  {errors.consent && <span className="text-xs text-rose-500 font-bold mt-1.5 block">{errors.consent}</span>}
+                </div>
+
+                {/* Submit Button */}
+                <motion.button
+                  whileHover={{ scale: 1.015 }}
+                  whileTap={{ scale: 0.985 }}
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="relative overflow-hidden w-full py-4 px-8 bg-gradient-to-r from-sky-600 via-blue-600 to-sky-700 hover:from-sky-700 hover:to-blue-800 text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider rounded-xl shadow-lg shadow-sky-600/30 hover:shadow-sky-600/40 disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2.5 border-none cursor-pointer group/btn"
+                >
+                  <Send className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-200" />
+                  <span>{isSubmitting ? 'Submitting Request...' : 'Submit Official Enquiry'}</span>
+                  <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
+                </motion.button>
+
+                {/* Lock privacy footer */}
+                <div className="flex items-center justify-center gap-2 text-xs font-semibold text-slate-400 pt-1">
+                  <Lock className="w-3.5 h-3.5 text-slate-400" />
+                  <span>SSL Encrypted & Confidential | ISO Standard Process</span>
+                </div>
+              </form>
+
+            </div>
+          </motion.div>
+
         </div>
       </section>
 
-      {/* Split details page with grid pattern details */}
-      <section className="py-24 relative overflow-hidden">
-        {/* Subtle background mesh grid */}
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(135deg, #0f172a 0.5px, transparent 0.5px), linear-gradient(45deg, #0f172a 0.5px, transparent 0.5px)`,
-            backgroundSize: '36px 36px'
-          }}
-        />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-            {/* Left Column Address Info - Premium Light-Frosted clinical panels */}
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="lg:col-span-5 space-y-10"
-            >
-              <div className="space-y-4">
-                <span className="text-blue-600 font-black tracking-widest text-xs uppercase block mb-1">Corporate Details</span>
-                <h2 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight leading-tight">
-                  Vel Bio <span className="bg-gradient-to-r from-blue-600 via-sky-600 to-amber-500 bg-clip-text text-transparent">Med Administration</span>
-                </h2>
-                <div className="w-16 h-[3px] bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 rounded-full" />
-              </div>
-
-              <p className="text-slate-500 text-sm leading-relaxed font-semibold">
-                Feel free to visit our central demonstration workspace in Bengaluru or submit an inquiry check sheet to secure specialized quote sheets.
-              </p>
-
-              {/* Contact Icons block */}
-              <div className="space-y-5">
-                <motion.div
-                  variants={cardSlideIn}
-                  className="flex gap-5 items-center relative bg-gradient-to-br from-white/95 via-slate-50/70 to-white/95 backdrop-blur-xl p-6 rounded-2xl border border-slate-200/60 shadow-lg shadow-slate-100/50 hover:shadow-blue-500/8 hover:border-blue-500/40 hover:translate-x-2 transition-all duration-300 group overflow-hidden cursor-pointer"
-                >
-                  {/* Left accent color strip */}
-                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-600 via-indigo-650 to-cyan-500 group-hover:w-2.5 transition-all duration-300" />
-
-                  <div className="p-3.5 bg-gradient-to-br from-blue-50 to-indigo-100/60 text-blue-600 rounded-2xl border border-blue-100/80 shadow-md group-hover:scale-105 transition-transform duration-300 flex-shrink-0">
-                    <MapPin className="w-5 h-5 group-hover:animate-bounce" />
-                  </div>
-                  <div>
-                    <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-blue-600 transition-colors">Administration HQ Address</h4>
-                    <p className="text-slate-800 text-xs sm:text-sm font-bold mt-1 leading-relaxed">{contact.address}</p>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  variants={cardSlideIn}
-                  className="flex gap-5 items-center relative bg-gradient-to-br from-white/95 via-slate-50/70 to-white/95 backdrop-blur-xl p-6 rounded-2xl border border-slate-200/60 shadow-lg shadow-slate-100/50 hover:shadow-amber-500/8 hover:border-amber-500/40 hover:translate-x-2 transition-all duration-300 group overflow-hidden cursor-pointer"
-                >
-                  {/* Left accent color strip */}
-                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-amber-500 via-orange-500 to-yellow-400 group-hover:w-2.5 transition-all duration-300" />
-
-                  <div className="p-3.5 bg-gradient-to-br from-amber-50 to-orange-100/60 text-amber-600 rounded-2xl border border-amber-100/80 shadow-md group-hover:scale-105 transition-transform duration-300 flex-shrink-0">
-                    <Phone className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
-                  </div>
-                  <div>
-                    <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-amber-500 transition-colors">Direct Sourcing Hotlines</h4>
-                    <p className="text-slate-800 text-xs sm:text-sm font-bold mt-1 leading-relaxed">{contact.phone}</p>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  variants={cardSlideIn}
-                  className="flex gap-5 items-center relative bg-gradient-to-br from-white/95 via-slate-50/70 to-white/95 backdrop-blur-xl p-6 rounded-2xl border border-slate-200/60 shadow-lg shadow-slate-100/50 hover:shadow-blue-500/8 hover:border-blue-500/40 hover:translate-x-2 transition-all duration-300 group overflow-hidden cursor-pointer"
-                >
-                  {/* Left accent color strip */}
-                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-600 via-sky-600 to-cyan-500 group-hover:w-2.5 transition-all duration-300" />
-
-                  <div className="p-3.5 bg-gradient-to-br from-blue-50 to-sky-100/60 text-blue-600 rounded-2xl border border-blue-100/80 shadow-md group-hover:scale-105 transition-transform duration-300 flex-shrink-0">
-                    <Mail className="w-5 h-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-                  </div>
-                  <div>
-                    <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-blue-600 transition-colors">Electronic Mail Setup</h4>
-                    <p className="text-blue-600 text-xs sm:text-sm font-bold mt-1 leading-relaxed">
-                      <a href={`mailto:${contact.email}`} className="hover:underline">{contact.email}</a>
-                    </p>
-                  </div>
-                </motion.div>
-
-                <motion.div
-                  variants={cardSlideIn}
-                  className="flex gap-5 items-center relative bg-gradient-to-br from-white/95 via-slate-50/70 to-white/95 backdrop-blur-xl p-6 rounded-2xl border border-slate-200/60 shadow-lg shadow-slate-100/50 hover:shadow-amber-500/8 hover:border-amber-500/40 hover:translate-x-2 transition-all duration-300 group overflow-hidden cursor-pointer"
-                >
-                  {/* Left accent color strip */}
-                  <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-amber-500 via-orange-500 to-yellow-400 group-hover:w-2.5 transition-all duration-300" />
-
-                  <div className="p-3.5 bg-gradient-to-br from-amber-50 to-orange-100/60 text-amber-600 rounded-2xl border border-amber-100/80 shadow-md group-hover:scale-105 transition-transform duration-300 flex-shrink-0">
-                    <Clock className="w-5 h-5 group-hover:rotate-[360deg] transition-transform duration-1000 ease-in-out" />
-                  </div>
-                  <div>
-                    <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-hover:text-amber-500 transition-colors">Administrative Working Hours</h4>
-                    <p className="text-slate-800 text-xs sm:text-sm font-bold mt-1 leading-relaxed">{contact.workingHours}</p>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
-
-            {/* Right Column Interactive Form with premium glassmorphic fade-up effect */}
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="lg:col-span-7 w-full relative z-10"
-            >
-              <div className="relative group">
-                {/* Traveling border light beam effect */}
-                <div className="absolute -inset-[1px] rounded-3xl overflow-hidden pointer-events-none">
-                  {/* Top light beam */}
-                  <motion.div
-                    className="absolute top-0 left-0 h-[3px] w-[50%] bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-80"
-                    animate={{ left: ["-50%", "100%"] }}
-                    transition={{ duration: 3, ease: "easeInOut", repeat: Infinity }}
-                  />
-                  {/* Right light beam */}
-                  <motion.div
-                    className="absolute top-0 right-0 h-[50%] w-[3px] bg-gradient-to-b from-transparent via-amber-400 to-transparent opacity-80"
-                    animate={{ top: ["-50%", "100%"] }}
-                    transition={{ duration: 3, ease: "easeInOut", repeat: Infinity, delay: 0.7 }}
-                  />
-                  {/* Bottom light beam */}
-                  <motion.div
-                    className="absolute bottom-0 right-0 h-[3px] w-[50%] bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-80"
-                    animate={{ right: ["-50%", "100%"] }}
-                    transition={{ duration: 3, ease: "easeInOut", repeat: Infinity, delay: 1.5 }}
-                  />
-                  {/* Left light beam */}
-                  <motion.div
-                    className="absolute bottom-0 left-0 h-[50%] w-[3px] bg-gradient-to-b from-transparent via-amber-400 to-transparent opacity-80"
-                    animate={{ bottom: ["-50%", "100%"] }}
-                    transition={{ duration: 3, ease: "easeInOut", repeat: Infinity, delay: 2.2 }}
-                  />
-                </div>
-
-                {/* Card border shadow */}
-                <div className="absolute -inset-[0.5px] rounded-3xl bg-gradient-to-r from-blue-500/10 via-amber-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-                {/* Glass Card Body */}
-                <div className="relative bg-slate-950 backdrop-blur-2xl rounded-3xl p-5 sm:p-10 border border-slate-800 shadow-2xl overflow-hidden text-white">
-                  {/* Subtle grid pattern inside */}
-                  <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
-                    style={{
-                      backgroundImage: `linear-gradient(135deg, white 0.5px, transparent 0.5px), linear-gradient(45deg, white 0.5px, transparent 0.5px)`,
-                      backgroundSize: '24px 24px'
-                    }}
-                  />
-
-                  {formSuccess ? (
-                    <div className="py-12 px-4 text-center max-w-md mx-auto space-y-6">
-                      <div className="w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-full flex items-center justify-center mx-auto shadow-xl border border-emerald-500/20">
-                        <ShieldCheck className="w-10 h-10 animate-pulse" />
-                      </div>
-                      <h3 className="text-2.5xl font-black bg-gradient-to-b from-white to-slate-200 bg-clip-text text-transparent tracking-tight">Inquiry Sheet Submitted!</h3>
-                      <p className="text-slate-400 text-xs sm:text-sm font-medium leading-relaxed">
-                        Thank you. Your request sheet has been recorded successfully in our database. One of our biomedical sourcing directors will call or email you with formal catalogs shortly.
-                      </p>
-                      <button
-                        onClick={() => {
-                          setFormSuccess(false);
-                          setInquiryMachineName(null);
-                        }}
-                        className="bg-gradient-to-r from-blue-600 to-amber-500 text-white font-bold text-xs py-3.5 px-8 rounded-xl uppercase tracking-wider transition-all hover:scale-103 cursor-pointer border-none shadow-lg shadow-blue-500/20"
-                      >
-                        Submit Another Request
-                      </button>
-                    </div>
-                  ) : (
-                    <form onSubmit={handleSubmit} noValidate className="space-y-6">
-                      <div className="space-y-1">
-                        <h3 className="text-xl font-bold bg-gradient-to-b from-white to-slate-200 bg-clip-text text-transparent">Biomedical Inquiry Form</h3>
-                        <p className="text-slate-400 text-xs font-semibold">Specify your clinic configuration to secure certified quote sheets.</p>
-                      </div>
-
-                      {/* Errors message display */}
-                      {formValidation && (
-                        <div className="p-3.5 bg-rose-500/10 border border-rose-500/20 rounded-xl text-rose-400 text-xs font-black">
-                          ⚠️ {formValidation}
-                        </div>
-                      )}
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                        <div className="space-y-2">
-                          <label htmlFor="name" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                            Contact Person Name <span className="text-amber-500">*</span>
-                          </label>
-                          <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            placeholder="Dr. Shrivastava"
-                            value={formData.name}
-                            onChange={handleChange}
-                            className="w-full bg-white/5 border border-slate-800 rounded-xl py-3 px-4 text-xs font-bold focus:outline-none focus:border-blue-500 focus:bg-white/10 text-white placeholder:text-slate-600 transition-all"
-                            required
-                          />
-                        </div>
-
-                        <div className="space-y-2">
-                          <label htmlFor="mobile" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                            Mobile Number <span className="text-amber-500">*</span>
-                          </label>
-                          <input
-                            type="tel"
-                            name="mobile"
-                            id="mobile"
-                            placeholder="e.g. 9876543210 (10 digits)"
-                            maxLength={10}
-                            value={formData.mobile}
-                            onChange={handleChange}
-                            className="w-full bg-white/5 border border-slate-800 rounded-xl py-3 px-4 text-xs font-bold focus:outline-none focus:border-blue-500 focus:bg-white/10 text-white placeholder:text-slate-600 transition-all"
-                            required
-                          />
-                        </div>
-
-                        <div className="space-y-2">
-                          <label htmlFor="email" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                            Institutional Email
-                          </label>
-                          <input
-                            type="email"
-                            name="email"
-                            id="email"
-                            placeholder="shrivastava@hospital.org"
-                            value={formData.email}
-                            onChange={handleChange}
-                            className="w-full bg-white/5 border border-slate-800 rounded-xl py-3 px-4 text-xs font-bold focus:outline-none focus:border-blue-500 focus:bg-white/10 text-white placeholder:text-slate-600 transition-all"
-                          />
-                        </div>
-
-                        <div className="space-y-2 relative">
-                          <label htmlFor="product" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                            Required Device or Machine
-                          </label>
-                          <div className="relative" ref={dropdownRef}>
-                            <button
-                              type="button"
-                              onClick={() => setIsOpen(!isOpen)}
-                              className="w-full bg-white/5 border border-slate-800 rounded-xl py-3 px-3.5 text-xs font-bold text-left text-white flex items-center justify-between transition-all focus:outline-none focus:border-blue-500 cursor-pointer"
-                            >
-                              <span className={formData.product ? "text-white" : "text-slate-500"}>
-                                {formData.product || "Select a Device / Machine"}
-                              </span>
-                              <svg className={`w-4 h-4 text-slate-500 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                              </svg>
-                            </button>
-
-                            <AnimatePresence>
-                              {isOpen && (
-                                <motion.div
-                                  initial={{ opacity: 0, y: -10 }}
-                                  animate={{ opacity: 1, y: 0 }}
-                                  exit={{ opacity: 0, y: -10 }}
-                                  transition={{ duration: 0.15 }}
-                                  className="absolute z-50 w-full top-full mt-1.5 bg-slate-950 border border-slate-800 rounded-xl shadow-2xl max-h-40 overflow-y-auto"
-                                  style={{
-                                    scrollbarWidth: 'thin',
-                                    scrollbarColor: '#334155 transparent'
-                                  }}
-                                >
-                                  <button
-                                    type="button"
-                                    onClick={() => {
-                                      setFormData(prev => ({ ...prev, product: "General Sourcing Inquiry" }));
-                                      setIsOpen(false);
-                                    }}
-                                    className="w-full px-3.5 py-2 text-left text-xs font-bold text-slate-300 hover:bg-blue-600 hover:text-white transition-colors border-none bg-transparent cursor-pointer"
-                                  >
-                                    General Sourcing Inquiry
-                                  </button>
-                                  {(state?.products || []).map((prod) => (
-                                    <button
-                                      key={prod.id}
-                                      type="button"
-                                      onClick={() => {
-                                        setFormData(prev => ({ ...prev, product: prod.name }));
-                                        setIsOpen(false);
-                                      }}
-                                      className="w-full px-3.5 py-2 text-left text-xs font-bold text-white hover:bg-blue-600 hover:text-white transition-colors border-none bg-transparent cursor-pointer"
-                                    >
-                                      {prod.name}
-                                    </button>
-                                  ))}
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
-                          </div>
-                        </div>
-
-                        <div className="space-y-2 sm:col-span-2">
-                          <label htmlFor="feedback" className="block text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                            Inquiry Details & Clinic Context <span className="text-amber-500">*</span>
-                          </label>
-                          <textarea
-                            name="feedback"
-                            id="feedback"
-                            rows={4}
-                            placeholder="Specify AMC contracts, transducer requests, or setup timelines..."
-                            value={formData.feedback}
-                            onChange={handleChange}
-                            className="w-full bg-white/5 border border-slate-800 rounded-xl py-3 px-4 text-xs font-bold focus:outline-none focus:border-blue-500 focus:bg-white/10 text-white placeholder:text-slate-600 transition-all resize-none leading-relaxed"
-                            required
-                          />
-                        </div>
-                      </div>
-
-                      {/* Native submit button with hover scale effects */}
-                      <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="w-full p-0 relative group/btn border-none bg-transparent cursor-pointer hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200"
-                      >
-                        <div className="absolute inset-0 bg-blue-500/20 rounded-xl blur-lg opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 pointer-events-none" />
-
-                        <div className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-sky-500 text-white font-black h-12 rounded-xl transition-all duration-300 flex items-center justify-center text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-widest shadow-lg shadow-blue-500/25">
-                          <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -z-10"
-                            animate={{ x: ['-100%', '100%'] }}
-                            transition={{ duration: 1.8, ease: "easeInOut", repeat: Infinity }}
-                            style={{ opacity: isSubmitting ? 1 : 0 }}
-                          />
-
-                          <AnimatePresence mode="wait">
-                            {isSubmitting ? (
-                              <motion.div
-                                key="loading"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                className="flex items-center justify-center gap-2"
-                              >
-                                <div className="w-4 h-4 border-2 border-white/70 border-t-transparent rounded-full animate-spin" />
-                                <span>Routing Sourcing Data...</span>
-                              </motion.div>
-                            ) : (
-                              <motion.span
-                                key="btn-text"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                className="flex items-center justify-center gap-2"
-                              >
-                                Submit Sourcing Inquiry
-                                <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1.5 transition-transform duration-300" />
-                              </motion.span>
-                            )}
-                          </AnimatePresence>
-                        </div>
-                      </button>
-                    </form>
-                  )}
-                </div>
-              </div>
-            </motion.div>
+      {/* EMBEDDED GOOGLE MAP SECTION */}
+      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="relative h-96 md:h-[480px] w-full rounded-3xl overflow-hidden border border-slate-200/80 shadow-2xl group">
+          <iframe
+            src={contact.mapUrl}
+            className="w-full h-full border-0 absolute inset-0 grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out"
+            title="Google Maps Location of Vel Bio Med Outer Ring Road, Bangalore"
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+          <div className="absolute top-4 left-4 bg-slate-900/90 text-white p-4 rounded-2xl shadow-2xl z-10 hidden sm:block max-w-xs border border-white/10 pointer-events-none backdrop-blur-md">
+            <p className="text-xs font-black uppercase tracking-wider text-amber-400">Corporate Headquarters</p>
+            <p className="text-xs font-medium leading-relaxed mt-1 text-slate-200">
+              Vel Bio Med Central Office is open Monday to Saturday for scheduled client demonstrations and equipment pickups.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Embedded High accuracy Google map Iframe */}
-      <section className="h-96 md:h-[450px] w-full relative group overflow-hidden">
-        <iframe
-          src={contact.mapUrl}
-          className="w-full h-full border-0 absolute inset-0 grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out"
-          title="Google Maps Location of Vel Bio Med Outer Ring Road, Bangalore"
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
-        <div className="absolute top-4 left-4 bg-slate-900/90 text-white p-4 rounded-xl shadow-2xl z-10 hidden sm:block max-w-xs border border-white/10 pointer-events-none">
-          <p className="text-xs font-black uppercase tracking-wider text-amber-500">Headquarters</p>
-          <p className="text-xs font-medium leading-relaxed mt-1 text-slate-150">Vel Bio Med Corporate Office is fully accessible during business operating hours.</p>
-        </div>
-      </section>
     </div>
   );
 }
