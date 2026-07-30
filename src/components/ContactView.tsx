@@ -16,7 +16,8 @@ import {
   HelpCircle,
   Compass,
   Globe,
-  Award
+  Award,
+  Loader2
 } from 'lucide-react';
 import Logo from './Logo';
 import HeartbeatLine from './HeartbeatLine';
@@ -96,13 +97,15 @@ export default function ContactView() {
   const [errors, setErrors] = useState<Record<string, string | null>>({});
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isLoadingModal, setIsLoadingModal] = useState(false);
   const [locationLoading, setLocationLoading] = useState(false);
   const [locationError, setLocationError] = useState('');
   const [isTracking, setIsTracking] = useState(false);
   const watchIdRef = useRef<number | null>(null);
 
-  // SweetAlert Modal & Toast states
+  // SweetAlert Modal & Reference Number states
   const [showSweetAlert, setShowSweetAlert] = useState(false);
+  const [refNumber, setRefNumber] = useState('');
   const [toast, setToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   const showToast = (type: 'success' | 'error', message: string) => {
@@ -235,21 +238,27 @@ export default function ContactView() {
     e.preventDefault();
     if (validateForm()) {
       setIsSubmitting(true);
+      setIsLoadingModal(true); // Open smooth loading overlay
 
-      if (submitInquiry) {
-        await submitInquiry({
-          name: formData.fullName.trim(),
-          email: formData.emailAddress.trim(),
-          mobile: formData.mobileNumber.trim(),
-          product: `Hospital: ${formData.hospitalName} | Doctor: ${formData.doctorName || 'N/A'}`,
-          feedback: `[City: ${formData.city}] ${formData.message.trim()}`
-        });
-      }
+      // Submit inquiry and ensure smooth minimum 1.2s loading state
+      const submitPromise = submitInquiry ? submitInquiry({
+        name: formData.fullName.trim(),
+        email: formData.emailAddress.trim(),
+        mobile: formData.mobileNumber.trim(),
+        product: `Hospital: ${formData.hospitalName} | Doctor: ${formData.doctorName || 'N/A'}`,
+        feedback: `[City: ${formData.city}] ${formData.message.trim()}`
+      }) : Promise.resolve();
+
+      const timerPromise = new Promise(resolve => setTimeout(resolve, 1400));
+
+      await Promise.all([submitPromise, timerPromise]);
 
       setIsSubmitting(false);
-      setSubmitted(true);
+      setIsLoadingModal(false);
 
-      // Trigger SweetAlert Popup Modal!
+      // Generate Reference Number & Trigger SweetAlert Modal!
+      const randomTicket = `VBM-${Math.floor(1000 + Math.random() * 9000)}`;
+      setRefNumber(randomTicket);
       setShowSweetAlert(true);
 
       setFormData({
@@ -284,73 +293,155 @@ export default function ContactView() {
         />
       </div>
 
+      {/* EXECUTIVE SUBMISSION LOADING MODAL OVERLAY */}
+      <AnimatePresence>
+        {isLoadingModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-slate-950/80 backdrop-blur-md"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.85, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.85, y: 10 }}
+              transition={{ type: "spring", stiffness: 350, damping: 25 }}
+              className="relative bg-white rounded-3xl p-8 sm:p-10 max-w-sm w-full text-center shadow-2xl border border-slate-100 z-10 space-y-5 overflow-hidden"
+            >
+              <div className="h-1.5 w-full bg-gradient-to-r from-sky-500 via-blue-600 to-amber-500 absolute top-0 left-0 right-0 animate-pulse" />
+
+              {/* Animated ECG Pulse Spinner */}
+              <div className="relative w-20 h-20 mx-auto flex items-center justify-center pt-2">
+                <div className="w-16 h-16 rounded-full border-4 border-sky-100 border-t-sky-600 animate-spin" />
+                <Activity className="w-7 h-7 text-sky-600 absolute inset-0 m-auto animate-pulse" />
+              </div>
+
+              <div className="space-y-1.5">
+                <h4 className="text-lg font-black text-slate-900 tracking-tight">Processing Request...</h4>
+                <p className="text-xs font-semibold text-slate-500 leading-relaxed">
+                  Encrypting specifications & routing to Vel Bio Biomedical Desk
+                </p>
+              </div>
+
+              {/* Progress Line Bar */}
+              <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                <motion.div
+                  className="h-full bg-gradient-to-r from-sky-500 to-blue-600 rounded-full"
+                  animate={{ x: ['-100%', '100%'] }}
+                  transition={{ duration: 1.2, repeat: Infinity, ease: 'easeInOut' }}
+                />
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
       {/* SWEETALERT SUCCESS MODAL POPUP */}
       <AnimatePresence>
         {showSweetAlert && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            {/* Backdrop */}
+            {/* Dark Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setShowSweetAlert(false)}
-              className="absolute inset-0 bg-slate-950/75 backdrop-blur-md cursor-pointer"
+              className="absolute inset-0 bg-slate-950/80 backdrop-blur-md cursor-pointer"
             />
 
-            {/* SweetAlert Popup Box */}
+            {/* SweetAlert Executive Popup Box */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
+              initial={{ opacity: 0, scale: 0.85, y: 25 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.8, y: 20 }}
-              transition={{ type: "spring", stiffness: 300, damping: 22 }}
-              className="relative bg-white rounded-3xl p-8 sm:p-10 max-w-md w-full text-center shadow-2xl border border-slate-100 z-10 space-y-6"
+              exit={{ opacity: 0, scale: 0.85, y: 20 }}
+              transition={{ type: "spring", stiffness: 320, damping: 24 }}
+              className="relative bg-white rounded-3xl max-w-lg w-full text-center shadow-[0_25px_60px_-15px_rgba(15,23,42,0.3)] border border-slate-100 z-10 overflow-hidden"
             >
-              {/* SweetAlert Animated Checkmark Badge */}
-              <div className="relative w-20 h-20 mx-auto flex items-center justify-center">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: [0, 1.2, 1] }}
-                  transition={{ duration: 0.5, ease: "easeOut" }}
-                  className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center border-4 border-emerald-500/30 shadow-lg shadow-emerald-500/20"
-                >
-                  <CheckCircle2 className="w-11 h-11 text-emerald-600" />
-                </motion.div>
-                <div className="absolute inset-0 rounded-full border-2 border-emerald-400 animate-ping opacity-25" />
-              </div>
+              {/* Gradient Top Accent Bar */}
+              <div className="h-2 w-full bg-gradient-to-r from-sky-500 via-blue-600 to-amber-500" />
 
-              {/* Modal Title & Text */}
-              <div className="space-y-2">
-                <h3 className="text-2xl font-black text-slate-900 tracking-tight">Inquiry Sent Successfully!</h3>
-                <p className="text-slate-600 text-xs sm:text-sm font-medium leading-relaxed">
-                  Thank you for reaching out to <span className="font-bold text-sky-600">Vel Bio Healthcare</span>. Our biomedical technical consultant will contact you shortly.
-                </p>
-              </div>
+              <div className="p-7 sm:p-9 space-y-6">
 
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-                {/* Explore Website Button -> Navigates to Home */}
-                <button
-                  type="button"
-                  onClick={() => {
-                    setShowSweetAlert(false);
-                    if (setCurrentTab) {
-                      setCurrentTab('home');
-                    }
-                  }}
-                  className="w-full sm:w-auto flex-1 py-3.5 px-6 bg-gradient-to-r from-sky-600 via-blue-600 to-sky-700 hover:from-sky-700 hover:to-blue-800 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-sky-600/30 hover:shadow-sky-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-none"
-                >
-                  <Compass className="w-4 h-4" />
-                  <span>Explore Website</span>
-                </button>
+                {/* Badge Header */}
+                <div className="flex items-center justify-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-black uppercase tracking-widest">
+                    <ShieldCheck className="w-3.5 h-3.5" /> Official Request Confirmed
+                  </span>
+                </div>
 
-                {/* Close Button */}
-                <button
-                  type="button"
-                  onClick={() => setShowSweetAlert(false)}
-                  className="w-full sm:w-auto py-3.5 px-5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs uppercase tracking-wider rounded-xl transition-colors cursor-pointer border-none"
-                >
-                  Close
-                </button>
+                {/* SweetAlert Animated Checkmark Badge */}
+                <div className="relative w-20 h-20 mx-auto flex items-center justify-center">
+                  <motion.div
+                    initial={{ scale: 0, rotate: -45 }}
+                    animate={{ scale: [0, 1.2, 1], rotate: 0 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    className="w-20 h-20 bg-gradient-to-tr from-emerald-500 to-teal-400 text-white rounded-2xl flex items-center justify-center shadow-xl shadow-emerald-500/30 transform rotate-3"
+                  >
+                    <CheckCircle2 className="w-10 h-10 text-white" />
+                  </motion.div>
+                  <div className="absolute inset-0 rounded-2xl border-2 border-emerald-400 animate-ping opacity-25" />
+                </div>
+
+                {/* Modal Title & Text */}
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-black text-slate-900 tracking-tight">
+                    Inquiry Sent Successfully!
+                  </h3>
+                  <p className="text-slate-600 text-xs sm:text-sm font-medium leading-relaxed max-w-sm mx-auto">
+                    Thank you for reaching out to <span className="font-bold text-sky-600">Vel Bio Healthcare</span>. Our biomedical technical consultant will review your request and contact you shortly.
+                  </p>
+                </div>
+
+                {/* Confirmation Details Card */}
+                <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200/80 text-left space-y-2.5">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-extrabold text-slate-400 uppercase tracking-wider text-[10px]">Reference Ticket</span>
+                    <span className="font-black text-slate-900 font-mono text-xs">{refNumber || 'VBM-2026-8942'}</span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-extrabold text-slate-400 uppercase tracking-wider text-[10px]">Response Estimate</span>
+                    <span className="font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-md border border-sky-100">&lt; 2-4 Hours</span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs pt-1 border-t border-slate-200/60">
+                    <span className="font-extrabold text-slate-400 uppercase tracking-wider text-[10px]">Status</span>
+                    <span className="inline-flex items-center gap-1.5 text-emerald-600 font-extrabold text-[11px]">
+                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> Consultant Assigned
+                    </span>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-1">
+                  {/* Explore Website Button -> Navigates to Home */}
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    type="button"
+                    onClick={() => {
+                      setShowSweetAlert(false);
+                      if (setCurrentTab) {
+                        setCurrentTab('home');
+                      }
+                    }}
+                    className="w-full sm:w-auto flex-1 py-3.5 px-6 bg-gradient-to-r from-sky-600 via-blue-600 to-sky-700 hover:from-sky-700 hover:to-blue-800 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-sky-600/30 hover:shadow-sky-600/50 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer border-none"
+                  >
+                    <Compass className="w-4 h-4" />
+                    <span>Explore Website</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </motion.button>
+
+                  {/* Close Button */}
+                  <button
+                    type="button"
+                    onClick={() => setShowSweetAlert(false)}
+                    className="w-full sm:w-auto py-3.5 px-5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs uppercase tracking-wider rounded-xl transition-colors cursor-pointer border-none"
+                  >
+                    Close Window
+                  </button>
+                </div>
+
               </div>
             </motion.div>
           </div>
@@ -708,15 +799,24 @@ export default function ContactView() {
 
                 {/* Submit Button */}
                 <motion.button
-                  whileHover={{ scale: 1.015 }}
-                  whileTap={{ scale: 0.985 }}
+                  whileHover={{ scale: isSubmitting ? 1 : 1.015 }}
+                  whileTap={{ scale: isSubmitting ? 1 : 0.985 }}
                   type="submit"
                   disabled={isSubmitting}
-                  className="relative overflow-hidden w-full py-4 px-8 bg-gradient-to-r from-sky-600 via-blue-600 to-sky-700 hover:from-sky-700 hover:to-blue-800 text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider rounded-xl shadow-lg shadow-sky-600/30 hover:shadow-sky-600/40 disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2.5 border-none cursor-pointer group/btn"
+                  className="relative overflow-hidden w-full py-4 px-8 bg-gradient-to-r from-sky-600 via-blue-600 to-sky-700 hover:from-sky-700 hover:to-blue-800 text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider rounded-xl shadow-lg shadow-sky-600/30 hover:shadow-sky-600/40 disabled:opacity-75 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2.5 border-none cursor-pointer group/btn"
                 >
-                  <Send className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-200" />
-                  <span>{isSubmitting ? 'Submitting Request...' : 'Submit Official Enquiry'}</span>
-                  <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-white" />
+                      <span>Processing Request...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform duration-200" />
+                      <span>Submit Official Enquiry</span>
+                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
+                    </>
+                  )}
                 </motion.button>
 
                 {/* Lock privacy footer */}
