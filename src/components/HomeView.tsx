@@ -538,6 +538,16 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
         </div>
       </section>
 
+      {/* TRUSTED BY PREMIUM MEDICAL INSTITUTIONS */}
+      <Logos3
+        heading="Trusted By Premium Medical Institutions"
+        logos={[...clientLogos, ...clientLogos, ...clientLogos].map((client, idx) => ({
+          id: `medical-client-${idx}`,
+          description: client.name,
+          icon: client.icon
+        }))}
+      />
+
       {/* 2. WHY CHOOSE VEL BIO MED SECTION */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-[#f0f6ff] via-white to-[#fff7ed] border-t border-blue-100/60 relative overflow-hidden">
         {/* Ambient background glows */}
@@ -1016,17 +1026,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
       {/* 5. GALLERY SECTION */}
       <ImageGallery />
 
-      {/* 6. VALUABLE CLIENTS LOGO SLIDER */}
-      <Logos3
-        heading="Trusted By Premium Medical Institutions"
-        logos={[...clientLogos, ...clientLogos, ...clientLogos].map((client, idx) => ({
-          id: `medical-client-${idx}`,
-          description: client.name,
-          icon: client.icon
-        }))}
-      />
-
-      {/* 7. TESTIMONIALS REVIEW SECTION */}
+      {/* 6. TESTIMONIALS REVIEW SECTION */}
       <section className="py-20 bg-white overflow-hidden">
         <motion.div
           variants={fadeUpVariants}
