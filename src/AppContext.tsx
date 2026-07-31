@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { DatabaseState, Inquiry, Product, ContactInfo, GalleryItem, Service } from "./types.js";
 import dbData from "../db.json";
 import { submitPublicInquiry, PublicInquiryPayload } from "./lib/api.js";
@@ -34,14 +35,39 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
+const tabToPath: Record<string, string> = {
+  home: "/home",
+  about: "/about",
+  products: "/products",
+  gallery: "/gallery",
+  contact: "/contact",
+};
+
+const pathToTab: Record<string, string> = {
+  "/home": "home",
+  "/about": "about",
+  "/products": "products",
+  "/gallery": "gallery",
+  "/contact": "contact",
+};
+
 export function AppProvider({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const [state, setState] = useState<DatabaseState>(dbData as DatabaseState);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [currentTab, setCurrentTab] = useState("home");
   const [inquiryMachineName, setInquiryMachineName] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
+
+  const currentTab = pathToTab[location.pathname] || "home";
+
+  const setCurrentTab = (tab: string) => {
+    const targetPath = tabToPath[tab] || (tab.startsWith("/") ? tab : `/${tab}`);
+    navigate(targetPath);
+  };
 
   const refreshState = async () => {
     // Pure static implementation, nothing to refresh
@@ -81,7 +107,6 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       return { success: false, message: errMsg };
     }
   };
-
 
   const toggleInquiryAttended = async (id: string) => {
     setState(prev => ({
@@ -174,51 +199,6 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }));
   };
 
-  useEffect(() => {
-    if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
-    }
-  }, []);
-
-  const scrollToHeroTop = () => {
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  };
-
-  const handleTabChange = (tab: string, pushHistory = true) => {
-    setCurrentTab(tab);
-    if (pushHistory && typeof window !== "undefined") {
-      try {
-        window.history.pushState({ tab }, "", `#${tab}`);
-      } catch (e) {
-        // Fallback if pushState fails
-      }
-    }
-    scrollToHeroTop();
-    requestAnimationFrame(() => {
-      scrollToHeroTop();
-    });
-  };
-
-  useEffect(() => {
-    const handlePopState = (event: PopStateEvent) => {
-      const stateTab = event.state?.tab;
-      const hash = window.location.hash.replace("#", "").toLowerCase();
-      const validTabs = ["home", "about", "products", "gallery", "contact"];
-      const targetTab = stateTab || (validTabs.includes(hash) ? hash : "home");
-
-      setCurrentTab(targetTab);
-      scrollToHeroTop();
-      requestAnimationFrame(() => {
-        scrollToHeroTop();
-      });
-    };
-
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
-  }, []);
-
   return (
     <AppContext.Provider
       value={{
@@ -226,9 +206,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         isLoading,
         error,
         currentTab,
-        setCurrentTab: (tab) => {
-          handleTabChange(tab, true);
-        },
+        setCurrentTab,
         inquiryMachineName,
         setInquiryMachineName,
         selectedCategory,

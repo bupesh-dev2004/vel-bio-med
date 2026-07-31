@@ -1,4 +1,5 @@
 import { useEffect, useState, useLayoutEffect } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AppProvider, useAppState } from "./AppContext.js";
 import Header from "./components/Header.js";
 import Footer from "./components/Footer.js";
@@ -13,8 +14,8 @@ import { Product } from "./types.js";
 import { Activity, ShieldAlert, RotateCcw } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-function AppContent() {
-  const { currentTab, setCurrentTab, isLoading, error, refreshState, state } = useAppState();
+function ScrollToTopOnRoute() {
+  const { pathname } = useLocation();
 
   useLayoutEffect(() => {
     if ('scrollRestoration' in window.history) {
@@ -23,7 +24,13 @@ function AppContent() {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
-  }, [currentTab]);
+  }, [pathname]);
+
+  return null;
+}
+
+function AppContent() {
+  const { currentTab, setCurrentTab, isLoading, error, refreshState, state } = useAppState();
 
   // Selected product modal state - shared so hot-selling or latest items on Home can open detail modal immediately!
   const [selectedProductModal, setSelectedProductModal] = useState<Product | null>(null);
@@ -122,6 +129,7 @@ function AppContent() {
   // 3. Complete Loaded Website Template
   return (
     <div className="min-h-screen bg-white flex flex-col justify-between font-sans overflow-x-hidden selection:bg-blue-500 selection:text-white pt-[116px]">
+      <ScrollToTopOnRoute />
       <AnimatePresence>
         {showPreloader && (
           <motion.div
@@ -185,17 +193,20 @@ function AppContent() {
 
       {/* Main active sub views switcher panel */}
       <main className="flex-grow">
-        {currentTab === "home" && <HomeView onOpenProductModal={handleOpenProductModal} showPreloader={showPreloader} />}
-        {currentTab === "about" && <AboutView />}
-        {currentTab === "gallery" && <GalleryView />}
-        {currentTab === "products" && (
-          <ProductsView
-            selectedProductModal={selectedProductModal}
-            onOpenProductModal={handleOpenProductModal}
-            onCloseProductModal={handleCloseProductModal}
-          />
-        )}
-        {currentTab === "contact" && <ContactView />}
+        <Routes>
+          <Route path="/" element={<HomeView onOpenProductModal={handleOpenProductModal} showPreloader={showPreloader} />} />
+          <Route path="/about" element={<AboutView />} />
+          <Route path="/gallery" element={<GalleryView />} />
+          <Route path="/products" element={
+            <ProductsView
+              selectedProductModal={selectedProductModal}
+              onOpenProductModal={handleOpenProductModal}
+              onCloseProductModal={handleCloseProductModal}
+            />
+          } />
+          <Route path="/contact" element={<ContactView />} />
+          <Route path="*" element={<HomeView onOpenProductModal={handleOpenProductModal} showPreloader={showPreloader} />} />
+        </Routes>
       </main>
 
       {/* Shared Deep blue footer block */}
@@ -212,8 +223,10 @@ function AppContent() {
 
 export default function App() {
   return (
-    <AppProvider>
-      <AppContent />
-    </AppProvider>
+    <BrowserRouter>
+      <AppProvider>
+        <AppContent />
+      </AppProvider>
+    </BrowserRouter>
   );
 }
