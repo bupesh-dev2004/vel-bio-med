@@ -20,7 +20,9 @@ function AppContent() {
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }, [currentTab]);
 
   // Selected product modal state - shared so hot-selling or latest items on Home can open detail modal immediately!

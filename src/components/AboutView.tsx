@@ -608,7 +608,19 @@ export default function AboutView() {
         <div
           ref={bgRef}
           className="bg"
-        />
+        >
+          <picture className="block w-full h-full pointer-events-none">
+            <source media="(min-width: 1024px)" type="image/webp" srcSet="/about-bg.webp" />
+            <img
+              src="/about-mobile-bg.webp"
+              alt="About Us Hero Background"
+              className="w-full h-full object-cover object-center pointer-events-none opacity-0"
+              loading="eager"
+              fetchPriority="high"
+              decoding="sync"
+            />
+          </picture>
+        </div>
 
         {/* Dark Overlay (Shade) that darkens as you scroll */}
         <div

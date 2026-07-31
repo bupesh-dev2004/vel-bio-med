@@ -118,7 +118,7 @@
 .heroEffects .bg {
   position: absolute;
   inset: 0;
-  background-image: url('/about%20mobile%20BG.png');
+  background-image: url('/about-mobile-bg.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -146,7 +146,7 @@
   }
 
   .heroEffects .bg {
-    background-image: url('/about-bg.png');
+    background-image: url('/about-bg.webp');
   }
 }
 

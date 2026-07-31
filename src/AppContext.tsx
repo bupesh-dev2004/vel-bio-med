@@ -174,6 +174,51 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }));
   };
 
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
+
+  const scrollToHeroTop = () => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  };
+
+  const handleTabChange = (tab: string, pushHistory = true) => {
+    setCurrentTab(tab);
+    if (pushHistory && typeof window !== "undefined") {
+      try {
+        window.history.pushState({ tab }, "", `#${tab}`);
+      } catch (e) {
+        // Fallback if pushState fails
+      }
+    }
+    scrollToHeroTop();
+    requestAnimationFrame(() => {
+      scrollToHeroTop();
+    });
+  };
+
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      const stateTab = event.state?.tab;
+      const hash = window.location.hash.replace("#", "").toLowerCase();
+      const validTabs = ["home", "about", "products", "gallery", "contact"];
+      const targetTab = stateTab || (validTabs.includes(hash) ? hash : "home");
+
+      setCurrentTab(targetTab);
+      scrollToHeroTop();
+      requestAnimationFrame(() => {
+        scrollToHeroTop();
+      });
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
   return (
     <AppContext.Provider
       value={{
@@ -182,8 +227,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         error,
         currentTab,
         setCurrentTab: (tab) => {
-          setCurrentTab(tab);
-          window.scrollTo({ top: 0, behavior: "smooth" });
+          handleTabChange(tab, true);
         },
         inquiryMachineName,
         setInquiryMachineName,

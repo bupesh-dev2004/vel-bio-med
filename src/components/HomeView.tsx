@@ -368,17 +368,20 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
         >
           <picture className="block w-full h-full overflow-hidden">
             {/* Desktop: screens 1025px and larger */}
-            <source media="(min-width: 1025px)" srcSet="/desktop%20pic.png" />
+            <source media="(min-width: 1025px)" type="image/webp" srcSet="/desktop-pic.webp" />
+            <source media="(min-width: 1025px)" type="image/png" srcSet="/desktop%20pic.png" />
             {/* Tablet: screens 768px to 1024px */}
-            <source media="(min-width: 768px)" srcSet="/tablet%20pic.png" />
-            {/* Standard Mobile: screens 376px to 767px */}
-            <source media="(min-width: 376px)" srcSet="/mobile%20pic.png" />
-            {/* Very Small Mobile: screens 320px to 375px */}
+            <source media="(min-width: 768px)" type="image/webp" srcSet="/tablet-pic.webp" />
+            <source media="(min-width: 768px)" type="image/png" srcSet="/tablet%20pic.png" />
+            {/* Mobile: screens below 768px */}
+            <source type="image/webp" srcSet="/mobile-pic.webp" />
             <img
-              src="/mobile%20pic.png"
+              src="/mobile-pic.webp"
               alt="Vel Bio Med Hero Background"
               className="mobile-hero-bg-img w-full h-full object-cover pointer-events-none"
               loading="eager"
+              fetchPriority="high"
+              decoding="sync"
             />
           </picture>
           {/* Light readability white gradient overlay (removed on desktop md/lg for crispness) */}
