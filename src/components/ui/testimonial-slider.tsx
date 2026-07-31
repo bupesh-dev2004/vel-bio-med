@@ -107,18 +107,9 @@ export const TestimonialSlider = ({ testimonials, className }: TestimonialSlider
             exit="exit"
             className="absolute w-full h-full"
           >
-            <div className="flex flex-col md:flex-row items-center justify-center w-full h-full p-4 pt-12 md:p-4">
-              {/* Image Section */}
-              <div className="relative w-20 h-20 md:w-56 md:h-56 flex-shrink-0 mb-[-2.5rem] md:mb-0 md:mr-[-4rem] z-20">
-                <img
-                  src={currentTestimonial.image}
-                  alt={currentTestimonial.name}
-                  className="w-full h-full object-cover rounded-full shadow-lg border-2 border-white"
-                />
-              </div>
-
+            <div className="flex flex-col items-center justify-center w-full h-full p-4">
               {/* Text & Controls Section */}
-              <div className="relative w-full bg-slate-50 text-slate-800 rounded-2xl shadow-xl pt-12 md:pt-6 pl-4 md:pl-24 pr-4 pb-4 border border-slate-100">
+              <div className="relative w-full bg-slate-50 text-slate-800 rounded-2xl shadow-xl p-6 md:p-8 border border-slate-100">
                 <Quote className="absolute top-4 left-4 h-8 w-8 text-blue-600/10" aria-hidden="true" />
                 <blockquote className="text-slate-600 text-xs md:text-sm mb-4 leading-relaxed italic font-medium">
                   "{currentTestimonial.quote}"

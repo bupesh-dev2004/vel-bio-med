@@ -68,11 +68,6 @@ export function TestimonialCard({ handleShuffle, testimonial, position, id, auth
         isFront ? "cursor-grab active:cursor-grabbing" : ""
       }`}
     >
-      <img
-        src={`https://images.unsplash.com/photo-${id === 1 ? '1534528741775-53994a69daeb' : id === 2 ? '1507003211169-0a1dd7228f2d' : '1500648767791-00dcc994a43e'}?auto=format&fit=crop&w=150&h=150&q=80`}
-        alt={`Avatar of ${author}`}
-        className="pointer-events-none mx-auto h-32 w-32 rounded-full border-2 border-slate-700 bg-slate-200 object-cover"
-      />
       <span className="text-center text-lg italic text-slate-400">"{testimonial}"</span>
       <span className="text-center text-sm font-medium text-indigo-400">{author}</span>
     </motion.div>

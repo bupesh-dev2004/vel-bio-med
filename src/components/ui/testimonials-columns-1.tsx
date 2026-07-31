@@ -21,7 +21,7 @@ export const TestimonialsColumn = (props: {
           translateY: "-50%",
         }}
         transition={{
-          duration: props.duration || 20,
+          duration: props.duration || 12,
           repeat: Infinity,
           ease: "linear",
           repeatType: "loop",
@@ -32,20 +32,13 @@ export const TestimonialsColumn = (props: {
         {[
           ...new Array(2).fill(0).map((_, index) => (
             <React.Fragment key={index}>
-              {props.testimonials.map(({ text, image, name, role }, i) => (
+              {props.testimonials.map(({ text, name, role }, i) => (
                 <div className="group p-6 sm:p-7 md:p-8 rounded-[28px] border border-slate-300/90 shadow-md shadow-slate-900/5 max-w-[320px] sm:max-w-xs md:max-w-[340px] w-full mx-auto bg-white text-slate-800 transition-all duration-300 flex flex-col justify-between md:hover:-translate-y-2 md:hover:scale-[1.02] md:hover:border-blue-400 md:hover:shadow-2xl md:hover:shadow-blue-500/10 cursor-pointer" key={i}>
                   <div className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">{text}</div>
                   <div className="flex items-center gap-3.5 mt-5">
-                    <img
-                      width={40}
-                      height={40}
-                      src={image}
-                      alt={name}
-                      className="h-10 w-10 rounded-full object-cover shrink-0 border border-slate-200 md:group-hover:border-blue-500 md:group-hover:scale-105 transition-all duration-300"
-                    />
                     <div className="flex flex-col min-w-0">
                       <div className="font-extrabold text-slate-900 text-xs sm:text-sm tracking-tight leading-snug truncate md:group-hover:text-blue-600 transition-colors duration-200">{name}</div>
-                      <div className="text-[10.5px] sm:text-xs font-medium text-slate-500 tracking-tight truncate">{role}</div>
+                      {role && <div className="text-[10.5px] sm:text-xs font-medium text-slate-500 tracking-tight truncate">{role}</div>}
                     </div>
                   </div>
                 </div>
