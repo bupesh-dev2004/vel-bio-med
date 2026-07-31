@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight, Award, ShieldCheck, Zap, Activity, Star, Eye, MessageSquare, Check, ArrowRight, StarHalf, Building, ThumbsUp, CheckSquare, Heart, Stethoscope, HeartPulse, Dna, Wrench, Shield, Briefcase, PhoneCall, LifeBuoy, CheckCircle2, Sparkles, HeartHandshake } from "lucide-react";
+import { ChevronLeft, ChevronRight, Award, ShieldCheck, Zap, Activity, Star, Eye, MessageSquare, Check, ArrowRight, StarHalf, Building, ThumbsUp, CheckSquare, Heart, Stethoscope, HeartPulse, Dna, Wrench, Shield, Briefcase, PhoneCall, LifeBuoy, CheckCircle2, Sparkles, HeartHandshake, Cross, Hospital, Brain, Microscope, Globe, Building2, PlusCircle, BadgePlus } from "lucide-react";
 import { useAppState } from "../AppContext.js";
 import { Product } from "../types.js";
 import { FrostedGlassCard } from "@/components/ui/interactive-frosted-glass-card";
@@ -138,6 +138,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
   const [productsApi, setProductsApi] = useState<any>(null);
   const [currentProductIndex, setCurrentProductIndex] = useState(0);
   const [productSnaps, setProductSnaps] = useState<number[]>([]);
+  const [isTestimonialsPaused, setIsTestimonialsPaused] = useState(false);
 
   useEffect(() => {
     if (!trendingApi) return;
@@ -326,29 +327,219 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
     }
   ];
 
-  // Clients Mock
+  // Clients Mock - Trusted Medical Institutions
   const clientLogos = [
-    { name: "Fortis Healthcare", icon: <Building className="w-4 h-4" /> },
-    { name: "Apollo Hospitals", icon: <HeartPulse className="w-4 h-4" /> },
-    { name: "Max Health", icon: <Stethoscope className="w-4 h-4" /> },
-    { name: "Aster CMI", icon: <Award className="w-4 h-4" /> },
-    { name: "Manipal Hospital", icon: <ShieldCheck className="w-4 h-4" /> },
-    { name: "Medanta Medicity", icon: <Activity className="w-4 h-4" /> },
-    { name: "Narayana Health", icon: <Dna className="w-4 h-4" /> }
+    { name: "GVN Hospital", icon: <Building className="w-4 h-4" /> },
+    { name: "Sundaram Hospital", icon: <HeartPulse className="w-4 h-4" /> },
+    { name: "Velan Hospital", icon: <ShieldCheck className="w-4 h-4" /> },
+    { name: "Curious Hospital", icon: <Sparkles className="w-4 h-4" /> },
+    { name: "ABC Hospital", icon: <Activity className="w-4 h-4" /> },
+    { name: "Frontline Hospital", icon: <Shield className="w-4 h-4" /> },
+    { name: "Pineapple Diagonisis Center", icon: <Microscope className="w-4 h-4" /> },
+    { name: "Neuro One", icon: <Brain className="w-4 h-4" /> },
+    { name: "Atlas Hospital", icon: <Globe className="w-4 h-4" /> },
+    { name: "Dhanalakshmi Srinivasan Hospital", icon: <Building2 className="w-4 h-4" /> },
+    { name: "HM Hospital", icon: <Stethoscope className="w-4 h-4" /> },
+    { name: "Silverline Hospital", icon: <Award className="w-4 h-4" /> },
+    { name: "Sugam Hospital", icon: <HeartHandshake className="w-4 h-4" /> },
+    { name: "Kumaran Hospital", icon: <CheckCircle2 className="w-4 h-4" /> },
+    { name: "Harshamitra Hospital", icon: <Heart className="w-4 h-4" /> },
+    { name: "KMC Hospital", icon: <Hospital className="w-4 h-4" /> },
+    { name: "Rathna Global", icon: <Globe className="w-4 h-4" /> },
+    { name: "Sri Ramya Hospital", icon: <Cross className="w-4 h-4" /> },
+    { name: "Janet Hospital", icon: <PlusCircle className="w-4 h-4" /> },
+    { name: "Gastro Care Hospital", icon: <Activity className="w-4 h-4" /> },
+    { name: "Galaxy Hospital", icon: <Sparkles className="w-4 h-4" /> },
+    { name: "Srinivasa Hospital", icon: <Building className="w-4 h-4" /> },
+    { name: "Ponni Hospital", icon: <ShieldCheck className="w-4 h-4" /> },
+    { name: "Rana Hospital", icon: <BadgePlus className="w-4 h-4" /> },
+    { name: "Arun Hospital", icon: <Stethoscope className="w-4 h-4" /> },
+    { name: "CSI Hospital", icon: <Hospital className="w-4 h-4" /> },
+    { name: "Child Jesus", icon: <Heart className="w-4 h-4" /> },
+    { name: "Murugan Health Care", icon: <HeartPulse className="w-4 h-4" /> },
+    { name: "Rajarajeshwari Hospital", icon: <Award className="w-4 h-4" /> },
+    { name: "Chandhan Hospital", icon: <Building2 className="w-4 h-4" /> },
+    { name: "City Hospital", icon: <Building className="w-4 h-4" /> },
+    { name: "Bharathi Hospital", icon: <Shield className="w-4 h-4" /> },
+    { name: "MR Hospital", icon: <Activity className="w-4 h-4" /> },
+    { name: "KTM Hospital", icon: <Hospital className="w-4 h-4" /> },
+    { name: "TMCH Hospital", icon: <Stethoscope className="w-4 h-4" /> },
+    { name: "Venkateshwara Hospital", icon: <ShieldCheck className="w-4 h-4" /> },
+    { name: "Dravidan Hospital", icon: <Cross className="w-4 h-4" /> },
+    { name: "Anu Hospital", icon: <HeartPulse className="w-4 h-4" /> },
+    { name: "Kamatchi Hospital", icon: <Heart className="w-4 h-4" /> },
+    { name: "Srinivasan Hospital", icon: <Building2 className="w-4 h-4" /> },
+    { name: "Annai Hospital", icon: <HeartHandshake className="w-4 h-4" /> },
+    { name: "Sai Hospital", icon: <Sparkles className="w-4 h-4" /> },
+    { name: "Kavi Hospital", icon: <BadgePlus className="w-4 h-4" /> },
+    { name: "AS Hospital", icon: <Building className="w-4 h-4" /> },
+    { name: "Garbaraksha Hospital", icon: <ShieldCheck className="w-4 h-4" /> },
+    { name: "Aarthi Hospital", icon: <Stethoscope className="w-4 h-4" /> },
+    { name: "KS Hospital", icon: <Activity className="w-4 h-4" /> },
+    { name: "ALVS Cardiac Center", icon: <HeartPulse className="w-4 h-4" /> },
+    { name: "V Care", icon: <HeartHandshake className="w-4 h-4" /> },
+    { name: "Sai Speed Hospital", icon: <Zap className="w-4 h-4" /> },
+    { name: "Shifa Hospital", icon: <PlusCircle className="w-4 h-4" /> },
+    { name: "Sumathi Hospital", icon: <Building2 className="w-4 h-4" /> }
   ];
 
   // Testimonials Columns Layout Setup
-  const testimonials = state?.testimonials || [];
-  const formattedTestimonials = testimonials.map((t: any) => ({
-    text: t.reviewText,
-    image: t.image,
-    name: t.name,
-    role: t.designation
-  }));
+  const DEFAULT_TESTIMONIALS = [
+    {
+      id: "tst-1",
+      name: "Dr. Govindarajan",
+      specialization: "Oncology",
+      hospital: "GVN Hospital, Trichy",
+      reviewText: "Vel Bio Med delivered our equipment on schedule and handled the installation professionally. Their technical team ensured everything was fully operational before handover. We are extremely satisfied with their reliable service and ongoing support."
+    },
+    {
+      id: "tst-2",
+      name: "Dr. Vivek Sundaram",
+      specialization: "General Medicine",
+      hospital: "Sundaram Hospital, Trichy",
+      reviewText: "We have been highly impressed with Vel Bio Med's professionalism and commitment to quality. Their installation process was seamless, and their after-sales support has always been prompt and reliable."
+    },
+    {
+      id: "tst-3",
+      name: "Dr. Rajavel",
+      specialization: "Orthopaedics",
+      hospital: "Velan Hospital, Trichy",
+      reviewText: "The quality of the medical equipment supplied by Vel Bio Med has been excellent. Their technical team completed the installation efficiently and provided comprehensive training to our staff."
+    },
+    {
+      id: "tst-4",
+      name: "Dr. Rajavel",
+      specialization: "Internal Medicine",
+      hospital: "Curious Hospital, Trichy",
+      reviewText: "Vel Bio Med understood our hospital's requirements and recommended the right solutions. Their attention to detail and dependable customer support have made them a trusted partner."
+    },
+    {
+      id: "tst-5",
+      name: "Dr. Muhundhan",
+      specialization: "General Surgery",
+      hospital: "ABC Hospital, Trichy",
+      reviewText: "From procurement to installation, the entire experience with Vel Bio Med was smooth and professional. We appreciate their timely delivery and commitment to customer satisfaction."
+    },
+    {
+      "id": "tst-6",
+      name: "Dr. Radhakrishnan",
+      specialization: "Anaesthesiology",
+      hospital: "Frontline Hospital, Trichy",
+      reviewText: "Vel Bio Med delivered exactly what was promised. Their engineers handled the installation with great care, and their technical support has been exceptional whenever required."
+    },
+    {
+      id: "tst-7",
+      name: "Dr. Vel Aravinth",
+      specialization: "Radiology",
+      hospital: "Pineapple Diagnosis Center, Trichy",
+      reviewText: "The diagnostic equipment supplied by Vel Bio Med has consistently delivered reliable performance. Their responsive support team and technical expertise have exceeded our expectations."
+    },
+    {
+      id: "tst-8",
+      name: "Dr. Vijayakumar",
+      specialization: "Neurology",
+      hospital: "Neuro One, Trichy",
+      reviewText: "Vel Bio Med has been a dependable partner for our hospital. Their product quality, timely service, and knowledgeable engineers have made every project successful."
+    },
+    {
+      id: "tst-9",
+      name: "Dr. Jai Krish",
+      specialization: "Orthopaedics",
+      hospital: "Atlas Hospital, Trichy",
+      reviewText: "We are pleased with the quality of equipment and the professionalism shown by the Vel Bio Med team. Their installation was completed on time, and the entire process was hassle-free."
+    },
+    {
+      id: "tst-10",
+      name: "Dr. Mahesh Yogaraj",
+      specialization: "Critical Care Medicine",
+      hospital: "HM Hospital, Trichy",
+      reviewText: "Vel Bio Med consistently provides high-quality medical equipment backed by excellent technical support. Their commitment to customer satisfaction has been outstanding."
+    },
+    {
+      id: "tst-11",
+      name: "Dr. Kumar",
+      specialization: "Cardiology",
+      hospital: "Silverline Hospital, Karur",
+      reviewText: "The equipment supplied by Vel Bio Med has been reliable and efficient in our daily operations. Their technical support team responds quickly whenever assistance is needed."
+    },
+    {
+      id: "tst-12",
+      name: "Dr. K. Ravikumar",
+      specialization: "General Medicine",
+      hospital: "Sugam Hospital, Karur",
+      reviewText: "Vel Bio Med has exceeded our expectations with quality products and professional service. Their team ensured a smooth installation and provided excellent user training."
+    },
+    {
+      id: "tst-13",
+      name: "Dr. S. Kumaran",
+      specialization: "Orthopaedics",
+      hospital: "Kumaran Hospital, Karur",
+      reviewText: "We appreciate Vel Bio Med's commitment to delivering dependable medical equipment. Their engineers completed the installation efficiently and answered all our technical questions."
+    },
+    {
+      id: "tst-14",
+      name: "Dr. Karthikeyan",
+      specialization: "Emergency Medicine",
+      hospital: "Harshamitra Hospital, Karur",
+      reviewText: "Working with Vel Bio Med has been a wonderful experience. Their products are reliable, and the after-sales support has always been prompt and professional."
+    },
+    {
+      id: "tst-15",
+      name: "Dr. Rathnavel",
+      specialization: "Cardiothoracic Surgery",
+      hospital: "Rathna Global Hospital, Karur",
+      reviewText: "Vel Bio Med demonstrated exceptional professionalism throughout our procurement process. Their quality standards and technical expertise are truly commendable."
+    },
+    {
+      id: "tst-16",
+      name: "Dr. Ramya",
+      specialization: "Obstetrics & Gynaecology",
+      hospital: "Sri Ramya Hospital, Karur",
+      reviewText: "The installation was completed on time, and every piece of equipment was tested thoroughly before handover. We appreciate the team's dedication and attention to detail."
+    },
+    {
+      id: "tst-17",
+      name: "Dr. Janet",
+      specialization: "Paediatrics",
+      hospital: "Janet Hospital, Karur",
+      reviewText: "Vel Bio Med has become one of our trusted medical equipment suppliers. Their prompt service, quality products, and experienced technical team have been impressive."
+    },
+    {
+      id: "tst-18",
+      name: "Dr. Saravanan",
+      specialization: "Gastroenterology",
+      hospital: "Gastro Care Hospital, Karur",
+      reviewText: "We are extremely pleased with the quality of products supplied by Vel Bio Med. Their engineers provided excellent installation support and ensured everything functioned perfectly."
+    },
+    {
+      id: "tst-19",
+      name: "Dr. Anand",
+      specialization: "Internal Medicine",
+      hospital: "Galaxy Hospital, Karur",
+      reviewText: "The professionalism shown by the Vel Bio Med team throughout the project was remarkable. Their customer support and technical guidance have been consistently excellent."
+    },
+    {
+      id: "tst-20",
+      name: "Dr. Srinivasan",
+      specialization: "General Surgery",
+      hospital: "Srinivasa Hospital, Karur",
+      reviewText: "Vel Bio Med delivers dependable medical equipment with exceptional customer service. Their commitment to quality and timely support has made them a valued healthcare partner."
+    }
+  ];
 
-  const firstColumn = formattedTestimonials.filter((_, idx) => idx % 3 === 0);
-  const secondColumn = formattedTestimonials.filter((_, idx) => idx % 3 === 1);
-  const thirdColumn = formattedTestimonials.filter((_, idx) => idx % 3 === 2);
+  const stateTestimonials = state?.testimonials || [];
+  const testimonials = (stateTestimonials.length >= 20 && stateTestimonials[0]?.name?.includes("Govindarajan"))
+    ? stateTestimonials
+    : DEFAULT_TESTIMONIALS;
+
+  // Desktop (3 columns)
+  const desktopCol1 = testimonials.filter((_, idx) => idx % 3 === 0);
+  const desktopCol2 = testimonials.filter((_, idx) => idx % 3 === 1);
+  const desktopCol3 = testimonials.filter((_, idx) => idx % 3 === 2);
+
+  // Tablet (2 columns)
+  const tabletCol1 = testimonials.filter((_, idx) => idx % 2 === 0);
+  const tabletCol2 = testimonials.filter((_, idx) => idx % 2 === 1);
 
   const startInquiry = (productName: string) => {
     setInquiryMachineName(productName);
@@ -544,7 +735,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
       {/* TRUSTED BY PREMIUM MEDICAL INSTITUTIONS */}
       <Logos3
         heading="Trusted By Premium Medical Institutions"
-        logos={[...clientLogos, ...clientLogos, ...clientLogos].map((client, idx) => ({
+        logos={clientLogos.map((client, idx) => ({
           id: `medical-client-${idx}`,
           description: client.name,
           icon: client.icon
@@ -765,12 +956,8 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                         {/* Footer with Star rating & Specs Button reveal on hover */}
                         <div className="relative pt-3 sm:pt-5 border-t border-slate-100 mt-3 sm:mt-5 h-10 flex items-center justify-between">
                           <div className="flex items-center gap-4 group-hover:opacity-0 transition-opacity duration-300 w-full justify-between">
-                            <div className="flex items-center gap-1 bg-amber-50/70 border border-amber-100/50 px-2.5 py-1 rounded-full text-amber-700 font-extrabold text-[10px]">
-                              <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                              <span>{p.rating}.0</span>
-                            </div>
                             <span className="text-[10px] text-slate-400 font-black uppercase tracking-wider flex items-center gap-1">
-                              <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" /> Certified
+                              <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" /> Certified Unit
                             </span>
                           </div>
 
@@ -866,13 +1053,9 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
 
                         {/* Details */}
                         <div className="flex items-center justify-between mb-1.5">
-                          <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest truncate mr-2">
+                          <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest truncate">
                             {item.category}
                           </span>
-                          <div className="flex items-center gap-1 flex-shrink-0">
-                            <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
-                            <span className="text-[11px] text-slate-400 font-bold">({item.rating}.0)</span>
-                          </div>
                         </div>
 
                         <h5 className="mb-1.5 text-lg sm:text-xl font-bold tracking-tight text-white group-hover:text-blue-400 transition-colors line-clamp-1">
@@ -1040,14 +1223,34 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
         >
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-blue-600 font-bold tracking-widest text-xs uppercase block mb-2">Our Testimonials</span>
-            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">Voices of Trust inside Hospital Wings</h2>
-            <div className="w-12 h-1 bg-blue-600 mx-auto mt-4 rounded-full" />
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">Voices of Trust inside Hospital Wings</h2>
+            <div className="w-12 h-1 bg-gradient-to-r from-blue-600 to-amber-500 mx-auto mt-4 rounded-full" />
           </div>
 
-          <div className="flex justify-center gap-6 md:gap-8 lg:gap-8 mt-10 [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)] max-h-[640px] overflow-hidden">
-            <TestimonialsColumn testimonials={firstColumn} duration={12} />
-            <TestimonialsColumn testimonials={secondColumn} className="hidden md:block md:pt-16" duration={12} />
-            <TestimonialsColumn testimonials={thirdColumn} className="hidden lg:block lg:pt-8" duration={12} />
+          <div
+            onMouseEnter={() => setIsTestimonialsPaused(true)}
+            onMouseLeave={() => setIsTestimonialsPaused(false)}
+            onTouchStart={() => setIsTestimonialsPaused(true)}
+            onTouchEnd={() => setIsTestimonialsPaused(false)}
+            className="relative h-[650px] overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_5%,black_95%,transparent)]"
+          >
+            {/* Desktop (≥1024px): 3 scrolling columns */}
+            <div className="hidden lg:grid grid-cols-3 gap-8 h-full">
+              <TestimonialsColumn testimonials={desktopCol1} duration={28} isPaused={isTestimonialsPaused} />
+              <TestimonialsColumn testimonials={desktopCol2} duration={34} isPaused={isTestimonialsPaused} />
+              <TestimonialsColumn testimonials={desktopCol3} duration={26} isPaused={isTestimonialsPaused} />
+            </div>
+
+            {/* Tablet (768px–1023px): 2 scrolling columns */}
+            <div className="hidden md:grid lg:hidden grid-cols-2 gap-6 h-full">
+              <TestimonialsColumn testimonials={tabletCol1} duration={30} isPaused={isTestimonialsPaused} />
+              <TestimonialsColumn testimonials={tabletCol2} duration={32} isPaused={isTestimonialsPaused} />
+            </div>
+
+            {/* Mobile (<768px): 1 single scrolling column for all 20 cards */}
+            <div className="grid md:hidden grid-cols-1 gap-6 h-full w-full max-w-md mx-auto">
+              <TestimonialsColumn testimonials={testimonials} duration={46} isPaused={isTestimonialsPaused} />
+            </div>
           </div>
         </motion.div>
       </section>

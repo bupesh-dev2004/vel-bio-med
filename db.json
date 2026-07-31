@@ -707,6 +707,299 @@
       },
       "trending": false,
       "newest": false
+    },
+    {
+      "id": "prod-22",
+      "name": "ICU COT MOTORIZED",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-22.png",
+      "shortDesc": "The Motorized ICU Cot is designed for ICU and critical care units, providing smooth electric adjustments for patient comfort and handling.",
+      "description": "The Motorized ICU Cot is designed for ICU and critical care units. It provides smooth electric adjustments for patient comfort and makes patient handling easier for healthcare professionals.",
+      "rating": 5,
+      "features": [
+        "Fully motorized operation",
+        "Electric backrest and knee rest adjustment",
+        "Height adjustable",
+        "Trendelenburg & Reverse Trendelenburg positions",
+        "Four ABS side rails",
+        "ABS head & foot panels",
+        "Four-section mattress",
+        "Heavy-duty castor wheels with brakes",
+        "SS telescopic IV stand",
+        "Easy keypad control"
+      ],
+      "specifications": {
+        "Operation": "Motorized",
+        "Dimensions": "2100 × 900 mm",
+        "Frame": "CRCA Steel",
+        "Side Rails": "4 ABS Rails",
+        "Panels": "ABS Head & Foot",
+        "Mattress": "4 Section",
+        "Wheels": "125 mm Castors with Brakes",
+        "IV Stand": "SS Telescopic",
+        "Adjustments": "Height, Backrest, Knee Rest, Trendelenburg & Reverse Trendelenburg"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-23",
+      "name": "Manual ICU Cot",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-23.png",
+      "shortDesc": "Designed for hospitals and intensive care units, providing smooth manual adjustments for patient comfort and support.",
+      "description": "The Manual ICU Cot is designed for hospitals and intensive care units, providing smooth manual adjustments for patient comfort and reliable support during treatment.",
+      "rating": 5,
+      "features": [
+        "Manual crank operation",
+        "Adjustable height",
+        "Adjustable backrest and knee rest",
+        "Trendelenburg & Reverse Trendelenburg positions",
+        "Four ABS side rails",
+        "ABS head & foot panels",
+        "Four-section high-quality mattress",
+        "Heavy-duty castor wheels with brakes",
+        "SS telescopic IV stand",
+        "Strong CRCA tubular steel frame"
+      ],
+      "specifications": {
+        "Operation": "Manual Crank",
+        "Dimensions": "2100 × 900 mm",
+        "Frame": "CRCA Tubular Steel",
+        "Side Rails": "4 ABS Rails",
+        "Panels": "ABS Head & Foot",
+        "Mattress": "4 Section",
+        "Wheels": "125 mm Castors with Brakes",
+        "IV Stand": "SS Telescopic Saline Rod",
+        "Adjustments": "Height, Backrest, Knee Rest, Trendelenburg & Reverse Trendelenburg"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-24",
+      "name": "SEMI ICU COT",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-24.png",
+      "shortDesc": "Engineered for intensive care and recovery wards, providing multi-position adjustment and sturdy ABS protection.",
+      "description": "The Semi ICU Cot is designed for critical care and recovery wards, providing reliable multi-position adjustment, adjustable height, sturdy ABS head & foot panels, and smooth mobility for optimal patient care.",
+      "rating": 5,
+      "features": [
+        "Easy-to-use control handles",
+        "Smooth multi-position bed control",
+        "Height adjustable design",
+        "Foldable ABS side rails for safety",
+        "ABS head & foot panels",
+        "Four-section mattress platform",
+        "Heavy-duty castor wheels with brakes",
+        "SS telescopic IV stand",
+        "Durable tubular steel construction"
+      ],
+      "specifications": {
+        "Product Type": "Semi ICU Cot",
+        "Application": "ICU & Critical Care",
+        "Bed Sections": "4 Section Platform",
+        "Side Rails": "ABS Collapsible Rails",
+        "Frame Material": "CRCA Tubular Steel",
+        "Wheels": "Castor Wheels with Brakes",
+        "IV Stand": "SS Telescopic",
+        "Adjustments": "Backrest, Knee Rest & Height"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-25",
+      "name": "FOWLER PATIENT COT",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-25.png",
+      "shortDesc": "Designed to provide comfort and support in hospitals and clinics, featuring an adjustable backrest for optimal positioning.",
+      "description": "The Fowler Patient Cot is designed to provide comfort and support for patients in hospitals, clinics, and healthcare facilities. It features an adjustable backrest for improved patient positioning and easy caregiving.",
+      "rating": 5,
+      "features": [
+        "Adjustable backrest",
+        "Strong steel frame",
+        "Foldable side rails",
+        "Smooth castor wheels with brakes",
+        "Comfortable mattress platform",
+        "Easy to clean",
+        "Durable powder-coated finish",
+        "Suitable for hospital use"
+      ],
+      "specifications": {
+        "Product Type": "Fowler Patient Cot",
+        "Frame Material": "Mild Steel",
+        "Finish": "Epoxy Powder Coated",
+        "Backrest": "Adjustable",
+        "Side Rails": "Foldable",
+        "Wheels": "125 mm Castors",
+        "Brakes": "Yes",
+        "Safe Working Load": "Up to 180 kg",
+        "Mattress Size": "Standard Hospital Size"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-26",
+      "name": "SEMI FOWLER COT",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-26.png",
+      "shortDesc": "Designed to provide comfort and support for recovery and hospital care, featuring an adjustable semi-fowler backrest.",
+      "description": "The Semi Fowler Cot is designed to provide comfort and support for patients during recovery and general hospital care. Its adjustable backrest helps patients sit comfortably for resting, eating, and medical treatment.",
+      "rating": 5,
+      "features": [
+        "Adjustable backrest",
+        "Strong mild steel frame",
+        "Epoxy powder-coated finish",
+        "Foldable side rails",
+        "Smooth castor wheels with brakes",
+        "Comfortable mattress platform",
+        "Easy to clean and maintain",
+        "Suitable for hospitals and clinics"
+      ],
+      "specifications": {
+        "Product Type": "Semi Fowler Cot",
+        "Frame Material": "Mild Steel",
+        "Finish": "Epoxy Powder Coated",
+        "Backrest": "Adjustable (Semi Fowler)",
+        "Side Rails": "Foldable",
+        "Wheels": "125 mm Castors",
+        "Brakes": "Yes",
+        "Safe Working Load": "Up to 180 kg",
+        "Mattress Size": "Standard Hospital Size"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-27",
+      "name": "BASIC FOWLER COT",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-27.png",
+      "shortDesc": "Designed for reliable patient care in hospitals and clinics, featuring a perforated MS mattress platform and adjustable backrest.",
+      "description": "The Basic Fowler Cot is designed to provide comfortable and reliable patient care in hospitals and clinics. It features an adjustable backrest to improve patient comfort during rest, treatment, and recovery.",
+      "rating": 5,
+      "features": [
+        "Adjustable backrest",
+        "Strong mild steel frame",
+        "Epoxy powder-coated finish",
+        "Comfortable mattress platform",
+        "Durable and sturdy construction",
+        "Easy to clean and maintain",
+        "Smooth and reliable operation",
+        "Ideal for hospitals and healthcare facilities"
+      ],
+      "specifications": {
+        "Product Type": "Basic Fowler Cot",
+        "Frame Material": "Mild Steel",
+        "Finish": "Epoxy Powder Coated",
+        "Backrest": "Adjustable",
+        "Mattress Platform": "Perforated MS Sheet",
+        "Wheels": "Optional Castor Wheels",
+        "Safe Working Load": "Up to 180 kg",
+        "Mattress Size": "Standard Hospital Size",
+        "Application": "Hospitals, Clinics & Nursing Homes"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-28",
+      "name": "EMERGENCY RECOVERY TROLLY",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-28.png",
+      "shortDesc": "Designed to safely transport patients in emergency rooms and recovery areas with high-density foam mattress and IV pole provision.",
+      "description": "The Emergency Recovery Trolley is designed to safely transport patients in emergency rooms, recovery areas, and hospitals. It provides comfort, stability, and quick mobility for efficient patient care during emergencies.",
+      "rating": 5,
+      "features": [
+        "Strong and durable steel frame",
+        "Adjustable backrest",
+        "Smooth castor wheels with brakes",
+        "Foldable side rails",
+        "Comfortable mattress platform",
+        "Easy to clean and maintain",
+        "IV pole provision",
+        "Suitable for emergency and recovery use"
+      ],
+      "specifications": {
+        "Product Type": "Emergency Recovery Trolley",
+        "Frame Material": "Mild Steel",
+        "Finish": "Epoxy Powder Coated",
+        "Backrest": "Adjustable",
+        "Side Rails": "Foldable",
+        "Wheels": "125 mm Castors",
+        "Brakes": "Yes",
+        "Safe Working Load": "Up to 180 kg",
+        "Mattress": "High-Density Foam Mattress",
+        "Application": "Emergency Rooms, Recovery Wards & Hospitals"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-29",
+      "name": "STRETCHER TROLLEY",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-29.png",
+      "shortDesc": "Designed for safe and efficient patient transfer with a removable stretcher and 150 mm locking castor wheels.",
+      "description": "The Stretcher Trolley is designed for safe and efficient patient transportation within hospitals, emergency departments, and healthcare facilities. Its sturdy construction and smooth mobility ensure reliable performance during patient transfer.",
+      "rating": 5,
+      "features": [
+        "Strong mild steel tubular framework",
+        "Removable stretcher",
+        "Epoxy powder-coated finish",
+        "Smooth mobility with 150 mm castor wheels",
+        "Two castors with brakes for safety",
+        "Durable and easy to maintain",
+        "Suitable for hospitals and emergency care"
+      ],
+      "specifications": {
+        "Category": "Critical Care & ICU",
+        "Frame": "Mild Steel Tubular",
+        "Finish": "Epoxy Powder Coated",
+        "Stretcher": "Removable",
+        "Dimensions": "2030 × 560 × 820 mm",
+        "Wheels": "150 mm Castors",
+        "Brakes": "2 Locking Castors",
+        "Application": "Patient Transport"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-30",
+      "name": "GYNECOLOGY TABLE",
+      "category": "Operating Theatre (OT)",
+      "image": "/images/prod-30.png",
+      "shortDesc": "Designed for gynecological examinations and obstetric procedures, featuring a 3-section stainless steel frame with lithotomy rods.",
+      "description": "The Gynecology Table is designed for gynecological examinations and obstetric procedures. It provides adjustable positioning, patient comfort, and reliable support, making it suitable for hospitals, maternity centers, and clinics.",
+      "rating": 5,
+      "features": [
+        "Three-section tabletop",
+        "Adjustable backrest",
+        "Collapsible leg section",
+        "Adjustable height",
+        "Tilting position for obstetric and gynecological procedures",
+        "Fully stainless steel construction",
+        "Supplied with two lithotomy rods and canvas straps",
+        "High-quality mattress for patient comfort",
+        "Strong, durable, and easy to clean"
+      ],
+      "specifications": {
+        "Category": "Operating Theatre (OT)",
+        "Construction": "Stainless Steel",
+        "Top Sections": "3 Section",
+        "Backrest": "Adjustable",
+        "Leg Section": "Collapsible",
+        "Height Adjustment": "Yes",
+        "Tilt Function": "Yes",
+        "Accessories": "2 Lithotomy Rods with Canvas Straps",
+        "Mattress": "High-Quality Mattress",
+        "Application": "Gynecology & Obstetric Procedures"
+      },
+      "trending": true,
+      "newest": true
     }
   ],
   "categories": [
@@ -784,75 +1077,143 @@
   "testimonials": [
     {
       "id": "tst-1",
-      "name": "Dr. Arisara Nair",
-      "designation": "Director of Maternal-Fetal Services, Metro Heart hospital",
-      "image": "/images/tst-1.jpg",
-      "reviewText": "The GE Voluson systems supplied by Vel Bio Med changed our outpatient scanning department. Their engineers finished calibration a day ahead of schedule, ensuring seamless clinical operations.",
-      "rating": 5
+      "name": "Dr. Govindarajan",
+      "specialization": "Oncology",
+      "hospital": "GVN Hospital, Trichy",
+      "reviewText": "Vel Bio Med delivered our equipment on schedule and handled the installation professionally. Their technical team ensured everything was fully operational before handover. We are extremely satisfied with their reliable service and ongoing support."
     },
     {
       "id": "tst-2",
-      "name": "Dr. Vivek Chawla",
-      "designation": "Head of Critical Care Services, Apollo Multispecialty",
-      "image": "/images/tst-2.jpg",
-      "reviewText": "Our institution depends on Vel Bio Med for emergency critical care ICU equipment maintenance. Their technical response support operates beautifully even during high emergency cycles.",
-      "rating": 5
+      "name": "Dr. Vivek Sundaram",
+      "specialization": "General Medicine",
+      "hospital": "Sundaram Hospital, Trichy",
+      "reviewText": "We have been highly impressed with Vel Bio Med's professionalism and commitment to quality. Their installation process was seamless, and their after-sales support has always been prompt and reliable."
     },
     {
       "id": "tst-3",
-      "name": "Prof. Alan Fletcher",
-      "designation": "Chief Operating Officer, Horizon Trust Clinics",
-      "image": "/images/tst-3.jpg",
-      "reviewText": "We purchased eight Dräger Primus stations for our complex upgrade phase. Vel Bio Med demonstrated absolute healthcare expertise-managing safety approvals, mechanical fittings, and technician briefings.",
-      "rating": 4
+      "name": "Dr. Rajavel",
+      "specialization": "Orthopaedics",
+      "hospital": "Velan Hospital, Trichy",
+      "reviewText": "The quality of the medical equipment supplied by Vel Bio Med has been excellent. Their technical team completed the installation efficiently and provided comprehensive training to our staff."
     },
     {
       "id": "tst-4",
-      "name": "Dr. Sarah Jenkins",
-      "designation": "Chief of Anesthesiology, Mayo Clinical Centre",
-      "image": "/images/tst-4.jpg",
-      "reviewText": "The clinical training modules and quick technical setup support provided by Vel Bio Med for our ventilator channels exceeded all safety and compliance indices.",
-      "rating": 5
+      "name": "Dr. Rajavel",
+      "specialization": "Internal Medicine",
+      "hospital": "Curious Hospital, Trichy",
+      "reviewText": "Vel Bio Med understood our hospital's requirements and recommended the right solutions. Their attention to detail and dependable customer support have made them a trusted partner."
     },
     {
       "id": "tst-5",
-      "name": "Dr. Rajesh Kumar",
-      "designation": "Senior Consultant Interventional Cardiologist, Fortis Healthcare",
-      "image": "/images/tst-5.jpg",
-      "reviewText": "For advanced high-acuity diagnostics and ICU monitors, Vel Bio Med is our gold standard. Zero calibration defects and prompt 24/7 AMC servicing guarantees absolute safety.",
-      "rating": 5
+      "name": "Dr. Muhundhan",
+      "specialization": "General Surgery",
+      "hospital": "ABC Hospital, Trichy",
+      "reviewText": "From procurement to installation, the entire experience with Vel Bio Med was smooth and professional. We appreciate their timely delivery and commitment to customer satisfaction."
     },
     {
       "id": "tst-6",
-      "name": "Dr. Briana Patton",
-      "designation": "Operations Manager, City Health Clinic",
-      "image": "/images/tst-6.jpg",
-      "reviewText": "This sourcing platform revolutionized our procurement, streamlining ICU setup and diagnostics. The support keeps our clinical teams productive.",
-      "rating": 5
+      "name": "Dr. Radhakrishnan",
+      "specialization": "Anaesthesiology",
+      "hospital": "Frontline Hospital, Trichy",
+      "reviewText": "Vel Bio Med delivered exactly what was promised. Their engineers handled the installation with great care, and their technical support has been exceptional whenever required."
     },
     {
       "id": "tst-7",
-      "name": "Dr. Bilal Ahmed",
-      "designation": "IT Director, National Medical Centre",
-      "image": "/images/tst-7.jpg",
-      "reviewText": "Implementing these patient monitoring networks was smooth and quick. The customizable, user-friendly interface made nursing staff training effortless.",
-      "rating": 5
+      "name": "Dr. Vel Aravinth",
+      "specialization": "Radiology",
+      "hospital": "Pineapple Diagnosis Center, Trichy",
+      "reviewText": "The diagnostic equipment supplied by Vel Bio Med has consistently delivered reliable performance. Their responsive support team and technical expertise have exceeded our expectations."
     },
     {
       "id": "tst-8",
-      "name": "Dr. Saman Malik",
-      "designation": "Nursing Superintendent, Care Hospital",
-      "image": "/images/tst-8.jpg",
-      "reviewText": "The technical team is exceptional, guiding us through OT machine calibration and providing ongoing 24/7 support.",
-      "rating": 5
+      "name": "Dr. Vijayakumar",
+      "specialization": "Neurology",
+      "hospital": "Neuro One, Trichy",
+      "reviewText": "Vel Bio Med has been a dependable partner for our hospital. Their product quality, timely service, and knowledgeable engineers have made every project successful."
     },
     {
       "id": "tst-9",
-      "name": "Dr. Omar Raza",
-      "designation": "Medical Director, Apex Super Specialty",
-      "image": "/images/tst-9.jpg",
-      "reviewText": "Vel Bio Med's seamless turnkey installations enhanced our business operations and ICU efficiency. Highly recommend their professional support.",
-      "rating": 5
+      "name": "Dr. Jai Krish",
+      "specialization": "Orthopaedics",
+      "hospital": "Atlas Hospital, Trichy",
+      "reviewText": "We are pleased with the quality of equipment and the professionalism shown by the Vel Bio Med team. Their installation was completed on time, and the entire process was hassle-free."
+    },
+    {
+      "id": "tst-10",
+      "name": "Dr. Mahesh Yogaraj",
+      "specialization": "Critical Care Medicine",
+      "hospital": "HM Hospital, Trichy",
+      "reviewText": "Vel Bio Med consistently provides high-quality medical equipment backed by excellent technical support. Their commitment to customer satisfaction has been outstanding."
+    },
+    {
+      "id": "tst-11",
+      "name": "Dr. Kumar",
+      "specialization": "Cardiology",
+      "hospital": "Silverline Hospital, Karur",
+      "reviewText": "The equipment supplied by Vel Bio Med has been reliable and efficient in our daily operations. Their technical support team responds quickly whenever assistance is needed."
+    },
+    {
+      "id": "tst-12",
+      "name": "Dr. K. Ravikumar",
+      "specialization": "General Medicine",
+      "hospital": "Sugam Hospital, Karur",
+      "reviewText": "Vel Bio Med has exceeded our expectations with quality products and professional service. Their team ensured a smooth installation and provided excellent user training."
+    },
+    {
+      "id": "tst-13",
+      "name": "Dr. S. Kumaran",
+      "specialization": "Orthopaedics",
+      "hospital": "Kumaran Hospital, Karur",
+      "reviewText": "We appreciate Vel Bio Med's commitment to delivering dependable medical equipment. Their engineers completed the installation efficiently and answered all our technical questions."
+    },
+    {
+      "id": "tst-14",
+      "name": "Dr. Karthikeyan",
+      "specialization": "Emergency Medicine",
+      "hospital": "Harshamitra Hospital, Karur",
+      "reviewText": "Working with Vel Bio Med has been a wonderful experience. Their products are reliable, and the after-sales support has always been prompt and professional."
+    },
+    {
+      "id": "tst-15",
+      "name": "Dr. Rathnavel",
+      "specialization": "Cardiothoracic Surgery",
+      "hospital": "Rathna Global Hospital, Karur",
+      "reviewText": "Vel Bio Med demonstrated exceptional professionalism throughout our procurement process. Their quality standards and technical expertise are truly commendable."
+    },
+    {
+      "id": "tst-16",
+      "name": "Dr. Ramya",
+      "specialization": "Obstetrics & Gynaecology",
+      "hospital": "Sri Ramya Hospital, Karur",
+      "reviewText": "The installation was completed on time, and every piece of equipment was tested thoroughly before handover. We appreciate the team's dedication and attention to detail."
+    },
+    {
+      "id": "tst-17",
+      "name": "Dr. Janet",
+      "specialization": "Paediatrics",
+      "hospital": "Janet Hospital, Karur",
+      "reviewText": "Vel Bio Med has become one of our trusted medical equipment suppliers. Their prompt service, quality products, and experienced technical team have been impressive."
+    },
+    {
+      "id": "tst-18",
+      "name": "Dr. Saravanan",
+      "specialization": "Gastroenterology",
+      "hospital": "Gastro Care Hospital, Karur",
+      "reviewText": "We are extremely pleased with the quality of products supplied by Vel Bio Med. Their engineers provided excellent installation support and ensured everything functioned perfectly."
+    },
+    {
+      "id": "tst-19",
+      "name": "Dr. Anand",
+      "specialization": "Internal Medicine",
+      "hospital": "Galaxy Hospital, Karur",
+      "reviewText": "The professionalism shown by the Vel Bio Med team throughout the project was remarkable. Their customer support and technical guidance have been consistently excellent."
+    },
+    {
+      "id": "tst-20",
+      "name": "Dr. Srinivasan",
+      "specialization": "General Surgery",
+      "hospital": "Srinivasa Hospital, Karur",
+      "reviewText": "Vel Bio Med delivers dependable medical equipment with exceptional customer service. Their commitment to quality and timely support has made them a valued healthcare partner."
     }
   ],
   "contactInfo": {

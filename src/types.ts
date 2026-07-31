@@ -45,10 +45,12 @@ export interface GalleryItem {
 export interface Testimonial {
   id: string;
   name: string;
-  designation: string;
-  image: string;
+  specialization?: string;
+  hospital?: string;
+  designation?: string;
+  image?: string;
   reviewText: string;
-  rating: number;
+  rating?: number;
 }
 
 export interface ContactInfo {

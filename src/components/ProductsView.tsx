@@ -407,18 +407,6 @@ export default function ProductsView({
 
                         {/* Info details pill */}
                         <div className="flex items-center justify-between mb-5 pt-3.5 border-t border-slate-100">
-                          <div className="flex items-center gap-1 bg-amber-50/70 border border-amber-100/50 px-2.5 py-1 rounded-full">
-                            <div className="flex text-amber-400 drop-shadow-[0_0_2px_rgba(251,191,36,0.35)]">
-                              {Array.from({ length: 5 }).map((_, i) => (
-                                <Star
-                                  key={i}
-                                  className={`w-3 h-3 ${i < Math.floor(p.rating) ? "text-amber-400 fill-amber-400" : "text-slate-200"
-                                    }`}
-                                />
-                              ))}
-                            </div>
-                            <span className="text-[10px] text-amber-700 font-extrabold ml-0.5">{p.rating}.0</span>
-                          </div>
                           <span className="text-[10px] text-slate-400 font-black uppercase tracking-wider flex items-center gap-1">
                             <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" /> Certified Unit
                           </span>
@@ -529,18 +517,7 @@ export default function ProductsView({
                       {selectedProductModal.name}
                     </motion.h2>
 
-                    <div className="flex items-center gap-2 mt-2 mb-5">
-                      <div className="flex text-amber-400">
-                        {Array.from({ length: 5 }).map((_, i) => (
-                          <Star
-                            key={i}
-                            className={`w-3.5 h-3.5 ${i < Math.floor(selectedProductModal.rating) ? "fill-amber-400" : "text-slate-350"
-                              }`}
-                          />
-                        ))}
-                      </div>
-                      <span className="text-xs text-slate-500 font-bold">({selectedProductModal.rating}.0 Customer Stars)</span>
-                    </div>
+                    <div className="mb-5" />
 
                     {/* Sub Tab selection triggers */}
                     <div className="flex border-b border-slate-200 mb-6 font-medium text-xs">
@@ -568,7 +545,7 @@ export default function ProductsView({
                     </div>
 
                     {/* Dynamic Content based on tab */}
-                    <div className="min-h-[140px] text-xs sm:text-sm text-slate-655 leading-relaxed font-sans font-medium">
+                    <div className="max-h-[260px] sm:max-h-[280px] overflow-y-auto pr-1 text-xs sm:text-sm leading-relaxed font-sans font-medium">
                       {activeModalTab === "desc" && (
                         <p className="whitespace-pre-line text-slate-600 font-medium">
                           {selectedProductModal.description}
@@ -580,7 +557,7 @@ export default function ProductsView({
                           {Boolean(selectedProductModal.features?.length) ? (
                             selectedProductModal.features.map((fea, index) => (
                               <li key={index} className="flex gap-2.5 items-start">
-                                <div className="p-1 px-[5px] bg-amber-500 text-white rounded text-[8px] mt-0.5">
+                                <div className="p-1 px-[5px] bg-amber-500 text-white rounded text-[8px] mt-0.5 shrink-0">
                                   <Check className="w-3 h-3 text-white" />
                                 </div>
                                 <span className="text-xs sm:text-sm font-semibold">{fea}</span>
@@ -593,16 +570,16 @@ export default function ProductsView({
                       )}
 
                       {activeModalTab === "specs" && (
-                        <div className="border border-slate-200/80 rounded-xl overflow-hidden bg-slate-50">
+                        <div className="border border-slate-200/80 rounded-xl overflow-y-auto max-h-[250px] bg-slate-50 shadow-xs">
                           {Boolean(Object.keys(selectedProductModal.specifications || {}).length) ? (
                             <table className="w-full text-xs text-left divide-y divide-slate-150">
                               <tbody>
                                 {Object.entries(selectedProductModal.specifications).map(([key, val]) => (
                                   <tr key={key} className="even:bg-white divide-x divide-slate-150 font-medium">
-                                    <td className="py-2.5 px-3 font-semibold text-slate-700 bg-slate-50/50 w-2/5">
+                                    <td className="py-2.5 px-3 font-bold text-slate-700 bg-slate-50/70 w-2/5 shrink-0 align-top">
                                       {key}
                                     </td>
-                                    <td className="py-2.5 px-3 text-slate-600 truncate max-w-[150px] font-semibold">
+                                    <td className="py-2.5 px-3 text-slate-700 font-semibold break-words leading-relaxed align-top">
                                       {val}
                                     </td>
                                   </tr>

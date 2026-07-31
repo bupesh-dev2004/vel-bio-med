@@ -36,7 +36,7 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 const tabToPath: Record<string, string> = {
-  home: "/home",
+  home: "/",
   about: "/about",
   products: "/products",
   gallery: "/gallery",
@@ -44,6 +44,7 @@ const tabToPath: Record<string, string> = {
 };
 
 const pathToTab: Record<string, string> = {
+  "/": "home",
   "/home": "home",
   "/about": "about",
   "/products": "products",

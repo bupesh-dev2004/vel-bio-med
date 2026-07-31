@@ -1,51 +1,69 @@
 "use client";
 import React from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 
 export interface TestimonialItem {
-  text: string;
-  image: string;
+  id?: string;
+  reviewText: string;
   name: string;
-  role: string;
+  specialization?: string;
+  hospital?: string;
 }
 
 export const TestimonialsColumn = (props: {
   className?: string;
   testimonials: TestimonialItem[];
   duration?: number;
+  isPaused?: boolean;
 }) => {
+  const duration = props.duration || 35;
+
   return (
-    <div className={`w-full md:w-[320px] lg:w-[340px] flex justify-center shrink-0 ${props.className || ""}`}>
+    <div className={`w-full flex justify-center shrink-0 overflow-hidden ${props.className || ""}`}>
       <motion.div
         animate={{
-          translateY: "-50%",
+          translateY: ["0%", "-50%"],
         }}
         transition={{
-          duration: props.duration || 12,
+          duration: duration,
           repeat: Infinity,
           ease: "linear",
           repeatType: "loop",
         }}
-        style={{ willChange: "transform", transformStyle: "preserve-3d" }}
-        className="transform-gpu flex flex-col gap-6 pb-6 w-full items-center"
+        style={{
+          willChange: "transform",
+        }}
+        animate-state={props.isPaused ? "paused" : "running"}
+        className={`flex flex-col gap-6 pb-6 w-full items-center ${props.isPaused ? "[animation-play-state:paused]" : ""}`}
       >
-        {[
-          ...new Array(2).fill(0).map((_, index) => (
-            <React.Fragment key={index}>
-              {props.testimonials.map(({ text, name, role }, i) => (
-                <div className="group p-6 sm:p-7 md:p-8 rounded-[28px] border border-slate-300/90 shadow-md shadow-slate-900/5 max-w-[320px] sm:max-w-xs md:max-w-[340px] w-full mx-auto bg-white text-slate-800 transition-all duration-300 flex flex-col justify-between md:hover:-translate-y-2 md:hover:scale-[1.02] md:hover:border-blue-400 md:hover:shadow-2xl md:hover:shadow-blue-500/10 cursor-pointer" key={i}>
-                  <div className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">{text}</div>
-                  <div className="flex items-center gap-3.5 mt-5">
-                    <div className="flex flex-col min-w-0">
-                      <div className="font-extrabold text-slate-900 text-xs sm:text-sm tracking-tight leading-snug truncate md:group-hover:text-blue-600 transition-colors duration-200">{name}</div>
-                      {role && <div className="text-[10.5px] sm:text-xs font-medium text-slate-500 tracking-tight truncate">{role}</div>}
-                    </div>
-                  </div>
+        {[...props.testimonials, ...props.testimonials].map((item, i) => (
+          <div
+            key={`${item.id || i}-${i}`}
+            className="group p-6 sm:p-7 md:p-8 rounded-[28px] border border-slate-300/90 shadow-md shadow-slate-900/5 w-full bg-white text-slate-800 transition-all duration-300 flex flex-col justify-between min-h-[260px] sm:min-h-[270px] md:min-h-[280px] hover:border-blue-400 hover:shadow-xl hover:shadow-blue-500/10 cursor-pointer"
+          >
+            {/* 1. Review Description (Top) */}
+            <div className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium text-left">
+              "{item.reviewText}"
+            </div>
+
+            {/* 2. Doctor Details (Bottom) */}
+            <div className="pt-4 border-t border-slate-100 flex flex-col text-left mt-auto">
+              <div className="font-extrabold text-slate-900 text-sm sm:text-base tracking-tight leading-snug group-hover:text-blue-600 transition-colors duration-200">
+                {item.name}
+              </div>
+              {item.specialization && (
+                <div className="text-xs font-semibold text-blue-600 tracking-wide mt-0.5">
+                  {item.specialization}
                 </div>
-              ))}
-            </React.Fragment>
-          )),
-        ]}
+              )}
+              {item.hospital && (
+                <div className="text-[11px] sm:text-xs font-medium text-slate-500 tracking-tight mt-0.5">
+                  {item.hospital}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
       </motion.div>
     </div>
   );
