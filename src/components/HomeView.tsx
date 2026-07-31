@@ -404,14 +404,14 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 <div className="ipad-pro-top-group flex flex-col items-center md:items-center xl:items-start text-center md:text-center xl:text-left gap-y-[clamp(8px,1.8vw,16px)] md:gap-y-0 xl:gap-y-4 w-full mt-1 sm:mt-0 translate-y-0 md:-translate-y-24 lg:-translate-y-[120px] xl:-translate-y-14">
                   {/* Badge */}
                   <motion.div variants={heroItemVariants} className="w-full text-center md:text-center xl:text-left translate-y-1 md:translate-y-2 lg:translate-y-0 xl:translate-y-0">
-                    <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[10.5px] md:text-[13px] lg:text-[21px] xl:text-[13.5px] font-black tracking-widest px-3 py-1 md:px-3 md:py-1 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
+                    <span className="small-mobile-badge inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[10.5px] md:text-[13px] lg:text-[21px] xl:text-[13.5px] font-black tracking-widest px-3 py-1 md:px-3 md:py-1 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
                       Clinical Sourcing Excellence
                     </span>
                   </motion.div>
                   {/* Heading */}
                   <motion.h1
                     variants={heroItemVariants}
-                    className="text-[clamp(1.45rem,4vw+0.5rem,2.75rem)] md:text-[2.5rem] lg:text-[3.85rem] xl:text-[2.65rem] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] md:max-w-[780px] lg:max-w-[760px] xl:max-w-[720px] w-full text-center md:text-center xl:text-left mt-3 md:mt-4 lg:mt-3 xl:mt-2"
+                    className="small-mobile-heading text-[clamp(1.45rem,4vw+0.5rem,2.75rem)] md:text-[2.5rem] lg:text-[3.85rem] xl:text-[2.65rem] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] md:max-w-[780px] lg:max-w-[760px] xl:max-w-[720px] w-full text-center md:text-center xl:text-left mt-3 md:mt-4 lg:mt-3 xl:mt-2"
                   >
                     <span className="whitespace-nowrap">
                       Transforming{" "}
@@ -430,7 +430,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   {/* Description */}
                   <motion.p
                     variants={heroItemVariants}
-                    className="text-[clamp(13px,1.5vw+9px,15px)] md:text-[17px] lg:text-[24px] xl:text-lg text-slate-650 leading-relaxed font-semibold max-w-[520px] md:max-w-[680px] lg:max-w-[720px] xl:max-w-[560px] w-full text-center md:text-center xl:text-left mt-3 md:mt-4 lg:mt-4 xl:mt-2"
+                    className="small-mobile-paragraph text-[clamp(13px,1.5vw+9px,15px)] md:text-[17px] lg:text-[24px] xl:text-lg text-slate-650 leading-relaxed font-semibold max-w-[520px] md:max-w-[680px] lg:max-w-[720px] xl:max-w-[560px] w-full text-center md:text-center xl:text-left mt-3 md:mt-4 lg:mt-4 xl:mt-2"
                   >
                     Vel Bio Med delivers high-caliber diagnostics, ICU patient monitors, operation theatre machinery, and life-support equipment to premium hospitals.
                   </motion.p>
@@ -438,7 +438,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   {/* CTA Buttons */}
                   <motion.div
                     variants={heroItemVariants}
-                    className="flex flex-row justify-center md:justify-center xl:justify-start gap-3 sm:gap-4 w-full mt-[clamp(6px,2vw,20px)] md:mt-5 lg:mt-5 xl:mt-5"
+                    className="small-mobile-btn-container flex flex-row justify-center md:justify-center xl:justify-start gap-3 sm:gap-4 w-full mt-[clamp(6px,2vw,20px)] md:mt-5 lg:mt-5 xl:mt-5"
                   >
                     <motion.button
                       whileHover={{
@@ -448,7 +448,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                       }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => setCurrentTab("products")}
-                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[11.5px] sm:text-xs md:text-[clamp(10px,0.8vw+8px,12px)] lg:text-base xl:text-sm py-2 px-3 sm:px-6 xl:px-7 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer border-none h-10 md:h-[clamp(38px,1vw+34px,44px)] lg:h-14 xl:h-12 flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
+                      className="small-mobile-btn bg-blue-600 hover:bg-blue-700 text-white font-bold text-[11.5px] sm:text-xs md:text-[clamp(10px,0.8vw+8px,12px)] lg:text-base xl:text-sm py-2 px-3 sm:px-6 xl:px-7 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer border-none h-10 md:h-[clamp(38px,1vw+34px,44px)] lg:h-14 xl:h-12 flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
                     >
                       Explore Products <ArrowRight className="w-4 h-4" />
                     </motion.button>
@@ -460,7 +460,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                       }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => setCurrentTab("contact")}
-                      className="bg-white border border-slate-200 text-blue-600 hover:bg-slate-50 font-bold text-[11.5px] sm:text-xs md:text-[clamp(10px,0.8vw+8px,12px)] lg:text-base xl:text-sm py-2 px-3 sm:px-6 xl:px-7 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer h-10 md:h-[clamp(38px,1vw+34px,44px)] lg:h-14 xl:h-12 flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
+                      className="small-mobile-btn bg-white border border-slate-200 text-blue-600 hover:bg-slate-50 font-bold text-[11.5px] sm:text-xs md:text-[clamp(10px,0.8vw+8px,12px)] lg:text-base xl:text-sm py-2 px-3 sm:px-6 xl:px-7 rounded-lg transition-all flex items-center justify-center gap-1.5 uppercase tracking-wider cursor-pointer h-10 md:h-[clamp(38px,1vw+34px,44px)] lg:h-14 xl:h-12 flex-1 sm:flex-initial max-w-[180px] sm:max-w-none"
                     >
                       <PhoneCall className="w-4 h-4 text-blue-600" /> Contact Us
                     </motion.button>

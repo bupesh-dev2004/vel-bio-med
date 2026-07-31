@@ -1246,4 +1246,63 @@ html.lenis, html.lenis body {
 .transform-gpu {
   transform: translateZ(0);
   will-change: transform;
+}
+
+/* Custom Hero styling specifically for very small mobile screens (< 380px width like iPhone SE 375x667) */
+@media (max-width: 380px) {
+  .ipad-pro-hero-section {
+    padding-top: 32px !important;
+    padding-bottom: 8px !important;
+  }
+
+  .ipad-pro-top-group {
+    transform: translateY(-28px) !important;
+    row-gap: 5px !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .small-mobile-badge {
+    font-size: 9.5px !important;
+    padding: 2.5px 9px !important;
+    letter-spacing: 0.08em !important;
+  }
+
+  .small-mobile-heading {
+    font-size: 1.22rem !important; /* ~19.5px, crisp & balanced */
+    line-height: 1.16 !important;
+    margin-top: 5px !important;
+    text-align: center !important;
+  }
+
+  .small-mobile-paragraph {
+    font-size: 12px !important;
+    line-height: 1.35 !important;
+    margin-top: 5px !important;
+    max-width: 330px !important;
+    text-align: center !important;
+  }
+
+  .small-mobile-btn-container {
+    margin-top: 10px !important;
+    gap: 8px !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  .small-mobile-btn {
+    height: 35px !important;
+    padding: 0 12px !important;
+    font-size: 10px !important;
+    border-radius: 6px !important;
+    max-width: 145px !important;
+    flex: 1 1 0% !important;
+    justify-content: center !important;
+  }
+
+  .small-mobile-btn svg {
+    width: 13px !important;
+    height: 13px !important;
+  }
 }
