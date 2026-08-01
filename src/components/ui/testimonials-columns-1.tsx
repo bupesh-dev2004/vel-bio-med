@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
 
 export interface TestimonialItem {
   id?: string;
@@ -16,25 +15,33 @@ export const TestimonialsColumn = (props: {
   duration?: number;
   isPaused?: boolean;
 }) => {
-  const duration = props.duration || 35;
+  const duration = props.duration || 20;
 
   return (
     <div className={`w-full flex justify-center shrink-0 overflow-hidden ${props.className || ""}`}>
-      <motion.div
-        animate={{
-          translateY: ["0%", "-50%"],
-        }}
-        transition={{
-          duration: duration,
-          repeat: Infinity,
-          ease: "linear",
-          repeatType: "loop",
-        }}
-        style={{
-          willChange: "transform",
-        }}
-        animate-state={props.isPaused ? "paused" : "running"}
-        className={`flex flex-col gap-6 pb-6 w-full items-center ${props.isPaused ? "[animation-play-state:paused]" : ""}`}
+      <style>{`
+        @keyframes testimonial-scroll-up {
+          0% {
+            transform: translate3d(0, 0%, 0);
+          }
+          100% {
+            transform: translate3d(0, -50%, 0);
+          }
+        }
+
+        .animate-testimonial-scroll {
+          animation: testimonial-scroll-up var(--scroll-duration, 15s) linear infinite;
+          will-change: transform;
+          transform: translate3d(0, 0, 0);
+        }
+
+        .animate-testimonial-scroll.paused {
+          animation-play-state: paused !important;
+        }
+      `}</style>
+      <div
+        style={{ "--scroll-duration": `${duration}s` } as React.CSSProperties}
+        className={`flex flex-col gap-6 pb-6 w-full items-center animate-testimonial-scroll ${props.isPaused ? "paused" : ""}`}
       >
         {[...props.testimonials, ...props.testimonials].map((item, i) => (
           <div
@@ -64,7 +71,7 @@ export const TestimonialsColumn = (props: {
             </div>
           </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 };

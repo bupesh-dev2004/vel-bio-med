@@ -408,9 +408,9 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
     },
     {
       id: "tst-4",
-      name: "Dr. Rajavel",
+      name: "Dr. S. K. Naganathan",
       specialization: "Internal Medicine",
-      hospital: "Curious Hospital, Trichy",
+      hospital: "Naganathan Hospital, Trichy",
       reviewText: "Vel Bio Med understood our hospital's requirements and recommended the right solutions. Their attention to detail and dependable customer support have made them a trusted partner."
     },
     {
@@ -421,7 +421,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
       reviewText: "From procurement to installation, the entire experience with Vel Bio Med was smooth and professional. We appreciate their timely delivery and commitment to customer satisfaction."
     },
     {
-      "id": "tst-6",
+      id: "tst-6",
       name: "Dr. Radhakrishnan",
       specialization: "Anaesthesiology",
       hospital: "Frontline Hospital, Trichy",
@@ -444,7 +444,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
     {
       id: "tst-9",
       name: "Dr. Jai Krish",
-      specialization: "Orthopaedics",
+      specialization: "Nephrology",
       hospital: "Atlas Hospital, Trichy",
       reviewText: "We are pleased with the quality of equipment and the professionalism shown by the Vel Bio Med team. Their installation was completed on time, and the entire process was hassle-free."
     },
@@ -457,7 +457,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
     },
     {
       id: "tst-11",
-      name: "Dr. Kumar",
+      name: "Dr. V. Ashok Kumar",
       specialization: "Cardiology",
       hospital: "Silverline Hospital, Karur",
       reviewText: "The equipment supplied by Vel Bio Med has been reliable and efficient in our daily operations. Their technical support team responds quickly whenever assistance is needed."
@@ -465,14 +465,14 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
     {
       id: "tst-12",
       name: "Dr. K. Ravikumar",
-      specialization: "General Medicine",
+      specialization: "Pulmonology",
       hospital: "Sugam Hospital, Karur",
       reviewText: "Vel Bio Med has exceeded our expectations with quality products and professional service. Their team ensured a smooth installation and provided excellent user training."
     },
     {
       id: "tst-13",
       name: "Dr. S. Kumaran",
-      specialization: "Orthopaedics",
+      specialization: "Arthroscopy & Trauma",
       hospital: "Kumaran Hospital, Karur",
       reviewText: "We appreciate Vel Bio Med's commitment to delivering dependable medical equipment. Their engineers completed the installation efficiently and answered all our technical questions."
     },
@@ -514,23 +514,20 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
     {
       id: "tst-19",
       name: "Dr. Anand",
-      specialization: "Internal Medicine",
+      specialization: "Urology",
       hospital: "Galaxy Hospital, Karur",
       reviewText: "The professionalism shown by the Vel Bio Med team throughout the project was remarkable. Their customer support and technical guidance have been consistently excellent."
     },
     {
       id: "tst-20",
       name: "Dr. Srinivasan",
-      specialization: "General Surgery",
+      specialization: "Vascular Surgery",
       hospital: "Srinivasa Hospital, Karur",
       reviewText: "Vel Bio Med delivers dependable medical equipment with exceptional customer service. Their commitment to quality and timely support has made them a valued healthcare partner."
     }
   ];
 
-  const stateTestimonials = state?.testimonials || [];
-  const testimonials = (stateTestimonials.length >= 20 && stateTestimonials[0]?.name?.includes("Govindarajan"))
-    ? stateTestimonials
-    : DEFAULT_TESTIMONIALS;
+  const testimonials = DEFAULT_TESTIMONIALS;
 
   // Desktop (3 columns)
   const desktopCol1 = testimonials.filter((_, idx) => idx % 3 === 0);
@@ -1236,20 +1233,20 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
           >
             {/* Desktop (≥1024px): 3 scrolling columns */}
             <div className="hidden lg:grid grid-cols-3 gap-8 h-full">
-              <TestimonialsColumn testimonials={desktopCol1} duration={28} isPaused={isTestimonialsPaused} />
-              <TestimonialsColumn testimonials={desktopCol2} duration={34} isPaused={isTestimonialsPaused} />
-              <TestimonialsColumn testimonials={desktopCol3} duration={26} isPaused={isTestimonialsPaused} />
+              <TestimonialsColumn testimonials={desktopCol1} duration={13} isPaused={isTestimonialsPaused} />
+              <TestimonialsColumn testimonials={desktopCol2} duration={15} isPaused={isTestimonialsPaused} />
+              <TestimonialsColumn testimonials={desktopCol3} duration={12} isPaused={isTestimonialsPaused} />
             </div>
 
             {/* Tablet (768px–1023px): 2 scrolling columns */}
             <div className="hidden md:grid lg:hidden grid-cols-2 gap-6 h-full">
-              <TestimonialsColumn testimonials={tabletCol1} duration={30} isPaused={isTestimonialsPaused} />
-              <TestimonialsColumn testimonials={tabletCol2} duration={32} isPaused={isTestimonialsPaused} />
+              <TestimonialsColumn testimonials={tabletCol1} duration={14} isPaused={isTestimonialsPaused} />
+              <TestimonialsColumn testimonials={tabletCol2} duration={15} isPaused={isTestimonialsPaused} />
             </div>
 
             {/* Mobile (<768px): 1 single scrolling column for all 20 cards */}
             <div className="grid md:hidden grid-cols-1 gap-6 h-full w-full max-w-md mx-auto">
-              <TestimonialsColumn testimonials={testimonials} duration={46} isPaused={isTestimonialsPaused} />
+              <TestimonialsColumn testimonials={testimonials} duration={21} isPaused={isTestimonialsPaused} />
             </div>
           </div>
         </motion.div>

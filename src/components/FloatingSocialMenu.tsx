@@ -20,7 +20,7 @@ const MenuTrigger = ({ isExpanded }: { isExpanded?: boolean }) => {
 export default function FloatingSocialMenu() {
   const { state } = useAppState();
 
-  const whatsappNumber = state?.contactInfo?.whatsappNumber || "918049302930";
+  const whatsappNumber = state?.contactInfo?.whatsappNumber || "919629515551";
   const whatsappText = encodeURIComponent("Hello Vel Bio Med! Please provide me more information about your medical machinery and hospital equipment solutions.");
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappText}`;
 

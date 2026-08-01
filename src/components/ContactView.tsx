@@ -74,11 +74,11 @@ export default function ContactView() {
   }, []);
 
   const defaultContact = {
-    address: "Vel Bio Healthcare, India",
-    phone: "+91 7094878251",
-    email: "velbio@gmail.com",
-    workingHours: "Mon - Sat, 9:00 AM - 7:00 PM",
-    mapUrl: "https://maps.google.com/maps?q=Vel%20Bio%20Med%20Outer%20Ring%20Road,%20Bengaluru&t=&z=14&ie=UTF8&iwloc=&output=embed"
+    address: "VEL BIO MED - Medical equipment supplier, Hari Divya Complex, 55, Palayam Bazaar Rd, Woraiyur, Tiruchirappalli, Tamil Nadu 620003",
+    phone: "9629515551 | 9445922066",
+    email: "velbiomed@gmail.com",
+    workingHours: "Monday - Saturday: 9:00 AM - 6:30 PM (IST)",
+    mapUrl: "https://maps.google.com/maps?q=Hari%20Divya%20Complex,%20Woraiyur,%20Tiruchirappalli&t=&z=15&ie=UTF8&iwloc=&output=embed"
   };
 
   const contact = state?.contactInfo || defaultContact;

@@ -1000,6 +1000,628 @@
       },
       "trending": true,
       "newest": true
+    },
+    {
+      "id": "prod-31",
+      "name": "Labour Delivery Table",
+      "category": "Operating Theatre (OT)",
+      "image": "/images/prod-31.png",
+      "shortDesc": "Designed for labor, delivery, and gynecological procedures with adjustable positioning and sturdy mild steel support.",
+      "description": "The Labour Delivery Table is designed for labor, delivery, and gynecological procedures. It provides adjustable positioning and sturdy support to ensure patient comfort and ease of use for healthcare professionals.",
+      "rating": 5,
+      "features": [
+        "Strong mild steel framework",
+        "Adjustable head backrest with ratchet",
+        "Perineal \"U\" cut for delivery procedures",
+        "Lithotomy rod provision for leg support",
+        "Durable and easy to maintain",
+        "Designed for labor and delivery rooms",
+        "Stable and comfortable construction"
+      ],
+      "specifications": {
+        "Category": "Operating Theatre (OT)",
+        "Frame": "Mild Steel",
+        "Backrest": "Ratchet Adjustable",
+        "Perineal Cut": "U-Cut",
+        "Lithotomy Rods": "Provided",
+        "Dimensions": "1800 × 600 × 750 mm",
+        "Application": "Labour & Delivery, Gynecology"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-32",
+      "name": "Labour Delivery Couch",
+      "category": "Operating Theatre (OT)",
+      "image": "/images/prod-32.png",
+      "shortDesc": "Designed to provide comfort and support during labor and delivery with pneumatic backrest and built-in storage.",
+      "description": "The Labour Delivery Couch is designed to provide comfort and support during labor and delivery procedures. It features an adjustable backrest, built-in storage, and essential accessories, making it suitable for maternity wards, labor rooms, and hospitals.",
+      "rating": 5,
+      "features": [
+        "CRCA sheet construction",
+        "Pneumatic adjustable backrest",
+        "High-quality foam mattress with washable Rexene upholstery",
+        "Three drawers and three utility cabinets",
+        "Foldable BP apparatus tray",
+        "Perineal cut for delivery procedures",
+        "Lithotomy rods with padded knee crutches",
+        "Epoxy powder-coated finish",
+        "Durable and easy to clean"
+      ],
+      "specifications": {
+        "Category": "Operating Theatre (OT)",
+        "Frame": "CRCA Steel",
+        "Backrest": "Pneumatic Adjustable",
+        "Mattress": "Foam with Washable Rexene Cover",
+        "Storage": "3 Drawers & 3 Utility Cabinets",
+        "BP Tray": "Foldable",
+        "Perineal Cut": "Yes",
+        "Lithotomy Rods": "With Padded Knee Crutches",
+        "Finish": "Epoxy Powder Coated",
+        "Application": "Labour Room, Maternity Ward & Delivery Procedures"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-33",
+      "name": "Examination Table",
+      "category": "Operating Theatre (OT)",
+      "image": "/images/prod-33.png",
+      "shortDesc": "Designed for general patient examinations and medical procedures with a comfortable cushioned top.",
+      "description": "The Examination Table is designed for general patient examinations and medical procedures. It provides a comfortable and stable surface for patients while ensuring easy access for healthcare professionals in hospitals, clinics, and diagnostic centers.",
+      "rating": 5,
+      "features": [
+        "Strong mild steel frame",
+        "Comfortable cushioned top",
+        "Durable epoxy powder-coated finish",
+        "Easy-to-clean upholstery",
+        "Stable and sturdy construction",
+        "Smooth surface for patient comfort",
+        "Compact and space-saving design",
+        "Suitable for hospitals and clinics"
+      ],
+      "specifications": {
+        "Product Type": "Examination Table",
+        "Frame Material": "Mild Steel",
+        "Finish": "Epoxy Powder Coated",
+        "Upholstery": "Cushioned & Washable",
+        "Structure": "Fixed",
+        "Safe Working Load": "Up to 180 kg",
+        "Surface": "Easy to Clean",
+        "Application": "Hospitals, Clinics & Diagnostic Centers"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-34",
+      "name": "Examination Couch with Drawer",
+      "category": "Operating Theatre (OT)",
+      "image": "/images/prod-34.png",
+      "shortDesc": "Designed for patient examinations and minor clinical procedures with built-in storage cabinets and drawers.",
+      "description": "The Examination Couch with Drawer is designed for patient examinations and minor clinical procedures. It offers a comfortable examination surface along with built-in storage for medical instruments and supplies, making it ideal for hospitals, clinics, and healthcare centers.",
+      "rating": 5,
+      "features": [
+        "Strong tubular steel construction",
+        "Powder-coated durable finish",
+        "Comfortable waterproof foam mattress",
+        "Adjustable backrest",
+        "Built-in drawers and storage cabinets",
+        "Supports up to 200 kg",
+        "Easy to clean and maintain",
+        "Suitable for hospitals, clinics, and examination rooms"
+      ],
+      "specifications": {
+        "Category": "Operating Theatre (OT)",
+        "Frame": "Tubular Steel",
+        "Finish": "Powder Coated",
+        "Mattress": "Foam, Waterproof",
+        "Backrest": "Adjustable",
+        "Storage": "Drawers & Cabinets",
+        "Dimensions": "Approx. 1800 × 600 × 760 mm",
+        "Load Capacity": "Up to 200 kg",
+        "Application": "Patient Examination & Minor Clinical Procedures"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-35",
+      "name": "Crash Cart (MS)",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-35.png",
+      "shortDesc": "Organizes emergency medical supplies for quick access with 6 molded drawers and smooth mobility.",
+      "description": "The Crash Cart (MS) is designed to organize emergency medical supplies for quick access during critical situations. Its durable mild steel construction, multiple storage drawers, and smooth mobility make it ideal for hospitals, ICUs, and emergency departments.",
+      "rating": 5,
+      "features": [
+        "Complete MS powder-coated tubular construction",
+        "Top with three-side steel railing",
+        "Six molded drawers for organized storage",
+        "Two drawers with utility containers",
+        "Six handout bins at eye level",
+        "SS saline rod provision",
+        "100 mm castor wheels for smooth movement",
+        "Two castors with brakes for added safety",
+        "Durable and easy to maintain"
+      ],
+      "specifications": {
+        "Category": "Critical Care & ICU",
+        "Material": "Mild Steel (MS)",
+        "Finish": "Powder Coated",
+        "Dimensions": "960 × 430 × 1580 mm",
+        "Drawers": "6 Molded Drawers",
+        "Utility Containers": "2",
+        "Handout Bins": "6",
+        "Wheels": "100 mm Castors",
+        "Brakes": "2 Locking Castors",
+        "Accessories": "SS Saline Rod Provision",
+        "Application": "ICU, Emergency & Critical Care"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-36",
+      "name": "Crash Cart (SS)",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-36.png",
+      "shortDesc": "Designed for emergency and critical care environments, made from high-quality stainless steel for durability and corrosion resistance.",
+      "description": "The Crash Cart (SS) is designed for emergency and critical care environments, providing quick access to essential medical supplies. Made from high-quality stainless steel, it offers durability, corrosion resistance, and smooth mobility for hospitals, ICUs, and emergency departments.",
+      "rating": 5,
+      "features": [
+        "Complete stainless steel tubular construction",
+        "Top with three-side steel railing",
+        "Six molded drawers for organized storage",
+        "Two drawers with utility containers",
+        "Six handout bins at eye level",
+        "SS saline rod provision",
+        "100 mm castor wheels for easy movement",
+        "Two castors with brakes for added safety",
+        "Corrosion-resistant and easy to clean"
+      ],
+      "specifications": {
+        "Category": "Critical Care & ICU",
+        "Material": "Stainless Steel (SS)",
+        "Construction": "Stainless Steel Tubular Frame",
+        "Dimensions": "960 × 430 × 1580 mm",
+        "Drawers": "6 Molded Drawers",
+        "Utility Containers": "2",
+        "Handout Bins": "6",
+        "Wheels": "100 mm Castors",
+        "Brakes": "2 Locking Castors",
+        "Accessories": "SS Saline Rod Provision",
+        "Application": "ICU, Emergency & Critical Care"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-37",
+      "name": "Drug Trolley",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-37.png",
+      "shortDesc": "Designed for the safe storage and easy transportation of medicines and medical supplies in healthcare facilities.",
+      "description": "The Drug Trolley is designed for the safe storage and easy transportation of medicines and medical supplies in hospitals and healthcare facilities. Its multiple drawers, smooth mobility, and durable construction help healthcare professionals access medications quickly and efficiently.",
+      "rating": 5,
+      "features": [
+        "CR sheet steel body with powder-coated finish",
+        "Adjustable storage drawers with label card holders",
+        "Foldable stainless steel writing board",
+        "Optional stainless steel top with raised edges",
+        "IV pole, utility basket, and dust bins",
+        "Four 75 mm silent swivel castor wheels",
+        "Smooth 360° mobility",
+        "Durable and easy to clean",
+        "Suitable for hospitals, ICUs, and emergency departments"
+      ],
+      "specifications": {
+        "Category": "Critical Care & ICU",
+        "Material": "CR Sheet Steel",
+        "Finish": "Powder Coated",
+        "Drawers": "Adjustable with Label Card Holders",
+        "Top": "Optional Stainless Steel Raised Edge Top",
+        "Writing Board": "Foldable Stainless Steel",
+        "Accessories": "IV Pole, Utility Basket & Dust Bins",
+        "Wheels": "Four 75 mm Silent 360° Swivel Castors",
+        "Application": "Medicine Storage & Patient Care"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-38",
+      "name": "Crash Cart (MS)",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-38.png",
+      "shortDesc": "Designed to store and organize emergency medical supplies for quick access during critical situations.",
+      "description": "The Crash Cart (MS) is designed to store and organize emergency medical supplies for quick access during critical situations. Its sturdy mild steel construction, spacious storage, and smooth mobility make it an essential unit for ICUs, emergency rooms, and hospital wards.",
+      "rating": 5,
+      "features": [
+        "Mild steel tubular construction",
+        "Powder-coated finish for durability",
+        "Six molded storage drawers",
+        "Two utility drawers with containers",
+        "Six handout bins for organized storage",
+        "Three-side safety railing on the top",
+        "SS saline rod provision",
+        "Four smooth-rolling castor wheels",
+        "Two wheels with locking brakes",
+        "Easy to clean and maintain"
+      ],
+      "specifications": {
+        "Category": "Critical Care & ICU",
+        "Material": "Mild Steel (MS)",
+        "Finish": "Powder Coated",
+        "Dimensions": "960 × 430 × 1580 mm",
+        "Drawers": "6 Molded Drawers",
+        "Utility Containers": "2",
+        "Handout Bins": "6",
+        "Top": "Three-Side Steel Railing",
+        "Wheels": "100 mm Castors",
+        "Brakes": "2 Locking Castors",
+        "IV Pole": "SS Saline Rod Provision",
+        "Application": "ICU, Emergency Room & Critical Care"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-39",
+      "name": "Equipment Trolley",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-39.png",
+      "shortDesc": "Designed for convenient transportation and organization of medical equipment and supplies within healthcare facilities.",
+      "description": "The Equipment Trolley is designed for the convenient transportation and organization of medical equipment and supplies within hospitals and healthcare facilities. Its durable construction and smooth mobility make it ideal for daily clinical use.",
+      "rating": 5,
+      "features": [
+        "Strong and durable steel construction",
+        "Spacious top shelf for medical equipment",
+        "Multiple shelves for organized storage",
+        "Smooth-rolling castor wheels",
+        "Easy to move between departments",
+        "Stable and easy to clean",
+        "Suitable for hospitals, clinics, and healthcare centers"
+      ],
+      "specifications": {
+        "Category": "Critical Care & ICU",
+        "Material": "Steel",
+        "Construction": "Durable Frame",
+        "Storage": "Multi-Shelf Design",
+        "Wheels": "Castor Wheels",
+        "Mobility": "Easy to Move",
+        "Maintenance": "Easy to Clean",
+        "Application": "Medical Equipment & Supply Transport"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-40",
+      "name": "ECG Trolley",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-40.png",
+      "shortDesc": "Designed to securely hold and transport ECG machines and related accessories within hospitals and healthcare facilities.",
+      "description": "The ECG Trolley is designed to securely hold and transport ECG machines and related accessories within hospitals and healthcare facilities. Its sturdy construction and smooth mobility make it ideal for use in ICUs, emergency departments, and diagnostic areas.",
+      "rating": 5,
+      "features": [
+        "Durable steel construction",
+        "Spacious top platform for ECG machine",
+        "Storage shelf for accessories",
+        "Smooth-rolling castor wheels",
+        "Compact and stable design",
+        "Easy to move and clean",
+        "Suitable for hospitals and diagnostic departments"
+      ],
+      "specifications": {
+        "Category": "Critical Care & ICU",
+        "Material": "Steel",
+        "Construction": "Durable Frame",
+        "Storage": "Top Platform & Lower Shelf",
+        "Wheels": "Smooth Castor Wheels",
+        "Mobility": "Easy to Move",
+        "Maintenance": "Easy to Clean",
+        "Application": "ECG Machine Support & Transport"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-41",
+      "name": "Cardiac Table",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-41.png",
+      "shortDesc": "Designed to provide a stable and convenient surface for patients during cardiac care and bedside treatments.",
+      "description": "The Cardiac Table is designed to provide a stable and convenient surface for patients during cardiac care and bedside treatments. Its sturdy construction and adjustable design make it suitable for hospitals, ICUs, and healthcare facilities.",
+      "rating": 5,
+      "features": [
+        "Strong and durable steel construction",
+        "Adjustable table height",
+        "Smooth and stable operation",
+        "Compact and space-saving design",
+        "Easy to move with castor wheels",
+        "Easy to clean and maintain",
+        "Suitable for hospitals, ICUs, and patient care areas"
+      ],
+      "specifications": {
+        "Category": "Critical Care & ICU",
+        "Material": "Steel",
+        "Construction": "Durable Frame",
+        "Height Adjustment": "Yes",
+        "Mobility": "Castor Wheels",
+        "Maintenance": "Easy to Clean",
+        "Application": "Cardiac Care & Bedside Patient Support"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-42",
+      "name": "Mayo Trolley",
+      "category": "Operating Theatre (OT)",
+      "image": "/images/prod-42.png",
+      "shortDesc": "Designed to hold surgical instruments and medical supplies during surgical and clinical procedures.",
+      "description": "The Mayo Trolley is designed to hold surgical instruments and medical supplies during surgical and clinical procedures. Its sturdy construction and smooth mobility provide easy access to essential instruments in operation theatres and procedure rooms.",
+      "rating": 5,
+      "features": [
+        "Durable stainless steel construction",
+        "Adjustable tray height",
+        "Smooth-rolling castor wheels",
+        "Stable and lightweight design",
+        "Easy to clean and maintain",
+        "Corrosion-resistant finish",
+        "Ideal for surgical and clinical procedures"
+      ],
+      "specifications": {
+        "Category": "Operating Theatre (OT)",
+        "Material": "Stainless Steel",
+        "Tray": "Adjustable Height",
+        "Mobility": "Castor Wheels",
+        "Construction": "Durable Frame",
+        "Finish": "Corrosion Resistant",
+        "Maintenance": "Easy to Clean",
+        "Application": "Surgical Instrument Support & OT Procedures"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-43",
+      "name": "Bedside Locker",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-43.png",
+      "shortDesc": "Provides convenient storage for patients' personal belongings, medicines, and essential medical supplies.",
+      "description": "The Bedside Locker is designed to provide convenient storage for patients' personal belongings, medicines, and essential medical supplies. Its compact design and durable construction make it ideal for hospital wards, ICUs, and patient rooms.",
+      "rating": 5,
+      "features": [
+        "Durable steel construction",
+        "Spacious storage compartment",
+        "Smooth drawer for easy access",
+        "Compact and space-saving design",
+        "Easy to clean and maintain",
+        "Stable and sturdy structure",
+        "Suitable for hospitals and healthcare facilities"
+      ],
+      "specifications": {
+        "Category": "Critical Care & ICU",
+        "Material": "Steel",
+        "Construction": "Durable Frame",
+        "Storage": "Cabinet & Drawer",
+        "Design": "Compact",
+        "Maintenance": "Easy to Clean",
+        "Application": "Patient Bedside Storage & Hospital Use"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-44",
+      "name": "Instrument Trolley",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-44.png",
+      "shortDesc": "Designed for safe storage and transportation of surgical instruments, medical devices, and clinical supplies.",
+      "description": "The Instrument Trolley is designed for the safe storage and transportation of surgical instruments, medical devices, and clinical supplies. Its sturdy construction and smooth mobility make it suitable for hospitals, operation theatres, and healthcare facilities.",
+      "rating": 5,
+      "features": [
+        "Durable stainless steel construction",
+        "Multi-shelf design for organized storage",
+        "Smooth-rolling castor wheels",
+        "Compact and stable structure",
+        "Corrosion-resistant finish",
+        "Easy to clean and maintain",
+        "Suitable for hospitals, clinics, and operation theatres"
+      ],
+      "specifications": {
+        "Category": "Critical Care & ICU",
+        "Material": "Stainless Steel",
+        "Construction": "Durable Frame",
+        "Storage": "Multi-Shelf Design",
+        "Mobility": "Castor Wheels",
+        "Finish": "Corrosion Resistant",
+        "Maintenance": "Easy to Clean",
+        "Application": "Medical Instrument Storage & Transport"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-45",
+      "name": "Dressing Trolley",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-45.png",
+      "shortDesc": "Designed for carrying dressing materials, medical instruments, and clinical supplies during patient care.",
+      "description": "The Dressing Trolley is designed for carrying dressing materials, medical instruments, and clinical supplies during patient care and wound dressing procedures. Its sturdy construction and smooth mobility make it suitable for hospitals, clinics, and healthcare facilities.",
+      "rating": 5,
+      "features": [
+        "Durable stainless steel construction",
+        "Two-shelf design for organized storage",
+        "Smooth-rolling castor wheels",
+        "Compact and sturdy structure",
+        "Corrosion-resistant finish",
+        "Easy to clean and maintain",
+        "Ideal for dressing rooms, wards, and clinics"
+      ],
+      "specifications": {
+        "Category": "Critical Care & ICU",
+        "Material": "Stainless Steel",
+        "Construction": "Durable Frame",
+        "Storage": "Two-Shelf Design",
+        "Mobility": "Castor Wheels",
+        "Finish": "Corrosion Resistant",
+        "Maintenance": "Easy to Clean",
+        "Application": "Wound Dressing & Medical Supply Transport"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-46",
+      "name": "Bedside Locker",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-46.png",
+      "shortDesc": "Designed to keep patients' personal belongings, medicines, and essential items within easy reach.",
+      "description": "The Bedside Locker is designed to keep patients' personal belongings, medicines, and essential items within easy reach. Its sturdy construction and compact design make it an ideal storage solution for hospitals, clinics, and patient care units.",
+      "rating": 5,
+      "features": [
+        "Durable steel construction",
+        "Compact and space-saving design",
+        "Spacious storage cabinet",
+        "Smooth sliding drawer",
+        "Easy to clean and maintain",
+        "Stable and sturdy structure",
+        "Suitable for hospitals, wards, and ICUs"
+      ],
+      "specifications": {
+        "Category": "Critical Care & ICU",
+        "Material": "Steel",
+        "Construction": "Durable Frame",
+        "Storage": "Cabinet with Drawer",
+        "Design": "Compact & Space-Saving",
+        "Maintenance": "Easy to Clean",
+        "Application": "Patient Bedside Storage"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-47",
+      "name": "Over Bed Trolley",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-47.png",
+      "shortDesc": "Provides a convenient surface for patients to eat, read, write, or use medical devices while in bed.",
+      "description": "The Over Bed Trolley is designed to provide a convenient surface for patients to eat, read, write, or use medical devices while in bed. Its adjustable design and smooth mobility make it suitable for hospitals, patient wards, and healthcare facilities.",
+      "rating": 5,
+      "features": [
+        "Durable steel construction",
+        "Height adjustable tabletop",
+        "Smooth-rolling castor wheels",
+        "Stable and sturdy frame",
+        "Compact and space-saving design",
+        "Easy to clean and maintain",
+        "Suitable for hospitals, wards, and patient care units"
+      ],
+      "specifications": {
+        "Category": "Critical Care & ICU",
+        "Material": "Steel",
+        "Construction": "Durable Frame",
+        "Tabletop": "Height Adjustable",
+        "Mobility": "Castor Wheels",
+        "Design": "Compact & Stable",
+        "Maintenance": "Easy to Clean",
+        "Application": "Bedside Patient Care & Meal Support"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-48",
+      "name": "Bedside Screen",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-48.png",
+      "shortDesc": "Designed to provide privacy and comfort for patients during examinations, treatments, and bedside procedures.",
+      "description": "The Bedside Screen is designed to provide privacy and comfort for patients during examinations, treatments, and bedside procedures. Its lightweight, durable construction and smooth mobility make it suitable for hospitals, clinics, and patient care areas.",
+      "rating": 5,
+      "features": [
+        "Durable metal frame",
+        "Privacy screen with washable fabric",
+        "Smooth-rolling castor wheels",
+        "Lightweight and easy to move",
+        "Stable and sturdy construction",
+        "Easy to clean and maintain",
+        "Ideal for hospitals, wards, and examination rooms"
+      ],
+      "specifications": {
+        "Category": "Critical Care & ICU",
+        "Material": "Metal Frame",
+        "Screen": "Washable Privacy Fabric",
+        "Mobility": "Castor Wheels",
+        "Construction": "Durable Frame",
+        "Maintenance": "Easy to Clean",
+        "Application": "Patient Privacy During Examination & Treatment"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-49",
+      "name": "IV Stand",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-49.png",
+      "shortDesc": "Designed to securely hold IV fluid bottles and infusion bags during patient treatment.",
+      "description": "The IV Stand is designed to securely hold IV fluid bottles and infusion bags during patient treatment. Its sturdy construction, adjustable height, and smooth mobility make it ideal for hospitals, ICUs, clinics, and healthcare facilities.",
+      "rating": 5,
+      "features": [
+        "Durable stainless steel construction",
+        "Height adjustable design",
+        "Stable five-leg base",
+        "Smooth-rolling castor wheels",
+        "Multiple IV bottle hooks",
+        "Corrosion-resistant finish",
+        "Easy to clean and maintain",
+        "Suitable for hospitals, ICUs, and patient wards"
+      ],
+      "specifications": {
+        "Category": "Critical Care & ICU",
+        "Material": "Stainless Steel",
+        "Height": "Adjustable",
+        "Hooks": "Multiple IV Hooks",
+        "Base": "Stable Five-Leg Base",
+        "Mobility": "Castor Wheels",
+        "Finish": "Corrosion Resistant",
+        "Application": "IV Fluid & Infusion Support"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-50",
+      "name": "Attender Cot",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-50.png",
+      "shortDesc": "Designed to provide a comfortable resting space for patient attendants during hospital stays.",
+      "description": "The Attender Cot is designed to provide a comfortable resting space for patient attendants during hospital stays. Its sturdy construction and compact design make it ideal for hospitals, clinics, and patient care units.",
+      "rating": 5,
+      "features": [
+        "Strong and durable steel construction",
+        "Comfortable sleeping surface",
+        "Compact and space-saving design",
+        "Stable and sturdy frame",
+        "Easy to clean and maintain",
+        "Suitable for hospital wards and patient rooms",
+        "Ideal for patient attendants"
+      ],
+      "specifications": {
+        "Category": "Critical Care & ICU",
+        "Material": "Steel",
+        "Construction": "Durable Frame",
+        "Design": "Compact & Sturdy",
+        "Surface": "Comfortable Sleeping Platform",
+        "Maintenance": "Easy to Clean",
+        "Application": "Patient Attendant Resting Cot"
+      },
+      "trending": true,
+      "newest": true
     }
   ],
   "categories": [
@@ -1011,67 +1633,144 @@
   "gallery": [
     {
       "id": "gal-1",
-      "image": "/images/gal-1.jpg",
+      "image": "/images/gal-1.jpeg",
       "title": "Surgical Suite Live Installation",
       "category": "Operation Theatre Setup"
     },
     {
       "id": "gal-2",
-      "image": "/images/gal-2.jpg",
-      "title": "Dräger Primus Installation in ICU",
+      "image": "/images/gal-2.jpeg",
+      "title": "ICU Patient Monitor Setup",
       "category": "Critical Care"
     },
     {
       "id": "gal-3",
-      "image": "/images/gal-3.jpg",
+      "image": "/images/gal-3.jpeg",
       "title": "Diagnostic Radiology Console Calibration",
       "category": "Diagnostics"
     },
     {
       "id": "gal-4",
-      "image": "/images/gal-4.jpg",
+      "image": "/images/gal-4.jpeg",
       "title": "Belimed CSSD Autoclave Training Session",
       "category": "Sterilization CSSD"
     },
     {
       "id": "gal-5",
-      "image": "/images/gal-5.png",
+      "image": "/images/gal-5.jpeg",
       "title": "Multidisciplinary Trauma Center Integration",
       "category": "Operation Theatre Setup"
     },
     {
       "id": "gal-6",
-      "image": "/images/gal-6.jpg",
-      "title": "Dräger Fabius Anaesthesia Setup Delivery",
+      "image": "/images/gal-6.jpeg",
+      "title": "Anaesthesia Setup & Delivery",
       "category": "Operation Theatre Setup"
     },
     {
+      "id": "gal-7",
+      "image": "/images/gal-7.jpeg",
+      "title": "Infusion & Syringe Pump Station",
+      "category": "Critical Care"
+    },
+    {
+      "id": "gal-8",
+      "image": "/images/gal-8.jpeg",
+      "title": "Operating Theatre LED Illumination Suite",
+      "category": "Operation Theatre Setup"
+    },
+    {
+      "id": "gal-9",
+      "image": "/images/gal-9.jpeg",
+      "title": "Neonatal Radiant Warmer Installation",
+      "category": "Critical Care"
+    },
+    {
+      "id": "gal-10",
+      "image": "/images/gal10.jpeg",
+      "title": "Digital ECG Diagnostic Station",
+      "category": "Diagnostics"
+    },
+    {
+      "id": "gal-11",
+      "image": "/images/gal-11.jpeg",
+      "title": "Emergency Crash Cart Supply Unit",
+      "category": "Critical Care"
+    },
+    {
+      "id": "gal-12",
+      "image": "/images/gal-12.jpeg",
+      "title": "Modular OT Panel Infrastructure",
+      "category": "Operation Theatre Setup"
+    },
+    {
+      "id": "gal-13",
+      "image": "/images/gal-13.jpeg",
+      "title": "High-Vacuum Surgical Suction Unit",
+      "category": "Operation Theatre Setup"
+    },
+    {
+      "id": "gal-14",
+      "image": "/images/gal-14.jpeg",
+      "title": "Portable Fetal Monitor Diagnostics",
+      "category": "Diagnostics"
+    },
+    {
+      "id": "gal-15",
+      "image": "/images/gal-15.jpeg",
+      "title": "Motorized ICU Cot & Bedside Ward Furniture",
+      "category": "Critical Care"
+    },
+    {
+      "id": "gal-16",
+      "image": "/images/gal-16.jpeg",
+      "title": "Low-Temperature ETO Sterilizer Setup",
+      "category": "Sterilization CSSD"
+    },
+    {
+      "id": "gal-17",
+      "image": "/images/gal-17.jpeg",
+      "title": "Electro-Hydraulic OT Table Integration",
+      "category": "Operation Theatre Setup"
+    },
+    {
+      "id": "gal-18",
+      "image": "/images/gal-18.jpeg",
+      "title": "Biphasic Cardiac Defibrillator Unit",
+      "category": "Critical Care"
+    },
+    {
+      "id": "gal-19",
+      "image": "/images/gal-19.jpeg",
+      "title": "Turbine Critical Care Ventilator",
+      "category": "Critical Care"
+    },
+    {
+      "id": "gal-20",
+      "image": "/images/gal-20.jpeg",
+      "title": "Neonatal Phototherapy Unit",
+      "category": "Critical Care"
+    },
+    {
       "id": "gal-v1",
-      "image": "/images/gal-v1.jpg",
-      "title": "Metro Heart Hospital - Dr. Nair Diagnostic Feedback",
+      "image": "",
+      "title": "Video Testimonial",
       "category": "Video Testimonials",
-      "video": "https://www.youtube.com/embed/HNs_P8v3m3U"
+      "video": ""
     },
     {
       "id": "gal-v2",
-      "image": "/images/gal-v2.jpg",
-      "title": "Apollo Multispecialty - Dr. Chawla Critical Care Review",
+      "image": "",
+      "title": "Video Testimonial",
       "category": "Video Testimonials",
-      "video": "https://www.youtube.com/embed/t7D1r8uJkQg"
+      "video": ""
     },
     {
       "id": "gal-v3",
-      "image": "/images/gal-v3.jpg",
-      "title": "Horizon Trust Clinics - Prof. Fletcher Installation Review",
+      "image": "",
+      "title": "Video Testimonial",
       "category": "Video Testimonials",
-      "video": "https://www.youtube.com/embed/9w_013V4w_w"
-    },
-    {
-      "id": "gal-v4",
-      "image": "/images/gal-v4.jpg",
-      "title": "Mayo Clinical Centre - Dr. Jenkins Anesthesiology Feedback",
-      "category": "Video Testimonials",
-      "video": "https://www.youtube.com/embed/2p825aXQzY0"
+      "video": ""
     }
   ],
   "testimonials": [
@@ -1098,9 +1797,9 @@
     },
     {
       "id": "tst-4",
-      "name": "Dr. Rajavel",
+      "name": "Dr. S. K. Naganathan",
       "specialization": "Internal Medicine",
-      "hospital": "Curious Hospital, Trichy",
+      "hospital": "Naganathan Hospital, Trichy",
       "reviewText": "Vel Bio Med understood our hospital's requirements and recommended the right solutions. Their attention to detail and dependable customer support have made them a trusted partner."
     },
     {
@@ -1134,7 +1833,7 @@
     {
       "id": "tst-9",
       "name": "Dr. Jai Krish",
-      "specialization": "Orthopaedics",
+      "specialization": "Nephrology",
       "hospital": "Atlas Hospital, Trichy",
       "reviewText": "We are pleased with the quality of equipment and the professionalism shown by the Vel Bio Med team. Their installation was completed on time, and the entire process was hassle-free."
     },
@@ -1147,7 +1846,7 @@
     },
     {
       "id": "tst-11",
-      "name": "Dr. Kumar",
+      "name": "Dr. V. Ashok Kumar",
       "specialization": "Cardiology",
       "hospital": "Silverline Hospital, Karur",
       "reviewText": "The equipment supplied by Vel Bio Med has been reliable and efficient in our daily operations. Their technical support team responds quickly whenever assistance is needed."
@@ -1155,14 +1854,14 @@
     {
       "id": "tst-12",
       "name": "Dr. K. Ravikumar",
-      "specialization": "General Medicine",
+      "specialization": "Pulmonology",
       "hospital": "Sugam Hospital, Karur",
       "reviewText": "Vel Bio Med has exceeded our expectations with quality products and professional service. Their team ensured a smooth installation and provided excellent user training."
     },
     {
       "id": "tst-13",
       "name": "Dr. S. Kumaran",
-      "specialization": "Orthopaedics",
+      "specialization": "Arthroscopy & Trauma",
       "hospital": "Kumaran Hospital, Karur",
       "reviewText": "We appreciate Vel Bio Med's commitment to delivering dependable medical equipment. Their engineers completed the installation efficiently and answered all our technical questions."
     },
@@ -1204,25 +1903,25 @@
     {
       "id": "tst-19",
       "name": "Dr. Anand",
-      "specialization": "Internal Medicine",
+      "specialization": "Urology",
       "hospital": "Galaxy Hospital, Karur",
       "reviewText": "The professionalism shown by the Vel Bio Med team throughout the project was remarkable. Their customer support and technical guidance have been consistently excellent."
     },
     {
       "id": "tst-20",
       "name": "Dr. Srinivasan",
-      "specialization": "General Surgery",
+      "specialization": "Vascular Surgery",
       "hospital": "Srinivasa Hospital, Karur",
       "reviewText": "Vel Bio Med delivers dependable medical equipment with exceptional customer service. Their commitment to quality and timely support has made them a valued healthcare partner."
     }
   ],
   "contactInfo": {
-    "address": "704-B, Phoenix Corporate Park, Outer Ring Road, Bengaluru - 560103, Karnataka, India",
-    "phone": "+91 80 4930 2930",
-    "email": "sales@velbiomed.co.in",
+    "address": "VEL BIO MED - Medical equipment supplier, Hari Divya Complex, 55, Palayam Bazaar Rd, Woraiyur, Tiruchirappalli, Tamil Nadu 620003",
+    "phone": "9629515551 | 9445922066",
+    "email": "velbiomed@gmail.com",
     "workingHours": "Monday - Saturday: 9:00 AM - 6:30 PM (IST)",
-    "mapUrl": "https://maps.google.com/maps?q=Vel%20Bio%20Med%20Bengaluru&t=&z=13&ie=UTF8&iwloc=&output=embed",
-    "whatsappNumber": "918049302930"
+    "mapUrl": "https://maps.google.com/maps?q=Hari%20Divya%20Complex,%20Woraiyur,%20Tiruchirappalli&t=&z=15&ie=UTF8&iwloc=&output=embed",
+    "whatsappNumber": "919629515551"
   },
   "inquiries": [
     {

@@ -47,9 +47,9 @@ export default function Footer() {
   const [isSubscribed, setIsSubscribed] = useState(false);
 
   const defaultContact = {
-    address: "704-B, Phoenix Corporate Park, Outer Ring Road, Bengaluru - 560103, Karnataka, India",
-    phone: "+91 80 4930 2930",
-    email: "sales@velbiomed.co.in",
+    address: "VEL BIO MED - Medical equipment supplier, Hari Divya Complex, 55, Palayam Bazaar Rd, Woraiyur, Tiruchirappalli, Tamil Nadu 620003",
+    phone: "9629515551 | 9445922066",
+    email: "velbiomed@gmail.com",
   };
 
   const contact = state?.contactInfo || defaultContact;

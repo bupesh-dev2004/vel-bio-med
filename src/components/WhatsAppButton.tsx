@@ -3,7 +3,7 @@ import { useAppState } from "../AppContext.js";
 
 export default function WhatsAppButton() {
   const { state } = useAppState();
-  const whatsappNumber = state?.contactInfo?.whatsappNumber || "918049302930";
+  const whatsappNumber = state?.contactInfo?.whatsappNumber || "919629515551";
   const text = encodeURIComponent("Hello Vel Bio Med! Please provide me more information about your medical machinery and hospital equipment solutions.");
   const url = `https://wa.me/${whatsappNumber}?text=${text}`;
 

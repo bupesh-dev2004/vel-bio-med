@@ -12,50 +12,37 @@ interface GalleryItem {
   objectFit?: "cover" | "contain";
 }
 
-const medicalImages: GalleryItem[] = [
-  {
-    src: "https://storage.googleapis.com/avante/images/13448-1-drager-fabius-os.jpg",
-    title: "ANAESTHESIA MACHINE",
-    category: "Operating Theatre (OT)",
-    description: "Advanced anaesthesia delivery system engineered for precise gas administration, patient safety, and reliable performance during surgical procedures",
-    objectFit: "contain"
-  },
-  {
-    src: "https://5.imimg.com/data5/HD/TV/MY-9082765/diathermy-machine-500x500.png",
-    title: "SURGICAL DIATHERMY",
-    category: "Operating Theatre (OT)",
-    description: "Surgical Diathermy: Advanced electrosurgical system designed for precise cutting, coagulation, and tissue management during surgical procedures, ensuring enhanced surgical efficiency and patient safety.",
-    objectFit: "contain"
-  },
-  {
-    src: "https://static.wixstatic.com/media/83a223_539cedb9b63e44689f4d77bb420fa4c0~mv2.jpg/v1/fill/w_980,h_980,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/83a223_539cedb9b63e44689f4d77bb420fa4c0~mv2.jpg",
-    title: "ECG MACHINE 3 CHANNEL",
-    category: "Critical Care & ICU",
-    description: "Compact and efficient electrocardiography system designed for accurate cardiac monitoring, rapid diagnostics, and dependable clinical performance.",
-    objectFit: "contain"
-  },
-  {
-    src: "https://5.imimg.com/data5/SELLER/Default/2024/6/428020518/CO/WP/OU/45018337/horizontal-semi-automatic-single-door-cylindrical-steam-sterilizer-1000x1000.png",
-    title: "STEAM STERILIZER AUTO/SEMI",
-    category: "CSSD & Sterilization",
-    description: "Advanced steam sterilization system designed for reliable and efficient infection control in hospitals, laboratories, and healthcare facilities.",
-    objectFit: "contain"
-  },
-  {
-    src: "https://meubon.com/cdn/shop/files/H490d3b68175b40a79e001740ba0454deq_1200x1200.webp?v=1731630708",
-    title: "FETAL MONITOR PORTABLE",
-    category: "Diagnostics & Imaging",
-    description: "Fetal Monitor – Portable: Advanced portable fetal monitoring system designed for accurate assessment of fetal heart rate, uterine activity, and maternal well-being during pregnancy and labor.",
-    objectFit: "contain"
-  },
-  {
-    src: "https://ventekindia.com/wp-content/uploads/2024/09/electra-4001.png",
-    title: "OT TABLE ELECTRIC",
-    category: "Operating Theatre (OT)",
-    description: "OT Table – Electric: Advanced electrically operated surgical table designed to provide precise positioning, stability, and flexibility for a wide range of surgical procedures, ensuring optimal patient care and surgical efficiency.",
-    objectFit: "contain"
-  }
+const ALL_GALLERY_IMAGES = [
+  { id: "gal-1", src: "/images/gal-1.jpeg", title: "Surgical Suite Live Installation", category: "Operation Theatre Setup" },
+  { id: "gal-2", src: "/images/gal-2.jpeg", title: "ICU Patient Monitor Setup", category: "Critical Care" },
+  { id: "gal-3", src: "/images/gal-3.jpeg", title: "Diagnostic Radiology Console Calibration", category: "Diagnostics" },
+  { id: "gal-4", src: "/images/gal-4.jpeg", title: "Belimed CSSD Autoclave Training Session", category: "Sterilization CSSD" },
+  { id: "gal-5", src: "/images/gal-5.jpeg", title: "Multidisciplinary Trauma Center Integration", category: "Operation Theatre Setup" },
+  { id: "gal-6", src: "/images/gal-6.jpeg", title: "Anaesthesia Setup & Delivery", category: "Operation Theatre Setup" },
+  { id: "gal-7", src: "/images/gal-7.jpeg", title: "Infusion & Syringe Pump Station", category: "Critical Care" },
+  { id: "gal-8", src: "/images/gal-8.jpeg", title: "Operating Theatre LED Illumination Suite", category: "Operation Theatre Setup" },
+  { id: "gal-9", src: "/images/gal-9.jpeg", title: "Neonatal Radiant Warmer Installation", category: "Critical Care" },
+  { id: "gal-10", src: "/images/gal10.jpeg", title: "Digital ECG Diagnostic Station", category: "Diagnostics" },
+  { id: "gal-11", src: "/images/gal-11.jpeg", title: "Emergency Crash Cart Supply Unit", category: "Critical Care" },
+  { id: "gal-12", src: "/images/gal-12.jpeg", title: "Modular OT Panel Infrastructure", category: "Operation Theatre Setup" },
+  { id: "gal-13", src: "/images/gal-13.jpeg", title: "High-Vacuum Surgical Suction Unit", category: "Operation Theatre Setup" },
+  { id: "gal-14", src: "/images/gal-14.jpeg", title: "Portable Fetal Monitor Diagnostics", category: "Diagnostics" },
+  { id: "gal-15", src: "/images/gal-15.jpeg", title: "Motorized ICU Cot & Bedside Ward Furniture", category: "Critical Care" },
+  { id: "gal-16", src: "/images/gal-16.jpeg", title: "Low-Temperature ETO Sterilizer Setup", category: "Sterilization CSSD" },
+  { id: "gal-17", src: "/images/gal-17.jpeg", title: "Electro-Hydraulic OT Table Integration", category: "Operation Theatre Setup" },
+  { id: "gal-18", src: "/images/gal-18.jpeg", title: "Biphasic Cardiac Defibrillator Unit", category: "Critical Care" },
+  { id: "gal-19", src: "/images/gal-19.jpeg", title: "Turbine Critical Care Ventilator", category: "Critical Care" },
+  { id: "gal-20", src: "/images/gal-20.jpeg", title: "Neonatal Phototherapy Unit", category: "Critical Care" }
 ];
+
+function getRandomTenImages(pool: typeof ALL_GALLERY_IMAGES) {
+  const arr = [...pool];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr.slice(0, 10);
+}
 
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 15 },
@@ -86,13 +73,23 @@ export default function ImageGallery() {
   const [activeImageUrl, setActiveImageUrl] = useState<string | null>(null);
   
   const dbGallery = state?.gallery || [];
-  const baseItems = dbGallery.length > 0
-    ? dbGallery.map((item: any) => ({
-        src: item.image,
-        title: item.title,
-        category: item.category
-      }))
-    : medicalImages;
+  const galleryImagePool = dbGallery.length >= 20
+    ? dbGallery
+        .filter((item: any) => !item.video && item.image)
+        .map((item: any) => ({
+          id: item.id,
+          src: item.image,
+          title: item.title,
+          category: item.category
+        }))
+    : ALL_GALLERY_IMAGES;
+
+  const pool = galleryImagePool.length >= 10 ? galleryImagePool : ALL_GALLERY_IMAGES;
+  const [selectedTen, setSelectedTen] = useState<typeof ALL_GALLERY_IMAGES>(() => getRandomTenImages(pool));
+
+  useEffect(() => {
+    setSelectedTen(getRandomTenImages(pool));
+  }, []);
 
   const gridClasses = [
     "block relative bg-slate-900 w-full h-24 rounded-xl overflow-hidden border border-slate-800 shadow-md group hover:scale-[1.02] hover:border-blue-500/50 transition-all duration-300",
@@ -107,8 +104,7 @@ export default function ImageGallery() {
     "block relative bg-slate-900 rounded-xl overflow-hidden border border-slate-800 shadow-md group hover:scale-[1.02] hover:border-blue-500/50 transition-all duration-300"
   ];
 
-  const displayImages = Array.from({ length: 10 }).map((_, idx) => {
-    const item = baseItems[idx % baseItems.length];
+  const displayImages = selectedTen.map((item, idx) => {
     return {
       thumb: item.src,
       full: item.src,
@@ -194,7 +190,8 @@ export default function ImageGallery() {
               >
                 <img
                   src={image.thumb}
-                  alt={image.title}
+                  alt={image.title || `Gallery showcase image ${index + 1}`}
+                  loading="lazy"
                   className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                 />
               </motion.a>

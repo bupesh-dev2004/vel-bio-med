@@ -288,14 +288,25 @@ export default function GalleryView() {
               <AnimatePresence mode="popLayout">
                 {filteredItems.map((item, idx) => {
                   const isAmber = idx % 2 === 1;
+                  const isVideoCategory = item.category === "Video Testimonials" || Boolean(item.video);
+                  const hasVideoUrl = Boolean(item.video && item.video.trim().length > 0);
+                  const showVideoPlaceholder = isVideoCategory && (!hasVideoUrl || !item.image || item.image.trim().length === 0 || item.image.includes("gal-v"));
+
                   return (
                     <motion.div
                       layout
                       variants={cardVariants}
                       exit={{ opacity: 0, scale: 0.9, y: 20 }}
                       key={item.id}
-                      onClick={() => openLightbox(idx)}
-                      className="relative group cursor-pointer rounded-[24px] z-10"
+                      onClick={() => {
+                        if (!showVideoPlaceholder) {
+                          openLightbox(idx);
+                        }
+                      }}
+                      className={cn(
+                        "relative group rounded-[24px] z-10",
+                        !showVideoPlaceholder ? "cursor-pointer" : "cursor-default"
+                      )}
                     >
                       {/* Glowing shadow effect behind card on hover */}
                       <div
@@ -313,78 +324,63 @@ export default function GalleryView() {
                         )}
                       />
 
-                      {/* Main image container */}
-                      <div className="relative aspect-[4/3] rounded-[24px] overflow-hidden border border-slate-200/60 shadow-md group-hover:shadow-2xl transition-all duration-500 bg-slate-900">
-                        {/* Media Tag Badge at top-right */}
-                        <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-950/60 backdrop-blur-md border border-white/10 text-white shadow-md transition-all duration-300 group-hover:bg-slate-950/85">
-                          {item.video ? (
-                            <>
-                              <Video className="w-3.5 h-3.5 text-amber-400 fill-amber-400/20" />
-                              <span className="text-[9px] font-black uppercase tracking-widest text-amber-300">Video</span>
-                            </>
-                          ) : (
-                            <>
-                              <Camera className="w-3.5 h-3.5 text-sky-400 fill-sky-400/20" />
-                              <span className="text-[9px] font-black uppercase tracking-widest text-sky-300">Photo</span>
-                            </>
-                          )}
-                        </div>
-
-                        {/* Image zoom effect */}
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out"
-                          loading="lazy"
-                        />
-
-                        {/* Glassmorphic dark gradient overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent opacity-85 group-hover:opacity-90 transition-opacity duration-500 z-10" />
-
-                        {/* Play Button Overlay for Videos */}
-                        {item.video && (
-                          <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-                            <div className={cn(
-                              "w-14 h-14 rounded-full flex items-center justify-center text-white backdrop-blur-md border shadow-lg transition-all duration-500 transform group-hover:scale-110 group-hover:rotate-12",
-                              isAmber
-                                ? "bg-amber-500/20 border-amber-400/40 shadow-amber-500/20 group-hover:bg-amber-500/40 group-hover:border-amber-400/60"
-                                : "bg-blue-600/20 border-blue-400/40 shadow-blue-600/20 group-hover:bg-blue-600/40 group-hover:border-blue-400/60"
-                            )}>
-                              <Play className="w-6 h-6 fill-white ml-0.5" />
+                      {/* Main card container */}
+                      <div className="relative aspect-[4/3] rounded-[24px] overflow-hidden border border-slate-800 shadow-md group-hover:shadow-2xl transition-all duration-500 bg-slate-900">
+                        {showVideoPlaceholder ? (
+                          /* Clean Official YouTube SVG Logo Placeholder Card */
+                          <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 flex flex-col items-center justify-center p-6 text-center z-10">
+                            {/* Media Tag Badge at top-right */}
+                            <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/10 text-white shadow-md">
+                              <Video className="w-3.5 h-3.5 text-red-500 fill-red-500/20" />
+                              <span className="text-[9px] font-black uppercase tracking-widest text-red-400">Video</span>
                             </div>
+
+                            {/* Centered Official YouTube SVG Icon */}
+                            <div className="mb-3 transform group-hover:scale-110 transition-transform duration-500">
+                              <svg className="w-16 h-16 drop-shadow-[0_4px_16px_rgba(255,0,0,0.4)]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z" fill="#FF0000"/>
+                                <path d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#FFFFFF"/>
+                              </svg>
+                            </div>
+
+                            {/* Title & Subtitle */}
+                            <h3 className="text-base sm:text-lg font-bold tracking-tight text-white leading-snug">
+                              Video Testimonial
+                            </h3>
+                            <span className="inline-block mt-1.5 px-2.5 py-0.5 rounded-full bg-red-500/10 border border-red-500/20 text-[10px] font-black uppercase tracking-widest text-red-400">
+                              Coming Soon
+                            </span>
+
+                            {/* Description */}
+                            <p className="text-slate-400 text-xs mt-2.5 max-w-xs font-medium leading-relaxed">
+                              Customer testimonial videos will be available here soon.
+                            </p>
                           </div>
+                        ) : (
+                          /* Standard Clean Image Card / Active Video Preview */
+                          <>
+                            <img
+                              src={item.image || `https://img.youtube.com/vi/${item.video?.split('/')?.pop()}/hqdefault.jpg`}
+                              alt={item.title}
+                              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                              loading="lazy"
+                            />
+
+                            {/* Play Button Overlay for Active Videos */}
+                            {hasVideoUrl && (
+                              <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+                                <div className={cn(
+                                  "w-14 h-14 rounded-full flex items-center justify-center text-white backdrop-blur-md border shadow-lg transition-all duration-500 transform group-hover:scale-110 group-hover:rotate-12",
+                                  isAmber
+                                    ? "bg-amber-500/20 border-amber-400/40 shadow-amber-500/20 group-hover:bg-amber-500/40 group-hover:border-amber-400/60"
+                                    : "bg-blue-600/20 border-blue-400/40 shadow-blue-600/20 group-hover:bg-blue-600/40 group-hover:border-blue-400/60"
+                                )}>
+                                  <Play className="w-6 h-6 fill-white ml-0.5" />
+                                </div>
+                              </div>
+                            )}
+                          </>
                         )}
-
-                        {/* Content aligned inside card */}
-                        <div className="absolute inset-x-0 bottom-0 p-6 z-20 flex flex-col justify-end text-white space-y-2">
-                          <span
-                            className={cn(
-                              "text-[10px] font-black uppercase tracking-widest block",
-                              isAmber ? "text-amber-400" : "text-sky-300"
-                            )}
-                          >
-                            {item.category}
-                          </span>
-
-                          <h3 className="text-base sm:text-lg font-bold tracking-tight text-white leading-snug drop-shadow-md group-hover:translate-x-1 transition-transform duration-300">
-                            {item.title}
-                          </h3>
-
-                          {/* Slide up Expand Action */}
-                          <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pt-1">
-                            {item.video ? (
-                               <>
-                                 <Play className={cn("w-4 h-4 fill-current", isAmber ? "text-amber-400" : "text-sky-300")} />
-                                 <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">Play Video</span>
-                               </>
-                            ) : (
-                               <>
-                                 <Maximize2 className={cn("w-4 h-4", isAmber ? "text-amber-400" : "text-sky-300")} />
-                                 <span className="text-[10px] font-black uppercase tracking-widest text-slate-300">Expand Photo</span>
-                               </>
-                            )}
-                          </div>
-                        </div>
                       </div>
                     </motion.div>
                   );
@@ -427,11 +423,11 @@ export default function GalleryView() {
 
           {/* Inner Photo Display Container */}
           <div
-            className="max-w-4xl max-h-[85vh] w-full flex flex-col items-center justify-center"
+            className="max-w-5xl max-h-[90vh] w-full flex flex-col items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
             {filteredItems[lightboxIndex].video ? (
-              <div className="w-full max-w-3xl aspect-video rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-black">
+              <div className="w-full max-w-4xl aspect-video rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-black">
                 <iframe
                   src={`${filteredItems[lightboxIndex].video}?autoplay=1`}
                   className="w-full h-full border-0"
@@ -444,29 +440,9 @@ export default function GalleryView() {
               <img
                 src={filteredItems[lightboxIndex].image}
                 alt={filteredItems[lightboxIndex].title}
-                className="max-w-full max-h-[70vh] object-contain rounded-2xl shadow-2xl border border-white/10"
+                className="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl border border-white/10"
               />
             )}
-            <div className="text-center mt-5 space-y-3 flex flex-col items-center">
-              <span className="inline-block bg-gradient-to-r from-blue-600 via-sky-400 to-amber-500 text-white text-[10px] sm:text-xs font-black tracking-widest px-3.5 py-1.5 rounded-full uppercase">
-                {filteredItems[lightboxIndex].category}
-              </span>
-              <h2 className="text-lg md:text-xl font-bold text-white tracking-tight max-w-2xl">
-                {filteredItems[lightboxIndex].title}
-              </h2>
-
-              <button
-                onClick={() => {
-                  setInquiryMachineName(`Gallery Asset: ${filteredItems[lightboxIndex].title} (${filteredItems[lightboxIndex].category})`);
-                  setCurrentTab("contact");
-                  closeLightbox();
-                }}
-                className="mt-2 group relative inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all cursor-pointer shadow-lg hover:shadow-blue-500/20 active:scale-95 border border-white/10"
-              >
-                <Zap className="w-3.5 h-3.5 fill-current text-amber-300 group-hover:scale-110 transition-transform" />
-                <span>Inquire About Setup</span>
-              </button>
-            </div>
           </div>
 
           {/* Right Arrow */}
