@@ -5,19 +5,19 @@ export default function FloatingSocialSidebar() {
   const socials = [
     {
       name: "Facebook",
-      url: "https://facebook.com/velbiomed",
+      url: "https://www.facebook.com/Velbiomed1",
       icon: <FacebookIcon className="w-4 h-4" />,
       hoverColor: "hover:bg-blue-600 hover:text-white hover:border-blue-500 hover:shadow-blue-500/20",
     },
     {
       name: "Instagram",
-      url: "https://instagram.com/velbiomed",
+      url: "https://www.instagram.com/velbiomed/",
       icon: <InstagramIcon className="w-4 h-4" />,
       hoverColor: "hover:bg-pink-600 hover:text-white hover:border-pink-500 hover:shadow-pink-500/20",
     },
     {
       name: "LinkedIn",
-      url: "https://linkedin.com/company/velbiomed",
+      url: "https://www.linkedin.com/company/vel-bio-med/",
       icon: <LinkedinIcon className="w-4 h-4" />,
       hoverColor: "hover:bg-blue-700 hover:text-white hover:border-blue-600 hover:shadow-blue-600/20",
     },
@@ -29,7 +29,7 @@ export default function FloatingSocialSidebar() {
     },
     {
       name: "YouTube",
-      url: "https://youtube.com/velbiomed",
+      url: "https://www.youtube.com/@Velbiomed",
       icon: <YoutubeIcon className="w-4 h-4" />,
       hoverColor: "hover:bg-red-650 hover:text-white hover:border-red-600 hover:shadow-red-500/20",
     },

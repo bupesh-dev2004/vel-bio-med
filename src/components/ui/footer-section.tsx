@@ -46,10 +46,10 @@ const footerLinks: FooterSection[] = [
 	{
 		label: 'Social Links',
 		links: [
-			{ title: 'Facebook', href: '#', icon: FacebookIcon },
-			{ title: 'Instagram', href: '#', icon: InstagramIcon },
-			{ title: 'Youtube', href: '#', icon: YoutubeIcon },
-			{ title: 'LinkedIn', href: '#', icon: LinkedinIcon },
+			{ title: 'Facebook', href: 'https://www.facebook.com/Velbiomed1', icon: FacebookIcon },
+			{ title: 'Instagram', href: 'https://www.instagram.com/velbiomed/', icon: InstagramIcon },
+			{ title: 'Youtube', href: 'https://www.youtube.com/@Velbiomed', icon: YoutubeIcon },
+			{ title: 'LinkedIn', href: 'https://www.linkedin.com/company/vel-bio-med/', icon: LinkedinIcon },
 		],
 	},
 ];

@@ -207,7 +207,7 @@
     },
     {
       "id": "prod-7",
-      "name": "Infusion Pump Infumax",
+      "name": "Infusion Pump – Infumax",
       "category": "Critical Care & ICU",
       "image": "/images/prod-7.jpg",
       "shortDesc": "High-precision volumetric infusion pump with dual volumetric and drop count monitoring.",
@@ -231,7 +231,7 @@
         "Display Type": "Digital LCD Display",
         "Warranty": "2 Years Certified AMC Support"
       },
-      "trending": false,
+      "trending": true,
       "newest": true
     },
     {
@@ -1901,6 +1901,38 @@
         "Safety": "Over-temperature Protection & Alarms",
         "Design": "Compact & Portable",
         "Usage": "ICU, OT, Emergency & Trauma Care"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-60",
+      "name": "Modular OT",
+      "category": "Modular OT",
+      "image": "/images/prod-60.png",
+      "shortDesc": "Modern, integrated operating theatre designed to provide a sterile, safe, and efficient surgical environment.",
+      "description": "The Modular OT is a modern, integrated operating theatre designed to provide a sterile, safe, and efficient surgical environment. It combines advanced infrastructure, seamless wall panels, medical gas systems, and OT equipment to support various surgical procedures while maintaining high infection control standards.",
+      "rating": 5,
+      "features": [
+        "Modular and seamless wall panels",
+        "Hygienic and easy-to-clean design",
+        "Advanced LED surgical lighting",
+        "Integrated medical gas pipeline system",
+        "Ceiling-mounted pendants",
+        "Efficient air filtration and ventilation",
+        "Customizable layout for different specialties",
+        "Ideal for hospitals and surgical centers"
+      ],
+      "specifications": {
+        "Product Name": "Modular OT",
+        "Category": "Modular OT",
+        "Application": "Modern Surgical Operating Theatre",
+        "Wall System": "Seamless Modular Panels",
+        "Lighting": "LED Surgical Lights",
+        "Medical Gas": "Integrated Pipeline System",
+        "Air Quality": "HEPA Filtered Ventilation (Optional)",
+        "Design": "Hygienic & Easy to Maintain",
+        "Usage": "Hospitals, Surgical Centers & Specialty Clinics"
       },
       "trending": true,
       "newest": true

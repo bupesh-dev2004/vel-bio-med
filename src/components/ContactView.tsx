@@ -94,7 +94,7 @@ export default function ContactView() {
     consent: false
   });
 
-  const [errors, setErrors] = useState<Record<string, string | null>>({});
+  const [errors, setErrors] = useState<{ [key: string]: string | null }>({});
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoadingModal, setIsLoadingModal] = useState(false);

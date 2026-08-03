@@ -33,19 +33,19 @@ export default function FloatingSocialMenu() {
     },
     {
       name: "LinkedIn",
-      url: "https://linkedin.com/company/velbiomed",
+      url: "https://www.linkedin.com/company/vel-bio-med/",
       icon: <LinkedinIcon className="w-5 h-5 text-white" />,
       className: "bg-blue-700 border border-blue-600 hover:bg-blue-800 text-white shadow-lg shadow-blue-700/20",
     },
     {
       name: "Facebook",
-      url: "https://facebook.com/velbiomed",
+      url: "https://www.facebook.com/Velbiomed1",
       icon: <FacebookIcon className="w-5 h-5 text-white" />,
       className: "bg-blue-600 border border-blue-500 hover:bg-blue-700 text-white shadow-lg shadow-blue-600/20",
     },
     {
       name: "Instagram",
-      url: "https://instagram.com/velbiomed",
+      url: "https://www.instagram.com/velbiomed/",
       icon: <InstagramIcon className="w-5 h-5 text-white" />,
       className: "bg-pink-600 border border-pink-500 hover:bg-pink-700 text-white shadow-lg shadow-pink-600/20",
     },
@@ -57,7 +57,7 @@ export default function FloatingSocialMenu() {
     },
     {
       name: "YouTube",
-      url: "https://youtube.com/velbiomed",
+      url: "https://www.youtube.com/@Velbiomed",
       icon: <YoutubeIcon className="w-5 h-5 text-white" />,
       className: "bg-red-650 border border-red-500 hover:bg-red-700 text-white shadow-lg shadow-red-600/20",
     },

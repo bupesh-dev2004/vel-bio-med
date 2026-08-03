@@ -95,17 +95,17 @@ export default function Footer() {
             {[
               {
                 icon: <FacebookIcon className="w-4 h-4" />,
-                url: "https://facebook.com/velbiomed",
+                url: "https://www.facebook.com/Velbiomed1",
                 hoverClass: "hover:bg-[#1877F2] hover:border-[#1877F2] hover:shadow-[#1877F2]/20 hover:text-white"
               },
               {
                 icon: <InstagramIcon className="w-4 h-4" />,
-                url: "https://instagram.com/velbiomed",
+                url: "https://www.instagram.com/velbiomed/",
                 hoverClass: "hover:bg-[#E1306C] hover:border-[#E1306C] hover:shadow-[#E1306C]/20 hover:text-white"
               },
               {
                 icon: <LinkedinIcon className="w-4 h-4" />,
-                url: "https://linkedin.com/company/velbiomed",
+                url: "https://www.linkedin.com/company/vel-bio-med/",
                 hoverClass: "hover:bg-[#0A66C2] hover:border-[#0A66C2] hover:shadow-[#0A66C2]/20 hover:text-white"
               },
               {
@@ -115,7 +115,7 @@ export default function Footer() {
               },
               {
                 icon: <YoutubeIcon className="w-4 h-4" />,
-                url: "https://youtube.com/velbiomed",
+                url: "https://www.youtube.com/@Velbiomed",
                 hoverClass: "hover:bg-[#FF0000] hover:border-[#FF0000] hover:shadow-[#FF0000]/20 hover:text-white"
               }
             ].map((social, idx) => (

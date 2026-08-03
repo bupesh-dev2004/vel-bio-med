@@ -134,62 +134,17 @@ function AnimatedCounter({ target, duration = 1500, suffix = "", startSignal }: 
 
 export default function HomeView({ onOpenProductModal, showPreloader = false }: HomeViewProps) {
   const { state, setCurrentTab, setInquiryMachineName } = useAppState();
-  const [trendingApi, setTrendingApi] = useState<any>(null);
+  const trendingAutoScroll = useRef(
+    AutoScroll({
+      speed: 1,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+    })
+  );
   const [productsApi, setProductsApi] = useState<any>(null);
   const [currentProductIndex, setCurrentProductIndex] = useState(0);
   const [productSnaps, setProductSnaps] = useState<number[]>([]);
   const [isTestimonialsPaused, setIsTestimonialsPaused] = useState(false);
-
-  useEffect(() => {
-    if (!trendingApi) return;
-    let intervalId: any = null;
-    let isHovered = false;
-
-    const startAutoplay = () => {
-      stopAutoplay();
-      if (isHovered) return;
-      intervalId = setInterval(() => {
-        if (!trendingApi) return;
-        if (trendingApi.canScrollNext()) {
-          trendingApi.scrollNext();
-        } else {
-          trendingApi.scrollTo(0);
-        }
-      }, 3500);
-    };
-
-    const stopAutoplay = () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-        intervalId = null;
-      }
-    };
-
-    const root = trendingApi.rootNode();
-    const onMouseEnter = () => {
-      isHovered = true;
-      stopAutoplay();
-    };
-    const onMouseLeave = () => {
-      isHovered = false;
-      startAutoplay();
-    };
-
-    root.addEventListener("mouseenter", onMouseEnter);
-    root.addEventListener("mouseleave", onMouseLeave);
-
-    startAutoplay();
-    trendingApi.on("pointerDown", stopAutoplay);
-    trendingApi.on("settle", startAutoplay);
-
-    return () => {
-      root.removeEventListener("mouseenter", onMouseEnter);
-      root.removeEventListener("mouseleave", onMouseLeave);
-      trendingApi.off("pointerDown", stopAutoplay);
-      trendingApi.off("settle", startAutoplay);
-      stopAutoplay();
-    };
-  }, [trendingApi]);
 
   useEffect(() => {
     if (!productsApi) return;
@@ -212,9 +167,19 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
   // Slider State (just slides data for background image)
   const slides = state?.homeSlides || [];
 
-  // Products filters
-  const trendingProducts = state?.products?.filter((p) => p.trending) || [];
-  const trendingThree = trendingProducts.slice(0, 3);
+  // Products filters - Target only the 3 specified products in exact order for Trending Machinery
+  const targetTrendingIds = ["prod-7", "prod-60", "prod-22"];
+  const trendingThree = targetTrendingIds
+    .map((id) => state?.products?.find((p) => p.id === id))
+    .filter(Boolean) as Product[];
+
+  const trendingCarouselItems = [
+    ...trendingThree,
+    ...trendingThree,
+    ...trendingThree,
+    ...trendingThree,
+  ];
+
   const dynamicProducts = state?.products || [];
   const latestAcquisitions = state?.products ? [...state.products].slice(-4).reverse() : [];
 
@@ -1025,12 +990,16 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
             </p>
           </div>
 
-          {/* Auto Slider showing exactly 3 cards */}
-          <div className="w-full max-w-4xl mx-auto px-0 sm:px-4">
-            <Carousel setApi={setTrendingApi} opts={{ align: "start", loop: true }} className="w-full relative px-6 md:px-16">
+          {/* Auto Slider showing the 3 products in continuous infinite scroll */}
+          <div className="w-full max-w-6xl mx-auto px-0 sm:px-4">
+            <Carousel
+              plugins={[trendingAutoScroll.current]}
+              opts={{ align: "start", loop: true }}
+              className="w-full relative px-2 sm:px-6 md:px-12"
+            >
               <CarouselContent className="-ml-4">
-                {trendingThree.map((item) => (
-                  <CarouselItem key={item.id} className="pl-4 basis-full md:basis-1/2">
+                {trendingCarouselItems.map((item, idx) => (
+                  <CarouselItem key={`${item.id}-${idx}`} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
                     <div
                       onClick={() => onOpenProductModal(item)}
                       className="flex flex-col bg-slate-900/80 backdrop-blur-md p-4 sm:p-6 border border-slate-800/80 rounded-3xl shadow-lg hover:shadow-blue-500/10 hover:border-blue-500/50 transition-[transform,border-color,box-shadow] duration-300 group relative overflow-hidden h-[400px] sm:h-[440px] justify-between cursor-pointer"
@@ -1080,7 +1049,8 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                           type="button"
                           onClick={(e) => {
                             e.stopPropagation();
-                            startInquiry(item.name);
+                            if (setInquiryMachineName) setInquiryMachineName(item.name);
+                            setCurrentTab("contact");
                           }}
                           className="inline-flex items-center justify-center flex-grow text-white bg-gradient-to-r from-blue-600 to-indigo-650 hover:from-blue-500 hover:to-indigo-600 shadow-md hover:shadow-blue-500/20 font-bold rounded-xl text-[10px] py-2.5 cursor-pointer transition-all gap-1 border-none"
                         >
