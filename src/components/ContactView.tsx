@@ -456,11 +456,10 @@ export default function ContactView() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.9 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl border backdrop-blur-xl max-w-md ${
-              toast.type === 'success'
+            className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl border backdrop-blur-xl max-w-md ${toast.type === 'success'
                 ? 'bg-slate-900/95 border-emerald-500/40 text-emerald-300'
                 : 'bg-slate-900/95 border-rose-500/40 text-rose-300'
-            }`}
+              }`}
           >
             <div className={`p-2 rounded-xl ${toast.type === 'success' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'}`}>
               {toast.type === 'success' ? <ShieldCheck className="w-5 h-5" /> : <HelpCircle className="w-5 h-5" />}
@@ -521,7 +520,7 @@ export default function ContactView() {
                 </div>
                 <div>
                   <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 block">Phone Hotline</span>
-                  <span className="text-slate-900 font-extrabold text-sm sm:text-base group-hover:text-sky-600 transition-colors">+91 7094878251</span>
+                  <span className="text-slate-900 font-extrabold text-sm sm:text-base group-hover:text-sky-600 transition-colors">9629515551 | 9677788859</span>
                   <span className="text-slate-500 text-xs block font-medium">Mon - Sat: 9:00 AM - 7:00 PM | Priority Desk</span>
                 </div>
               </motion.a>

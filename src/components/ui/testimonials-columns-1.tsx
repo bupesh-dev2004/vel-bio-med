@@ -53,22 +53,14 @@ export const TestimonialsColumn = (props: {
               "{item.reviewText}"
             </div>
 
-            {/* 2. Doctor Details (Bottom) */}
-            <div className="pt-4 border-t border-slate-100 flex flex-col text-left mt-auto">
-              <div className="font-extrabold text-slate-900 text-sm sm:text-base tracking-tight leading-snug group-hover:text-blue-600 transition-colors duration-200">
-                {item.name}
-              </div>
-              {item.specialization && (
-                <div className="text-xs font-semibold text-blue-600 tracking-wide mt-0.5">
-                  {item.specialization}
-                </div>
-              )}
-              {item.hospital && (
-                <div className="text-[11px] sm:text-xs font-medium text-slate-500 tracking-tight mt-0.5">
+            {/* 2. Hospital Name (Bottom) */}
+            {item.hospital && (
+              <div className="pt-4 border-t border-slate-100 flex flex-col text-left mt-auto">
+                <div className="font-extrabold text-slate-900 text-sm sm:text-base tracking-tight leading-snug group-hover:text-blue-600 transition-colors duration-200">
                   {item.hospital}
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         ))}
       </div>
