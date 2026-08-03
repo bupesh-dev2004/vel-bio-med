@@ -74,7 +74,7 @@ export default function ContactView() {
   }, []);
 
   const defaultContact = {
-    address: "VEL BIO MED - Medical equipment supplier, Hari Divya Complex, 55, Palayam Bazaar Rd, Woraiyur, Tiruchirappalli, Tamil Nadu 620003",
+    address: "VEL BIO MED - Medical equipment supplier, Hari Divya Complex, 55, Palayam Bazaar , Woraiyur, Tiruchirappalli, Tamil Nadu 620003",
     phone: "9629515551 | 9445922066",
     email: "velbiomed@gmail.com",
     workingHours: "Monday - Saturday: 9:00 AM - 6:30 PM (IST)",
@@ -457,8 +457,8 @@ export default function ContactView() {
             exit={{ opacity: 0, y: -20, scale: 0.9 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             className={`fixed top-6 right-6 z-50 flex items-center gap-3 px-5 py-4 rounded-2xl shadow-2xl border backdrop-blur-xl max-w-md ${toast.type === 'success'
-                ? 'bg-slate-900/95 border-emerald-500/40 text-emerald-300'
-                : 'bg-slate-900/95 border-rose-500/40 text-rose-300'
+              ? 'bg-slate-900/95 border-emerald-500/40 text-emerald-300'
+              : 'bg-slate-900/95 border-rose-500/40 text-rose-300'
               }`}
           >
             <div className={`p-2 rounded-xl ${toast.type === 'success' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-rose-500/10 text-rose-400'}`}>
