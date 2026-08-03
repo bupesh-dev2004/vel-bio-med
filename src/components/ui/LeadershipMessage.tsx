@@ -203,7 +203,7 @@ export default function LeadershipMessage() {
                             {/* Image wrapper */}
                             <div className="relative overflow-hidden aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3]">
                                 <motion.img
-                                    src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=800&q=80"
+                                    src="/images/managing-founder.jpg"
                                     alt="Mr. Muralikrishnan Gokulakrishnan – Founder & Managing Director"
                                     className="w-full h-full object-cover object-top"
                                     whileHover={{ scale: 1.04, transition: { duration: 0.5 } }}

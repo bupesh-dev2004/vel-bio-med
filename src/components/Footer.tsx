@@ -54,9 +54,9 @@ export default function Footer() {
 
   const contact = state?.contactInfo || defaultContact;
   const categories = state?.categories || [
-    "Diagnostics & Imaging",
     "Critical Care & ICU",
-    "Operating Theatre (OT)",
+    "Modular OT",
+    "Hospital Furniture",
     "CSSD & Sterilization"
   ];
 

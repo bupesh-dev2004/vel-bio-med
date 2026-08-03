@@ -64,7 +64,7 @@
     {
       "id": "prod-1",
       "name": "ANESTHESIA MACHINE",
-      "category": "Operating Theatre (OT)",
+      "category": "Modular OT",
       "image": "/images/prod-1.jpg",
       "shortDesc": "Advanced anesthesia delivery system engineered for precise gas administration and patient safety.",
       "description": "Advanced anesthesia delivery system engineered for precise gas administration, patient safety, and reliable performance during surgical procedures. Features advanced ventilation modes and digital flow meters for optimized surgical control.",
@@ -88,7 +88,7 @@
     {
       "id": "prod-2",
       "name": "SURGICAL DIATHERMY",
-      "category": "Operating Theatre (OT)",
+      "category": "Modular OT",
       "image": "/images/prod-2.png",
       "shortDesc": "Advanced electrosurgical system designed for precise cutting and coagulation during surgical procedures.",
       "description": "Surgical Diathermy: Advanced electrosurgical system designed for precise cutting, coagulation, and tissue management during surgical procedures, ensuring enhanced surgical efficiency and patient safety.",
@@ -112,7 +112,7 @@
     {
       "id": "prod-3",
       "name": "ECG MACHINE 3 CHANNEL",
-      "category": "Diagnostics & Imaging",
+      "category": "Critical Care & ICU",
       "image": "/images/prod-3.jpg",
       "shortDesc": "Compact and efficient electrocardiography system designed for accurate cardiac monitoring.",
       "description": "ECG Machine – 3 Channel: Compact and efficient electrocardiography system designed for accurate cardiac monitoring, rapid diagnostics, and dependable clinical performance. Built with lightweight portability and robust accessories.",
@@ -160,7 +160,7 @@
     {
       "id": "prod-5",
       "name": "FETAL MONITOR PORTABLE",
-      "category": "Diagnostics & Imaging",
+      "category": "Critical Care & ICU",
       "image": "/images/prod-5.webp",
       "shortDesc": "Advanced portable fetal monitoring system designed for assessment of fetal heart rate and uterine activity.",
       "description": "Fetal Monitor – Portable: Advanced portable fetal monitoring system designed for accurate assessment of fetal heart rate, uterine activity, and maternal well-being during pregnancy and labor. Ideal for clinical bedside monitoring and portable diagnostics.",
@@ -184,7 +184,7 @@
     {
       "id": "prod-6",
       "name": "OT TABLE ELECTRIC",
-      "category": "Operating Theatre (OT)",
+      "category": "Modular OT",
       "image": "/images/prod-6.png",
       "shortDesc": "Advanced electrically operated surgical table designed to provide precise positioning, stability, and flexibility.",
       "description": "OT Table – Electric: Advanced electrically operated surgical table designed to provide precise positioning, stability, and flexibility for a wide range of surgical procedures, ensuring optimal patient care and surgical efficiency.",
@@ -338,7 +338,7 @@
     {
       "id": "prod-11",
       "name": "ECG Machine 12 Channel",
-      "category": "Diagnostics & Imaging",
+      "category": "Critical Care & ICU",
       "image": "/images/prod-11.jpg",
       "shortDesc": "Advanced 12-channel electrocardiography station with auto-diagnostic analysis and high-fidelity trace.",
       "description": "12 Channel ECG Machine is an advanced electrocardiography system designed for accurate cardiac monitoring and diagnosis. It simultaneously captures and records 12-lead ECG signals with high precision, making it ideal for hospitals, clinics, ICUs, and diagnostic centers. The system features a user-friendly interface, high-resolution display, and reliable data storage for efficient workflow management.",
@@ -372,7 +372,7 @@
     {
       "id": "prod-12",
       "name": "LED OT Light 6 Series",
-      "category": "Operating Theatre (OT)",
+      "category": "Modular OT",
       "image": "/images/prod-12.png",
       "shortDesc": "High intensity shadowless surgical LED light dome providing superior cold light illumination.",
       "description": "The LED OT Light 6 Series is an advanced surgical lighting solution engineered to deliver uniform, shadow-free illumination for critical surgical procedures. Featuring energy-efficient LED technology, adjustable brightness control, and superior color accuracy, it enhances surgical visibility and operational efficiency in modern operation theatres and healthcare facilities.",
@@ -406,7 +406,7 @@
     {
       "id": "prod-13",
       "name": "LED OT Light Round Dome",
-      "category": "Operating Theatre (OT)",
+      "category": "Modular OT",
       "image": "/images/prod-13.jpg",
       "shortDesc": "Classic round dome operating theatre light combining robust mechanics with premium LED illumination.",
       "description": "The LED OT Light Round Dome is a premium surgical lighting solution engineered to deliver consistent, shadow-free illumination for advanced surgical and medical procedures. Featuring high-performance LED technology, adjustable intensity control, and superior color accuracy, it enhances surgical precision and operational efficiency in modern healthcare environments.",
@@ -440,7 +440,7 @@
     {
       "id": "prod-14",
       "name": "OT Table Advance",
-      "category": "Operating Theatre (OT)",
+      "category": "Modular OT",
       "image": "/images/prod-14.jpg",
       "shortDesc": "Electro-hydraulic multi-purpose surgical table offering versatile positioning for complex specialties.",
       "description": "The OT Table Advance is a high-performance electro-hydraulic surgical table engineered for precision positioning and superior operational efficiency in modern operation theatres. Designed with advanced adjustment controls, radiolucent compatibility, and robust structural stability, it supports a wide range of surgical procedures while ensuring maximum patient safety and surgeon convenience.",
@@ -677,7 +677,7 @@
     {
       "id": "prod-21",
       "name": "Modular OT ICU Setup",
-      "category": "Operating Theatre (OT)",
+      "category": "Modular OT",
       "image": "/images/prod-21.png",
       "shortDesc": "Complete modular medical infrastructure solutions for state-of-the-art operating theatres and ICU wards.",
       "description": "The Modular OT ICU Setup is a state-of-the-art healthcare infrastructure solution engineered to deliver sterile, efficient, and technologically advanced operation theatre and intensive care environments. Featuring modular construction, integrated utility systems, advanced infection control, and customizable configurations, it enhances operational efficiency, patient safety, and clinical performance in modern healthcare facilities.",
@@ -711,7 +711,7 @@
     {
       "id": "prod-22",
       "name": "ICU COT MOTORIZED",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-22.png",
       "shortDesc": "The Motorized ICU Cot is designed for ICU and critical care units, providing smooth electric adjustments for patient comfort and handling.",
       "description": "The Motorized ICU Cot is designed for ICU and critical care units. It provides smooth electric adjustments for patient comfort and makes patient handling easier for healthcare professionals.",
@@ -745,7 +745,7 @@
     {
       "id": "prod-23",
       "name": "Manual ICU Cot",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-23.png",
       "shortDesc": "Designed for hospitals and intensive care units, providing smooth manual adjustments for patient comfort and support.",
       "description": "The Manual ICU Cot is designed for hospitals and intensive care units, providing smooth manual adjustments for patient comfort and reliable support during treatment.",
@@ -779,7 +779,7 @@
     {
       "id": "prod-24",
       "name": "SEMI ICU COT",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-24.png",
       "shortDesc": "Engineered for intensive care and recovery wards, providing multi-position adjustment and sturdy ABS protection.",
       "description": "The Semi ICU Cot is designed for critical care and recovery wards, providing reliable multi-position adjustment, adjustable height, sturdy ABS head & foot panels, and smooth mobility for optimal patient care.",
@@ -811,7 +811,7 @@
     {
       "id": "prod-25",
       "name": "FOWLER PATIENT COT",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-25.png",
       "shortDesc": "Designed to provide comfort and support in hospitals and clinics, featuring an adjustable backrest for optimal positioning.",
       "description": "The Fowler Patient Cot is designed to provide comfort and support for patients in hospitals, clinics, and healthcare facilities. It features an adjustable backrest for improved patient positioning and easy caregiving.",
@@ -843,7 +843,7 @@
     {
       "id": "prod-26",
       "name": "SEMI FOWLER COT",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-26.png",
       "shortDesc": "Designed to provide comfort and support for recovery and hospital care, featuring an adjustable semi-fowler backrest.",
       "description": "The Semi Fowler Cot is designed to provide comfort and support for patients during recovery and general hospital care. Its adjustable backrest helps patients sit comfortably for resting, eating, and medical treatment.",
@@ -875,7 +875,7 @@
     {
       "id": "prod-27",
       "name": "BASIC FOWLER COT",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-27.png",
       "shortDesc": "Designed for reliable patient care in hospitals and clinics, featuring a perforated MS mattress platform and adjustable backrest.",
       "description": "The Basic Fowler Cot is designed to provide comfortable and reliable patient care in hospitals and clinics. It features an adjustable backrest to improve patient comfort during rest, treatment, and recovery.",
@@ -907,7 +907,7 @@
     {
       "id": "prod-28",
       "name": "EMERGENCY RECOVERY TROLLY",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-28.png",
       "shortDesc": "Designed to safely transport patients in emergency rooms and recovery areas with high-density foam mattress and IV pole provision.",
       "description": "The Emergency Recovery Trolley is designed to safely transport patients in emergency rooms, recovery areas, and hospitals. It provides comfort, stability, and quick mobility for efficient patient care during emergencies.",
@@ -940,7 +940,7 @@
     {
       "id": "prod-29",
       "name": "STRETCHER TROLLEY",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-29.png",
       "shortDesc": "Designed for safe and efficient patient transfer with a removable stretcher and 150 mm locking castor wheels.",
       "description": "The Stretcher Trolley is designed for safe and efficient patient transportation within hospitals, emergency departments, and healthcare facilities. Its sturdy construction and smooth mobility ensure reliable performance during patient transfer.",
@@ -955,7 +955,7 @@
         "Suitable for hospitals and emergency care"
       ],
       "specifications": {
-        "Category": "Critical Care & ICU",
+        "Category": "Hospital Furniture",
         "Frame": "Mild Steel Tubular",
         "Finish": "Epoxy Powder Coated",
         "Stretcher": "Removable",
@@ -970,7 +970,7 @@
     {
       "id": "prod-30",
       "name": "GYNECOLOGY TABLE",
-      "category": "Operating Theatre (OT)",
+      "category": "Hospital Furniture",
       "image": "/images/prod-30.png",
       "shortDesc": "Designed for gynecological examinations and obstetric procedures, featuring a 3-section stainless steel frame with lithotomy rods.",
       "description": "The Gynecology Table is designed for gynecological examinations and obstetric procedures. It provides adjustable positioning, patient comfort, and reliable support, making it suitable for hospitals, maternity centers, and clinics.",
@@ -987,7 +987,7 @@
         "Strong, durable, and easy to clean"
       ],
       "specifications": {
-        "Category": "Operating Theatre (OT)",
+        "Category": "Hospital Furniture",
         "Construction": "Stainless Steel",
         "Top Sections": "3 Section",
         "Backrest": "Adjustable",
@@ -1004,7 +1004,7 @@
     {
       "id": "prod-31",
       "name": "Labour Delivery Table",
-      "category": "Operating Theatre (OT)",
+      "category": "Hospital Furniture",
       "image": "/images/prod-31.png",
       "shortDesc": "Designed for labor, delivery, and gynecological procedures with adjustable positioning and sturdy mild steel support.",
       "description": "The Labour Delivery Table is designed for labor, delivery, and gynecological procedures. It provides adjustable positioning and sturdy support to ensure patient comfort and ease of use for healthcare professionals.",
@@ -1019,7 +1019,7 @@
         "Stable and comfortable construction"
       ],
       "specifications": {
-        "Category": "Operating Theatre (OT)",
+        "Category": "Hospital Furniture",
         "Frame": "Mild Steel",
         "Backrest": "Ratchet Adjustable",
         "Perineal Cut": "U-Cut",
@@ -1033,7 +1033,7 @@
     {
       "id": "prod-32",
       "name": "Labour Delivery Couch",
-      "category": "Operating Theatre (OT)",
+      "category": "Hospital Furniture",
       "image": "/images/prod-32.png",
       "shortDesc": "Designed to provide comfort and support during labor and delivery with pneumatic backrest and built-in storage.",
       "description": "The Labour Delivery Couch is designed to provide comfort and support during labor and delivery procedures. It features an adjustable backrest, built-in storage, and essential accessories, making it suitable for maternity wards, labor rooms, and hospitals.",
@@ -1050,7 +1050,7 @@
         "Durable and easy to clean"
       ],
       "specifications": {
-        "Category": "Operating Theatre (OT)",
+        "Category": "Hospital Furniture",
         "Frame": "CRCA Steel",
         "Backrest": "Pneumatic Adjustable",
         "Mattress": "Foam with Washable Rexene Cover",
@@ -1067,7 +1067,7 @@
     {
       "id": "prod-33",
       "name": "Examination Table",
-      "category": "Operating Theatre (OT)",
+      "category": "Hospital Furniture",
       "image": "/images/prod-33.png",
       "shortDesc": "Designed for general patient examinations and medical procedures with a comfortable cushioned top.",
       "description": "The Examination Table is designed for general patient examinations and medical procedures. It provides a comfortable and stable surface for patients while ensuring easy access for healthcare professionals in hospitals, clinics, and diagnostic centers.",
@@ -1098,7 +1098,7 @@
     {
       "id": "prod-34",
       "name": "Examination Couch with Drawer",
-      "category": "Operating Theatre (OT)",
+      "category": "Hospital Furniture",
       "image": "/images/prod-34.png",
       "shortDesc": "Designed for patient examinations and minor clinical procedures with built-in storage cabinets and drawers.",
       "description": "The Examination Couch with Drawer is designed for patient examinations and minor clinical procedures. It offers a comfortable examination surface along with built-in storage for medical instruments and supplies, making it ideal for hospitals, clinics, and healthcare centers.",
@@ -1114,7 +1114,7 @@
         "Suitable for hospitals, clinics, and examination rooms"
       ],
       "specifications": {
-        "Category": "Operating Theatre (OT)",
+        "Category": "Hospital Furniture",
         "Frame": "Tubular Steel",
         "Finish": "Powder Coated",
         "Mattress": "Foam, Waterproof",
@@ -1130,7 +1130,7 @@
     {
       "id": "prod-35",
       "name": "Crash Cart (MS)",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-35.png",
       "shortDesc": "Organizes emergency medical supplies for quick access with 6 molded drawers and smooth mobility.",
       "description": "The Crash Cart (MS) is designed to organize emergency medical supplies for quick access during critical situations. Its durable mild steel construction, multiple storage drawers, and smooth mobility make it ideal for hospitals, ICUs, and emergency departments.",
@@ -1147,7 +1147,7 @@
         "Durable and easy to maintain"
       ],
       "specifications": {
-        "Category": "Critical Care & ICU",
+        "Category": "Hospital Furniture",
         "Material": "Mild Steel (MS)",
         "Finish": "Powder Coated",
         "Dimensions": "960 × 430 × 1580 mm",
@@ -1165,7 +1165,7 @@
     {
       "id": "prod-36",
       "name": "Crash Cart (SS)",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-36.png",
       "shortDesc": "Designed for emergency and critical care environments, made from high-quality stainless steel for durability and corrosion resistance.",
       "description": "The Crash Cart (SS) is designed for emergency and critical care environments, providing quick access to essential medical supplies. Made from high-quality stainless steel, it offers durability, corrosion resistance, and smooth mobility for hospitals, ICUs, and emergency departments.",
@@ -1182,7 +1182,7 @@
         "Corrosion-resistant and easy to clean"
       ],
       "specifications": {
-        "Category": "Critical Care & ICU",
+        "Category": "Hospital Furniture",
         "Material": "Stainless Steel (SS)",
         "Construction": "Stainless Steel Tubular Frame",
         "Dimensions": "960 × 430 × 1580 mm",
@@ -1200,7 +1200,7 @@
     {
       "id": "prod-37",
       "name": "Drug Trolley",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-37.png",
       "shortDesc": "Designed for the safe storage and easy transportation of medicines and medical supplies in healthcare facilities.",
       "description": "The Drug Trolley is designed for the safe storage and easy transportation of medicines and medical supplies in hospitals and healthcare facilities. Its multiple drawers, smooth mobility, and durable construction help healthcare professionals access medications quickly and efficiently.",
@@ -1217,7 +1217,7 @@
         "Suitable for hospitals, ICUs, and emergency departments"
       ],
       "specifications": {
-        "Category": "Critical Care & ICU",
+        "Category": "Hospital Furniture",
         "Material": "CR Sheet Steel",
         "Finish": "Powder Coated",
         "Drawers": "Adjustable with Label Card Holders",
@@ -1233,7 +1233,7 @@
     {
       "id": "prod-38",
       "name": "Crash Cart (MS)",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-38.png",
       "shortDesc": "Designed to store and organize emergency medical supplies for quick access during critical situations.",
       "description": "The Crash Cart (MS) is designed to store and organize emergency medical supplies for quick access during critical situations. Its sturdy mild steel construction, spacious storage, and smooth mobility make it an essential unit for ICUs, emergency rooms, and hospital wards.",
@@ -1251,7 +1251,7 @@
         "Easy to clean and maintain"
       ],
       "specifications": {
-        "Category": "Critical Care & ICU",
+        "Category": "Hospital Furniture",
         "Material": "Mild Steel (MS)",
         "Finish": "Powder Coated",
         "Dimensions": "960 × 430 × 1580 mm",
@@ -1270,7 +1270,7 @@
     {
       "id": "prod-39",
       "name": "Equipment Trolley",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-39.png",
       "shortDesc": "Designed for convenient transportation and organization of medical equipment and supplies within healthcare facilities.",
       "description": "The Equipment Trolley is designed for the convenient transportation and organization of medical equipment and supplies within hospitals and healthcare facilities. Its durable construction and smooth mobility make it ideal for daily clinical use.",
@@ -1285,7 +1285,7 @@
         "Suitable for hospitals, clinics, and healthcare centers"
       ],
       "specifications": {
-        "Category": "Critical Care & ICU",
+        "Category": "Hospital Furniture",
         "Material": "Steel",
         "Construction": "Durable Frame",
         "Storage": "Multi-Shelf Design",
@@ -1300,7 +1300,7 @@
     {
       "id": "prod-40",
       "name": "ECG Trolley",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-40.png",
       "shortDesc": "Designed to securely hold and transport ECG machines and related accessories within hospitals and healthcare facilities.",
       "description": "The ECG Trolley is designed to securely hold and transport ECG machines and related accessories within hospitals and healthcare facilities. Its sturdy construction and smooth mobility make it ideal for use in ICUs, emergency departments, and diagnostic areas.",
@@ -1315,7 +1315,7 @@
         "Suitable for hospitals and diagnostic departments"
       ],
       "specifications": {
-        "Category": "Critical Care & ICU",
+        "Category": "Hospital Furniture",
         "Material": "Steel",
         "Construction": "Durable Frame",
         "Storage": "Top Platform & Lower Shelf",
@@ -1330,7 +1330,7 @@
     {
       "id": "prod-41",
       "name": "Cardiac Table",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-41.png",
       "shortDesc": "Designed to provide a stable and convenient surface for patients during cardiac care and bedside treatments.",
       "description": "The Cardiac Table is designed to provide a stable and convenient surface for patients during cardiac care and bedside treatments. Its sturdy construction and adjustable design make it suitable for hospitals, ICUs, and healthcare facilities.",
@@ -1345,7 +1345,7 @@
         "Suitable for hospitals, ICUs, and patient care areas"
       ],
       "specifications": {
-        "Category": "Critical Care & ICU",
+        "Category": "Hospital Furniture",
         "Material": "Steel",
         "Construction": "Durable Frame",
         "Height Adjustment": "Yes",
@@ -1359,7 +1359,7 @@
     {
       "id": "prod-42",
       "name": "Mayo Trolley",
-      "category": "Operating Theatre (OT)",
+      "category": "Hospital Furniture",
       "image": "/images/prod-42.png",
       "shortDesc": "Designed to hold surgical instruments and medical supplies during surgical and clinical procedures.",
       "description": "The Mayo Trolley is designed to hold surgical instruments and medical supplies during surgical and clinical procedures. Its sturdy construction and smooth mobility provide easy access to essential instruments in operation theatres and procedure rooms.",
@@ -1374,7 +1374,7 @@
         "Ideal for surgical and clinical procedures"
       ],
       "specifications": {
-        "Category": "Operating Theatre (OT)",
+        "Category": "Hospital Furniture",
         "Material": "Stainless Steel",
         "Tray": "Adjustable Height",
         "Mobility": "Castor Wheels",
@@ -1389,7 +1389,7 @@
     {
       "id": "prod-43",
       "name": "Bedside Locker",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-43.png",
       "shortDesc": "Provides convenient storage for patients' personal belongings, medicines, and essential medical supplies.",
       "description": "The Bedside Locker is designed to provide convenient storage for patients' personal belongings, medicines, and essential medical supplies. Its compact design and durable construction make it ideal for hospital wards, ICUs, and patient rooms.",
@@ -1404,7 +1404,7 @@
         "Suitable for hospitals and healthcare facilities"
       ],
       "specifications": {
-        "Category": "Critical Care & ICU",
+        "Category": "Hospital Furniture",
         "Material": "Steel",
         "Construction": "Durable Frame",
         "Storage": "Cabinet & Drawer",
@@ -1418,7 +1418,7 @@
     {
       "id": "prod-44",
       "name": "Instrument Trolley",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-44.png",
       "shortDesc": "Designed for safe storage and transportation of surgical instruments, medical devices, and clinical supplies.",
       "description": "The Instrument Trolley is designed for the safe storage and transportation of surgical instruments, medical devices, and clinical supplies. Its sturdy construction and smooth mobility make it suitable for hospitals, operation theatres, and healthcare facilities.",
@@ -1433,7 +1433,7 @@
         "Suitable for hospitals, clinics, and operation theatres"
       ],
       "specifications": {
-        "Category": "Critical Care & ICU",
+        "Category": "Hospital Furniture",
         "Material": "Stainless Steel",
         "Construction": "Durable Frame",
         "Storage": "Multi-Shelf Design",
@@ -1448,7 +1448,7 @@
     {
       "id": "prod-45",
       "name": "Dressing Trolley",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-45.png",
       "shortDesc": "Designed for carrying dressing materials, medical instruments, and clinical supplies during patient care.",
       "description": "The Dressing Trolley is designed for carrying dressing materials, medical instruments, and clinical supplies during patient care and wound dressing procedures. Its sturdy construction and smooth mobility make it suitable for hospitals, clinics, and healthcare facilities.",
@@ -1463,7 +1463,7 @@
         "Ideal for dressing rooms, wards, and clinics"
       ],
       "specifications": {
-        "Category": "Critical Care & ICU",
+        "Category": "Hospital Furniture",
         "Material": "Stainless Steel",
         "Construction": "Durable Frame",
         "Storage": "Two-Shelf Design",
@@ -1478,7 +1478,7 @@
     {
       "id": "prod-46",
       "name": "Bedside Locker",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-46.png",
       "shortDesc": "Designed to keep patients' personal belongings, medicines, and essential items within easy reach.",
       "description": "The Bedside Locker is designed to keep patients' personal belongings, medicines, and essential items within easy reach. Its sturdy construction and compact design make it an ideal storage solution for hospitals, clinics, and patient care units.",
@@ -1493,7 +1493,7 @@
         "Suitable for hospitals, wards, and ICUs"
       ],
       "specifications": {
-        "Category": "Critical Care & ICU",
+        "Category": "Hospital Furniture",
         "Material": "Steel",
         "Construction": "Durable Frame",
         "Storage": "Cabinet with Drawer",
@@ -1507,7 +1507,7 @@
     {
       "id": "prod-47",
       "name": "Over Bed Trolley",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-47.png",
       "shortDesc": "Provides a convenient surface for patients to eat, read, write, or use medical devices while in bed.",
       "description": "The Over Bed Trolley is designed to provide a convenient surface for patients to eat, read, write, or use medical devices while in bed. Its adjustable design and smooth mobility make it suitable for hospitals, patient wards, and healthcare facilities.",
@@ -1522,7 +1522,7 @@
         "Suitable for hospitals, wards, and patient care units"
       ],
       "specifications": {
-        "Category": "Critical Care & ICU",
+        "Category": "Hospital Furniture",
         "Material": "Steel",
         "Construction": "Durable Frame",
         "Tabletop": "Height Adjustable",
@@ -1537,7 +1537,7 @@
     {
       "id": "prod-48",
       "name": "Bedside Screen",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-48.png",
       "shortDesc": "Designed to provide privacy and comfort for patients during examinations, treatments, and bedside procedures.",
       "description": "The Bedside Screen is designed to provide privacy and comfort for patients during examinations, treatments, and bedside procedures. Its lightweight, durable construction and smooth mobility make it suitable for hospitals, clinics, and patient care areas.",
@@ -1552,7 +1552,7 @@
         "Ideal for hospitals, wards, and examination rooms"
       ],
       "specifications": {
-        "Category": "Critical Care & ICU",
+        "Category": "Hospital Furniture",
         "Material": "Metal Frame",
         "Screen": "Washable Privacy Fabric",
         "Mobility": "Castor Wheels",
@@ -1566,7 +1566,7 @@
     {
       "id": "prod-49",
       "name": "IV Stand",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-49.png",
       "shortDesc": "Designed to securely hold IV fluid bottles and infusion bags during patient treatment.",
       "description": "The IV Stand is designed to securely hold IV fluid bottles and infusion bags during patient treatment. Its sturdy construction, adjustable height, and smooth mobility make it ideal for hospitals, ICUs, clinics, and healthcare facilities.",
@@ -1582,7 +1582,7 @@
         "Suitable for hospitals, ICUs, and patient wards"
       ],
       "specifications": {
-        "Category": "Critical Care & ICU",
+        "Category": "Hospital Furniture",
         "Material": "Stainless Steel",
         "Height": "Adjustable",
         "Hooks": "Multiple IV Hooks",
@@ -1597,7 +1597,7 @@
     {
       "id": "prod-50",
       "name": "Attender Cot",
-      "category": "Critical Care & ICU",
+      "category": "Hospital Furniture",
       "image": "/images/prod-50.png",
       "shortDesc": "Designed to provide a comfortable resting space for patient attendants during hospital stays.",
       "description": "The Attender Cot is designed to provide a comfortable resting space for patient attendants during hospital stays. Its sturdy construction and compact design make it ideal for hospitals, clinics, and patient care units.",
@@ -1612,7 +1612,7 @@
         "Ideal for patient attendants"
       ],
       "specifications": {
-        "Category": "Critical Care & ICU",
+        "Category": "Hospital Furniture",
         "Material": "Steel",
         "Construction": "Durable Frame",
         "Design": "Compact & Sturdy",
@@ -1622,12 +1622,294 @@
       },
       "trending": true,
       "newest": true
+    },
+    {
+      "id": "prod-51",
+      "name": "Blood Warmer – WarmJET II",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-51.png",
+      "shortDesc": "Designed to safely warm blood and IV fluids before administration to maintain body temperature during transfusions.",
+      "description": "The WarmJET II Blood Warmer is designed to safely warm blood and IV fluids before they are administered to patients. It helps maintain body temperature during transfusions and fluid therapy, making it ideal for use in ICUs, operating theatres, emergency departments, and trauma care.",
+      "rating": 5,
+      "features": [
+        "Compact and lightweight design",
+        "Quick and efficient warming",
+        "Accurate temperature control",
+        "Digital temperature display",
+        "Easy to operate",
+        "Safety alarms for protection",
+        "Suitable for blood and IV fluids",
+        "Ideal for ICU, OT, and Emergency use"
+      ],
+      "specifications": {
+        "Product Name": "WarmJET II Blood Warmer",
+        "Category": "Critical Care & ICU",
+        "Application": "Blood & IV Fluid Warming",
+        "Temperature Range": "36°C – 42°C",
+        "Display": "Digital Display",
+        "Safety": "Over-temperature Alarm",
+        "Design": "Compact & Portable",
+        "Usage": "ICU, OT, Emergency & Trauma Care"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-52",
+      "name": "Thalassemia Pump",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-52.png",
+      "shortDesc": "Delivers iron chelation medication continuously and accurately for patients with thalassemia.",
+      "description": "The Thalassemia Pump is used to deliver iron chelation medication continuously and accurately for patients with thalassemia. It is compact, easy to use, and designed for safe, reliable infusion in both hospital and home care settings.",
+      "rating": 5,
+      "features": [
+        "Accurate and continuous drug delivery",
+        "Compact and lightweight design",
+        "Easy-to-use controls",
+        "Reliable infusion performance",
+        "Battery-operated for portability",
+        "Audible and visual alarms",
+        "Suitable for long-term therapy",
+        "Comfortable for daily use"
+      ],
+      "specifications": {
+        "Product Name": "Thalassemia Pump",
+        "Category": "Critical Care & ICU",
+        "Application": "Iron Chelation Therapy",
+        "Infusion Type": "Continuous Infusion",
+        "Display": "Digital Display",
+        "Power Source": "Rechargeable/Battery Operated",
+        "Safety": "Audible & Visual Alarms",
+        "Usage": "Hospitals, Clinics & Home Care"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-53",
+      "name": "DVT Pump – Hello 123 Model",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-53.png",
+      "shortDesc": "Pneumatic compression device designed to prevent Deep Vein Thrombosis by improving leg circulation.",
+      "description": "The DVT Pump (Hello 123 Model) is a pneumatic compression device designed to help prevent Deep Vein Thrombosis (DVT) by improving blood circulation in the legs. It provides intermittent compression therapy for patients who are immobile after surgery or during prolonged bed rest.",
+      "rating": 5,
+      "features": [
+        "Sequential pneumatic compression",
+        "Improves blood circulation",
+        "Helps prevent Deep Vein Thrombosis (DVT)",
+        "Compact and portable design",
+        "Easy-to-use controls",
+        "Adjustable pressure settings",
+        "Audible and visual safety alarms",
+        "Suitable for ICU, OT, and post-operative care"
+      ],
+      "specifications": {
+        "Product Name": "DVT Pump – Hello 123 Model",
+        "Category": "Critical Care & ICU",
+        "Application": "DVT Prevention & Compression Therapy",
+        "Compression Type": "Sequential Pneumatic Compression",
+        "Pressure": "Adjustable",
+        "Display": "Digital Display",
+        "Safety": "Audible & Visual Alarms",
+        "Design": "Compact & Portable",
+        "Usage": "ICU, OT, Post-operative Care & Recovery"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-54",
+      "name": "5-in-One Power Guard",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-54.png",
+      "shortDesc": "Medical power protection device designed to safeguard critical medical equipment from voltage fluctuations.",
+      "description": "The 5-in-One Power Guard is a medical power protection device designed to safeguard critical medical equipment from voltage fluctuations, power surges, and electrical faults. It provides stable and reliable power to ensure the safe operation of medical devices in hospitals and healthcare facilities.",
+      "rating": 5,
+      "features": [
+        "Protects against voltage fluctuations",
+        "Built-in surge protection",
+        "Stable power output",
+        "Compact and durable design",
+        "Easy to install and operate",
+        "Suitable for multiple medical devices",
+        "Reliable and safe performance",
+        "Ideal for ICU, OT, and hospital use"
+      ],
+      "specifications": {
+        "Product Name": "5-in-One Power Guard",
+        "Category": "Critical Care & ICU",
+        "Application": "Medical Equipment Power Protection",
+        "Protection": "Voltage & Surge Protection",
+        "Output": "Stable Power Supply",
+        "Design": "Compact & Durable",
+        "Installation": "Easy to Install",
+        "Usage": "ICU, OT, Hospitals & Clinics"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-55",
+      "name": "DVT Pump – Hello 111 Model",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-55.png",
+      "shortDesc": "Intermittent pneumatic compression device to improve blood circulation and prevent DVT.",
+      "description": "The DVT Pump – Hello 111 Model is designed to help prevent Deep Vein Thrombosis (DVT) by improving blood circulation through intermittent pneumatic compression. It is ideal for patients who are immobile, recovering from surgery, or receiving long-term care.",
+      "rating": 5,
+      "features": [
+        "Sequential pneumatic compression",
+        "Improves blood circulation",
+        "Helps prevent Deep Vein Thrombosis (DVT)",
+        "Compact and portable design",
+        "Easy-to-use controls",
+        "Adjustable pressure settings",
+        "Audible and visual safety alarms",
+        "Suitable for ICU, OT, and post-operative care"
+      ],
+      "specifications": {
+        "Product Name": "DVT Pump – Hello 111 Model",
+        "Category": "Critical Care & ICU",
+        "Application": "DVT Prevention & Compression Therapy",
+        "Compression Type": "Sequential Pneumatic Compression",
+        "Pressure": "Adjustable",
+        "Display": "Digital Display",
+        "Safety": "Audible & Visual Alarms",
+        "Design": "Compact & Portable",
+        "Usage": "ICU, OT, Post-operative Care & Recovery"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-56",
+      "name": "4004 Syringe Pump",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-56.png",
+      "shortDesc": "Compact and accurate infusion device to deliver medications and fluids at controlled rates.",
+      "description": "The 4004 Syringe Pump is a compact and accurate infusion device designed to deliver medications and fluids at a controlled rate. It is suitable for adult, pediatric, and neonatal patients, making it ideal for ICUs, operating theatres, emergency departments, and critical care units.",
+      "rating": 5,
+      "features": [
+        "Accurate and continuous drug delivery",
+        "Compact and lightweight design",
+        "Easy-to-use digital display",
+        "Compatible with multiple syringe sizes",
+        "Audible and visual safety alarms",
+        "Battery backup for uninterrupted operation",
+        "Suitable for adult, pediatric, and neonatal patients",
+        "Ideal for ICU, OT, and Emergency Care"
+      ],
+      "specifications": {
+        "Product Name": "4004 Syringe Pump",
+        "Category": "Critical Care & ICU",
+        "Application": "Controlled Drug & Fluid Infusion",
+        "Display": "Digital Display",
+        "Syringe Compatibility": "5 ml – 100 ml Syringes",
+        "Power Source": "AC Power with Battery Backup",
+        "Safety": "Audible & Visual Alarms",
+        "Usage": "ICU, OT, NICU, Emergency & Critical Care"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-57",
+      "name": "5005 Infusion Pump",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-57.png",
+      "shortDesc": "Volumetric infusion pump designed to deliver fluids and medications accurately at controlled flow rates.",
+      "description": "The 5005 Infusion Pump is a volumetric infusion pump designed to deliver fluids and medications accurately at controlled flow rates. It is suitable for adult and pediatric patients and is widely used in ICUs, operating theatres, emergency departments, and general wards.",
+      "rating": 5,
+      "features": [
+        "Accurate and continuous infusion",
+        "Easy-to-use digital display",
+        "Suitable for adult and pediatric patients",
+        "Multiple infusion modes",
+        "Audible and visual safety alarms",
+        "Battery backup for uninterrupted operation",
+        "Compatible with standard IV sets",
+        "Ideal for ICU, OT, and Emergency Care"
+      ],
+      "specifications": {
+        "Product Name": "5005 Infusion Pump",
+        "Category": "Critical Care & ICU",
+        "Application": "Controlled Fluid & Medication Infusion",
+        "Pump Type": "Volumetric Infusion Pump",
+        "Display": "Digital Display",
+        "Power Source": "AC Power with Battery Backup",
+        "Accuracy": "±5%",
+        "Usage": "ICU, OT, Emergency, Pediatric & General Wards"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-58",
+      "name": "6006B Dual Syringe Pump",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-58.png",
+      "shortDesc": "Designed to deliver two medications or fluids simultaneously with high accuracy and independent controls.",
+      "description": "The 6006B Dual Syringe Pump is designed to deliver two medications or fluids simultaneously with high accuracy. It features dual independent channels, making it ideal for critical care, anesthesia, neonatal care, and emergency applications.",
+      "rating": 5,
+      "features": [
+        "Dual independent syringe channels",
+        "Accurate and continuous infusion",
+        "Easy-to-use digital display",
+        "Compatible with multiple syringe sizes",
+        "Audible and visual safety alarms",
+        "Battery backup for uninterrupted operation",
+        "Compact and portable design",
+        "Ideal for ICU, OT, NICU, and Emergency Care"
+      ],
+      "specifications": {
+        "Product Name": "6006B Dual Syringe Pump",
+        "Category": "Critical Care & ICU",
+        "Application": "Controlled Drug & Fluid Infusion",
+        "Channels": "Dual Channel",
+        "Display": "Digital Display",
+        "Syringe Compatibility": "Multiple Syringe Sizes",
+        "Power Source": "AC Power with Battery Backup",
+        "Safety": "Audible & Visual Alarms",
+        "Usage": "ICU, OT, NICU & Emergency Care"
+      },
+      "trending": true,
+      "newest": true
+    },
+    {
+      "id": "prod-59",
+      "name": "WarmJET Blood Warmer",
+      "category": "Critical Care & ICU",
+      "image": "/images/prod-59.png",
+      "shortDesc": "Safely warms blood and IV fluids before patient administration to maintain body temperature.",
+      "description": "The WarmJET Blood Warmer is designed to safely warm blood and IV fluids before they are administered to patients. It helps maintain normal body temperature during transfusions and fluid therapy, making it ideal for use in ICUs, operating theatres, emergency departments, and trauma care.",
+      "rating": 5,
+      "features": [
+        "Quick and efficient blood & fluid warming",
+        "Compact and lightweight design",
+        "Accurate temperature control",
+        "Digital temperature display",
+        "Easy to operate",
+        "Built-in safety alarms",
+        "Suitable for blood and IV fluids",
+        "Ideal for ICU, OT, and Emergency Care"
+      ],
+      "specifications": {
+        "Product Name": "WarmJET Blood Warmer",
+        "Category": "Critical Care & ICU",
+        "Application": "Blood & IV Fluid Warming",
+        "Temperature Range": "36°C – 42°C",
+        "Display": "Digital Display",
+        "Safety": "Over-temperature Protection & Alarms",
+        "Design": "Compact & Portable",
+        "Usage": "ICU, OT, Emergency & Trauma Care"
+      },
+      "trending": true,
+      "newest": true
     }
   ],
   "categories": [
-    "Diagnostics & Imaging",
     "Critical Care & ICU",
-    "Operating Theatre (OT)",
+    "Modular OT",
+    "Hospital Furniture",
     "CSSD & Sterilization"
   ],
   "gallery": [

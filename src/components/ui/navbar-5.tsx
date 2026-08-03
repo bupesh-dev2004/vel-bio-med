@@ -81,22 +81,22 @@ export const Navbar5 = () => {
   // Dynamic clinical categories from our catalog database
   const productCategories = [
     {
-      title: "Diagnostics & Imaging",
-      description: "ECG Channels, portable fetal monitors, ultrasound scans",
-      icon: Activity,
-      color: "text-blue-500 bg-blue-50"
-    },
-    {
       title: "Critical Care & ICU",
       description: "Infusion pumps, syringe flow controls, ventilators & monitors",
       icon: Shield,
       color: "text-emerald-500 bg-emerald-50"
     },
     {
-      title: "Operating Theatre (OT)",
+      title: "Modular OT",
       description: "Electric multi-function tables, surgical lightings & diathermy",
       icon: Wrench,
       color: "text-amber-500 bg-amber-50"
+    },
+    {
+      title: "Hospital Furniture",
+      description: "Bedside lockers, Over bed trolleys, Attender cots & IV stands",
+      icon: Activity,
+      color: "text-blue-500 bg-blue-50"
     },
     {
       title: "CSSD & Sterilization",

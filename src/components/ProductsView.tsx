@@ -183,7 +183,7 @@ export default function ProductsView({
                 }}
                 className="text-slate-400 text-sm sm:text-base font-medium leading-relaxed max-w-xl"
               >
-                Explore our world-class inventory of high-acuity ventilators, precise ECG monitors, surgical operating theatre setups, and certified CSSD sterilization suites.
+                Explore our world-class inventory of high-acuity ventilators, precise ECG monitors, modular OT setups, and certified CSSD sterilization suites.
               </motion.p>
             </motion.div>
 
