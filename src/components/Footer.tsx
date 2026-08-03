@@ -224,7 +224,8 @@ export default function Footer() {
       {/* Bottom Bar copyright & Admin trigger */}
       <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-slate-900 text-xs text-slate-500 font-bold flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
         <p className="text-center md:text-left select-none">
-          © {currentYear} Vel Bio Med. All Rights Reserved. Engineered for clinical perfection & patient safety.
+          © {currentYear} Vel Bio Med. All Rights Reserved. Designed & Developed by{" "}
+          <a href="https://www.izonetech.in/" target="_blank" rel="noreferrer" className="hover:text-[#00A8CC] transition-colors">Izone Technologies</a>
         </p>
         <div className="flex gap-6">
           <button onClick={() => setCurrentTab("about")} className="hover:text-[#00A8CC] cursor-pointer transition-colors">Privacy Policy</button>
