@@ -133,13 +133,13 @@ export const Navbar5 = () => {
         initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`py-2 px-0 transition-all duration-500 border-b relative z-50 ${isScrolled
+        className={`py-1 sm:py-2 px-0 transition-all duration-500 border-b relative z-50 ${isScrolled
           ? "bg-white/80 backdrop-blur-md shadow-lg shadow-slate-900/5 border-slate-200/60"
           : "bg-white border-slate-100"
           }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center justify-between h-24">
+          <nav className="flex items-center justify-between h-14 sm:h-16 lg:h-20 min-h-0">
 
             {/* Brand Logo Identity */}
             <motion.div
@@ -153,7 +153,7 @@ export const Navbar5 = () => {
               <img
                 src="/logo.png"
                 alt="Vel Bio Med"
-                className="h-20 w-auto object-contain relative z-10"
+                className="h-10 sm:h-14 lg:h-[72px] w-auto max-w-[140px] sm:max-w-[180px] object-contain relative z-10"
               />
             </motion.div>
 
@@ -232,7 +232,7 @@ export const Navbar5 = () => {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 12, scale: 0.96 }}
                       transition={{ duration: 0.2, ease: "easeOut" }}
-                      className="absolute left-1/2 -translate-x-1/2 mt-2 w-[580px] bg-white/95 backdrop-blur-md border border-slate-100 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.08)] p-4 grid grid-cols-2 gap-2 z-55"
+                      className="absolute left-1/2 -translate-x-1/2 mt-2 w-[min(580px,calc(100vw-2rem))] bg-white/95 backdrop-blur-md border border-slate-100 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.08)] p-4 grid grid-cols-2 gap-2 z-55"
                     >
                       <div className="col-span-2 pb-2 mb-2 border-b border-slate-100 flex items-center justify-between">
                         <span className="text-[9px] font-black uppercase tracking-widest text-slate-400 flex items-center gap-1.5">
@@ -324,13 +324,13 @@ export const Navbar5 = () => {
 
             {/* Desktop Right Action Buttons & Inline Search */}
             <div className="hidden lg:flex items-center gap-4">
-              <form onSubmit={handleSearchSubmit} className="relative w-48 group">
+              <form onSubmit={handleSearchSubmit} className="relative w-44 xl:w-52 group">
                 <input
                   type="text"
                   placeholder="Search catalog..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100 rounded-full py-2.5 pl-4 pr-9 text-xs focus:outline-none transition-all text-slate-800 font-bold"
+                  className="w-full bg-slate-50 border border-slate-200 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-100 rounded-full py-2 pl-4 pr-9 text-xs focus:outline-none transition-all text-slate-800 font-bold"
                 />
                 <button type="submit" className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-hover:text-blue-600 transition-colors cursor-pointer border-none bg-transparent">
                   <Search className="w-3.5 h-3.5" />
@@ -381,15 +381,15 @@ export const Navbar5 = () => {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="fixed inset-0 w-full h-screen bg-white z-[70] flex flex-col justify-between overflow-y-auto"
+                  className="fixed inset-0 w-full h-[100dvh] bg-white z-[70] flex flex-col justify-between overflow-y-auto overscroll-contain"
                 >
                   {/* Matching main header height & brand identity */}
-                  <div className="h-24 px-4 sm:px-6 lg:px-8 border-b border-slate-100 flex items-center justify-between shrink-0">
+                  <div className="h-14 sm:h-16 px-4 sm:px-6 border-b border-slate-100 flex items-center justify-between shrink-0">
                     <div className="flex items-center cursor-pointer" onClick={() => navigateTab("home")}>
                       <img
                         src="/logo.png"
                         alt="Vel Bio Med"
-                        className="h-16 w-auto object-contain"
+                        className="h-10 sm:h-12 w-auto max-w-[130px] object-contain"
                       />
                     </div>
                     {/* Spacer for toggle button which stays on top */}
@@ -397,7 +397,7 @@ export const Navbar5 = () => {
                   </div>
 
                   {/* Vertically Centered Content Container */}
-                  <div className="flex-1 flex flex-col justify-center px-6 py-12 max-w-md mx-auto w-full">
+                  <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 py-8 max-w-md mx-auto w-full">
                     {/* Navigation Links list */}
                     <motion.div
                       variants={containerVariants}

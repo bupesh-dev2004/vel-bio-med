@@ -1,3 +1,4 @@
+
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Award, Stethoscope, TrendingUp, Users, Quote } from "lucide-react";
@@ -59,7 +60,7 @@ export default function LeadershipMessage() {
     return (
         <section
             ref={ref}
-            className="relative py-16 md:py-28 lg:py-36 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 text-slate-100 border-t border-b border-slate-800/60"
+            className="relative py-12 sm:py-20 md:py-28 lg:py-36 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 text-slate-100 border-t border-b border-slate-800/60"
         >
             {/* Ambient background glows */}
             <div
@@ -96,7 +97,7 @@ export default function LeadershipMessage() {
                         <Award className="w-3.5 h-3.5" /> Leadership Vision
                     </span>
                     <h2
-                        className="text-4xl sm:text-5xl lg:text-[56px] font-extrabold leading-[1.1] tracking-tight text-white"
+                        className="text-4xl sm:text-5xl lg:text-[clamp(2.5rem,4vw,3.5rem)] font-extrabold leading-[1.1] tracking-tight text-white"
                         style={{ fontFamily: "'Poppins', 'Satoshi', sans-serif" }}
                     >
                         A Message From Our{" "}
@@ -111,7 +112,7 @@ export default function LeadershipMessage() {
                 </motion.div>
 
                 {/* Two-column layout */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
                     {/* LEFT COLUMN - Refined Quote */}
                     <div className="lg:col-span-7 space-y-8">
@@ -201,11 +202,11 @@ export default function LeadershipMessage() {
                             />
 
                             {/* Image wrapper */}
-                            <div className="relative overflow-hidden aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/3]">
+                            <div className="relative overflow-hidden">
                                 <motion.img
-                                    src="/images/managing-founder.jpg"
+                                    src="/images/managing-founder.png"
                                     alt="Mr. Muralikrishnan Gokulakrishnan – Founder & Managing Director"
-                                    className="w-full h-full object-cover object-top"
+                                    className="w-full h-auto block aspect-[3/4] object-cover object-top"
                                     whileHover={{ scale: 1.04, transition: { duration: 0.5 } }}
                                 />
 
@@ -244,7 +245,7 @@ export default function LeadershipMessage() {
                                 <motion.div
                                     key={label}
                                     whileHover={{ y: -4, transition: { duration: 0.25 } }}
-                                    className="rounded-2xl p-5 flex flex-col gap-3 bg-slate-900/40 border border-slate-800/60 shadow-md backdrop-blur-md hover:border-slate-700 transition-all duration-300 group"
+                                    className="rounded-2xl p-4 flex flex-row items-center gap-4 bg-slate-900/40 border border-slate-800/60 shadow-md backdrop-blur-md hover:border-slate-700 transition-all duration-300 group"
                                 >
                                     <div
                                         className={`w-10 h-10 rounded-xl flex items-center justify-center ${bgGlow} border border-slate-700/50 group-hover:rotate-6 transition-transform duration-300`}

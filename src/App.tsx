@@ -128,7 +128,7 @@ function AppContent() {
 
   // 3. Complete Loaded Website Template
   return (
-    <div className="min-h-screen bg-white flex flex-col justify-between font-sans overflow-x-hidden selection:bg-blue-500 selection:text-white pt-[116px]">
+    <div className="min-h-screen bg-white flex flex-col justify-between font-sans overflow-x-hidden selection:bg-blue-500 selection:text-white pt-[59px] sm:pt-[67px] lg:pt-[83px]">
       <ScrollToTopOnRoute />
       <AnimatePresence>
         {showPreloader && (

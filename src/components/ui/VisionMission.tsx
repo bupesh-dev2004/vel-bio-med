@@ -157,7 +157,7 @@ export default function VisionMission() {
   return (
     <section
       ref={ref}
-      className="relative py-16 md:py-28 lg:py-36 overflow-hidden"
+      className="relative py-12 sm:py-20 md:py-28 lg:py-36 overflow-hidden"
       style={{ background: "linear-gradient(170deg, #FFFFFF 0%, #F4F8FD 40%, #E9F1FC 100%)" }}
     >
       {/* Ambient background glows */}

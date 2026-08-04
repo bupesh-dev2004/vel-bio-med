@@ -117,7 +117,7 @@ export default function ProductsView({
   return (
     <div className="bg-slate-50 min-h-screen">
       {/* Search and Category filter banner with premium midnight-tech radial gradient and premium hospital background image */}
-      <section className="bg-slate-950 text-white border-b border-slate-900 py-16 px-4 sm:px-6 lg:px-8 relative shadow-2xl">
+      <section className="bg-slate-950 text-white border-b border-slate-900 py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative shadow-2xl">
         {/* Background decorative wrapper to isolate overflow hiding to background elements only */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
           {/* Background cover image */}
@@ -188,16 +188,16 @@ export default function ProductsView({
             </motion.div>
 
             {/* In-tab search bar & high-tech statistics */}
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center lg:flex-col lg:items-end w-full lg:w-auto">
-              <div className="relative w-full sm:w-80">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center lg:flex-col lg:items-end w-full lg:w-auto">
+              <div className="relative w-full sm:w-72 lg:w-80">
                 <input
                   type="text"
                   placeholder="Search machines, specs, category..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-slate-900/90 border border-slate-800 focus:border-amber-500 focus:bg-slate-950 rounded-2xl py-4 pl-12 pr-4 text-xs focus:outline-none transition-all text-white font-medium shadow-inner placeholder:text-slate-500"
+                  className="w-full bg-slate-900/90 border border-slate-800 focus:border-amber-500 focus:bg-slate-950 rounded-2xl py-3 sm:py-4 pl-10 sm:pl-12 pr-4 text-xs focus:outline-none transition-all text-white font-medium shadow-inner placeholder:text-slate-500"
                 />
-                <Search className="w-4.5 h-4.5 text-slate-400 absolute left-4.5 top-1/2 -translate-y-1/2" />
+                <Search className="w-4 h-4 text-slate-400 absolute left-3.5 sm:left-4.5 top-1/2 -translate-y-1/2" />
               </div>
 
               {/* Live counter badges */}
@@ -221,12 +221,12 @@ export default function ProductsView({
           <hr className="border-slate-900 my-8" />
 
           {/* Filtering Tools Layout */}
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             {/* Category tags horizontal select */}
-            <div className="flex flex-wrap gap-2.5">
+            <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setSelectedCategory("All")}
-                className={`px-5 py-3 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer shadow-md ${selectedCategory === "All"
+                className={`px-3 sm:px-5 py-2 sm:py-3 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer shadow-md ${selectedCategory === "All"
                   ? "bg-gradient-to-r from-blue-600 via-indigo-650 to-amber-500 text-white shadow-lg shadow-blue-500/10 scale-102"
                   : "bg-slate-900 hover:bg-slate-850 text-slate-400 hover:text-white border border-slate-800/60"
                   }`}
@@ -237,7 +237,7 @@ export default function ProductsView({
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
-                  className={`px-5 py-3 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer shadow-md ${selectedCategory === cat
+                  className={`px-3 sm:px-5 py-2 sm:py-3 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer shadow-md ${selectedCategory === cat
                     ? "bg-gradient-to-r from-blue-600 via-indigo-650 to-amber-500 text-white shadow-lg shadow-blue-500/10 scale-102"
                     : "bg-slate-900 hover:bg-slate-850 text-slate-400 hover:text-white border border-slate-800/60"
                     }`}
@@ -362,7 +362,7 @@ export default function ProductsView({
                         <img
                           src={p.image}
                           alt={p.name}
-                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                          className="absolute inset-0 w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ease-out"
                           loading="lazy"
                         />
                         {/* Premium glassmorphic details overlay */}
@@ -470,10 +470,10 @@ export default function ProductsView({
             />
 
             {/* Expanded Modal Container */}
-            <div className="fixed inset-0 flex items-center justify-center p-4 md:p-6 lg:p-12 z-55 overflow-y-auto">
+            <div className="fixed inset-0 flex items-end sm:items-center justify-center p-0 sm:p-4 md:p-6 lg:p-12 z-[55] overflow-y-auto">
               <motion.div
                 layoutId={`product-${selectedProductModal.id}`}
-                className="w-full max-w-4xl bg-white rounded-3xl overflow-y-auto md:overflow-hidden shadow-2xl relative max-h-[90vh] flex flex-col md:flex-row border border-slate-150 z-56"
+                className="w-full max-w-4xl bg-white rounded-t-3xl sm:rounded-3xl overflow-y-auto shadow-2xl relative max-h-[92dvh] sm:max-h-[90vh] flex flex-col md:flex-row border border-slate-150 z-[56]"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Close Cross button */}
@@ -488,12 +488,12 @@ export default function ProductsView({
                 {/* Left Image View */}
                 <motion.div
                   layoutId={`product-image-${selectedProductModal.id}`}
-                  className="w-full md:w-1/2 bg-white relative flex items-center justify-center p-6 min-h-[250px] md:min-h-full"
+                  className="w-full md:w-1/2 bg-white relative flex items-center justify-center p-4 sm:p-6 min-h-[200px] sm:min-h-[250px] md:min-h-full"
                 >
                   <img
                     src={selectedProductModal.image}
                     alt={selectedProductModal.name}
-                    className="max-w-full max-h-[350px] md:max-h-[500px] object-contain"
+                    className="max-w-full max-h-[220px] sm:max-h-[300px] md:max-h-[500px] object-contain"
                   />
                   {/* Visual clinical overlay tag inside modal */}
                   <div className="absolute bottom-4 left-4 bg-slate-900/90 text-white text-[9px] font-black uppercase px-3 py-1.5 rounded-full shadow-md backdrop-blur-sm border border-slate-800 tracking-wider flex items-center gap-1.5">
@@ -545,7 +545,7 @@ export default function ProductsView({
                     </div>
 
                     {/* Dynamic Content based on tab */}
-                    <div className="max-h-[260px] sm:max-h-[280px] overflow-y-auto pr-1 text-xs sm:text-sm leading-relaxed font-sans font-medium">
+                    <div className="max-h-[200px] sm:max-h-[260px] md:max-h-[280px] overflow-y-auto pr-1 text-xs sm:text-sm leading-relaxed font-sans font-medium">
                       {activeModalTab === "desc" && (
                         <p className="whitespace-pre-line text-slate-600 font-medium">
                           {selectedProductModal.description}

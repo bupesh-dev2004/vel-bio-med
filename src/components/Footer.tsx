@@ -1,16 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import type { ComponentProps, ReactNode } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import {
-  MapPin,
-  Phone,
-  Mail,
-  ArrowRight,
-  Send,
-  CheckCircle2
-} from "lucide-react";
+import { MapPin, Phone, Mail } from "lucide-react";
 import { FacebookIcon, InstagramIcon, LinkedinIcon, XIcon, YoutubeIcon } from "./ui/BrandSocialIcons.js";
 import { useAppState } from "../AppContext.js";
 
@@ -43,8 +36,6 @@ function AnimatedContainer({ className, delay = 0.1, children }: ViewAnimationPr
 export default function Footer() {
   const { setCurrentTab, state } = useAppState();
   const currentYear = new Date().getFullYear();
-  const [newsletterEmail, setNewsletterEmail] = useState("");
-  const [isSubscribed, setIsSubscribed] = useState(false);
 
   const defaultContact = {
     address: "VEL BIO MED - Medical equipment supplier, Hari Divya Complex, 55, Palayam Bazaar Rd, Woraiyur, Tiruchirappalli, Tamil Nadu 620003",
@@ -60,16 +51,8 @@ export default function Footer() {
     "CSSD & Sterilization"
   ];
 
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (newsletterEmail.trim() === "") return;
-    setIsSubscribed(true);
-    setNewsletterEmail("");
-    setTimeout(() => setIsSubscribed(false), 4000);
-  };
-
   return (
-    <footer className="relative w-full border-t border-slate-900 bg-[#040d1a] px-6 pt-20 pb-8 font-sans overflow-hidden">
+    <footer className="relative w-full border-t border-slate-900 bg-[#040d1a] px-4 sm:px-6 pt-12 sm:pt-16 lg:pt-20 pb-8 font-sans overflow-hidden">
       {/* Background Decorative Grid Pattern */}
       <div className="absolute inset-0 opacity-[0.015] bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:24px_24px] pointer-events-none" />
 
@@ -77,21 +60,21 @@ export default function Footer() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[300px] bg-[radial-gradient(ellipse_at_center,rgba(10,110,189,0.12),transparent_65%)] pointer-events-none rounded-full blur-3xl" />
       <div className="absolute top-0 right-1/2 left-1/2 h-[2px] w-[60%] -translate-x-1/2 bg-gradient-to-r from-transparent via-[#0A6EBD]/55 to-transparent rounded-full blur-[1px]" />
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 relative z-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 relative z-10">
         {/* Column 1: Brand Info & Newsletter (lg:col-span-5) */}
-        <AnimatedContainer className="space-y-6 lg:col-span-5">
+        <AnimatedContainer className="space-y-5 sm:space-y-6 col-span-1 sm:col-span-2 lg:col-span-5">
           <div className="flex items-center gap-3 cursor-pointer group" onClick={() => setCurrentTab("home")}>
             <img
               src="/logo.png"
               alt="Vel Bio Med Logo"
-              className="h-20 w-auto object-contain rounded-2xl transition-transform duration-300 group-hover:scale-105"
+              className="h-14 sm:h-16 md:h-20 w-auto object-contain rounded-2xl transition-transform duration-300 group-hover:scale-105"
             />
           </div>
           <p className="text-xs text-slate-400 leading-relaxed max-w-md font-medium">
             Vel Bio Med is a premier medical infrastructure partner, sourcing elite high-acuity ventilators, premium diagnostics scanners, and state-of-the-art modular operation theatre systems for healthcare leaders globally.
           </p>
 
-          <div className="flex items-center gap-2.5 pt-3">
+          <div className="flex items-center gap-2 flex-wrap pt-2 sm:pt-3">
             {[
               {
                 icon: <FacebookIcon className="w-4 h-4" />,
@@ -133,7 +116,7 @@ export default function Footer() {
         </AnimatedContainer>
 
         {/* Column 2: Navigation Links (lg:col-span-2) */}
-        <AnimatedContainer delay={0.2} className="lg:col-span-2 lg:pl-4">
+        <AnimatedContainer delay={0.2} className="lg:col-span-2 lg:pl-4 col-span-1">
           <h3 className="text-white text-xs font-black uppercase tracking-widest mb-6 border-b border-slate-900 pb-2 relative">
             Company Info
             <span className="absolute bottom-0 left-0 w-8 h-[2px] bg-[#0A6EBD]" />
@@ -168,7 +151,7 @@ export default function Footer() {
         </AnimatedContainer>
 
         {/* Column 3: Categories (lg:col-span-2) */}
-        <AnimatedContainer delay={0.3} className="lg:col-span-2">
+        <AnimatedContainer delay={0.3} className="lg:col-span-2 col-span-1">
           <h3 className="text-white text-xs font-black uppercase tracking-widest mb-6 border-b border-slate-900 pb-2 relative">
             Our Offerings
             <span className="absolute bottom-0 left-0 w-8 h-[2px] bg-[#0A6EBD]" />
@@ -189,7 +172,7 @@ export default function Footer() {
         </AnimatedContainer>
 
         {/* Column 4: Contact Details (lg:col-span-3) */}
-        <AnimatedContainer delay={0.4} className="lg:col-span-3">
+        <AnimatedContainer delay={0.4} className="lg:col-span-3 col-span-1 sm:col-span-2">
           <h3 className="text-white text-xs font-black uppercase tracking-widest mb-6 border-b border-slate-900 pb-2 relative">
             Contact Details
             <span className="absolute bottom-0 left-0 w-8 h-[2px] bg-[#0A6EBD]" />
@@ -221,16 +204,13 @@ export default function Footer() {
         </AnimatedContainer>
       </div>
 
-      {/* Bottom Bar copyright & Admin trigger */}
-      <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-slate-900 text-xs text-slate-500 font-bold flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
-        <p className="text-center md:text-left select-none">
-          © {currentYear} Vel Bio Med. All Rights Reserved. Designed & Developed by{" "}
-          <a href="https://www.izonetech.in/" target="_blank" rel="noreferrer" className="hover:text-[#00A8CC] transition-colors">Izone Technologies</a>
+      {/* Bottom Bar copyright */}
+      <div className="max-w-7xl mx-auto mt-8 sm:mt-12 lg:mt-16 pt-6 sm:pt-8 border-t border-slate-900 text-xs text-slate-500 font-bold flex flex-col items-center gap-1.5 relative z-10">
+        <p className="text-center select-none">© {currentYear} Vel Bio Med. All Rights Reserved.</p>
+        <p className="text-center select-none">
+          Designed & Developed by{" "}
+          <a href="https://www.izonetech.in/" target="_blank" rel="noreferrer" className="text-sky-400 hover:text-[#00A8CC] transition-colors">Izone Technologies</a>
         </p>
-        <div className="flex gap-6">
-          <button onClick={() => setCurrentTab("about")} className="hover:text-[#00A8CC] cursor-pointer transition-colors">Privacy Policy</button>
-          <button onClick={() => setCurrentTab("contact")} className="hover:text-[#00A8CC] cursor-pointer transition-colors">Terms & Conditions</button>
-        </div>
       </div>
     </footer>
   );

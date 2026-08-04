@@ -103,7 +103,7 @@ export default function GalleryView() {
   return (
     <div className="bg-slate-50 min-h-screen">
       {/* Immersive Hero/Landing Section with Premium Background Image */}
-      <div className="relative w-full min-h-[85vh] bg-slate-950 overflow-hidden flex flex-col items-center justify-center py-20">
+      <div className="relative w-full min-h-[60vh] sm:min-h-[75vh] bg-slate-950 overflow-hidden flex flex-col items-center justify-center py-12 sm:py-20">
         {/* Background Image with elegant overlay */}
         <div
           className="absolute inset-0 bg-[url('https://static.vecteezy.com/system/resources/thumbnails/053/732/763/small/comfortable-patient-room-featuring-advanced-equipment-and-relaxing-bed-design-free-photo.jpg')] bg-cover bg-center opacity-30"
@@ -120,7 +120,7 @@ export default function GalleryView() {
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse pointer-events-none" />
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl animate-pulse pointer-events-none" />
 
-        <div className="relative z-10 text-center space-y-12 max-w-5xl mx-auto px-6">
+        <div className="relative z-10 text-center space-y-8 sm:space-y-12 max-w-5xl mx-auto px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -144,7 +144,7 @@ export default function GalleryView() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, delay: 0.3 }}
-                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight leading-[0.9] select-none text-white"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black tracking-tight leading-[0.9] select-none text-white"
                 style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
               >
                 <span className="block font-light text-slate-300/85 mb-2 text-2xl md:text-3xl lg:text-4xl">
@@ -193,7 +193,7 @@ export default function GalleryView() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1 }}
-            className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-4"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center items-stretch sm:items-center pt-4 w-full px-4 sm:px-0"
           >
             <motion.button
               onClick={handleScrollToGrid}
@@ -203,7 +203,7 @@ export default function GalleryView() {
                 y: -2
               }}
               whileTap={{ scale: 0.98 }}
-              className="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 via-sky-400 to-amber-500 text-white rounded-xl font-bold text-lg shadow-xl hover:shadow-blue-500/30 transition-all duration-500 overflow-hidden border border-blue-400/20 cursor-pointer"
+              className="group relative inline-flex items-center justify-center gap-3 px-5 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-blue-600 via-sky-400 to-amber-500 text-white rounded-xl font-bold text-sm sm:text-base shadow-xl hover:shadow-blue-500/30 transition-all duration-500 overflow-hidden border border-blue-400/20 cursor-pointer w-full sm:w-auto"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <motion.div
@@ -226,7 +226,7 @@ export default function GalleryView() {
                 y: -2
               }}
               whileTap={{ scale: 0.98 }}
-              className="group relative inline-flex items-center gap-3 px-8 py-4 border-2 border-slate-700 rounded-xl font-bold text-lg text-white hover:border-amber-500 transition-all duration-500 backdrop-blur-xl bg-slate-900/60 hover:bg-slate-900/90 shadow-lg overflow-hidden cursor-pointer"
+              className="group relative inline-flex items-center justify-center gap-3 px-5 sm:px-8 py-3 sm:py-4 border-2 border-slate-700 rounded-xl font-bold text-sm sm:text-base text-white hover:border-amber-500 transition-all duration-500 backdrop-blur-xl bg-slate-900/60 hover:bg-slate-900/90 shadow-lg overflow-hidden cursor-pointer w-full sm:w-auto"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 via-transparent to-amber-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <Zap className="relative z-10 w-5 h-5 text-amber-500 group-hover:scale-110 group-hover:rotate-6 transition-all duration-300" />
@@ -239,7 +239,7 @@ export default function GalleryView() {
 
 
       {/* Filter tabs and masonry grid */}
-      <section id="portfolio-showcase" className="py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden border-t border-slate-100">
+      <section id="portfolio-showcase" className="py-12 sm:py-16 lg:py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden border-t border-slate-100">
         {/* Ambient Decorative Elements */}
         <div className="absolute top-1/3 left-0 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-1/3 right-0 w-80 h-80 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
@@ -247,7 +247,7 @@ export default function GalleryView() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Category Filter buttons */}
-          <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4 mb-16">
+          <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-3 mb-8 sm:mb-16">
             {categories.map((cat) => {
               const isActive = selectedCategory === cat;
               return (
@@ -404,7 +404,7 @@ export default function GalleryView() {
           {/* Close trigger button */}
           <button
             onClick={closeLightbox}
-            className="absolute top-6 right-6 text-white/70 hover:text-white bg-slate-900/50 hover:bg-amber-500 p-2.5 rounded-full transition-all cursor-pointer"
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 text-white/70 hover:text-white bg-slate-900/50 hover:bg-amber-500 p-2 sm:p-2.5 rounded-full transition-all cursor-pointer"
             aria-label="Close Lightbox"
           >
             <X className="w-6 h-6" />
@@ -414,7 +414,7 @@ export default function GalleryView() {
           {filteredItems.length > 1 && (
             <button
               onClick={handlePrevImage}
-              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-slate-900/50 hover:bg-blue-600 p-3 rounded-full transition-all cursor-pointer"
+              className="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-slate-900/50 hover:bg-blue-600 p-2 sm:p-3 rounded-full transition-all cursor-pointer"
               aria-label="Previous Image"
             >
               <ChevronLeft className="w-6 h-6" />
@@ -449,7 +449,7 @@ export default function GalleryView() {
           {filteredItems.length > 1 && (
             <button
               onClick={handleNextImage}
-              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-slate-900/50 hover:bg-blue-600 p-3 rounded-full transition-all cursor-pointer"
+              className="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/70 hover:text-white bg-slate-900/50 hover:bg-blue-600 p-2 sm:p-3 rounded-full transition-all cursor-pointer"
               aria-label="Next Image"
             >
               <ChevronRight className="w-6 h-6" />

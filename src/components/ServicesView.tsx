@@ -193,7 +193,7 @@ export default function ServicesView() {
   return (
     <div className="bg-slate-50 min-h-screen">
       {/* Upper header cover */}
-      <section className="relative py-24 bg-slate-900 overflow-hidden">
+      <section className="relative py-20 sm:py-24 bg-slate-900 overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://altosengineers.com/wp-content/uploads/2023/01/5-Keys-to-Proper-Setup-of-Medical-Equipment-1.jpg')] bg-cover bg-center opacity-85" />
         <div className="absolute inset-0 bg-slate-950/45" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/70 to-slate-950" />
@@ -214,7 +214,7 @@ export default function ServicesView() {
             className="text-3xl md:text-5xl font-extrabold tracking-tight flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2"
           >
             <span>Biomedical Service</span>
-            <span className="min-w-[280px] sm:min-w-[320px] text-center sm:text-left inline-block">
+            <span className="min-w-0 w-full sm:min-w-[280px] sm:w-auto md:min-w-[320px] text-center sm:text-left inline-block">
               <FlipWords
                 words={["Calibration", "Maintenance", "Installation", "Emergency SLA"]}
                 duration={3000}

@@ -156,7 +156,7 @@ function CorporateValueCard({ handleShuffle, title, desc, icon: IconComponent, g
         dragRef.current = 0;
       }}
       transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
-      className={`absolute left-0 top-0 flex flex-col justify-between h-[340px] w-[250px] sm:h-[430px] sm:w-[330px] select-none rounded-3xl border border-slate-800 bg-[#0f172a] p-6 sm:p-8 shadow-2xl text-white ${isFront ? "cursor-grab active:cursor-grabbing hover:border-slate-700" : ""}`}
+      className={`absolute left-0 top-0 flex flex-col justify-between h-[300px] w-[220px] xs:h-[340px] xs:w-[250px] sm:h-[430px] sm:w-[330px] select-none rounded-3xl border border-slate-800 bg-[#0f172a] p-5 sm:p-8 shadow-2xl text-white ${isFront ? "cursor-grab active:cursor-grabbing hover:border-slate-700" : ""}`}
     >
       {/* Decorative top line */}
       <div className={`absolute top-0 inset-x-0 h-1.5 rounded-t-3xl bg-gradient-to-r ${gradient}`} />
@@ -265,11 +265,11 @@ function CorporateValuesStack({ values }: { values: ValueItem[] }) {
 
           {/* Right Side card stack */}
           <div
-            className="lg:col-span-7 flex justify-center lg:justify-end items-center h-[390px] sm:h-[480px] relative"
+            className="lg:col-span-7 flex justify-center lg:justify-end items-center h-[350px] xs:h-[390px] sm:h-[480px] relative"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            <div className="relative h-[340px] w-[250px] sm:h-[430px] sm:w-[330px] -ml-[20px] sm:-ml-[60px] lg:mr-28">
+            <div className="relative h-[300px] w-[220px] xs:h-[340px] xs:w-[250px] sm:h-[430px] sm:w-[330px] -ml-[10px] xs:-ml-[20px] sm:-ml-[60px] lg:mr-28">
               {values.map((v, index) => (
                 <CorporateValueCard
                   key={index}
@@ -651,7 +651,7 @@ export default function AboutView() {
               </motion.span>
               <motion.h1
                 variants={fadeUpVariants}
-                className="text-4xl md:text-6xl font-black text-white tracking-tight leading-none"
+                className="text-3xl sm:text-4xl md:text-6xl font-black text-white tracking-tight leading-none"
               >
                 Your Partner in <span className="bg-gradient-to-r from-cyan-300 to-white bg-clip-text text-transparent">Clinical</span> <span className="bg-gradient-to-r from-amber-400 to-[#F97316] bg-clip-text text-transparent">Longevity</span>
               </motion.h1>
@@ -694,7 +694,7 @@ export default function AboutView() {
       {/* Subsequent Content Wrapper - scrolls over fixed background */}
       <div className="relative z-10 bg-slate-50 border-t border-slate-200/40">
         {/* Corporate Overview Story */}
-        <section className="py-16 md:py-24 lg:py-32 bg-gradient-to-br from-slate-50 via-[#f0f6ff] to-white relative overflow-hidden">
+        <section className="py-12 sm:py-16 md:py-24 lg:py-32 bg-gradient-to-br from-slate-50 via-[#f0f6ff] to-white relative overflow-hidden">
           {/* Scientific grid dot background */}
           <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1.5px,transparent_1.5px)] [background-size:24px_24px] opacity-60" />
 
@@ -710,8 +710,8 @@ export default function AboutView() {
             style={{ background: "radial-gradient(circle, #f97316 0%, transparent 70%)", filter: "blur(100px)" }}
           />
 
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+              <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center">
 
               {/* Left Column Asymmetrical Image Block */}
               <div className="lg:col-span-5 relative">
@@ -745,7 +745,7 @@ export default function AboutView() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                   whileHover={{ y: -6, transition: { duration: 0.3 } }}
-                  className="absolute bottom-3 left-3 sm:-bottom-6 sm:-left-6 bg-slate-900/95 backdrop-blur-md text-white p-4 sm:p-6 rounded-2xl shadow-2xl border border-slate-800 z-10"
+                  className="absolute bottom-3 left-3 sm:-bottom-6 sm:-left-6 bg-slate-900/95 backdrop-blur-md text-white p-3 sm:p-6 rounded-xl sm:rounded-2xl shadow-2xl border border-slate-800 z-10"
                 >
                   <span className="text-2xl sm:text-3xl font-black block tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500">
                     16+ Years
@@ -777,7 +777,7 @@ export default function AboutView() {
                   <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-50 text-blue-700 border border-blue-100 font-extrabold tracking-widest text-[10px] uppercase">
                     <Building2 className="w-3.5 h-3.5 text-blue-600" /> Corporate Profile
                   </span>
-                  <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+                  <h2 className="text-2xl sm:text-3xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
                     Sourcing Global Diagnostics of{" "}
                     <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-800 bg-clip-text text-transparent">Unparalleled</span>{" "}
                     <span className="bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 bg-clip-text text-transparent">Metric Confidence</span>
@@ -836,7 +836,7 @@ export default function AboutView() {
 
 
         {/* Corporate Strengths Section (relocated from Home) */}
-        <section className="py-16 md:py-24 bg-slate-950 relative overflow-hidden">
+        <section className="py-12 sm:py-16 md:py-24 bg-slate-950 relative overflow-hidden">
           {/* Glow ambient design elements */}
           <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
@@ -876,7 +876,7 @@ export default function AboutView() {
                   </div>
                 </BorderRotate>
 
-                <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-6 rounded-2xl shadow-xl z-20 max-w-xs hidden sm:block border border-blue-50/30">
+                <div className="absolute -bottom-6 -right-6 bg-blue-600 text-white p-4 sm:p-6 rounded-2xl shadow-xl z-20 max-w-xs hidden sm:block border border-blue-50/30">
                   <p className="text-3xl font-black text-white">100%</p>
                   <p className="text-xs font-bold uppercase tracking-wider text-blue-100 mt-1">Uptime SLA Support</p>
                   <p className="text-blue-100 text-[11px] mt-2 font-medium leading-relaxed">Our engineers are dispatched immediately for high emergency troubleshooting alerts.</p>
@@ -894,7 +894,7 @@ export default function AboutView() {
                 >
                   <div>
                     <span className="text-blue-400 font-bold tracking-widest text-xs uppercase block mb-1">Corporate Strengths</span>
-                    <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
                       Our Uncompromising Standard of Reliability
                     </h2>
                     <div className="w-12 h-1 bg-blue-50 mt-4 rounded-full" />

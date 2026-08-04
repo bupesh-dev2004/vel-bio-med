@@ -478,7 +478,7 @@ export default function ContactView() {
       </AnimatePresence>
 
       {/* MAIN CONTENT SECTION */}
-      <section className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
+      <section className="py-8 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
 
           {/* LEFT COLUMN: Executive Branding & Direct Contact Cards */}
@@ -590,19 +590,21 @@ export default function ContactView() {
             <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-2xl shadow-slate-200/60 relative overflow-hidden">
 
               {/* Form Header */}
-              <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-6 mb-6">
+              <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center sm:justify-between gap-3 border-b border-slate-100 pb-5 mb-5">
                 <div>
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-50 text-sky-600 text-xs font-extrabold uppercase tracking-wider border border-sky-100 mb-2">
                     Official Enquiry Desk <Send className="w-3 h-3 -rotate-45" />
                   </span>
-                  <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+                  <h2 className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
                     Send an <span className="text-sky-600">Official Enquiry</span>
                   </h2>
                   <p className="text-slate-500 text-xs sm:text-sm font-medium mt-1">
                     Fill out the form below. Our biomedical technical consultants will provide datasheets and an instant quote.
                   </p>
                 </div>
-                <HeartbeatLine />
+                <div className="hidden sm:block">
+                  <HeartbeatLine />
+                </div>
               </div>
 
               {/* Contact Form */}
@@ -832,8 +834,8 @@ export default function ContactView() {
       </section>
 
       {/* EMBEDDED GOOGLE MAP SECTION */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="relative h-96 md:h-[480px] w-full rounded-3xl overflow-hidden border border-slate-200/80 shadow-2xl group">
+      <section className="py-6 sm:py-12 lg:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="relative h-64 sm:h-96 md:h-[480px] w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200/80 shadow-2xl group">
           <iframe
             src={contact.mapUrl}
             className="w-full h-full border-0 absolute inset-0 grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out"

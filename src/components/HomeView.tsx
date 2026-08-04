@@ -511,7 +511,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* 1. HERO SECTION */}
-      <section className="ipad-pro-hero-section relative h-[100dvh] md:h-[82vh] lg:h-auto xl:h-[100dvh] w-full flex flex-col md:flex-row items-stretch md:items-center bg-slate-50 overflow-hidden pt-16 pb-4 md:pt-[96px] md:pb-12 lg:pt-[120px] lg:pb-16 xl:pt-[72px] xl:pb-6">
+      <section className="ipad-pro-hero-section relative min-h-[100dvh] md:min-h-[82vh] lg:min-h-0 lg:h-auto xl:min-h-[100dvh] w-full flex flex-col md:flex-row items-stretch md:items-center bg-slate-50 overflow-hidden pt-0 pb-4 md:pt-[96px] md:pb-12 lg:pt-[120px] lg:pb-16 xl:pt-[72px] xl:pb-6">
         {/* Background with zoom and fade in effect */}
         <motion.div
           initial={{ opacity: 0, scale: 1 }}
@@ -547,7 +547,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
 
         {/* Hero Content Wrapper */}
         <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 xl:px-10 w-full z-20 relative flex flex-col justify-start md:justify-stretch h-full">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start md:items-center h-full w-full">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-8 items-start md:items-center h-full w-full">
             {/* Left Side (45% on desktop xl, 58% on tablet/medium desktop) */}
             <div className="ipad-pro-left-side col-span-1 md:col-span-12 xl:col-span-5 flex flex-col justify-start md:justify-between lg:justify-start xl:justify-start h-auto md:h-full lg:h-auto text-center md:text-center xl:text-left text-slate-900 translate-y-0 md:translate-y-0 lg:translate-x-0 lg:translate-y-0 xl:translate-x-0 xl:-translate-y-6">
               <motion.div
@@ -638,7 +638,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                     return (
                       <div
                         key={idx}
-                        className={`flex flex-col items-center justify-center text-center gap-1 py-2.5 sm:py-3 md:py-5 lg:py-6 xl:py-3.5 px-2 sm:px-3 md:px-4 lg:px-5 xl:px-2 rounded-xl sm:rounded-2xl border ${m.border} bg-gradient-to-br from-blue-500/8 via-white/80 to-orange-500/8 backdrop-blur-[3px] sm:backdrop-blur-sm shadow-[0_1px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_3px_14px_rgba(0,0,0,0.09)] hover:scale-[1.02] transition-all duration-200 w-full max-w-[115px] sm:max-w-[135px] md:max-w-none md:w-[170px] md:h-[150px] lg:w-[190px] lg:h-[170px] xl:w-full xl:max-w-none xl:h-auto`}
+                        className={`flex flex-col items-center justify-center text-center gap-1 py-2.5 sm:py-3 md:py-5 lg:py-6 xl:py-3.5 px-2 sm:px-3 md:px-4 lg:px-5 xl:px-2 rounded-xl sm:rounded-2xl border ${m.border} bg-gradient-to-br from-blue-500/8 via-white/80 to-orange-500/8 backdrop-blur-[3px] sm:backdrop-blur-sm shadow-[0_1px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_3px_14px_rgba(0,0,0,0.09)] hover:scale-[1.02] transition-all duration-200 w-full`}
                       >
                         <div className={`w-7 h-7 sm:w-8 sm:h-8 md:w-11 md:h-11 lg:w-12 lg:h-12 xl:w-9 xl:h-9 flex items-center justify-center rounded-lg sm:rounded-xl ${m.iconBg} border border-white/90 shadow-sm`}>
                           <IconComponent className={`w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5 lg:w-6 lg:h-6 xl:w-4.5 xl:h-4.5 ${m.color}`} strokeWidth={2} />
@@ -705,16 +705,16 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
       />
 
       {/* 2. WHY CHOOSE VEL BIO MED SECTION */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-[#f0f6ff] via-white to-[#fff7ed] border-t border-blue-100/60 relative overflow-hidden">
+      <section className="py-12 sm:py-16 md:py-24 bg-gradient-to-br from-[#f0f6ff] via-white to-[#fff7ed] border-t border-blue-100/60 relative overflow-hidden">
         {/* Ambient background glows */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full opacity-20"
+          className="pointer-events-none absolute -top-40 -left-40 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] rounded-full opacity-20"
           style={{ background: "radial-gradient(circle, #3b82f6 0%, transparent 70%)", filter: "blur(120px)" }}
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full opacity-15"
+          className="pointer-events-none absolute -bottom-40 -right-40 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] rounded-full opacity-15"
           style={{ background: "radial-gradient(circle, #f97316 0%, transparent 70%)", filter: "blur(120px)" }}
         />
 
@@ -724,7 +724,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false, margin: "-100px" }}
-            className="bg-white/80 backdrop-blur-2xl rounded-[2.5rem] p-5 sm:p-10 md:p-16 border border-blue-100/80 shadow-2xl relative overflow-hidden"
+            className="bg-white/80 backdrop-blur-2xl rounded-[2rem] sm:rounded-[2.5rem] p-4 sm:p-10 md:p-16 border border-blue-100/80 shadow-2xl relative overflow-hidden"
           >
             {/* Inner card subtle decorative items */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-blue-500/5 to-orange-500/5 rounded-full blur-3xl -z-10" />
@@ -802,7 +802,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
       </section>
 
       {/* 2. OUR PRODUCTS SECTION */}
-      <section className="py-24 bg-linear-to-br from-blue-50/50 via-white to-orange-50/50 relative overflow-hidden border-b border-slate-100">
+      <section className="py-14 sm:py-24 bg-linear-to-br from-blue-50/50 via-white to-orange-50/50 relative overflow-hidden border-b border-slate-100">
 
 
         {/* Ambient Decorative Light Orbs - Blue and Orange Gradient Glows */}
@@ -816,12 +816,12 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
           viewport={{ once: true, margin: "-100px" }}
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10"
         >
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 sm:mb-16 gap-4 sm:gap-6">
             <div className="space-y-3">
               <span className="inline-flex items-center gap-1.5 bg-blue-50/80 border border-blue-200/50 text-blue-600 font-extrabold px-4 py-1.5 rounded-full text-[10px] uppercase tracking-widest shadow-xs">
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-ping" /> Sourcing Catalogue
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-none">
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-none">
                 Our <span className="bg-gradient-to-r from-blue-600 to-amber-500 bg-clip-text text-transparent">Products</span>
               </h2>
               <p className="text-slate-500 text-xs sm:text-sm font-medium max-w-xl">
@@ -870,7 +870,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                       whileInView="visible"
                       viewport={{ once: true, margin: "-50px" }}
                       onClick={() => onOpenProductModal(p)}
-                      className={`group relative bg-gradient-to-b from-white to-slate-50/40 border border-slate-200/60 rounded-[32px] p-4 sm:p-6 hover:-translate-y-2.5 transition-[transform,border-color,box-shadow] duration-500 flex flex-col h-[400px] sm:h-[500px] overflow-hidden cursor-pointer
+                      className={`group relative bg-gradient-to-b from-white to-slate-50/40 border border-slate-200/60 rounded-[32px] p-4 sm:p-6 hover:-translate-y-2.5 transition-[transform,border-color,box-shadow] duration-500 flex flex-col min-h-[400px] sm:min-h-[500px] overflow-hidden cursor-pointer
                         ${isAmber
                           ? "hover:border-amber-300 hover:shadow-[0_20px_45px_rgba(245,158,11,0.08)]"
                           : "hover:border-blue-300 hover:shadow-[0_20px_45px_rgba(37,99,235,0.08)]"
@@ -963,7 +963,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
       </section>
 
       {/* 3. TRENDING PRODUCTS GRID */}
-      <section className="py-24 bg-gradient-to-b from-slate-900 via-slate-950 to-blue-950 relative overflow-hidden border-b border-slate-900">
+      <section className="py-14 sm:py-24 bg-gradient-to-b from-slate-900 via-slate-950 to-blue-950 relative overflow-hidden border-b border-slate-900">
 
 
         {/* Glowing Ambient Light Orbs */}
@@ -1002,7 +1002,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   <CarouselItem key={`${item.id}-${idx}`} className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3">
                     <div
                       onClick={() => onOpenProductModal(item)}
-                      className="flex flex-col bg-slate-900/80 backdrop-blur-md p-4 sm:p-6 border border-slate-800/80 rounded-3xl shadow-lg hover:shadow-blue-500/10 hover:border-blue-500/50 transition-[transform,border-color,box-shadow] duration-300 group relative overflow-hidden h-[400px] sm:h-[440px] justify-between cursor-pointer"
+                      className="flex flex-col bg-slate-900/80 backdrop-blur-md p-4 sm:p-6 border border-slate-800/80 rounded-3xl shadow-lg hover:shadow-blue-500/10 hover:border-blue-500/50 transition-[transform,border-color,box-shadow] duration-300 group relative overflow-hidden min-h-[400px] sm:min-h-[440px] justify-between cursor-pointer"
                     >
                       <div>
                         {/* Image - beautifully aligned in white container */}
@@ -1070,7 +1070,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
       </section>
 
       {/* 4. SERVICES SECTION - COMPREHENSIVE SUPPORT DELIVERABLES */}
-      <section id="services-section" className="py-24 bg-slate-50/40 relative overflow-hidden border-b border-slate-100">
+      <section id="services-section" className="py-14 sm:py-24 bg-slate-50/40 relative overflow-hidden border-b border-slate-100">
         <div className="absolute top-1/3 left-0 w-[500px] h-[500px] bg-blue-100/30 rounded-full blur-3xl pointer-events-none -translate-x-1/2" />
         <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-orange-100/30 rounded-full blur-3xl pointer-events-none translate-x-1/2" />
 
@@ -1102,14 +1102,14 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
             {dbServices.map((srv, idx) => {
               const isAmber = idx % 2 === 1;
               const deliverables = getDeliverables(srv.title);
               return (
                 <div
                   key={srv.id}
-                  className={`border p-8 rounded-3xl transition-all duration-500 flex flex-col h-full group relative overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.02)]
+                  className={`border p-5 sm:p-8 rounded-3xl transition-all duration-500 flex flex-col h-full group relative overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.02)]
                     ${isAmber
                       ? "bg-gradient-to-br from-orange-50/40 via-white to-white border-orange-200/80 hover:border-orange-400 hover:shadow-[0_20px_40px_rgba(249,115,22,0.08)]"
                       : "bg-gradient-to-br from-blue-50/40 via-white to-white border-blue-200/80 hover:border-blue-400 hover:shadow-[0_20px_40px_rgba(59,130,246,0.08)]"
@@ -1180,7 +1180,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
       <ImageGallery />
 
       {/* 6. TESTIMONIALS REVIEW SECTION */}
-      <section className="py-20 bg-white overflow-hidden">
+      <section className="py-12 sm:py-20 bg-white overflow-hidden">
         <motion.div
           variants={fadeUpVariants}
           initial="hidden"
@@ -1199,7 +1199,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
             onMouseLeave={() => setIsTestimonialsPaused(false)}
             onTouchStart={() => setIsTestimonialsPaused(true)}
             onTouchEnd={() => setIsTestimonialsPaused(false)}
-            className="relative h-[650px] overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_5%,black_95%,transparent)]"
+            className="relative h-[500px] sm:h-[600px] lg:h-[650px] overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_5%,black_95%,transparent)]"
           >
             {/* Desktop (≥1024px): 3 scrolling columns */}
             <div className="hidden lg:grid grid-cols-3 gap-8 h-full">

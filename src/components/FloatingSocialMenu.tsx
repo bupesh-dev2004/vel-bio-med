@@ -64,7 +64,7 @@ export default function FloatingSocialMenu() {
   ];
 
   return (
-    <div className="fixed bottom-6 right-6 z-45" id="floating-social-dashboard">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40" id="floating-social-dashboard">
       <MenuContainer upward={true}>
         <MenuTrigger />
         {socials.map((social) => (
