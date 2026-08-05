@@ -1,8 +1,8 @@
 import { Award, ShieldCheck, Users, Activity, Sparkles, Building2, Globe, HeartHandshake, Scale, Cpu, Heart, MapPin, ThumbsUp, CheckSquare, Zap, ArrowRight, Briefcase, Wrench, TrendingUp, Trophy } from "lucide-react";
 import LeadershipMessage from "./ui/LeadershipMessage";
 import VisionMission from "./ui/VisionMission";
-import React, { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import React, { useEffect, useRef, useState, useCallback, memo } from "react";
+import { motion } from "framer-motion";
 import { useAppState } from "../AppContext.js";
 import { FrostedGlassCard } from "@/components/ui/interactive-frosted-glass-card";
 import { BorderRotate } from "@/components/ui/animated-gradient-border";
@@ -103,8 +103,7 @@ interface CorporateValueCardProps {
   isMobile: boolean;
 }
 
-function CorporateValueCard({ handleShuffle, title, desc, icon: IconComponent, gradient, position, isMobile }: CorporateValueCardProps) {
-  const dragRef = React.useRef(0);
+const CorporateValueCard = React.memo(function CorporateValueCard({ handleShuffle, title, desc, icon: IconComponent, gradient, position, isMobile }: CorporateValueCardProps) {
   const isFront = position === "front";
 
   const posStyles = React.useMemo(() => {
@@ -136,26 +135,26 @@ function CorporateValueCard({ handleShuffle, title, desc, icon: IconComponent, g
         opacity: posStyles.opacity
       }}
       drag={isFront ? "x" : false}
-      dragElastic={0.2}
+      dragElastic={0.85}
+      dragSnapToOrigin={true}
       dragListener={isFront}
       dragConstraints={{
-        left: -150,
-        right: 150,
+        left: -180,
+        right: 180,
         top: 0,
         bottom: 0
       }}
-      onDragStart={(e) => {
-        const clientX = 'clientX' in e ? e.clientX : (e as any).touches?.[0]?.clientX || 0;
-        dragRef.current = clientX;
-      }}
-      onDragEnd={(e) => {
-        const clientX = 'clientX' in e ? e.clientX : (e as any).changedTouches?.[0]?.clientX || 0;
-        if (Math.abs(dragRef.current - clientX) > 60) {
+      onDragEnd={(_e, info) => {
+        if (Math.abs(info.offset.x) > 40 || Math.abs(info.velocity.x) > 250) {
           handleShuffle();
         }
-        dragRef.current = 0;
       }}
-      transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
+      transition={{
+        type: "spring",
+        stiffness: 380,
+        damping: 26,
+        mass: 0.8
+      }}
       className={`absolute left-0 top-0 flex flex-col justify-between h-[300px] w-[220px] xs:h-[340px] xs:w-[250px] sm:h-[430px] sm:w-[330px] select-none rounded-3xl border border-slate-800 bg-[#0f172a] p-5 sm:p-8 shadow-2xl text-white ${isFront ? "cursor-grab active:cursor-grabbing hover:border-slate-700" : ""}`}
     >
       {/* Decorative top line */}
@@ -191,7 +190,7 @@ function CorporateValueCard({ handleShuffle, title, desc, icon: IconComponent, g
       )}
     </motion.div>
   );
-}
+});
 
 function CorporateValuesStack({ values }: { values: ValueItem[] }) {
   const [positions, setPositions] = useState(["front", "middle", "back", "far-back", "hidden"]);
@@ -333,7 +332,7 @@ const timelineMilestones = [
   }
 ];
 
-function TimelineMilestone({ milestone, index, activeIndex, setActiveIndex }: {
+const TimelineMilestone = memo(function TimelineMilestone({ milestone, index, activeIndex, setActiveIndex }: {
   milestone: typeof timelineMilestones[0];
   index: number;
   activeIndex: number;
@@ -343,24 +342,10 @@ function TimelineMilestone({ milestone, index, activeIndex, setActiveIndex }: {
   const isLeft = index % 2 === 0;
   const isActive = index === activeIndex;
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-
-  // Smooth out scroll progress using spring physics
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 80, damping: 25, mass: 0.8 });
-  const opacity = useTransform(smoothProgress, [0.15, 0.45, 0.55, 0.85], [0, 1, 1, 0]);
-  const y = useTransform(smoothProgress, [0.15, 0.45, 0.55, 0.85], [60, 0, 0, -60]);
-
-  // Dynamic horizontal fly-in based on alternating column position (left or right)
-  const rawX = useTransform(smoothProgress, [0.15, 0.45, 0.55, 0.85], [isLeft ? -45 : 45, 0, 0, isLeft ? -45 : 45]);
-  const x = useSpring(rawX, { stiffness: 80, damping: 25, mass: 0.8 });
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && activeIndex !== index) {
+        if (entry.isIntersecting) {
           setActiveIndex(index);
         }
       },
@@ -374,71 +359,63 @@ function TimelineMilestone({ milestone, index, activeIndex, setActiveIndex }: {
       observer.observe(ref.current);
     }
     return () => observer.disconnect();
-  }, [index, activeIndex, setActiveIndex]);
+  }, [index, setActiveIndex]);
 
   const IconComponent = milestone.icon;
 
   return (
     <div ref={ref} className="relative min-h-[260px] sm:min-h-[300px] md:min-h-[380px] flex items-center w-full py-8 md:py-16">
       {/* Node dot on the vertical timeline with expanding scale and pulse shadow */}
-      <motion.div
-        animate={{
-          scale: isActive ? 1.3 : 1,
-          backgroundColor: isActive ? "#0284C7" : "#cbd5e1",
-          boxShadow: isActive ? "0 0 20px rgba(2, 132, 199, 0.6)" : "0 0 0px rgba(0,0,0,0)"
-        }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute left-4 md:left-1/2 -translate-x-1/2 z-30 flex items-center justify-center rounded-full w-5 h-5 cursor-pointer"
+      <div
+        className={`absolute left-4 md:left-1/2 -translate-x-1/2 z-30 flex items-center justify-center rounded-full w-5 h-5 cursor-pointer transition-all duration-500 ease-out ${
+          isActive
+            ? "scale-125 bg-[#0284C7] shadow-[0_0_20px_rgba(2,132,199,0.6)]"
+            : "scale-100 bg-slate-300 shadow-none"
+        }`}
       >
         {isActive && (
           <span className="absolute inset-0 rounded-full bg-[#0284C7] animate-ping opacity-75" />
         )}
         <div className="rounded-full w-2 h-2 bg-white" />
-      </motion.div>
+      </div>
 
       {/* Horizontal Connector Line (desktop only) that expands smoothly when active */}
-      <motion.div
-        animate={{
-          width: isActive ? "5%" : "0%",
-          backgroundColor: isActive ? "#0284C7" : "#e2e8f0"
-        }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className={`hidden md:block absolute top-1/2 -translate-y-1/2 h-0.5 z-20 ${isLeft ? "left-[45%]" : "right-[45%]"}`}
+      <div
+        className={`hidden md:block absolute top-1/2 -translate-y-1/2 h-0.5 z-20 transition-all duration-500 ease-out ${
+          isLeft ? "left-[45%]" : "right-[45%]"
+        } ${isActive ? "w-[5%] bg-[#0284C7]" : "w-0 bg-slate-200"}`}
       />
 
-      {/* Card Wrapper with Parallax Scroll Transition (Vertical + Horizontal Fly-in) */}
+      {/* Card Wrapper with Viewport Entrance Animation */}
       <motion.div
-        style={{ opacity, y, x }}
+        initial={{ opacity: 0, x: isLeft ? -40 : 40, y: 30 }}
+        whileInView={{ opacity: 1, x: 0, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`w-full flex ${isLeft ? "md:justify-start" : "md:justify-end"} pl-12 md:pl-0`}
       >
         <motion.div
-          whileHover={{
-            y: -10,
-            scale: isActive ? 1.05 : 1.01,
-            boxShadow: isActive
-              ? "0 30px 60px -15px rgba(2, 132, 199, 0.2)"
-              : "0 20px 40px -10px rgba(0, 0, 0, 0.08)",
-          }}
-          animate={{
-            scale: isActive ? 1.03 : 0.98,
-            borderColor: isActive ? "#bae6fd" : "#f1f5f9",
-            boxShadow: isActive ? "0 25px 50px -12px rgba(2, 132, 199, 0.12)" : "0 4px 6px -1px rgba(0, 0, 0, 0.03)"
-          }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full md:w-[45%] rounded-3xl p-6 sm:p-8 bg-white border flex flex-col sm:flex-row gap-6 items-start cursor-pointer"
+          whileHover={{ y: -6 }}
+          className={`w-full md:w-[45%] rounded-3xl p-6 sm:p-8 bg-white border flex flex-col sm:flex-row gap-6 items-start cursor-pointer transition-all duration-500 ease-out ${
+            isActive
+              ? "border-sky-200 shadow-[0_25px_50px_-12px_rgba(2,132,199,0.12)] scale-[1.02]"
+              : "border-slate-100 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.03)] scale-100 hover:shadow-lg"
+          }`}
         >
           {/* Milestone Icon with glow, scale, and subtle hover wiggle */}
           <motion.div
             whileHover={{
-              rotate: [0, -10, 10, 0],
-              scale: 1.15
+              rotate: [0, -8, 8, 0],
+              scale: 1.12
             }}
-            animate={{
-              scale: isActive ? 1.1 : 1,
-              boxShadow: isActive ? "0 10px 15px -3px rgba(2, 132, 199, 0.2)" : "0 0px 0px rgba(0,0,0,0)"
-            }}
-            transition={{ duration: 0.5 }}
-            className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center text-white flex-shrink-0 bg-gradient-to-br ${isLeft ? "from-sky-500 to-indigo-600" : "from-orange-500 to-amber-500"}`}
+            transition={{ duration: 0.4 }}
+            className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center text-white flex-shrink-0 bg-gradient-to-br transition-all duration-500 ease-out ${
+              isLeft ? "from-sky-500 to-indigo-600" : "from-orange-500 to-amber-500"
+            } ${
+              isActive
+                ? "scale-110 shadow-[0_10px_15px_-3px_rgba(2,132,199,0.2)]"
+                : "scale-100 shadow-none"
+            }`}
           >
             <IconComponent className="w-6 h-6" strokeWidth={2.2} />
           </motion.div>
@@ -446,9 +423,9 @@ function TimelineMilestone({ milestone, index, activeIndex, setActiveIndex }: {
           {/* Text Content */}
           <div className="space-y-2 text-left">
             <span
-              className={`text-xl sm:text-2xl font-black tracking-tight transition-all duration-500 block
-                ${isActive ? "text-[#0284C7]" : "text-slate-400"}
-              `}
+              className={`text-xl sm:text-2xl font-black tracking-tight transition-all duration-500 block ${
+                isActive ? "text-[#0284C7]" : "text-slate-400"
+              }`}
             >
               {milestone.year}
             </span>
@@ -463,10 +440,14 @@ function TimelineMilestone({ milestone, index, activeIndex, setActiveIndex }: {
       </motion.div>
     </div>
   );
-}
+});
 
 function TimelineSection() {
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleSetActiveIndex = useCallback((idx: number) => {
+    setActiveIndex(idx);
+  }, []);
 
   return (
     <section className="py-20 md:py-32 bg-slate-50 border-t border-slate-100 relative overflow-hidden">
@@ -492,8 +473,10 @@ function TimelineSection() {
           {/* Vertical progress timeline line */}
           <div className="absolute left-4 md:left-1/2 -translate-x-1/2 top-[60px] bottom-[60px] w-1 bg-slate-200 z-10 rounded-full overflow-hidden">
             <div
-              className="w-full bg-[#0284C7] transition-all duration-500 ease-out origin-top"
-              style={{ height: `${(activeIndex / (timelineMilestones.length - 1)) * 100}%` }}
+              className="w-full h-full bg-[#0284C7] transition-transform duration-500 ease-out origin-top"
+              style={{
+                transform: `scaleY(${activeIndex / (timelineMilestones.length - 1)})`
+              }}
             />
           </div>
 
@@ -505,7 +488,7 @@ function TimelineSection() {
                 milestone={m}
                 index={idx}
                 activeIndex={activeIndex}
-                setActiveIndex={setActiveIndex}
+                setActiveIndex={handleSetActiveIndex}
               />
             ))}
           </div>
@@ -523,32 +506,41 @@ export default function AboutView() {
   const arrowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
-      // Update Shade Opacity (starts at 0.20, increases to 0.50 as you scroll)
-      const num = 0.20 + (scrollTop / 500) * 0.30;
-      if (shadeRef.current) {
-        shadeRef.current.style.opacity = Math.min(num, 0.50).toString();
-      }
+          // Update Shade Opacity (starts at 0.20, increases to 0.50 as you scroll)
+          const num = 0.20 + (scrollTop / 500) * 0.30;
+          if (shadeRef.current) {
+            shadeRef.current.style.opacity = Math.min(num, 0.50).toString();
+          }
 
-      // Update BG Scale
-      const num2mod = 1 + (scrollTop * 0.0004);
-      if (bgRef.current) {
-        bgRef.current.style.transform = `scale(${num2mod})`;
-      }
+          // Update BG Scale
+          const num2mod = 1 + (scrollTop * 0.0004);
+          if (bgRef.current) {
+            bgRef.current.style.transform = `scale(${num2mod})`;
+          }
 
-      // Update Text translation (parallax speed effect)
-      const num3mod = scrollTop * 0.2;
-      if (textRef.current) {
-        textRef.current.style.transform = `translateY(-${num3mod}px)`;
-      }
+          // Update Text translation (parallax speed effect)
+          const num3mod = scrollTop * 0.2;
+          if (textRef.current) {
+            textRef.current.style.transform = `translateY(-${num3mod}px)`;
+          }
 
-      // Fade out arrow as we scroll down
-      if (arrowRef.current) {
-        const arrowOpacity = Math.max(1 - (scrollTop / 300), 0);
-        arrowRef.current.style.opacity = arrowOpacity.toString();
-        arrowRef.current.style.pointerEvents = arrowOpacity === 0 ? "none" : "auto";
+          // Fade out arrow as we scroll down
+          if (arrowRef.current) {
+            const arrowOpacity = Math.max(1 - (scrollTop / 300), 0);
+            arrowRef.current.style.opacity = arrowOpacity.toString();
+            arrowRef.current.style.pointerEvents = arrowOpacity === 0 ? "none" : "auto";
+          }
+
+          ticking = false;
+        });
+        ticking = true;
       }
     };
 

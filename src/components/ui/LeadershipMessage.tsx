@@ -202,21 +202,19 @@ export default function LeadershipMessage() {
                             />
 
                             {/* Image wrapper */}
-                            <div className="relative overflow-hidden">
+                            <div className="relative overflow-hidden pt-6 sm:pt-8 px-6 sm:px-8 flex justify-center items-center">
                                 <motion.img
                                     src="/images/managing-founder.png"
                                     alt="Mr. Muralikrishnan Gokulakrishnan – Founder & Managing Director"
-                                    className="w-full h-auto block aspect-[3/4] object-cover object-top"
+                                    className="w-[82%] h-auto block rounded-2xl object-contain shadow-md"
                                     whileHover={{ scale: 1.04, transition: { duration: 0.5 } }}
                                 />
-
-
 
                                 {/* Floating expert chip */}
                                 <motion.div
                                     animate={{ y: [0, 5, 0] }}
                                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                                    className="absolute bottom-5 left-5 rounded-xl px-3.5 py-2 flex items-center gap-2 bg-slate-900/90 border border-slate-800/80 shadow-lg backdrop-blur-md z-20"
+                                    className="absolute bottom-4 left-8 rounded-xl px-3.5 py-2 flex items-center gap-2 bg-slate-900/90 border border-slate-800/80 shadow-lg backdrop-blur-md z-20"
                                 >
                                     <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
                                     <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-200">

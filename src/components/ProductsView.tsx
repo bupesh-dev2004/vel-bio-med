@@ -15,11 +15,13 @@ import {
   Award,
   Cpu,
   Bookmark,
-  ChevronDown
+  ChevronDown,
+  LayoutGrid
 } from "lucide-react";
 import { useAppState } from "../AppContext.js";
 import { Product } from "../types.js";
 import { motion, AnimatePresence, useReducedMotion, LayoutGroup } from "framer-motion";
+import Pagination from "./ui/Pagination.js";
 
 interface ProductsViewProps {
   selectedProductModal: Product | null;
@@ -108,6 +110,31 @@ export default function ProductsView({
     return 0; // default order
   });
 
+  // Pagination calculation
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 15;
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedCategory, sortBy]);
+
+  const totalPages = Math.ceil(sortedProducts.length / ITEMS_PER_PAGE);
+
+  const paginatedProducts = sortedProducts.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    const element = document.getElementById("products-catalog-section");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.scrollTo({ top: 300, behavior: "smooth" });
+    }
+  };
+
   const triggerInquiryFlow = (productName: string) => {
     setInquiryMachineName(productName);
     onCloseProductModal();
@@ -115,7 +142,13 @@ export default function ProductsView({
   };
 
   return (
-    <div className="bg-slate-50 min-h-screen">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
+      className="bg-slate-50 min-h-screen"
+    >
       {/* Search and Category filter banner with premium midnight-tech radial gradient and premium hospital background image */}
       <section className="bg-slate-950 text-white border-b border-slate-900 py-12 sm:py-16 px-4 sm:px-6 lg:px-8 relative shadow-2xl">
         {/* Background decorative wrapper to isolate overflow hiding to background elements only */}
@@ -226,12 +259,17 @@ export default function ProductsView({
             <div className="flex flex-wrap gap-2">
               <button
                 onClick={() => setSelectedCategory("All")}
-                className={`px-3 sm:px-5 py-2 sm:py-3 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer shadow-md ${selectedCategory === "All"
-                  ? "bg-gradient-to-r from-blue-600 via-indigo-650 to-amber-500 text-white shadow-lg shadow-blue-500/10 scale-102"
-                  : "bg-slate-900 hover:bg-slate-850 text-slate-400 hover:text-white border border-slate-800/60"
-                  }`}
+                className={`group px-5 sm:px-7 py-2 sm:py-3 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-widest transition-all duration-300 cursor-pointer flex items-center gap-2 sm:gap-2.5 active:scale-[0.98] select-none bg-gradient-to-r from-[#2563EB] to-[#22D3EE] text-white shadow-[0_0_20px_rgba(37,99,235,0.45)] hover:shadow-[0_0_25px_rgba(34,211,238,0.55)] hover:-translate-y-[2px] hover:brightness-110 border border-transparent ${
+                  selectedCategory === "All"
+                    ? "ring-2 ring-cyan-300/80 ring-offset-2 ring-offset-slate-950 scale-[1.02]"
+                    : "opacity-90 hover:opacity-100"
+                }`}
               >
-                All Categories
+                <LayoutGrid className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white flex-shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                <span>ALL CATEGORIES</span>
+                <span className="ml-0.5 px-2.5 py-0.5 rounded-full text-[9px] sm:text-[10px] font-black bg-white text-blue-900 shadow-sm flex items-center justify-center min-w-[20px] h-5">
+                  {productsList.length}
+                </span>
               </button>
               {categories.map((cat) => (
                 <button
@@ -315,13 +353,13 @@ export default function ProductsView({
       </section>
 
       {/* Catalog Display Section with subtle premium medical background */}
-      <section className="py-14 relative overflow-hidden">
+      <section id="products-catalog-section" className="py-14 relative overflow-hidden">
         {/* Hospital corridor watermark background */}
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center opacity-[0.16] pointer-events-none z-0" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-slate-400 text-xs sm:text-sm font-semibold mb-8 flex justify-between items-center bg-slate-100/60 p-4 rounded-xl border border-slate-200/50">
             <span>
-              Showing <strong className="text-slate-800">{sortedProducts.length}</strong> certified machines matching requirements
+              Showing <strong className="text-slate-800">{paginatedProducts.length}</strong> of <strong className="text-slate-800">{sortedProducts.length}</strong> certified machines matching requirements
             </span>
             {selectedCategory !== "All" && (
               <span className="text-xs bg-amber-500/10 text-amber-700 border border-amber-200/50 px-3 py-1 rounded-lg font-bold uppercase tracking-wider">
@@ -332,14 +370,14 @@ export default function ProductsView({
 
           <LayoutGroup>
             <motion.div
+              key={`products-grid-${selectedCategory}-${searchQuery}-${sortBy}-${currentPage}`}
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10"
               initial={shouldAnimate ? "hidden" : "visible"}
-              whileInView="visible"
-              viewport={{ once: false, margin: "-80px" }}
+              animate="visible"
               variants={cardContainerVariants}
             >
-              {sortedProducts.length > 0 ? (
-                sortedProducts.map((p, idx) => {
+              {paginatedProducts.length > 0 ? (
+                paginatedProducts.map((p, idx) => {
                   const isAmber = idx % 2 === 1;
                   return (
                     <motion.div
@@ -453,6 +491,13 @@ export default function ProductsView({
               )}
             </motion.div>
           </LayoutGroup>
+
+          {/* Pagination Controls */}
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         </div>
       </section>
 
@@ -609,6 +654,6 @@ export default function ProductsView({
           </>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }

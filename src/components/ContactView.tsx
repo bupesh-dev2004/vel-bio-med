@@ -501,9 +501,9 @@ export default function ContactView() {
             </motion.div>
 
             {/* Direct Contact Cards */}
-            <div className="space-y-4">
+            <div className="space-y-5 sm:space-y-6">
               <div className="flex items-center justify-between px-1">
-                <h3 className="text-xs font-black uppercase tracking-widest text-slate-400">
+                <h3 className="text-xs sm:text-sm font-black uppercase tracking-widest text-slate-400">
                   Direct Communication Channels
                 </h3>
               </div>
@@ -512,16 +512,16 @@ export default function ContactView() {
               <motion.a
                 variants={itemVariants}
                 href="tel:+917094878251"
-                className="group flex items-center gap-4 p-5 bg-white rounded-2xl border border-slate-200/80 shadow-md hover:shadow-xl hover:border-sky-400 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
+                className="group flex items-center gap-5 p-6 sm:p-7 bg-white rounded-3xl border border-slate-200/80 shadow-md hover:shadow-xl hover:border-sky-400 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
               >
-                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-sky-500 to-blue-600 group-hover:w-2.5 transition-all duration-300" />
-                <div className="p-3.5 rounded-xl bg-sky-50 text-sky-600 group-hover:bg-sky-600 group-hover:text-white transition-all duration-300 group-hover:scale-110">
-                  <Phone className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+                <div className="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b from-sky-500 to-blue-600 group-hover:w-3 transition-all duration-300" />
+                <div className="p-4 sm:p-5 rounded-2xl bg-sky-50 text-sky-600 group-hover:bg-sky-600 group-hover:text-white transition-all duration-300 group-hover:scale-110 flex-shrink-0">
+                  <Phone className="w-6 h-6 sm:w-7 sm:h-7 group-hover:rotate-12 transition-transform duration-300" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 block">Phone Hotline</span>
-                  <span className="text-slate-900 font-extrabold text-sm sm:text-base group-hover:text-sky-600 transition-colors">9629515551 | 9677788859</span>
-                  <span className="text-slate-500 text-xs block font-medium">Mon - Sat: 9:00 AM - 7:00 PM | Priority Desk</span>
+                  <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-slate-400 block mb-0.5">Phone Hotline</span>
+                  <span className="text-slate-900 font-black text-base sm:text-lg md:text-xl group-hover:text-sky-600 transition-colors block">9629515551 | 9677788859</span>
+                  <span className="text-slate-500 text-xs sm:text-sm block font-medium mt-0.5">Mon - Sat: 9:00 AM - 7:00 PM | Priority Desk</span>
                 </div>
               </motion.a>
 
@@ -529,32 +529,32 @@ export default function ContactView() {
               <motion.a
                 variants={itemVariants}
                 href="mailto:velbio@gmail.com"
-                className="group flex items-center gap-4 p-5 bg-white rounded-2xl border border-slate-200/80 shadow-md hover:shadow-xl hover:border-emerald-400 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
+                className="group flex items-center gap-5 p-6 sm:p-7 bg-white rounded-3xl border border-slate-200/80 shadow-md hover:shadow-xl hover:border-emerald-400 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
               >
-                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-emerald-500 to-teal-600 group-hover:w-2.5 transition-all duration-300" />
-                <div className="p-3.5 rounded-xl bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 group-hover:scale-110">
-                  <Mail className="w-5 h-5 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300" />
+                <div className="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b from-emerald-500 to-teal-600 group-hover:w-3 transition-all duration-300" />
+                <div className="p-4 sm:p-5 rounded-2xl bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-all duration-300 group-hover:scale-110 flex-shrink-0">
+                  <Mail className="w-6 h-6 sm:w-7 sm:h-7 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 block">Official Email Desk</span>
-                  <span className="text-slate-900 font-extrabold text-sm sm:text-base group-hover:text-emerald-600 transition-colors">velbio@gmail.com</span>
-                  <span className="text-slate-500 text-xs block font-medium">Guaranteed response within 24 business hours</span>
+                  <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-slate-400 block mb-0.5">Official Email Desk</span>
+                  <span className="text-slate-900 font-black text-base sm:text-lg md:text-xl group-hover:text-emerald-600 transition-colors block">velbio@gmail.com</span>
+                  <span className="text-slate-500 text-xs sm:text-sm block font-medium mt-0.5">Guaranteed response within 24 business hours</span>
                 </div>
               </motion.a>
 
               {/* Business Hours Card */}
               <motion.div
                 variants={itemVariants}
-                className="group flex items-center gap-4 p-5 bg-white rounded-2xl border border-slate-200/80 shadow-md hover:shadow-xl hover:border-amber-400 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
+                className="group flex items-center gap-5 p-6 sm:p-7 bg-white rounded-3xl border border-slate-200/80 shadow-md hover:shadow-xl hover:border-amber-400 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
               >
-                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-amber-500 to-orange-500 group-hover:w-2.5 transition-all duration-300" />
-                <div className="p-3.5 rounded-xl bg-amber-50 text-amber-600 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300 group-hover:scale-110">
-                  <Clock className="w-5 h-5 group-hover:rotate-[360deg] transition-transform duration-700 ease-in-out" />
+                <div className="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b from-amber-500 to-orange-500 group-hover:w-3 transition-all duration-300" />
+                <div className="p-4 sm:p-5 rounded-2xl bg-amber-50 text-amber-600 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300 group-hover:scale-110 flex-shrink-0">
+                  <Clock className="w-6 h-6 sm:w-7 sm:h-7 group-hover:rotate-[360deg] transition-transform duration-700 ease-in-out" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 block">Business Hours</span>
-                  <span className="text-slate-900 font-extrabold text-sm">Monday – Saturday: 9:00 AM – 7:00 PM</span>
-                  <span className="text-slate-500 text-xs block font-medium">Sunday: Emergency Critical Care Support</span>
+                  <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-slate-400 block mb-0.5">Business Hours</span>
+                  <span className="text-slate-900 font-black text-base sm:text-lg block">Monday – Saturday: 9:00 AM – 7:00 PM</span>
+                  <span className="text-slate-500 text-xs sm:text-sm block font-medium mt-0.5">Sunday: Emergency Critical Care Support</span>
                 </div>
               </motion.div>
 
@@ -564,16 +564,16 @@ export default function ContactView() {
                 href="https://www.google.com/maps/place/VEL+BIO+MED+-+Medical+equipment+supplier/@11.3431194,78.2216324,9.64z/data=!4m10!1m2!2m1!1sVel+Bio+Healthcare+India!3m6!1s0x3baaf51c4fca421d:0x599b7e0900cf70b5!8m2!3d10.827287!4d78.676879!15sChhWZWwgQmlvIEhlYWx0aGNhcmUgSW5kaWFaGiIYdmVsIGJpbyBoZWFsdGhjYXJlIGluZGlhkgEabWVkaWNhbF_lcXVpcG1lbnRfc3VwcGxpZXKaAURDaTlEUVVsUlFVTnZaRU5vZEhsalJqbHZUMjVPYjAxV2FFZFhWR3Q0V2xaa1RsZHFXWGRTUmpsVlZqRm9NMDlGUlJBQuABAPoBBAgAEDQ!16s%2Fg%2F11qkn5ljt_?entry=ttu&g_ep=EgoyMDI2MDYyOC4wIKXMDSoASAFQAw%3D%3D"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-4 p-5 bg-white rounded-2xl border border-slate-200/80 shadow-md hover:shadow-xl hover:border-indigo-400 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
+                className="group flex items-center gap-5 p-6 sm:p-7 bg-white rounded-3xl border border-slate-200/80 shadow-md hover:shadow-xl hover:border-indigo-400 hover:-translate-y-1 transition-all duration-300 relative overflow-hidden"
               >
-                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-indigo-500 to-purple-600 group-hover:w-2.5 transition-all duration-300" />
-                <div className="p-3.5 rounded-xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 group-hover:scale-110">
-                  <MapPin className="w-5 h-5 group-hover:animate-bounce" />
+                <div className="absolute left-0 top-0 bottom-0 w-2 bg-gradient-to-b from-indigo-500 to-purple-600 group-hover:w-3 transition-all duration-300" />
+                <div className="p-4 sm:p-5 rounded-2xl bg-indigo-50 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 group-hover:scale-110 flex-shrink-0">
+                  <MapPin className="w-6 h-6 sm:w-7 sm:h-7 group-hover:animate-bounce" />
                 </div>
                 <div>
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 block">Corporate Office</span>
-                  <span className="text-slate-900 font-extrabold text-sm group-hover:text-indigo-600 transition-colors">Vel Bio Healthcare, India</span>
-                  <span className="text-slate-500 text-xs block font-medium">Click to open Google Maps directions</span>
+                  <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-slate-400 block mb-0.5">Corporate Office</span>
+                  <span className="text-slate-900 font-black text-base sm:text-lg md:text-xl group-hover:text-indigo-600 transition-colors block">Vel Bio Healthcare, India</span>
+                  <span className="text-slate-500 text-xs sm:text-sm block font-medium mt-0.5">Click to open Google Maps directions</span>
                 </div>
               </motion.a>
             </div>
