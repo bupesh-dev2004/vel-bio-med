@@ -161,11 +161,11 @@ export default function VisionMission() {
       style={{ background: "linear-gradient(170deg, #FFFFFF 0%, #F4F8FD 40%, #E9F1FC 100%)" }}
     >
       {/* Ambient background glows */}
-      <div aria-hidden className="pointer-events-none absolute -top-32 left-1/4 w-[600px] h-[600px] rounded-full opacity-30 animate-pulse"
+      <div aria-hidden className="pointer-events-none absolute -top-32 left-1/4 w-full max-w-[500px] aspect-square rounded-full opacity-30 animate-pulse"
         style={{ background: "radial-gradient(circle, #0A6EBD 0%, transparent 70%)", filter: "blur(110px)" }} />
-      <div aria-hidden className="pointer-events-none absolute -bottom-24 right-1/4 w-[500px] h-[500px] rounded-full opacity-20"
+      <div aria-hidden className="pointer-events-none absolute -bottom-24 right-1/4 w-full max-w-[500px] aspect-square rounded-full opacity-20"
         style={{ background: "radial-gradient(circle, #00B4D8 0%, transparent 70%)", filter: "blur(90px)" }} />
-      <div aria-hidden className="pointer-events-none absolute top-1/2 left-10 w-[300px] h-[300px] rounded-full opacity-15"
+      <div aria-hidden className="pointer-events-none absolute top-1/2 left-10 w-full max-w-[500px] aspect-square rounded-full opacity-15"
         style={{ background: "radial-gradient(circle, #F97316 0%, transparent 70%)", filter: "blur(70px)" }} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 lg:px-12">

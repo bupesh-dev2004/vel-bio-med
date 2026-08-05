@@ -511,13 +511,13 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* 1. HERO SECTION */}
-      <section className="ipad-pro-hero-section relative min-h-[100dvh] md:min-h-[82vh] lg:min-h-0 lg:h-auto xl:min-h-[100dvh] w-full flex flex-col md:flex-row items-stretch md:items-center bg-slate-50 overflow-hidden pt-0 pb-4 md:pt-[96px] md:pb-12 lg:pt-[120px] lg:pb-16 xl:pt-[72px] xl:pb-6">
+      <section className="relative min-h-[100dvh] md:min-h-[82vh] lg:min-h-0 lg:h-auto xl:min-h-[100dvh] w-full flex flex-col md:flex-row items-stretch md:items-center bg-slate-50 overflow-hidden pt-4 pb-8 md:pt-6 md:pb-10 lg:pt-12 lg:pb-16 xl:pt-14 xl:pb-8">
         {/* Background with zoom and fade in effect */}
         <motion.div
           initial={{ opacity: 0, scale: 1 }}
           animate={showPreloader ? { opacity: 0, scale: 1 } : { opacity: 1, scale: 1 }}
           transition={{ duration: 1.8, ease: "easeOut" }}
-          className="mobile-hero-bg-wrapper absolute inset-0"
+          className="absolute inset-0"
         >
           <picture className="block w-full h-full overflow-hidden">
             {/* Desktop: screens 1025px and larger */}
@@ -531,7 +531,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
             <img
               src="/mobile-pic.webp"
               alt="Vel Bio Med Hero Background"
-              className="mobile-hero-bg-img w-full h-full object-cover pointer-events-none"
+              className="w-full h-full object-cover pointer-events-none"
               loading="eager"
               fetchPriority="high"
               decoding="sync"
@@ -542,32 +542,32 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
         </motion.div>
 
         {/* Background Glows */}
-        <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-radial from-blue-500/12 via-blue-900/0 to-transparent pointer-events-none z-10" />
-        <div className="absolute bottom-0 left-0 w-[350px] h-[350px] bg-radial from-amber-500/10 via-amber-650/0 to-transparent rounded-full pointer-events-none z-10" />
+        <div className="absolute top-0 right-0 w-full max-w-[500px] aspect-square bg-radial from-blue-500/12 via-blue-900/0 to-transparent pointer-events-none z-10" />
+        <div className="absolute bottom-0 left-0 w-full max-w-[500px] aspect-square bg-radial from-amber-500/10 via-amber-650/0 to-transparent rounded-full pointer-events-none z-10" />
 
         {/* Hero Content Wrapper */}
         <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 xl:px-10 w-full z-20 relative flex flex-col justify-start md:justify-stretch h-full">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-8 items-start md:items-center h-full w-full">
             {/* Left Side (45% on desktop xl, 58% on tablet/medium desktop) */}
-            <div className="ipad-pro-left-side col-span-1 md:col-span-12 xl:col-span-5 flex flex-col justify-start md:justify-between lg:justify-start xl:justify-start h-auto md:h-full lg:h-auto text-center md:text-center xl:text-left text-slate-900 translate-y-0 md:translate-y-0 lg:translate-x-0 lg:translate-y-0 xl:translate-x-0 xl:-translate-y-6">
+            <div className="col-span-1 md:col-span-12 lg:col-span-6 xl:col-span-5 flex flex-col justify-start md:justify-between lg:justify-start xl:justify-start h-auto md:h-full lg:h-auto text-center md:text-center lg:text-left text-slate-900 translate-y-0 md:translate-y-0 lg:translate-x-0 lg:translate-y-0 xl:translate-x-0 xl:translate-y-0">
               <motion.div
                 initial="hidden"
                 animate={showPreloader ? "hidden" : "visible"}
                 variants={heroContainerVariants}
-                className="ipad-pro-motion-container flex flex-col items-center md:items-center xl:items-start text-center md:text-center xl:text-left text-slate-900 justify-start md:justify-between lg:justify-start xl:justify-start h-auto md:h-full lg:h-auto w-full gap-y-[clamp(10px,2vw,16px)] md:gap-y-0 xl:gap-y-5"
+                className="flex flex-col items-center md:items-center lg:items-start text-center md:text-center lg:text-left text-slate-900 justify-start md:justify-between lg:justify-start xl:justify-start h-auto md:h-full lg:h-auto w-full gap-y-[clamp(10px,2vw,16px)] md:gap-y-0 xl:gap-y-5"
               >
                 {/* Top Group: Text & Buttons */}
-                <div className="ipad-pro-top-group flex flex-col items-center md:items-center xl:items-start text-center md:text-center xl:text-left gap-y-[clamp(8px,1.8vw,16px)] md:gap-y-0 xl:gap-y-4 w-full mt-1 sm:mt-0 translate-y-0 md:-translate-y-24 lg:-translate-y-[120px] xl:-translate-y-14">
+                <div className="flex flex-col items-center md:items-center lg:items-start text-center md:text-center lg:text-left gap-y-[clamp(8px,1.8vw,16px)] md:gap-y-0 xl:gap-y-4 w-full mt-2 sm:mt-0 pt-2 lg:pt-4">
                   {/* Badge */}
-                  <motion.div variants={heroItemVariants} className="w-full text-center md:text-center xl:text-left translate-y-1 md:translate-y-2 lg:translate-y-0 xl:translate-y-0">
-                    <span className="small-mobile-badge inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[10.5px] md:text-[13px] lg:text-[21px] xl:text-[13.5px] font-black tracking-widest px-3 py-1 md:px-3 md:py-1 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
+                  <motion.div variants={heroItemVariants} className="w-full text-center md:text-center lg:text-left translate-y-1 md:translate-y-2 lg:translate-y-0 xl:translate-y-0">
+                    <span className="small-mobile-badge inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[10.5px] md:text-[13px] lg:text-[14px] xl:text-[13.5px] font-black tracking-widest px-3 py-1 md:px-3 md:py-1 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
                       Clinical Sourcing Excellence
                     </span>
                   </motion.div>
                   {/* Heading */}
                   <motion.h1
                     variants={heroItemVariants}
-                    className="small-mobile-heading text-[clamp(1.45rem,4vw+0.5rem,2.75rem)] md:text-[2.5rem] lg:text-[3.85rem] xl:text-[2.65rem] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] md:max-w-[780px] lg:max-w-[760px] xl:max-w-[720px] w-full text-center md:text-center xl:text-left mt-3 md:mt-4 lg:mt-3 xl:mt-2"
+                    className="small-mobile-heading text-[clamp(1.45rem,4vw+0.5rem,2.75rem)] md:text-[2.5rem] lg:text-[2.75rem] xl:text-[2.65rem] font-black tracking-tight leading-[1.15] text-slate-900 max-w-[680px] md:max-w-[780px] lg:max-w-[760px] xl:max-w-[720px] w-full text-center md:text-center lg:text-left mt-3 md:mt-4 lg:mt-3 xl:mt-2"
                   >
                     <span className="whitespace-nowrap">
                       Transforming{" "}
@@ -586,7 +586,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   {/* Description */}
                   <motion.p
                     variants={heroItemVariants}
-                    className="small-mobile-paragraph text-[clamp(13px,1.5vw+9px,15px)] md:text-[17px] lg:text-[24px] xl:text-lg text-slate-650 leading-relaxed font-semibold max-w-[520px] md:max-w-[680px] lg:max-w-[720px] xl:max-w-[560px] w-full text-center md:text-center xl:text-left mt-3 md:mt-4 lg:mt-4 xl:mt-2"
+                    className="small-mobile-paragraph text-[clamp(13px,1.5vw+9px,15px)] md:text-[17px] lg:text-[17px] xl:text-lg text-slate-650 leading-relaxed font-semibold max-w-[520px] md:max-w-[680px] lg:max-w-[600px] xl:max-w-[560px] w-full text-center md:text-center lg:text-left mt-3 md:mt-4 lg:mt-4 xl:mt-2"
                   >
                     Vel Bio Med delivers high-caliber diagnostics, ICU patient monitors, operation theatre machinery, and life-support equipment to premium hospitals.
                   </motion.p>
@@ -594,7 +594,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                   {/* CTA Buttons */}
                   <motion.div
                     variants={heroItemVariants}
-                    className="small-mobile-btn-container flex flex-row justify-center md:justify-center xl:justify-start gap-3 sm:gap-4 w-full mt-[clamp(6px,2vw,20px)] md:mt-5 lg:mt-5 xl:mt-5"
+                    className="small-mobile-btn-container flex flex-row justify-center md:justify-center lg:justify-start gap-3 sm:gap-4 w-full mt-[clamp(6px,2vw,20px)] md:mt-5 lg:mt-5 xl:mt-5"
                   >
                     <motion.button
                       whileHover={{
@@ -626,7 +626,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 {/* Statistics Cards (Desktop & Tablet View) */}
                 <motion.div
                   variants={heroItemVariants}
-                  className="ipad-pro-cards-container hidden md:grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3.5 md:gap-[clamp(8px,1.8vw,14px)] xl:gap-3.5 w-full md:mx-auto xl:mx-0 mt-[clamp(10px,2vw,16px)] md:mt-2 lg:mt-3 xl:mt-2 pt-2 xs:pt-3 sm:pt-4 xl:pt-0 justify-items-center md:translate-y-4 lg:-translate-y-4 xl:-translate-y-6 xl:-translate-x-6"
+                  className="hidden md:grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3.5 md:gap-[clamp(8px,1.8vw,14px)] xl:gap-3.5 w-full md:mx-auto xl:mx-0 mt-[clamp(10px,2vw,16px)] md:mt-2 lg:mt-3 xl:mt-2 pt-2 xs:pt-3 sm:pt-4 xl:pt-0 justify-items-center md:translate-y-4 lg:-translate-y-4 xl:-translate-y-6 xl:-translate-x-6"
                 >
                   {[
                     { target: 16, suffix: "+", label: "Years Exp.", icon: Award, color: "text-blue-600", iconBg: "bg-blue-50", border: "border-blue-100/40 hover:border-orange-200/60", glow: "from-blue-500/5" },
@@ -709,12 +709,12 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
         {/* Ambient background glows */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-40 -left-40 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] rounded-full opacity-20"
+          className="pointer-events-none absolute -top-40 -left-40 w-full max-w-[500px] aspect-square rounded-full opacity-20"
           style={{ background: "radial-gradient(circle, #3b82f6 0%, transparent 70%)", filter: "blur(120px)" }}
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute -bottom-40 -right-40 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] rounded-full opacity-15"
+          className="pointer-events-none absolute -bottom-40 -right-40 w-full max-w-[500px] aspect-square rounded-full opacity-15"
           style={{ background: "radial-gradient(circle, #f97316 0%, transparent 70%)", filter: "blur(120px)" }}
         />
 
@@ -806,8 +806,8 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
 
 
         {/* Ambient Decorative Light Orbs - Blue and Orange Gradient Glows */}
-        <div className="absolute top-10 -left-10 w-[500px] h-[500px] bg-radial from-blue-500/15 via-blue-900/0 to-transparent rounded-full pointer-events-none" />
-        <div className="absolute bottom-10 -right-10 w-[500px] h-[500px] bg-radial from-orange-500/12 via-orange-950/0 to-transparent rounded-full pointer-events-none" />
+        <div className="absolute top-10 -left-10 w-full max-w-[500px] aspect-square bg-radial from-blue-500/15 via-blue-900/0 to-transparent rounded-full pointer-events-none" />
+        <div className="absolute bottom-10 -right-10 w-full max-w-[500px] aspect-square bg-radial from-orange-500/12 via-orange-950/0 to-transparent rounded-full pointer-events-none" />
 
         <motion.div
           variants={fadeUpVariants}
@@ -967,8 +967,8 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
 
 
         {/* Glowing Ambient Light Orbs */}
-        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-radial from-blue-600/18 via-blue-950/0 to-transparent rounded-full pointer-events-none" />
-        <div className="absolute -bottom-40 -right-40 w-[600px] h-[600px] bg-radial from-amber-500/10 via-amber-950/0 to-transparent rounded-full pointer-events-none" />
+        <div className="absolute -top-40 -left-40 w-full max-w-[500px] aspect-square bg-radial from-blue-600/18 via-blue-950/0 to-transparent rounded-full pointer-events-none" />
+        <div className="absolute -bottom-40 -right-40 w-full max-w-[500px] aspect-square bg-radial from-amber-500/10 via-amber-950/0 to-transparent rounded-full pointer-events-none" />
 
         <motion.div
           variants={fadeUpVariants}
@@ -1071,8 +1071,8 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
 
       {/* 4. SERVICES SECTION - COMPREHENSIVE SUPPORT DELIVERABLES */}
       <section id="services-section" className="py-14 sm:py-24 bg-slate-50/40 relative overflow-hidden border-b border-slate-100">
-        <div className="absolute top-1/3 left-0 w-[500px] h-[500px] bg-blue-100/30 rounded-full blur-3xl pointer-events-none -translate-x-1/2" />
-        <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] bg-orange-100/30 rounded-full blur-3xl pointer-events-none translate-x-1/2" />
+        <div className="absolute top-1/3 left-0 w-full max-w-[500px] aspect-square bg-blue-100/30 rounded-full blur-3xl pointer-events-none -translate-x-1/2" />
+        <div className="absolute bottom-1/4 right-0 w-full max-w-[500px] aspect-square bg-orange-100/30 rounded-full blur-3xl pointer-events-none translate-x-1/2" />
 
         <motion.div
           variants={fadeUpVariants}

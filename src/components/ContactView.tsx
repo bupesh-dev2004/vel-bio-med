@@ -281,9 +281,9 @@ export default function ContactView() {
 
       {/* GPU Hardware-Accelerated Ambient Backdrop (Zero Scroll Lag) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 transform-gpu translate-z-0">
-        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-gradient-to-br from-sky-400/12 via-blue-500/08 to-transparent rounded-full blur-[140px] will-change-transform" />
-        <div className="absolute top-1/4 -right-40 w-[650px] h-[650px] bg-gradient-to-bl from-orange-400/12 via-amber-500/08 to-transparent rounded-full blur-[150px] will-change-transform" />
-        <div className="absolute -bottom-40 left-10 w-[550px] h-[550px] bg-gradient-to-tr from-blue-600/08 via-sky-400/08 to-transparent rounded-full blur-[140px] will-change-transform" />
+        <div className="absolute -top-40 -left-40 w-full max-w-[500px] aspect-square bg-gradient-to-br from-sky-400/12 via-blue-500/08 to-transparent rounded-full blur-[140px] will-change-transform" />
+        <div className="absolute top-1/4 -right-40 w-full max-w-[500px] aspect-square bg-gradient-to-bl from-orange-400/12 via-amber-500/08 to-transparent rounded-full blur-[150px] will-change-transform" />
+        <div className="absolute -bottom-40 left-10 w-full max-w-[500px] aspect-square bg-gradient-to-tr from-blue-600/08 via-sky-400/08 to-transparent rounded-full blur-[140px] will-change-transform" />
         <div
           className="absolute inset-0 opacity-[0.02]"
           style={{

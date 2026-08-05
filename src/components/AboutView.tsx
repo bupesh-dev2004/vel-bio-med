@@ -237,12 +237,12 @@ function CorporateValuesStack({ values }: { values: ValueItem[] }) {
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full opacity-15"
+        className="pointer-events-none absolute -top-40 -right-40 w-full max-w-[500px] aspect-square rounded-full opacity-15"
         style={{ background: "radial-gradient(circle, #0A6EBD 0%, transparent 70%)" }}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full opacity-10"
+        className="pointer-events-none absolute -bottom-40 -left-40 w-full max-w-[500px] aspect-square rounded-full opacity-10"
         style={{ background: "radial-gradient(circle, #F97316 0%, transparent 70%)" }}
       />
 
@@ -701,12 +701,12 @@ export default function AboutView() {
           {/* Subtle background ambient glows */}
           <div
             aria-hidden
-            className="pointer-events-none absolute -top-20 -left-20 w-[500px] h-[500px] rounded-full opacity-25 animate-pulse"
+            className="pointer-events-none absolute -top-20 -left-20 w-full max-w-[500px] aspect-square rounded-full opacity-25 animate-pulse"
             style={{ background: "radial-gradient(circle, #3b82f6 0%, transparent 70%)", filter: "blur(100px)" }}
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute -bottom-20 -right-20 w-[500px] h-[500px] rounded-full opacity-20"
+            className="pointer-events-none absolute -bottom-20 -right-20 w-full max-w-[500px] aspect-square rounded-full opacity-20"
             style={{ background: "radial-gradient(circle, #f97316 0%, transparent 70%)", filter: "blur(100px)" }}
           />
 

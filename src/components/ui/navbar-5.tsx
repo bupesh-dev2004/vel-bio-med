@@ -133,13 +133,13 @@ export const Navbar5 = () => {
         initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`py-1 sm:py-2 px-0 transition-all duration-500 border-b relative z-50 ${isScrolled
+        className={`py-1 px-2 sm:px-3 transition-all duration-500 border-b relative z-50 ${isScrolled
           ? "bg-white/80 backdrop-blur-md shadow-lg shadow-slate-900/5 border-slate-200/60"
           : "bg-white border-slate-100"
           }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="flex items-center justify-between h-14 sm:h-16 lg:h-20 min-h-0">
+          <nav className="flex items-center justify-between h-14 lg:h-20 min-h-0">
 
             {/* Brand Logo Identity */}
             <motion.div
@@ -153,7 +153,7 @@ export const Navbar5 = () => {
               <img
                 src="/logo.png"
                 alt="Vel Bio Med"
-                className="h-10 sm:h-14 lg:h-[72px] w-auto max-w-[140px] sm:max-w-[180px] object-contain relative z-10"
+                className="h-10 sm:h-11 lg:h-[72px] w-auto max-w-[140px] sm:max-w-[180px] object-contain relative z-10"
               />
             </motion.div>
 

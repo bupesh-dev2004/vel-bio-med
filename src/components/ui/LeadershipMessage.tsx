@@ -65,12 +65,12 @@ export default function LeadershipMessage() {
             {/* Ambient background glows */}
             <div
                 aria-hidden
-                className="pointer-events-none absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full opacity-25 animate-pulse"
+                className="pointer-events-none absolute -top-40 -left-40 w-full max-w-[500px] aspect-square rounded-full opacity-25 animate-pulse"
                 style={{ background: "radial-gradient(circle, #00B4D8 0%, transparent 70%)", filter: "blur(100px)" }}
             />
             <div
                 aria-hidden
-                className="pointer-events-none absolute -bottom-32 -right-32 w-[500px] h-[500px] rounded-full opacity-15"
+                className="pointer-events-none absolute -bottom-32 -right-32 w-full max-w-[500px] aspect-square rounded-full opacity-15"
                 style={{ background: "radial-gradient(circle, #0A6EBD 0%, transparent 70%)", filter: "blur(80px)" }}
             />
 

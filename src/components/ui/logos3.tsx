@@ -45,8 +45,8 @@ const Logos3 = ({
   return (
     <section className={`py-14 bg-gradient-to-r from-blue-50/90 via-slate-50/70 to-amber-50/80 border-t border-blue-100/80 border-b border-amber-100/60 overflow-hidden relative ${className}`}>
       {/* Soft Ambient Background Glow Orbs (Blue + Orange/Amber) */}
-      <div className="absolute -top-20 -left-20 w-[450px] h-[450px] rounded-full bg-gradient-to-br from-blue-400/20 via-sky-300/15 to-transparent blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-20 -right-20 w-[450px] h-[450px] rounded-full bg-gradient-to-tl from-amber-400/20 via-orange-300/15 to-transparent blur-3xl pointer-events-none" />
+      <div className="absolute -top-20 -left-20 w-full max-w-[500px] aspect-square rounded-full bg-gradient-to-br from-blue-400/20 via-sky-300/15 to-transparent blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-20 -right-20 w-full max-w-[500px] aspect-square rounded-full bg-gradient-to-tl from-amber-400/20 via-orange-300/15 to-transparent blur-3xl pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[180px] bg-gradient-to-r from-blue-200/20 via-sky-100/10 to-amber-200/20 blur-2xl pointer-events-none" />
 
       <motion.div

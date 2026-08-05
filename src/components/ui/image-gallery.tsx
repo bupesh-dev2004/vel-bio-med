@@ -142,8 +142,8 @@ export default function ImageGallery() {
     <>
       <section className="w-full flex flex-col items-center justify-start py-24 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 relative overflow-hidden border-y border-slate-950">
         {/* Ambient Glow Effects */}
-        <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-radial from-blue-600/8 via-transparent to-transparent rounded-full pointer-events-none blur-2xl" />
-        <div className="absolute bottom-0 left-1/4 w-[600px] h-[600px] bg-radial from-amber-500/4 via-transparent to-transparent rounded-full pointer-events-none blur-2xl" />
+        <div className="absolute top-0 right-1/4 w-full max-w-[500px] aspect-square bg-radial from-blue-600/8 via-transparent to-transparent rounded-full pointer-events-none blur-2xl" />
+        <div className="absolute bottom-0 left-1/4 w-full max-w-[500px] aspect-square bg-radial from-amber-500/4 via-transparent to-transparent rounded-full pointer-events-none blur-2xl" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-radial from-indigo-500/5 via-transparent to-transparent rounded-full pointer-events-none blur-3xl" />
 
         {/* Ambient Grid Background */}

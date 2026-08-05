@@ -126,8 +126,8 @@ export default function ProductsView({
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-955/75 to-slate-950 pointer-events-none" />
 
           {/* Glow rings */}
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-radial from-blue-600/10 via-blue-900/5 to-transparent rounded-full -mr-40 -mt-40 pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-radial from-amber-500/10 via-amber-650/5 to-transparent rounded-full -ml-20 -mb-20 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-full max-w-[500px] aspect-square bg-radial from-blue-600/10 via-blue-900/5 to-transparent rounded-full -mr-40 -mt-40 pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-full max-w-[500px] aspect-square bg-radial from-amber-500/10 via-amber-650/5 to-transparent rounded-full -ml-20 -mb-20 pointer-events-none" />
 
           {/* Abstract grids */}
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a_1px,transparent_1px),linear-gradient(to_bottom,#0f172a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-35" />
@@ -570,7 +570,7 @@ export default function ProductsView({
                       )}
 
                       {activeModalTab === "specs" && (
-                        <div className="border border-slate-200/80 rounded-xl overflow-y-auto max-h-[250px] bg-slate-50 shadow-xs">
+                        <div className="border border-slate-200/80 rounded-xl overflow-auto max-h-[250px] bg-slate-50 shadow-xs">
                           {Boolean(Object.keys(selectedProductModal.specifications || {}).length) ? (
                             <table className="w-full text-xs text-left divide-y divide-slate-150">
                               <tbody>
