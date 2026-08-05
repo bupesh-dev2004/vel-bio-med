@@ -511,7 +511,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[100dvh] md:min-h-[82vh] lg:min-h-0 lg:h-auto xl:min-h-[100dvh] w-full flex flex-col md:flex-row items-stretch md:items-center bg-slate-50 overflow-hidden pt-4 pb-8 md:pt-6 md:pb-10 lg:pt-12 lg:pb-16 xl:pt-14 xl:pb-8">
+      <section className="relative min-h-[100dvh] md:min-h-[82vh] lg:min-h-0 lg:h-auto xl:min-h-[100dvh] w-full flex flex-col md:flex-row items-stretch md:items-center bg-slate-50 overflow-hidden pt-4 pb-8 md:pt-6 md:pb-10 lg:pt-6 lg:pb-16 xl:pt-8 xl:pb-8">
         {/* Background with zoom and fade in effect */}
         <motion.div
           initial={{ opacity: 0, scale: 1 }}
@@ -557,7 +557,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
                 className="flex flex-col items-center md:items-center lg:items-start text-center md:text-center lg:text-left text-slate-900 justify-start md:justify-between lg:justify-start xl:justify-start h-auto md:h-full lg:h-auto w-full gap-y-[clamp(10px,2vw,16px)] md:gap-y-0 xl:gap-y-5"
               >
                 {/* Top Group: Text & Buttons */}
-                <div className="flex flex-col items-center md:items-center lg:items-start text-center md:text-center lg:text-left gap-y-[clamp(8px,1.8vw,16px)] md:gap-y-0 xl:gap-y-4 w-full mt-2 sm:mt-0 pt-2 lg:pt-4">
+                <div className="hero-top-group flex flex-col items-center md:items-center lg:items-start text-center md:text-center lg:text-left gap-y-[clamp(8px,1.8vw,16px)] md:gap-y-0 xl:gap-y-4 w-full mt-2 sm:mt-0 pt-2 lg:pt-0">
                   {/* Badge */}
                   <motion.div variants={heroItemVariants} className="w-full text-center md:text-center lg:text-left translate-y-1 md:translate-y-2 lg:translate-y-0 xl:translate-y-0">
                     <span className="small-mobile-badge inline-block bg-gradient-to-r from-blue-600 via-sky-500 to-amber-500 text-white text-[10.5px] md:text-[13px] lg:text-[14px] xl:text-[13.5px] font-black tracking-widest px-3 py-1 md:px-3 md:py-1 rounded-full uppercase shadow-lg shadow-blue-500/20 animate-pulse">
