@@ -367,11 +367,10 @@ const TimelineMilestone = memo(function TimelineMilestone({ milestone, index, ac
     <div ref={ref} className="relative min-h-[260px] sm:min-h-[300px] md:min-h-[380px] flex items-center w-full py-8 md:py-16">
       {/* Node dot on the vertical timeline with expanding scale and pulse shadow */}
       <div
-        className={`absolute left-4 md:left-1/2 -translate-x-1/2 z-30 flex items-center justify-center rounded-full w-5 h-5 cursor-pointer transition-all duration-500 ease-out ${
-          isActive
+        className={`absolute left-4 md:left-1/2 -translate-x-1/2 z-30 flex items-center justify-center rounded-full w-5 h-5 cursor-pointer transition-all duration-500 ease-out ${isActive
             ? "scale-125 bg-[#0284C7] shadow-[0_0_20px_rgba(2,132,199,0.6)]"
             : "scale-100 bg-slate-300 shadow-none"
-        }`}
+          }`}
       >
         {isActive && (
           <span className="absolute inset-0 rounded-full bg-[#0284C7] animate-ping opacity-75" />
@@ -381,9 +380,8 @@ const TimelineMilestone = memo(function TimelineMilestone({ milestone, index, ac
 
       {/* Horizontal Connector Line (desktop only) that expands smoothly when active */}
       <div
-        className={`hidden md:block absolute top-1/2 -translate-y-1/2 h-0.5 z-20 transition-all duration-500 ease-out ${
-          isLeft ? "left-[45%]" : "right-[45%]"
-        } ${isActive ? "w-[5%] bg-[#0284C7]" : "w-0 bg-slate-200"}`}
+        className={`hidden md:block absolute top-1/2 -translate-y-1/2 h-0.5 z-20 transition-all duration-500 ease-out ${isLeft ? "left-[45%]" : "right-[45%]"
+          } ${isActive ? "w-[5%] bg-[#0284C7]" : "w-0 bg-slate-200"}`}
       />
 
       {/* Card Wrapper with Viewport Entrance Animation */}
@@ -396,11 +394,10 @@ const TimelineMilestone = memo(function TimelineMilestone({ milestone, index, ac
       >
         <motion.div
           whileHover={{ y: -6 }}
-          className={`w-full md:w-[45%] rounded-3xl p-6 sm:p-8 bg-white border flex flex-col sm:flex-row gap-6 items-start cursor-pointer transition-all duration-500 ease-out ${
-            isActive
+          className={`w-full md:w-[45%] rounded-3xl p-6 sm:p-8 bg-white border flex flex-col sm:flex-row gap-6 items-start cursor-pointer transition-all duration-500 ease-out ${isActive
               ? "border-sky-200 shadow-[0_25px_50px_-12px_rgba(2,132,199,0.12)] scale-[1.02]"
               : "border-slate-100 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.03)] scale-100 hover:shadow-lg"
-          }`}
+            }`}
         >
           {/* Milestone Icon with glow, scale, and subtle hover wiggle */}
           <motion.div
@@ -409,13 +406,11 @@ const TimelineMilestone = memo(function TimelineMilestone({ milestone, index, ac
               scale: 1.12
             }}
             transition={{ duration: 0.4 }}
-            className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center text-white flex-shrink-0 bg-gradient-to-br transition-all duration-500 ease-out ${
-              isLeft ? "from-sky-500 to-indigo-600" : "from-orange-500 to-amber-500"
-            } ${
-              isActive
+            className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center text-white flex-shrink-0 bg-gradient-to-br transition-all duration-500 ease-out ${isLeft ? "from-sky-500 to-indigo-600" : "from-orange-500 to-amber-500"
+              } ${isActive
                 ? "scale-110 shadow-[0_10px_15px_-3px_rgba(2,132,199,0.2)]"
                 : "scale-100 shadow-none"
-            }`}
+              }`}
           >
             <IconComponent className="w-6 h-6" strokeWidth={2.2} />
           </motion.div>
@@ -423,9 +418,8 @@ const TimelineMilestone = memo(function TimelineMilestone({ milestone, index, ac
           {/* Text Content */}
           <div className="space-y-2 text-left">
             <span
-              className={`text-xl sm:text-2xl font-black tracking-tight transition-all duration-500 block ${
-                isActive ? "text-[#0284C7]" : "text-slate-400"
-              }`}
+              className={`text-xl sm:text-2xl font-black tracking-tight transition-all duration-500 block ${isActive ? "text-[#0284C7]" : "text-slate-400"
+                }`}
             >
               {milestone.year}
             </span>
@@ -702,7 +696,7 @@ export default function AboutView() {
             style={{ background: "radial-gradient(circle, #f97316 0%, transparent 70%)", filter: "blur(100px)" }}
           />
 
-              <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16 items-center">
 
               {/* Left Column Asymmetrical Image Block */}
@@ -893,7 +887,7 @@ export default function AboutView() {
                   </div>
 
                   <p className="text-slate-300 text-sm leading-relaxed font-medium">
-                    Vel Bio Med bridges the technical void in biological science distribution by delivering world-class hospital equipment, fast emergency servicing response, and long term comprehensive warranties.
+                    Vel Bio Med bridges the technical void in biological science distribution by delivering world-class hospital equipment, fast emergency servicing response, and long-term comprehensive warranties.
                   </p>
                 </motion.div>
 

@@ -39,7 +39,7 @@ export default function ServicesView() {
     },
     {
       id: "srv-5",
-      title: "Customised Product solutions for all medical equipment",
+      title: "Customized Product Solutions for all medical equipment",
       description: "We provide customized healthcare equipment solutions and OEM adaptations for all medical devices, meeting diverse hospital needs with precision engineering and innovation.",
       iconName: "PhoneCall"
     },

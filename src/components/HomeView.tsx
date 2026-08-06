@@ -164,6 +164,23 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
     };
   }, [productsApi]);
 
+  useEffect(() => {
+    if (window.location.hash === "#services-section") {
+      const scrollToServices = () => {
+        const element = document.getElementById("services-section");
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      };
+      const t1 = setTimeout(scrollToServices, 100);
+      const t2 = setTimeout(scrollToServices, 350);
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+      };
+    }
+  }, []);
+
   // Slider State (just slides data for background image)
   const slides = state?.homeSlides || [];
 
@@ -269,7 +286,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
     {
       id: "srv-3",
       title: "Installation & Commissioning of new medical equipment",
-      description: "We excel in the seamless installation and commissioning of new medical equipment, ensuring optimal functionality and readiness .",
+      description: "We excel in the seamless installation and commissioning of new medical equipment, ensuring optimal functionality and readiness.",
       iconName: "Briefcase"
     },
     {
@@ -280,7 +297,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
     },
     {
       id: "srv-5",
-      title: "Customised Product solutions for all medical equipment",
+      title: "Customized Product Solutions for all medical equipment",
       description: "We provide customized solutions for all medical equipment, meeting diverse needs with precision and innovation.",
       iconName: "PhoneCall"
     },
@@ -300,7 +317,7 @@ export default function HomeView({ onOpenProductModal, showPreloader = false }: 
     { name: "Curious Hospital", icon: <Sparkles className="w-4 h-4" /> },
     { name: "ABC Hospital", icon: <Activity className="w-4 h-4" /> },
     { name: "Frontline Hospital", icon: <Shield className="w-4 h-4" /> },
-    { name: "Pineapple Diagonisis Center", icon: <Microscope className="w-4 h-4" /> },
+    { name: "Pineapple Diagnosis Center", icon: <Microscope className="w-4 h-4" /> },
     { name: "Neuro One", icon: <Brain className="w-4 h-4" /> },
     { name: "Atlas Hospital", icon: <Globe className="w-4 h-4" /> },
     { name: "Dhanalakshmi Srinivasan Hospital", icon: <Building2 className="w-4 h-4" /> },

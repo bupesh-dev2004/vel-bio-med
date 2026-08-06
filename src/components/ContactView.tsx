@@ -74,7 +74,7 @@ export default function ContactView() {
   }, []);
 
   const defaultContact = {
-    address: "VEL BIO MED - Medical equipment supplier, Hari Divya Complex, 55, Palayam Bazaar , Woraiyur, Tiruchirappalli, Tamil Nadu 620003",
+    address: "VEL BIO MED - Medical equipment supplier, Hari Divya Complex, 55, Palayam Bazaar, Woraiyur, Tiruchirappalli, Tamil Nadu 620003",
     phone: "9629515551 | 9445922066",
     email: "velbiomed@gmail.com",
     workingHours: "Monday - Saturday: 9:00 AM - 6:30 PM (IST)",

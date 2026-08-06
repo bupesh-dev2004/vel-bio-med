@@ -276,8 +276,8 @@ export default function ProductsView({
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
                   className={`px-3 sm:px-5 py-2 sm:py-3 rounded-full text-[10px] sm:text-xs font-black uppercase tracking-wider transition-all duration-300 cursor-pointer shadow-md ${selectedCategory === cat
-                    ? "bg-gradient-to-r from-blue-600 via-indigo-650 to-amber-500 text-white shadow-lg shadow-blue-500/10 scale-102"
-                    : "bg-slate-900 hover:bg-slate-850 text-slate-400 hover:text-white border border-slate-800/60"
+                    ? "bg-gradient-to-r from-blue-600 via-indigo-600 to-amber-500 text-white shadow-lg shadow-blue-500/10 scale-102"
+                    : "bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800/60"
                     }`}
                 >
                   {cat}
@@ -289,7 +289,7 @@ export default function ProductsView({
             <div className="relative z-30">
               <button
                 onClick={() => setIsSortOpen(!isSortOpen)}
-                className="flex items-center justify-between gap-3 bg-slate-900/60 hover:bg-slate-850 border border-slate-800/80 px-4 py-2.5 rounded-xl cursor-pointer transition-all duration-200 select-none min-w-[200px]"
+                className="flex items-center justify-between gap-3 bg-slate-900/60 hover:bg-slate-800 border border-slate-800/80 px-4 py-2.5 rounded-xl cursor-pointer transition-all duration-200 select-none min-w-[200px]"
               >
                 <div className="flex items-center gap-2">
                   <SlidersHorizontal className="w-3.5 h-3.5 text-slate-400" />
@@ -333,7 +333,7 @@ export default function ProductsView({
                             setIsSortOpen(false);
                           }}
                           className={`w-full text-left px-3.5 py-2.5 text-xs rounded-lg transition-all duration-200 cursor-pointer flex items-center justify-between ${sortBy === opt.value
-                              ? "bg-gradient-to-r from-blue-600/30 via-indigo-650/20 to-amber-500/10 text-white font-bold border-l-2 border-amber-500 pl-2.5"
+                              ? "bg-gradient-to-r from-blue-600/30 via-indigo-600/20 to-amber-500/10 text-white font-bold border-l-2 border-amber-500 pl-2.5"
                               : "text-slate-400 hover:text-white hover:bg-slate-900/60 font-semibold"
                             }`}
                         >
@@ -460,7 +460,7 @@ export default function ProductsView({
                             className={`w-full font-bold text-xs py-3.5 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 uppercase tracking-wide cursor-pointer text-white shadow-md hover:shadow-lg active:scale-[0.98]
                               ${isAmber
                                 ? "bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 hover:shadow-amber-500/25"
-                                : "bg-gradient-to-r from-blue-600 to-indigo-650 hover:from-blue-700 hover:to-indigo-700 hover:shadow-blue-600/25"
+                                : "bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 hover:shadow-blue-600/25"
                               }
                             `}
                           >

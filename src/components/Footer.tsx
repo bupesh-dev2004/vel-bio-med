@@ -38,7 +38,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   const defaultContact = {
-    address: "VEL BIO MED - Medical equipment supplier, Hari Divya Complex, 55, Palayam Bazaar Rd, Woraiyur, Tiruchirappalli, Tamil Nadu 620003",
+    address: "VEL BIO MED - Medical equipment supplier, Hari Divya Complex, 55, Palayam Bazaar , Woraiyur, Tiruchirappalli, Tamil Nadu 620003",
     phone: "9629515551 | 9445922066",
     email: "velbiomed@gmail.com",
   };
@@ -128,12 +128,17 @@ export default function Footer() {
                   onClick={() => {
                     if (tab === "services") {
                       setCurrentTab("home");
-                      setTimeout(() => {
-                        const element = document.getElementById("services-section");
-                        if (element) {
-                          element.scrollIntoView({ behavior: "smooth" });
+                      window.location.hash = "services-section";
+                      const scrollToTarget = () => {
+                        const el = document.getElementById("services-section");
+                        if (el) {
+                          el.scrollIntoView({ behavior: "smooth", block: "start" });
                         }
-                      }, 100);
+                      };
+                      scrollToTarget();
+                      setTimeout(scrollToTarget, 100);
+                      setTimeout(scrollToTarget, 250);
+                      setTimeout(scrollToTarget, 450);
                     } else {
                       setCurrentTab(tab);
                     }
