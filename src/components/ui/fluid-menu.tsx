@@ -133,10 +133,10 @@ export function MenuContainer({
           let targetY = translateValue;
 
           if (layout === "radial") {
-            // Responsive sizing settings to prevent icon overlapping and edge overflow
-            const radius = isMobile ? 95 : isTablet ? 110 : 135;
-            const startAngle = isMobile ? 165 : isTablet ? 172 : 170;
-            const endAngle = isMobile ? 285 : isTablet ? 278 : 280;
+            // Radial arc bound to top-left quadrant (180deg = Left, 270deg = Up) to prevent edge overflow
+            const radius = isMobile ? 95 : isTablet ? 115 : 130;
+            const startAngle = 180;
+            const endAngle = 270;
 
             const angleInDegrees = totalItems > 1
               ? startAngle + (index / (totalItems - 1)) * (endAngle - startAngle)

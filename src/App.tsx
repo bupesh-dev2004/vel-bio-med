@@ -8,8 +8,8 @@ import AboutView from "./components/AboutView.js";
 import GalleryView from "./components/GalleryView.js";
 import ProductsView from "./components/ProductsView.js";
 import ContactView from "./components/ContactView.js";
-import ScrollToTop from "./components/ScrollToTop.js";
 import FloatingSocialMenu from "./components/FloatingSocialMenu.js";
+import ProductDetailModal from "./components/ProductDetailModal.js";
 import { Product } from "./types.js";
 import { Activity, ShieldAlert, RotateCcw } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -48,7 +48,6 @@ function AppContent() {
 
   const handleOpenProductModal = (product: Product) => {
     setSelectedProductModal(product);
-    setCurrentTab("products");
   };
 
   const handleCloseProductModal = () => {
@@ -215,8 +214,11 @@ function AppContent() {
       {/* Shared dynamic floating social and chat hub */}
       <FloatingSocialMenu />
 
-      {/* Shared Scroll to safe top anchor widget */}
-      <ScrollToTop />
+      {/* Global Product Detail Overview Modal */}
+      <ProductDetailModal
+        product={selectedProductModal}
+        onClose={handleCloseProductModal}
+      />
     </div>
   );
 }
